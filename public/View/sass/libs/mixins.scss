@@ -1,0 +1,27 @@
+@mixin transform($transform) {
+    -ms-transform: $transform;
+    -webkit-transform: $transform;
+    -o-transform: $transform;
+    -moz-transform: $transform;
+    transform: $transform;
+}
+
+@mixin centrer() {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin triangle($color : #fff, $size : 10px) {
+    &::after{
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: $size solid $color;
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+
+        position: absolute;
+        bottom: -$size;
+        @include centrer;
+    }
+}
