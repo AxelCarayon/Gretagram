@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de tests</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <p id="userReponse">rien</p>
+    <input id="userInput" type="number">
+    <button onclick="afficherUser()">Afficher User n</button>
+</body>
+
+<script type="text/javascript">
+    var xhttp = new XMLHttpRequest();
+
+    function afficherUser() {
+        var user = document.getElementById("userInput").value;
+        $.ajax({
+            url: 'showUser' + '?user=' + user,
+            type: 'GET', // Le type de la requête HTTP
+            success: function(reponse, statut) { // code_html contient le HTML renvoyé
+                $("#userReponse").html(reponse[0].nom);
+            },
+            error: function(resultat, statut, erreur) {
+                console.log(resultat);
+                console.log(statut);
+                console.log(erreur);
+            }
+        });
+    }
+</script>
+
+</html>
