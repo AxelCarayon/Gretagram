@@ -22,11 +22,15 @@ function loadData($scope) { // Fonction de traitement des données
         $.getJSON('View/data/testTrend.json', (data) => { // Chargement des données test
             $scope.publications = data; // Je les mets dans container 
         });
+
+        
 }
 
 function showCurrentPublications($scope){
     // TODO: afficher les publications qui se trouvent dans la zone géographique actuellement sélectionnée
 }
+
+
 
 
 
@@ -37,10 +41,7 @@ var app = angular.module('app', []);
 app.controller("ctrl", ($scope) => {
     
     loadData($scope); // Appel de la fonction de traitement des données 
-    
-    $scope.abonnements = false; // Je passe uniquement les trends en true pour qu'il n'y ait que ça d'afficher
-    $scope.trend = true;
-    $scope.proche = false;
+
 
     $scope.aboFunction = () => {
         $scope.abonnements = true; // Quand on appuie sur le bouton abonnement le container des abonnements s'affichent les autres se cachent
@@ -52,6 +53,7 @@ app.controller("ctrl", ($scope) => {
 
     }
     $scope.trendFunction = () => { // Quand on appuie sur le bouton trend le container des trend s'affichent les autres se cachent
+        console.log("hello")
         $scope.abonnements = false;
         $scope.trend = true;
         $scope.proche = false;
@@ -68,6 +70,12 @@ app.controller("ctrl", ($scope) => {
             right: '0%'
         });
     }
+
+    $scope.abonnements = true; // Je passe uniquement les trends en true pour qu'il n'y ait que ça d'afficher
+    $scope.trend = false;
+    $scope.proche = false;
+
+    
 
     if (navigator.geolocation) { // Si l'utilisateur accepte de données ses données de navigation 
         navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
@@ -110,7 +118,7 @@ app.controller("ctrl", ($scope) => {
             circle.bindPopup("Vous êtes ici.").openPopup();
             circle.addTo(mymap);
 
-            $('.theme-toggler').click(() => { // On change la map de couleur quand l'utilisateur switch de theme 
+            $('.change-theme').click(() => { // On change la map de couleur quand l'utilisateur switch de theme 
                 if (sombre) {
                     L.tileLayer(lightmap, {
                         maxZoom: 18
@@ -166,7 +174,8 @@ app.controller("ctrl", ($scope) => {
                 showCurrentPublications($scope); // Appel de la fonction pour afficher les publications actuellements sur la carte
             })
             
-            
+
+
 
 
         }, function error(msg) { // Si l'utilisateur n'accepte pas de confier ses données de geolocalisation on le renvoie vers une page d'erreur  

@@ -1,37 +1,39 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html class="js" lang="fr" dir="ltr">
 
 <head>
 
+    <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
+    <!-- Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <!-- Leaflet -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>Gretagram</title>
+    <!-- Style Principal -->
     <link rel="stylesheet" href="View/css/style.css">
 
     <!-- Markers Cluster  -->
@@ -40,23 +42,43 @@
     <script src="View/dist/leaflet.markercluster-src.js"></script>
 
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="View/ressources/favicon.ico">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Demo for the tutorial: Styling and Customizing File Inputs the Smart Way" />
+    <meta name="keywords" content="cutom file input, styling, label, cross-browser, accessible, input type file" />
+    <meta name="author" content="Osvaldas Valutis for Codrops" />
+    <title>Gretagram</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+
+    <!-- Input File -->
+    <link rel="stylesheet" type="text/css" href="View/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="View/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="View/css/component.css" />
+
+   
+
+
 </head>
 
 <body class="sombre" ng-app="app" ng-controller="ctrl">
 
 
 
-    <nav class="container navbar navbar-expand-lg justify-content-between ">
-        <a class="navbar-brand" href="#">
-            <img src="View/ressources/instagram-light.com.svg" width="30" height="30" alt="">
-        </a>
+    <nav class="mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
         <a class="navbar-brand" href="#">Gretagram</a>
-        <input class="form-control searchbar" id="searchbar" type="search" placeholder="Search" aria-label="Search">
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Mon compte <span class="sr-only">(current)</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Mon compte</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Abonnements</a>
@@ -64,22 +86,39 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Abonnés</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a style="cursor: pointer;" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Parametres
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                        aria-labelledby="navbarDropdownMenuLink-333">
+                        <a href="#" class="dropdown-item">Paramètres du compte</a>
+                        <a href="#" class="dropdown-item change-theme">Changement du thème</a>
+
+                    </div>
+                </li>
             </ul>
-
         </div>
-        <div class="" style="width: 100px;">
+    </nav>
+    <!--/.Navbar -->
 
-        </div>
-        <div class="theme-toggler sombre">
-            <div class="theme-toggler2 sombre">
 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class=" form-control searchbar col-6">
+                <input class="col-6" id="searchbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="search-items" style="display: none;">
+                    <h5 style="margin-top: 10px;">Tendances</h5>
+                    <p>
+                        <span class="badge badge-primary">#globalWarming</span>
+                        <span class="badge badge-primary">#savePlanet</span>
+                        <span class="badge badge-primary">#unis</span>
+                    </p>
+                </div>
             </div>
         </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
+    </div>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -94,30 +133,57 @@
                                 <div class="col-2">
                                     <img class="avatar-create-publication" src="View/ressources/avatar.svg" alt="">
                                 </div>
-                                <div contenteditable="true" placeholder="Exprimez vous..."
-                                    class="col-10 text-create-publication">
+                                <div class="container-fluid col-10">
+                                    <div class="row">
+                                        <p class="hashtest"></p>
+                                        <div contenteditable="true" placeholder="Exprimez vous..."
+                                            class="col-12 text-create-publication">
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-end">
+
+
+                                        <div class="content ">
+                                            <div class="box "
+                                                style="margin-right: -30px;height: 40px;min-width: 200px;">
+                                                <input type="file" name="file-1[]" id="file-1"
+                                                    class="inputfile inputfile-1 "
+                                                    data-multiple-caption="{count} files selected" multiple />
+                                                <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                        height="17" viewBox="0 0 20 17">
+                                                        <path
+                                                            d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                                                        </svg> <span>Choisis une photo</span></label>
+                                            </div>
+                                        </div>
+                                        <button href="#" class=" btn btn-publication ">Tendances</button>
+                                        <button href="#" class=" btn btn-publier ">Publier</button>
+                                    </div>
                                 </div>
+
+
                             </div>
-                            <p class="hashtest"></p>
+
                         </div>
                         <!-- <textarea placeholder="Exprimez vous ..." class="text-create-publication" type="text"  name="" value=""></textarea> -->
                     </div>
-                    <button href="#" class="btn btn-publier btn-primary">Publier</button>
                 </div>
             </div>
         </div>
     </div>
 
-    </div>
+
+
+
 
 
     <div class=" container tabs">
         <div class="row justify-content-center">
-            <button type="button" id="btn-tabs" ng-click="aboFunction()" class="btn-tabs sombre btn  col-2"
+            <button type="button" ng-click="aboFunction()" class="btnAbo btn-tabs sombre btn  col-2"
                 name="button">Abonnements</button>
-            <button type="button" ng-click="trendFunction()" class="btn-tabs active sombre btn  col-2"
+            <button type="button" ng-click="trendFunction()" class="btnTrend btn-tabs active sombre btn  col-2"
                 name="button">Trend</button>
-            <button type="button" ng-click="procheFunction()" class="btn-tabs sombre btn  col-2"
+            <button type="button" ng-click="procheFunction()" class="btnProche btn-tabs sombre btn  col-2"
                 name="button">Proche</button>
         </div>
     </div>
@@ -213,8 +279,9 @@
     </div>
 
 
-    <script src="View/js/map.js" charset="utf-8"></script>
-    <script src="View/js/publication.js" charset="utf-8"></script>
+    <script src="View/js/custom-file-input.js"></script>
+    <script src="Controller/js/map.js" charset="utf-8"></script>
+    <script src="Controller/js/publication.js" charset="utf-8"></script>
 
 
 
@@ -234,7 +301,7 @@
             document.body.style.zoom = "80%"; //Dézoom de la page juste pour que ça soit plus beau 
 
 
-            $(".theme-toggler").click(() => { // Bouton de changement de theme 
+            $(".change-theme").click(() => { // Bouton de changement de theme 
                 $('*').toggleClass('sombre');
                 $('*').toggleClass('clair');
             })
@@ -245,7 +312,22 @@
                 $(btn).toggleClass('active');
             })
 
+            //Agrandissement de la barre de recherche
+            $(".form-control")
+                .focusin((e) => {
+                    $(".form-control").addClass('col-10');
+                    $(".form-control").addClass('searchbar-hover');
+                    $(".form-control").removeClass('col-6');
+                    $('.search-items').fadeIn();
+                })
+                .focusout((e) => {
+                    $(".form-control").addClass('col-6');
+                    $(".form-control").removeClass('col-10');
+                    $(".form-control").removeClass('searchbar-hover');
+                    $('.search-items').fadeOut();
+                })
 
+            //Ajout des hashtag dans la creation de publication
             var dieze = false;
             var cptText = 0;
             var tab = [];
@@ -271,18 +353,24 @@
                     tab.push($('.hashtest').children().eq(index).text());
 
                 }
-
-                tab.forEach((i) => {
-                    textbrut = textbrut.replace(i, "<span class='badge badge-primary'>" + i +
-                        "</span> ");
-                })
-                $(".text-create-publication").focusout(
-                    function () {
-
-                        $(".text-create-publication").html(textbrut)
-
-                    });
             })
+
+            var placeholderTrigger = false;
+
+            $(".text-create-publication").focus(() => {
+                if (!placeholderTrigger) {
+                    placeholderTrigger = !placeholderTrigger;
+                    $(".text-create-publication").text("");
+                }
+            })
+
+            $("#file-1").on('change', (e) => {
+                $("#file-1").addClass("filled");
+                $("label").addClass("filled");
+
+            })
+
+            $(".text-create-publication").text("Exprimez vous...");
 
             $(".text-create-publication").focusout(
                 function () { // Gestion de l'entrée de commentaire pour créer l'illusion d'un placeholder
@@ -291,11 +379,11 @@
                         element.empty();
                     }
 
-
                 });
 
 
 
+            $('.btnTrend').click();
         });
     </script>
 
