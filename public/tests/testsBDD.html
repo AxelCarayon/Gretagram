@@ -23,7 +23,9 @@
             url: 'showUser' + '?user=' + user,
             type: 'GET', // Le type de la requête HTTP
             success: function(reponse, statut) { // code_html contient le HTML renvoyé
-                $("#userReponse").html(reponse[0].nom);
+                if (reponse.length > 0) {
+                    $("#userReponse").html(reponse[0].nom);
+                }
             },
             error: function(resultat, statut, erreur) {
                 console.log(resultat);
