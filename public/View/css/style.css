@@ -176,10 +176,10 @@ div[contenteditable]:focus.clair {
   color: #f7f2f2 !important;
 }
 .btn-publication.clair {
-  background-color: #bbd4ec;
+  background-color: #879aac;
 }
 .btn-publication.clair:hover {
-  background-color: #a8c7e6;
+  background-color: #96a7b7;
   color: #f7f2f2 !important;
 }
 
@@ -187,7 +187,7 @@ div[contenteditable]:focus.clair {
   margin-right: 10px;
   color: #f7f2f2;
   border-radius: 10px;
-  background-color: #6c5ce7;
+  background-color: #8e9b55;
 }
 
 .publicationContainer {

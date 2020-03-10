@@ -1,12 +1,13 @@
 $primary-dark : #2A343D;
 $primary-light : #E3EDF7;
-$accent-color : #6c5ce7;
+$accent-color : #8e9b55;
 
 
 html,body,h1,h2,h3,h4,p,a{
     
     font-family: 'Sen', sans-serif !important;
 }
+
 
 .badge.badge-primary{
     font-size: 1em;
@@ -211,9 +212,9 @@ div[contenteditable] {
     }
 
     &.clair{
-        background-color: darken($color: $primary-light, $amount: 10%) ;
+        background-color: lighten($color: $primary-dark, $amount: 40%)  ;
         &:hover{
-            background-color: darken($color: $primary-light, $amount: 15%) ;
+            background-color: lighten($color: $primary-dark, $amount: 45%)  ;
             color: rgb(247, 242, 242) !important ;
         }
     }

@@ -60,7 +60,7 @@
     <link rel="stylesheet" type="text/css" href="View/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="View/css/component.css" />
 
-   
+
 
 
 </head>
@@ -70,7 +70,10 @@
 
 
     <nav class="mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
-        <a class="navbar-brand" href="#">Gretagram</a>
+        <a class="navbar-brand" href="#">
+            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30"
+                class="d-inline-block " alt="">
+            Gretagram</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
             aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -153,7 +156,7 @@
                                                         height="17" viewBox="0 0 20 17">
                                                         <path
                                                             d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
-                                                        </svg> <span>Choisis une photo</span></label>
+                                                    </svg> <span>Choisis une photo</span></label>
                                             </div>
                                         </div>
                                         <button href="#" class=" btn btn-publication ">Tendances</button>
@@ -172,6 +175,7 @@
         </div>
     </div>
 
+    <div class="imgtest"></div>
 
 
 
@@ -258,12 +262,12 @@
         <div class="row publicationContainer">
             <div class="col-12 col-12-sm container containerPublicationsProche">
 
-                <div class="col-12 publication sombre" ng-repeat="x in proches">
+                <div class="col-12 publication sombre container" ng-repeat="x in proches">
                     <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
                     <p class="nomProfil sombre">{{x.nom}}</p>
                     <p class="publicationDate">{{x.date | date : "dd-mm-yyyy hh:ss"}}</p>
                     <p class="publicationTexte sombre">{{x.msg}}</p>
-                    <img src={{x.image}} class="imagePublication" alt="">
+                    <img src={{x.image}} class="col-12 imagePublication" alt="">
                     <div class="likes">
                         <p class="nbLike sombre">{{x.nblikes}} <span class="coeur"><svg aria-label='J’aime'
                                     class='_8-yf5 ' fill='#fff' height='24' viewBox='0 0 48 48' width='24'>
@@ -289,102 +293,109 @@
         // Ici ce ne sont que des fonctions cosmétiques
         $(document).ready(() => {
 
-            var sombre = false; // Meme variable que dans map.js
-            if (sombre) { // Si sombre est false le theme est clair sinon dark
-                $('*').removeClass('sombre');
-                $('*').addClass('clair');
-            } else {
-                $('*').removeClass('clair');
-                $('*').addClass('sombre');
-            }
-
-            document.body.style.zoom = "80%"; //Dézoom de la page juste pour que ça soit plus beau 
-
-
-            $(".change-theme").click(() => { // Bouton de changement de theme 
-                $('*').toggleClass('sombre');
-                $('*').toggleClass('clair');
-            })
-
-            $('.btn-tabs').click((e) => { // changement de classe des boutons pour changer d'aspect
-                var btn = e.target;
-                $('.btn-tabs').removeClass('active');
-                $(btn).toggleClass('active');
-            })
-
-            //Agrandissement de la barre de recherche
-            $(".form-control")
-                .focusin((e) => {
-                    $(".form-control").addClass('col-10');
-                    $(".form-control").addClass('searchbar-hover');
-                    $(".form-control").removeClass('col-6');
-                    $('.search-items').fadeIn();
-                })
-                .focusout((e) => {
-                    $(".form-control").addClass('col-6');
-                    $(".form-control").removeClass('col-10');
-                    $(".form-control").removeClass('searchbar-hover');
-                    $('.search-items').fadeOut();
-                })
-
-            //Ajout des hashtag dans la creation de publication
-            var dieze = false;
-            var cptText = 0;
-            var tab = [];
-            $(".text-create-publication").keyup((e) => {
-                tab = [];
-                var text = $(".text-create-publication").text();
-                var textbrut = $(".text-create-publication").html();
-                var textReplace;
-                if (e.keyCode == 51) {
-                    dieze = true;
-                }
-
-                var phrase = text.split(/,| /);
-                $('.hashtest').html("");
-                phrase.forEach((i) => {
-                    if (i.includes('#') && i != "#") {
-                        $('.hashtest').append("<span class='badge badge-primary'>" + i +
-                            "</span> ");
-                    }
-                });
-
-                for (let index = 0; index < $('.hashtest').children().length; index++) {
-                    tab.push($('.hashtest').children().eq(index).text());
-
-                }
-            })
-
-            var placeholderTrigger = false;
-
-            $(".text-create-publication").focus(() => {
-                if (!placeholderTrigger) {
-                    placeholderTrigger = !placeholderTrigger;
-                    $(".text-create-publication").text("");
-                }
-            })
-
-            $("#file-1").on('change', (e) => {
-                $("#file-1").addClass("filled");
-                $("label").addClass("filled");
-
-            })
-
-            $(".text-create-publication").text("Exprimez vous...");
-
-            $(".text-create-publication").focusout(
-                function () { // Gestion de l'entrée de commentaire pour créer l'illusion d'un placeholder
-                    var element = $(this);
-                    if (!element.text().replace(" ", "").length) {
-                        element.empty();
+                    var sombre = false; // Meme variable que dans map.js
+                    if (sombre) { // Si sombre est false le theme est clair sinon dark
+                        $('*').removeClass('sombre');
+                        $('*').addClass('clair');
+                    } else {
+                        $('*').removeClass('clair');
+                        $('*').addClass('sombre');
                     }
 
-                });
+                    document.body.style.zoom = "80%"; //Dézoom de la page juste pour que ça soit plus beau 
 
 
+                    $(".change-theme").click(() => { // Bouton de changement de theme 
+                        $('*').toggleClass('sombre');
+                        $('*').toggleClass('clair');
+                    })
 
-            $('.btnTrend').click();
-        });
+                    $('.btn-tabs').click((e) => { // changement de classe des boutons pour changer d'aspect
+                        var btn = e.target;
+                        $('.btn-tabs').removeClass('active');
+                        $(btn).toggleClass('active');
+                    })
+
+                    //Agrandissement de la barre de recherche
+                    $(".form-control")
+                        .focusin((e) => {
+                            $(".form-control").addClass('col-10');
+                            $(".form-control").addClass('searchbar-hover');
+                            $(".form-control").removeClass('col-6');
+                            $('.search-items').fadeIn();
+                        })
+                        .focusout((e) => {
+                            $(".form-control").addClass('col-6');
+                            $(".form-control").removeClass('col-10');
+                            $(".form-control").removeClass('searchbar-hover');
+                            $('.search-items').fadeOut();
+                        })
+
+                    //Ajout des hashtag dans la creation de publication
+                    var dieze = false;
+                    var cptText = 0;
+                    var tab = [];
+                    $(".text-create-publication").keyup((e) => {
+                        tab = [];
+                        var text = $(".text-create-publication").text();
+                        var textbrut = $(".text-create-publication").html();
+                        var textReplace;
+                        if (e.keyCode == 51) {
+                            dieze = true;
+                        }
+
+                        var phrase = text.split(/,| /);
+                        $('.hashtest').html("");
+                        phrase.forEach((i) => {
+                            if (i.includes('#') && i != "#") {
+                                $('.hashtest').append("<span class='badge badge-primary'>" + i +
+                                    "</span> ");
+                            }
+                        });
+
+                        for (let index = 0; index < $('.hashtest').children().length; index++) {
+                            tab.push($('.hashtest').children().eq(index).text());
+
+                        }
+                    })
+
+                    var placeholderTrigger = false;
+
+                    $(".text-create-publication").focus(() => {
+                        if (!placeholderTrigger) {
+                            placeholderTrigger = !placeholderTrigger;
+                            $(".text-create-publication").text("");
+                        }
+                    })
+
+                    $("#file-1").on('change', (e) => {
+                        $("#file-1").addClass("filled");
+                        $("label").addClass("filled");
+
+                        console.log(e.currentTarget.value);
+
+                        $('.imgtest').append(
+                            $("<img></img>")
+                            .attr("src", e.currentTarget.value)
+                    )});
+
+                        $(".text-create-publication").text("Exprimez vous...");
+
+                        $(".text-create-publication").focusout(
+                            function () { // Gestion de l'entrée de commentaire pour créer l'illusion d'un placeholder
+                                var element = $(this);
+                                if (!element.text().replace(" ", "").length) {
+                                    element.empty();
+                                }
+
+                            });
+
+
+                        setTimeout(() => {
+                            $('.btnTrend').click();
+                        }, 1000);
+
+                    });
     </script>
 
 
