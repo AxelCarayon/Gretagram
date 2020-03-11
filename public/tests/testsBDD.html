@@ -9,9 +9,19 @@
 </head>
 
 <body>
-    <p id="userReponse">rien</p>
-    <input id="userInput" type="number">
-    <button onclick="afficherUser()">Afficher User n</button>
+    <div id="testAfficherUser">
+        <p>Test affichage utilisateur :</p>
+        <p id="userReponse">aucun</p>
+        <input id="userInput" type="number">
+        <button onclick="afficherUser()">Afficher User n</button>
+    </div>
+    <div id="testUploadPhoto">
+        <p>Test envoi de photo :</p>
+        <form action="/uploadPicture" method="post" enctype="multipart/form-data">
+            <input type="file" accept="image/*" name="photo">
+            <input type="submit" value="upload">
+        </form>
+    </div>
 </body>
 
 <script type="text/javascript">

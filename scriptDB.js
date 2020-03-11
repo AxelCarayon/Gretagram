@@ -24,8 +24,9 @@ function getNextId(sequenceName) {
 
 
 //PERSONNES
+var idUser = getNextId("userId");
 db.users.insert({
-    "_id": getNextId("userId"),
+    "_id": idUser,
     "prenom": "Maurice",
     "nom": "Lestin",
     "mail": "lestin.coquin@gmail.com",
@@ -34,12 +35,19 @@ db.users.insert({
     "publications": [1],
     "abonnements": [],
     "abonnes": [],
+    "images": {
+        "pdp": null,
+        "photos": []
+
+    },
     "password": "Lestin69"
 
 });
+mkdir(pwd() + "/Photos/" + idUser);
 
+var idUser = getNextId("userId");
 db.users.insert({
-    "_id": getNextId("userId"),
+    "_id": idUser,
     "prenom": "Mathilde",
     "nom": "Tchoin",
     "mail": "Michtodu81@gmail.com",
@@ -48,8 +56,15 @@ db.users.insert({
     "publications": [2],
     "abonnements": [],
     "abonnes": [],
+    "images": {
+        "pdp": null,
+        "photos": []
+
+    },
     "password": "Migos"
 });
+mkdir(pwd() + "/Photos/" + idUser);
+
 //PUBLICATIONS
 
 db.publications.insert({
