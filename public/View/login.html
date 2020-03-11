@@ -30,52 +30,10 @@ and open the template in the editor.
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
     <script defer src="View/css/fontawesome/js/all.js"></script>
-
-    <script>
-        $(document).ready( // Exécuté à la fin du chargement de la page
-            function () {
-
-                function getFormData($form) {
-                    var unindexed_array = $form.serializeArray();
-                    var indexed_array = {};
-
-                    $.map(unindexed_array, function (n, i) {
-                        indexed_array[n['name']] = n['value'];
-                    });
-
-                    return indexed_array;
-                }
-
-                $('.btn').click(function (e) {
-                    e.preventDefault();
-                    var datas = getFormData($('#codeForm'));
-                    console.log(datas.username);
-                    console.log(datas.password);
-
-                    if (datas.username != "" && datas.password != "") {
-                        $.ajax({
-                            url: "/index",
-                            method: "get",
-                            data: datas,
-                            success : (data)=>{
-                                console.log(data);
-                            }
-                        });
-                    }else{
-                        $('.error2').css("display","block");
-                    }
-
-                })
-
-
-            });
-    </script>
-
-
+    <!-- Controller -->
+    <script src="/public/Controller/js/connexion.js"></script>
 </head>
-
 <body>
-
     <div class="container">
         <div class="img">
             <a class="navbar-brand" href="#">
