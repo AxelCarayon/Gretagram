@@ -3,7 +3,9 @@ const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 const app = express();
 const path = require('path');
+const multer = require('multer');
 const bodyParser = require('body-parser');
+const upload = multer({ dest: __dirname + '/Photos' });
 
 app.use(express.static(__dirname + '/public'));
 
@@ -47,11 +49,17 @@ app.get('/showUser', function(req, res) {
         var query = { _id: userId };
         dbo.collection("users").find(query).toArray(function(err, result) {
             if (err) throw err;
-            console.log(result);
             db.close();
             res.send(result);
         });
     });
+});
+
+app.post('/uploadPicture', upload.single('photo'), function(req, res) {
+
+    if (req.file) {
+        res.json(req.file);
+    } else throw 'error';
 });
 
 app.listen(8080, function() {
