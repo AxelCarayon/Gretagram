@@ -41,7 +41,7 @@ var app = angular.module('app', []);
 app.controller("ctrl", ($scope) => {
     
     loadData($scope); // Appel de la fonction de traitement des données 
-
+    
 
     $scope.aboFunction = () => {
         $scope.abonnements = true; // Quand on appuie sur le bouton abonnement le container des abonnements s'affichent les autres se cachent

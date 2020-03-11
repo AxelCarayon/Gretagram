@@ -3,11 +3,33 @@ const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/public'));
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+)
+
+app.use(bodyParser.json())
+
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/View/index.html'));
+});
+app.get('/login', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/View/login.html'));
+});
+
+app.post('/connect', function(req, res) {
+    var username = req.body.username; // Le nom d'utilisateur et le mot de passe sont récupérés ici
+    var password = req.body.password; // Pour les tester ensuite
+
+    console.log(`username : ${username}`);
+    console.log(`password : ${password}`);
+
+
 });
 
 app.get('/testUser', function(req, res) {

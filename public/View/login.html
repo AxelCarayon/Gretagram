@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+<head>
+    <title>Gretagram</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
+        -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="View/css/login.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="View/ressources/favicon.ico">
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+    <script defer src="View/css/fontawesome/js/all.js"></script>
+
+    <script>
+        $(document).ready( // Exécuté à la fin du chargement de la page
+            function () {
+
+                function getFormData($form) {
+                    var unindexed_array = $form.serializeArray();
+                    var indexed_array = {};
+
+                    $.map(unindexed_array, function (n, i) {
+                        indexed_array[n['name']] = n['value'];
+                    });
+
+                    return indexed_array;
+                }
+
+                $('.btn').click(function (e) {
+                    e.preventDefault();
+                    var datas = getFormData($('#codeForm'));
+                    console.log(datas.username);
+                    console.log(datas.password);
+
+                    if (datas.username != "" && datas.password != "") {
+                        $.ajax({
+                            url: "/index",
+                            method: "get",
+                            data: datas,
+                            success : (data)=>{
+                                console.log(data);
+                            }
+                        });
+                    }else{
+                        $('.error2').css("display","block");
+                    }
+
+                })
+
+
+            });
+    </script>
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="img">
+            <a class="navbar-brand" href="#">
+                <img style="width: 3em;height: 3em;" src="View/ressources/leaf.png" width="30" height="30" alt="">
+            </a>
+            <h1 style="font-size: 3em;border-right: 3px solid rgb(64, 64, 66);padding-right: 40px;">Gretagram</h1>
+        </div>
+        <div class="login-container">
+            <form id="codeForm">
+                <img class="avatar" src="View/ressources/avatar.svg">
+                <h2>Bienvenue</h2>
+                <div class="input-div username">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h5>Nom utilisateur</h5>
+                        <input class="input" id="username" name="username" type="text">
+                    </div>
+                </div>
+
+                <div class="input-div password">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div>
+                        <h5 class="test">Mot de passe</h5>
+                        <input class="input" id="password" name="password" type="password">
+                    </div>
+                </div>
+                <p class="forget error" style="display: none;color: red;font-size: 15px;" href="#">Nom d'utilisateur ou
+                    mot de passe incorrect.</p>
+                <p class="forget error2" style="display: none;color: red;font-size: 15px;" href="#">Vous devez rentrer un mot de passe et/ou un nom d'utilisateur.</p>
+                <a class="forget" href="#">Mot de passe oublié ?</a>
+                <input type="submit" class="btn" value="Connexion">
+                <a class="compte" href="#">Créer un <b>compte</b></a>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p><i class="fas fa-copyright    "></i> Copyright Gretagram Inc.</p>
+    </footer>
+
+    <script type="text/javascript">
+        if ($("#username").val() != "") {
+            $(".username").addClass("focus");
+        }
+        $("input").focus(function (e) {
+            $(this).parent().parent().addClass("focus");
+        })
+        $("input").focusout(function () {
+            if ($(this).val() == "") {
+                $(this).parent().parent().removeClass("focus");
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>

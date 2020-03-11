@@ -54,6 +54,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet"> 
 
     <!-- Input File -->
     <link rel="stylesheet" type="text/css" href="View/css/normalize.css" />
@@ -163,12 +164,8 @@
                                         <button href="#" class=" btn btn-publier ">Publier</button>
                                     </div>
                                 </div>
-
-
                             </div>
-
                         </div>
-                        <!-- <textarea placeholder="Exprimez vous ..." class="text-create-publication" type="text"  name="" value=""></textarea> -->
                     </div>
                 </div>
             </div>
@@ -335,6 +332,11 @@
                     var dieze = false;
                     var cptText = 0;
                     var tab = [];
+                    
+                    var test = "oui";
+                    console.log(test[0]);
+                    
+
                     $(".text-create-publication").keyup((e) => {
                         tab = [];
                         var text = $(".text-create-publication").text();
@@ -347,7 +349,7 @@
                         var phrase = text.split(/,| /);
                         $('.hashtest').html("");
                         phrase.forEach((i) => {
-                            if (i.includes('#') && i != "#") {
+                            if (i[0] == "#" && i != "#") {
                                 $('.hashtest').append("<span class='badge badge-primary'>" + i +
                                     "</span> ");
                             }
@@ -360,6 +362,9 @@
                     })
 
                     var placeholderTrigger = false;
+
+  
+                    
 
                     $(".text-create-publication").focus(() => {
                         if (!placeholderTrigger) {
