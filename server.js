@@ -1,3 +1,4 @@
+//DEPENDANCES========================================================
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
@@ -6,13 +7,20 @@ const path = require('path');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const upload = multer({ dest: __dirname + '/Photos' });
+//===================================================================
+
+
+//LANCEMENT API======================================================
+let apiRoutes = require("./api-routes") // Use Api routes in the App
+app.use('/api', apiRoutes);
+//===================================================================
 
 app.use(express.static(__dirname + '/public'));
 
 app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
+    bodyParser.urlencoded({
+        extended: true
+    })
 )
 
 app.use(bodyParser.json())
