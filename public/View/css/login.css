@@ -17,8 +17,12 @@ h3,
 h4,
 p,
 a {
-  font-family: "Sen", sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
   color: #404042 !important;
+}
+
+h1 {
+  font-family: "Sen", sans-serif !important;
 }
 
 .container {
@@ -62,6 +66,10 @@ form h2 {
   font-family: "Poppins", sans-serif !important;
 }
 
+p {
+  font-family: "Poppins", sans-serif !important;
+}
+
 #codeForm {
   border-radius: 21px;
   background: #eff4f8;
@@ -75,6 +83,9 @@ form h2 {
   margin: 25px 0;
   padding: 5px 0;
   border-bottom: 2px solid #487450;
+}
+.input-div.invalid {
+  border-bottom: 3px solid #d11717;
 }
 
 .input-div.focus .i i {
@@ -238,6 +249,10 @@ footer p {
   transform: translate(-50%, -50%);
   background-color: transparent !important;
   top: 50%;
+}
+
+.fa-at.invalid, .mdps.invalid, .fa-key.invalid, .h5mail.invalid {
+  color: red;
 }
 
 /*# sourceMappingURL=login.css.map */

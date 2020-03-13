@@ -119,7 +119,7 @@ app.controller("ctrl", ($scope) => {
             circle.addTo(mymap);
 
             $('.change-theme').click(() => { // On change la map de couleur quand l'utilisateur switch de theme 
-                if (sombre) {
+                if (!sombre) {
                     L.tileLayer(lightmap, {
                         maxZoom: 18
                     }).addTo(mymap);

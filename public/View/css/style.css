@@ -1,8 +1,15 @@
-html, body, h1, h2, h3, h4, p, a {
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+a {
   font-family: "Sen", sans-serif !important;
 }
 
-.badge.badge-primary {
+.badge.badge-success {
   font-size: 1em;
   padding: 2px;
 }
@@ -71,6 +78,12 @@ h2.clair {
 }
 .searchbar.sombre {
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
+}
+
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+  border-color: transparent !important;
 }
 
 #searchbar {
@@ -349,6 +362,68 @@ label.filled:hover {
 .inputfile-1.has-focus + label,
 .inputfile-1 + label:hover {
   background-color: #495b6a;
+}
+
+.animated-icon1 {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  margin: 0px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+.animated-icon1 span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+  background: #868484;
+}
+.animated-icon1 span:nth-child(1) {
+  top: 0px;
+}
+.animated-icon1 span:nth-child(2) {
+  top: 10px;
+}
+.animated-icon1 span:nth-child(3) {
+  top: 20px;
+}
+.animated-icon1.open span:nth-child(1) {
+  top: 11px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+.animated-icon1.open span:nth-child(2) {
+  top: 11px;
+  opacity: 0;
+  left: -60px;
+}
+.animated-icon1.open span:nth-child(3) {
+  top: 11px;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
 }
 
 /*# sourceMappingURL=style.css.map */

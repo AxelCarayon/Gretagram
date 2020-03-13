@@ -3,16 +3,24 @@ $primary-light : #E3EDF7;
 $accent-color : #8e9b55;
 
 
-html,body,h1,h2,h3,h4,p,a{
-    
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+
     font-family: 'Sen', sans-serif !important;
 }
 
 
-.badge.badge-primary{
+.badge.badge-success {
     font-size: 1em;
     padding: 2px;
 }
+
 body {
     overflow-x: hidden;
 
@@ -96,6 +104,12 @@ h2 {
     }
 }
 
+.navbar-toggler {
+    border: none !important;
+    outline: none !important;
+    border-color: transparent !important;
+
+}
 
 #searchbar {
     background: none;
@@ -198,30 +212,33 @@ div[contenteditable] {
     content: "";
 }
 
-.btn-publication{
-    margin-right:10px;
+.btn-publication {
+    margin-right: 10px;
     color: rgb(247, 242, 242);
     border-radius: 10px;
-    &.sombre{
-        background-color: lighten($color: $primary-dark, $amount: 10%) ;
-        &:hover{
-            background-color: lighten($color: $primary-dark, $amount: 15%) ;
-            color: rgb(247, 242, 242) !important ;
+
+    &.sombre {
+        background-color: lighten($color: $primary-dark, $amount: 10%);
+
+        &:hover {
+            background-color: lighten($color: $primary-dark, $amount: 15%);
+            color: rgb(247, 242, 242) !important;
         }
-        
+
     }
 
-    &.clair{
-        background-color: lighten($color: $primary-dark, $amount: 40%)  ;
-        &:hover{
-            background-color: lighten($color: $primary-dark, $amount: 45%)  ;
-            color: rgb(247, 242, 242) !important ;
+    &.clair {
+        background-color: lighten($color: $primary-dark, $amount: 40%);
+
+        &:hover {
+            background-color: lighten($color: $primary-dark, $amount: 45%);
+            color: rgb(247, 242, 242) !important;
         }
     }
 }
 
-.btn-publier{
-    margin-right:10px;
+.btn-publier {
+    margin-right: 10px;
     color: rgb(247, 242, 242);
     border-radius: 10px;
     background-color: $accent-color;
@@ -376,36 +393,110 @@ div[contenteditable] {
 }
 
 
-.inputfile-1 + label {
+.inputfile-1+label {
     color: #f1e5e6;
     border-radius: 10px;
-    background-color: lighten($color: $primary-dark, $amount: 10%) ;
+    background-color: lighten($color: $primary-dark, $amount: 10%);
     padding: 10px;
     text-align: right;
 }
 
-label{
+label {
     text-align: right;
-    &.filled{
-        background-color: rgb(150, 158, 79) ;
-        &:hover{
+
+    &.filled {
+        background-color: rgb(150, 158, 79);
+
+        &:hover {
             background-color: lighten($color: rgb(150, 158, 79), $amount: 10%)
         }
     }
 }
 
-.inputfile-1{
+.inputfile-1 {
     text-align: right;
-    &.filled{
-        background-color: rgb(150, 158, 79) ;
-        &:hover{
+
+    &.filled {
+        background-color: rgb(150, 158, 79);
+
+        &:hover {
             background-color: lighten($color: rgb(150, 158, 79), $amount: 10%)
         }
     }
 }
 
-.inputfile-1:focus + label,
-.inputfile-1.has-focus + label,
-.inputfile-1 + label:hover {
-    background-color: lighten($color: $primary-dark, $amount: 15%) 
+.inputfile-1:focus+label,
+.inputfile-1.has-focus+label,
+.inputfile-1+label:hover {
+    background-color: lighten($color: $primary-dark, $amount: 15%)
+}
+
+
+.animated-icon1 {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: 0px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+
+    span{
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        border-radius: 9px;
+        opacity: 1;
+        left: 0;
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transition: .25s ease-in-out;
+        -moz-transition: .25s ease-in-out;
+        -o-transition: .25s ease-in-out;
+        transition: .25s ease-in-out;
+        background: #868484;
+
+        &:nth-child(1) {
+            top: 0px;
+        }
+        &:nth-child(2) {
+            top: 10px;
+        }
+        &:nth-child(3) {
+            top: 20px;
+        }
+    }
+
+    &.open{
+        span{
+            &:nth-child(1){
+                top: 11px;
+                -webkit-transform: rotate(135deg);
+                -moz-transform: rotate(135deg);
+                -o-transform: rotate(135deg);
+                transform: rotate(135deg);
+            }
+            &:nth-child(2){
+                top: 11px;
+                opacity: 0;
+                left: -60px;
+            }
+            &:nth-child(3){
+                top: 11px;
+                -webkit-transform: rotate(-135deg);
+                -moz-transform: rotate(-135deg);
+                -o-transform: rotate(-135deg);
+                transform: rotate(-135deg);
+            }
+        }
+    }
 }

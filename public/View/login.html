@@ -106,15 +106,15 @@ and open the template in the editor.
                             <i class="fas fa-at"></i>
                         </div>
                         <div>
-                            <h5 class="test">e-mail</h5>
-                            <input class="input" id="mdp-forget" name="mdp-forget" type="text">
+                            <h5 class="h5mail">e-mail</h5>
+                            <input class="input" id="mdp-forget" name="mdp-forget" type="mail">
                         </div>
                     </div>
                 </div>
+                <p class="mail-false" style="margin-left: 30px; display:none;color:red !important;">Vous devez rentrer un mail vailde.</p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" data-toggle="modal" data-dismiss="modal" data-target="#mail-envoye"
-                        class="btn btn-success btn-send-mail">Envoyer mail</button>
+                    <button type="button" class="btn btn-success btn-send-mail">Envoyer mail</button>
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@ and open the template in the editor.
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Un e-mail vous a été envoyé à l'adresse <span class="mail-ok"></span>. <br> Si vous ne recevez
+                    <p>Un e-mail vous a été envoyé à l'adresse <span class="mail-ok"></span> <br> Si vous ne recevez
                         rien d'ici quelques minutes, veuillez réessayer.</p>
 
                 </div>
@@ -147,26 +147,83 @@ and open the template in the editor.
     </footer>
 
     <script type="text/javascript">
+        var verifMail = () => {
+            var drap = true;
+            var mail = $("#mdp-forget").val();
+            console.log($("#mdp-forget"));
 
-        
+            if (!mail.includes("@") || mail.includes(" ") || mail.includes("é")) {
+                $("#mdp-forget").parent().parent().addClass("invalid");
+                drap = false;
+            } else {
+                $("#mdp-forget").parent().parent().removeClass("invalid");
+                var tabmail = mail.split("@");
+                console.log(tabmail[1]);
+                if (tabmail.length > 2) {
+                    drap = false;
+                }
+                var tabmailpoint = tabmail[1].split('.');
+                if (tabmailpoint.length > 2) {
+                    drap = false;
+                }
+                if (!tabmail[1].includes(".")) {
+                    drap = false
+                }
+            }
+
+            if (mail == "") {
+                drap = true;
+            }
+
+            console.log(drap);
+
+            if (drap) {
+                $("#mdp-forget").parent().parent().removeClass("invalid");
+                $('.fa-at').removeClass("invalid");
+                $('.h5mail').removeClass("invalid");
+                $(".mail-false").fadeOut();
+            } else {
+                $("#mdp-forget").parent().parent().addClass("invalid");
+                $('.fa-at').addClass("invalid");
+                $('.h5mail').addClass("invalid");
+                $(".mail-false").fadeIn();
+            }
+
+        }
+
+        verifMail();
+        $("#mdp-forget").focusout(() => {
+            verifMail();
+        });
         $('.btn-send-mail').click((e) => {
             console.log($('#mdp-forget').val());
-            $('.mail-ok').text($('#mdp-forget').val());
+            if ($('.h5mail').hasClass("invalid")) {
+                e.preventDefault();
+            } else {
+                // data-toggle="modal" data-dismiss="modal" data-target="#mail-envoye"
+                $('.btn-send-mail').attr('data-toggle', 'modal');
+                $('.btn-send-mail').attr('data-dismiss', 'modal');
+                $('.btn-send-mail').attr('data-target', '#mail-envoye');
+                $('.mail-ok').text($('#mdp-forget').val());
+                $('.btn-send-mail').click();
+            }
+
 
         })
 
         $('.btn-connexion').click((e) => {
             e.preventDefault();
             window.location.href = "/";
+
         })
 
-        $("input").each((i)=>{
+        $("input").each((i) => {
             var input = $("input").eq(i);
             if ($("input").eq(i).val() != "") {
                 $("input").eq(i).parent().parent().addClass("focus");
             }
             console.log($("input").eq(i).val());
-            
+
         })
 
 

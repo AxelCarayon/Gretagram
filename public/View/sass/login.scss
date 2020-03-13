@@ -17,10 +17,13 @@ h3,
 h4,
 p,
 a {
-    font-family: 'Sen', sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
     color: rgb(64, 64, 66) !important;
 }
 
+h1{
+    font-family: 'Sen', sans-serif !important;
+}
 .container {
     width: 100vw;
     height: 100vh;
@@ -62,6 +65,9 @@ form h2 {
     font-family: 'Poppins', sans-serif !important;
 }
 
+p{
+    font-family: 'Poppins', sans-serif !important;
+}
 #codeForm {
     border-radius: 21px;
     background: #eff4f8;
@@ -76,6 +82,10 @@ form h2 {
     margin: 25px 0;
     padding: 5px 0;
     border-bottom: 2px solid rgb(72, 116, 80);
+    &.invalid{
+        border-bottom: 3px solid rgb(209, 23, 23);
+
+    }
 }
 
 .input-div.focus .i i {
@@ -249,4 +259,8 @@ footer{
 }
 
 
+
+.fa-at.invalid,.mdps.invalid,.fa-key.invalid,.h5mail.invalid{
+    color:red;
+}
 
