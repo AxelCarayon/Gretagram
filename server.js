@@ -5,25 +5,29 @@ const url = "mongodb://localhost:27017/";
 const app = express();
 const path = require('path');
 const multer = require('multer');
+const mongoose = require('mongoose'); // Configure bodyparser to handle post requests
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const upload = multer({ dest: __dirname + '/Photos' });
-//===================================================================
-
-
-//LANCEMENT API======================================================
-let apiRoutes = require("./api-routes") // Use Api routes in the App
-app.use('/api', apiRoutes);
 //===================================================================
 
 app.use(express.static(__dirname + '/public'));
 
-app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
-)
+// Import Body parser
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json()); // Connect to Mongoose and set connection variable
+mongoose.connect('mongodb://localhost/gretagram', { useNewUrlParser: true });
+var db = mongoose.connection;
 
-app.use(bodyParser.json())
+// Import routes
+let apiRoutes = require("./api-routes") // Use Api routes in the App
+app.use('/api', apiRoutes)
+
+//==============================================================================================
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/View/index.html'));
