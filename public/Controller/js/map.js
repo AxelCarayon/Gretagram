@@ -98,7 +98,7 @@ app.controller("ctrl", ($scope) => {
                 }
             });
 
-            if (sombre) { // Par rapport à la variable de l'utilisateur on met la map en light ou en dark
+            if (!sombre) { // Par rapport à la variable de l'utilisateur on met la map en light ou en dark
                 L.tileLayer(darkmap, {
                     maxZoom: 18
                 }).addTo(mymap);

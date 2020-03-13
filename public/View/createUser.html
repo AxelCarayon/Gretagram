@@ -19,7 +19,7 @@ and open the template in the editor.
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="View/css/login.css">
+    <link rel="stylesheet" href="View/css/createUser.css">
     <link href="View/css/fontawesome/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 
@@ -31,99 +31,218 @@ and open the template in the editor.
     <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
     <script defer src="View/css/fontawesome/js/all.js"></script>
 
-    <script>
-        $(document).ready( // Exécuté à la fin du chargement de la page
-            function () {
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-                function getFormData($form) {
-                    var unindexed_array = $form.serializeArray();
-                    var indexed_array = {};
-
-                    $.map(unindexed_array, function (n, i) {
-                        indexed_array[n['name']] = n['value'];
-                    });
-
-                    return indexed_array;
-                }
-
-                $('.btn').click(function (e) {
-                    e.preventDefault();
-                    var datas = getFormData($('#codeForm'));
-                    console.log(datas.username);
-                    console.log(datas.password);
-
-                    if (datas.username != "" && datas.password != "") {
-                        $.ajax({
-                            url: "/index",
-                            method: "get",
-                            data: datas,
-                            success : (data)=>{
-                                console.log(data);
-                            }
-                        });
-                    }else{
-                        $('.error2').css("display","block");
-                    }
-
-                })
-
-
-            });
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjmdVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
 </head>
 
 <body>
 
-    <div class="container">
-        <div class="img">
-            <a class="navbar-brand" href="#">
-                <img style="width: 3em;height: 3em;" src="View/ressources/leaf.png" width="30" height="30" alt="">
-            </a>
-            <h1 style="font-size: 3em;border-right: 3px solid rgb(64, 64, 66);padding-right: 40px;">Gretagram</h1>
-        </div>
-        <div class="login-container">
-            <form id="codeForm">
-                <img class="avatar" src="View/ressources/avatar.svg">
-                <h2>Bienvenue</h2>
-                <div class="input-div username">
-                    <div class="i">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <h5>Nom utilisateur</h5>
-                        <input class="input" id="username" name="username" type="text">
-                    </div>
-                </div>
+    <a href="/login"><span class="fleche"><i class="fas fa-arrow-left"></i></span></a>
 
-                <div class="input-div password">
-                    <div class="i">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <div>
-                        <h5 class="test">Mot de passe</h5>
-                        <input class="input" id="password" name="password" type="password">
-                    </div>
+    <div class="logo">
+
+        <h1 style="font-size: 3em;">        
+            <img style="width: 80px;height: 80px;" src="View/ressources/leaf.png" width="30" height="30" alt="">
+        <span class="greta">Gretagram</span></h1>
+    </div>
+
+
+    <div class="container publication">
+        <div class="row justify-content-center">
+            <img class="avatar" style="width: 150px;" src="View/ressources/avatar.svg">
+            <div class="w-100"></div>
+            <h2 class="col-6" style="text-align: center;">Création de compte</h2>
+            <div class="w-100"></div>
+            <div class="col-12 container">
+                <div class="row justify-content-center">
+                    <form class="col-12">
+                        <div class="container" style="width: 85%;">
+                            <div class="row">
+                                <div class="input-div col-12 col-md-3 prenom">
+                                    <div class="i">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Prénom</h5>
+                                        <input class="input" id="prenom" name="prenom" type="text">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-3 nom ">
+                                    <div class="i">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Nom</h5>
+                                        <input class="input" id="nom" name="nom" type="text">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-5 mail ">
+                                    <div class="i">
+                                        <i class="fas fa-at"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="h5mail">Email</h5>
+                                        <input class="input shadow-none "  id="mail" name="mail" type="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p class="mail-false" style="margin-right: 20px; text-align: right; display:none;color: red !important;font-size: 14px;">L'adresse mail n'est pas correct.        </p>
+
+                            </div>
+                            <div class="row">
+                                <div class="input-div col-12 col-md-5 adress">
+                                    <div class="i">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Adresse</h5>
+                                        <input class="input" id="adress" name="adress" type="text">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-3 cp">
+                                    <div class="i">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Code postal</h5>
+                                        <input class="input" id="cp" name="cp" type="text">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-3 ville">
+                                    <div class="i">
+                                        <i class="fas fa-city"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Ville</h5>
+                                        <input class="input" id="ville" name="ville" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-div col-12 col-md-5 mdp1">
+                                    <div class="i">
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mdps">Mot de passe</h5>
+                                        <input class="input" id="mdp1" name="mdp1" type="password">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-5 mdp2">
+                                    <div class="i">
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mdps">Répétez votre mot de passe</h5>
+                                        <input class="input" id="mdp2" name="mdp2" type="password">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <p class="mdp-false" style="display:none;color: red !important;font-size: 14px;">Les 2 mots de passe ne correspondent pas.</p>
+
+                                </div>
+
+                            </div>
+                            <div class="row justify-content-end">
+                                <input type="submit" class="btn" value="Création du compte">
+                            </div>
+                        </div>
+
+
+                    </form>
                 </div>
-                <p class="forget error" style="display: none;color: red;font-size: 15px;" href="#">Nom d'utilisateur ou
-                    mot de passe incorrect.</p>
-                <p class="forget error2" style="display: none;color: red;font-size: 15px;" href="#">Vous devez rentrer un mot de passe et/ou un nom d'utilisateur.</p>
-                <a class="forget" href="#">Mot de passe oublié ?</a>
-                <input type="submit" class="btn" value="Connexion">
-                <a class="compte" href="#">Créer un <b>compte</b></a>
-            </form>
+            </div>
         </div>
     </div>
 
-    <footer>
+    <div class=" footer">
         <p><i class="fas fa-copyright    "></i> Copyright Gretagram Inc.</p>
-    </footer>
+    </div>
+
 
     <script type="text/javascript">
-        if ($("#username").val() != "") {
-            $(".username").addClass("focus");
+
+        var verifMail = ()=>{
+            var drap = true;
+            var mail = $("#mail").val();
+            if ( !mail.includes("@") || mail.includes(" ") ||  mail.includes("é")) {
+                $("#mail").parent().parent().addClass("invalid");       
+                drap = false;         
+            }else{
+                $("#mail").parent().parent().removeClass("invalid");
+                var tabmail = mail.split("@");
+                console.log(tabmail[1]);
+                if (tabmail.length > 2) {
+                    drap = false;
+                }
+                var tabmailpoint = tabmail[1].split('.');
+                if (tabmailpoint.length > 2) {
+                    drap = false;
+                }
+                if (!tabmail[1].includes(".")) {
+                    drap = false
+                }
+            }
+
+            if (mail == "") {
+                drap = true;
+            }
+            if (drap) {
+                $("#mail").parent().parent().removeClass("invalid"); 
+                $('.fa-at').removeClass("invalid");
+                $('.h5mail').removeClass("invalid");
+                $(".mail-false").fadeOut();
+            }else{
+                $("#mail").parent().parent().addClass("invalid");
+                $('.fa-at').addClass("invalid");
+                $('.h5mail').addClass("invalid");
+                $(".mail-false").fadeIn();
+            }
+
         }
+
+        function verifMdp() {
+            if ($("#mdp1").val() != $("#mdp2").val() ) {
+                $("#mdp1").parent().parent().addClass("invalid");
+                $("#mdp2").parent().parent().addClass("invalid");
+                $('.fa-key').addClass('invalid');
+                $('.mdps').addClass('invalid');
+                $(".mdp-false").fadeIn();
+            }else{
+                $("#mdp1").parent().parent().removeClass("invalid");
+                $("#mdp2").parent().parent().removeClass("invalid");
+                $('.fa-key').removeClass('invalid');
+                $('.mdps').removeClass('invalid');
+                $(".mdp-false").fadeOut();
+            }
+        }
+
+        verifMail();
+        verifMdp();
+        $('#mdp1,#mdp2').focusout((e)=>{
+            verifMdp();
+        })
+        $("#mail").focusout((e)=>{
+            verifMail();
+        })
+    
+        $("input").each((i)=>{
+            var input = $("input").eq(i);
+            if ($("input").eq(i).val() != "") {
+                $("input").eq(i).parent().parent().addClass("focus");
+            }
+            
+        })
+
         $("input").focus(function (e) {
             $(this).parent().parent().addClass("focus");
         })
@@ -134,7 +253,6 @@ and open the template in the editor.
 
         })
     </script>
-
 </body>
 
 </html>

@@ -1,12 +1,7 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body{
+body,
+html {
     background-color: #eff4f8 !important;
-    overflow: hidden;
+    height: 100%;
 }
 
 html,
@@ -17,18 +12,23 @@ h3,
 h4,
 p,
 a {
-    font-family: 'Sen', sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
     color: rgb(64, 64, 66) !important;
 }
 
-.container {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 7rem;
-    padding: 0 2rem;
+.publication {
+    border-radius: 13px;
+    background: #eff4f8;
+    box-shadow: 11px 11px 15px #ced2d5,
+        -11px -11px 15px #ffffff;
+    width: 80%;
+    padding: 20px;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+
 }
+
 
 .img {
     display: flex;
@@ -37,21 +37,16 @@ a {
 }
 
 .img img {
-    width: 500px;
+    width: 100px;
 }
 
-.login-container {
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
 
 form {
     width: 400px;
 }
 
 .avatar {
-    width: 100px;
+    width: 50px;
 }
 
 form h2 {
@@ -62,20 +57,18 @@ form h2 {
     font-family: 'Poppins', sans-serif !important;
 }
 
-#codeForm {
-    border-radius: 21px;
-    background: #eff4f8;
-    box-shadow: 11px 11px 15px #ced2d5,
-        -11px -11px 15px #ffffff;
-    padding: 40px;
-}
 
 .input-div {
     display: grid;
     grid-template-columns: 7% 93%;
-    margin: 25px 0;
+    margin: 15px 5px;
     padding: 5px 0;
     border-bottom: 2px solid rgb(72, 116, 80);
+
+    &.invalid{
+        border-bottom: 3px solid rgb(209, 23, 23);
+
+    }
 }
 
 .input-div.focus .i i {
@@ -133,64 +126,8 @@ form h2 {
     font-weight: 700;
 }
 
-.forget {
-    display: block;
-    text-align: right;
-    text-decoration: none;
-    color: #999;
-    font-size: 0.9rem;
-    transition: .3s;
-}
 
-.forget:hover {
-    color: #eb3b5a;
-}
 
-.compte {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    color: #999;
-    font-size: 0.9rem;
-    transition: .3s;
-}
-
-.compte:hover {
-    color: #eb3b5a;
-}
-
-a.forget,a.compte{
-    color: #b6d4a8 !important;
-    margin-bottom: 40px;
-}
-.btn-connexion {
-    text-decoration: solid;
-    display: block;
-    width: 100%;
-    height: 50px;
-    margin: 1rem 0;
-    font-size: 1.2rem;
-    outline: none !important;
-    border: none !important;
-    border-radius: 21px;
-    background: #eff4f8;
-    box-shadow: 11px 11px 15px #ced2d5,
-        -11px -11px 15px #ffffff;
-    cursor: pointer;
-    color: darken($color: #b6d4a8, $amount: 10%) !important;
-    background-size: 200%;
-    transition: .5s;
-    text-transform: uppercase;
-
-    &:hover,&:active{
-        outline: none !important;
-        box-shadow: none;
-    }
-}
-
-.btn:hover {
-    background-position: right;
-}
 
 @media screen and (max-width: 1050px) {
     .container {
@@ -222,16 +159,37 @@ a.forget,a.compte{
         grid-template-columns: 1fr;
     }
 
-    .wave {
-        display: none;
-    }
 
     .login-container {
         justify-content: center;
     }
 }
 
-footer{
+
+.btn {
+    text-decoration: solid;
+    display: block;
+    height: 50px;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    border-radius: 21px;
+    background: #eff4f8;
+    box-shadow: 11px 11px 15px #ced2d5,
+        -11px -11px 15px #ffffff;
+    cursor: pointer;
+    color: darken($color: #b6d4a8, $amount: 10%) !important;
+    background-size: 200%;
+    transition: .5s;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-position: right;
+}
+
+.footer{
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -248,5 +206,36 @@ footer{
     }
 }
 
+.logo{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+}
+.greta{
+    position: relative;
+    top: 5px;
+    font-family: 'Sen', sans-serif !important;
+}
+
+.fleche{
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    color: #aaa;
+    font-size: 40px;
+}
+
+.input-div.focus .i i {
+    color: rgb(128, 187, 139);
+}
 
 
+.input-div.focus div h5 {
+    top: -5px;
+    font-size: 15px;
+}
+
+.fa-at.invalid,.mdps.invalid,.fa-key.invalid,.h5mail.invalid{
+    color:red;
+}

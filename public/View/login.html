@@ -31,8 +31,18 @@ and open the template in the editor.
     <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
     <script defer src="View/css/fontawesome/js/all.js"></script>
     <!-- Controller -->
-    <script src="/public/Controller/js/connexion.js"></script>
+    <script src="Controller/js/connexion.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 </head>
+
 <body>
     <div class="container">
         <div class="img">
@@ -66,22 +76,100 @@ and open the template in the editor.
                 </div>
                 <p class="forget error" style="display: none;color: red;font-size: 15px;" href="#">Nom d'utilisateur ou
                     mot de passe incorrect.</p>
-                <p class="forget error2" style="display: none;color: red;font-size: 15px;" href="#">Vous devez rentrer un mot de passe et/ou un nom d'utilisateur.</p>
-                <a class="forget" href="#">Mot de passe oublié ?</a>
-                <input type="submit" class="btn" value="Connexion">
-                <a class="compte" href="#">Créer un <b>compte</b></a>
+                <p class="forget error2" style="display: none;color: red;font-size: 15px;" href="#">Vous devez rentrer
+                    un mot de passe et/ou un nom d'utilisateur.</p>
+                <a class="forget" href="#" data-toggle="modal" data-target="#Model-mdp-oublie">Mot de passe oublié ?</a>
+
+                <input type="submit" class="btn btn-connexion" value="Connexion">
+                <a class="compte" href="/createUser">Créer un <b>compte</b></a>
             </form>
         </div>
     </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="Model-mdp-oublie" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">Vous avez oublié votre mot de passe ?</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Nous allons vous envoyer un e mail contenant vos informations personnelles.</p>
+
+                    <div class="input-div password">
+                        <div class="i">
+                            <i class="fas fa-at"></i>
+                        </div>
+                        <div>
+                            <h5 class="test">e-mail</h5>
+                            <input class="input" id="mdp-forget" name="mdp-forget" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" data-toggle="modal" data-dismiss="modal" data-target="#mail-envoye"
+                        class="btn btn-success btn-send-mail">Envoyer mail</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mail-envoye" tabindex="-1" role="dialog" aria-labelledby="mail-envoyeTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">E-mail envoyé !</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Un e-mail vous a été envoyé à l'adresse <span class="mail-ok"></span>. <br> Si vous ne recevez
+                        rien d'ici quelques minutes, veuillez réessayer.</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Merci</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
-        <p><i class="fas fa-copyright    "></i> Copyright Gretagram Inc.</p>
+        <p><i class="fas fa-copyright"></i> Copyright Gretagram Inc.</p>
     </footer>
 
     <script type="text/javascript">
-        if ($("#username").val() != "") {
-            $(".username").addClass("focus");
-        }
+
+        
+        $('.btn-send-mail').click((e) => {
+            console.log($('#mdp-forget').val());
+            $('.mail-ok').text($('#mdp-forget').val());
+
+        })
+
+        $('.btn-connexion').click((e) => {
+            e.preventDefault();
+            window.location.href = "/";
+        })
+
+        $("input").each((i)=>{
+            var input = $("input").eq(i);
+            if ($("input").eq(i).val() != "") {
+                $("input").eq(i).parent().parent().addClass("focus");
+            }
+            console.log($("input").eq(i).val());
+            
+        })
+
+
         $("input").focus(function (e) {
             $(this).parent().parent().addClass("focus");
         })
