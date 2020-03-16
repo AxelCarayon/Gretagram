@@ -21,7 +21,7 @@ body.sombre {
   background-color: #2A343D;
 }
 body.clair {
-  background-color: #E3EDF7;
+  background-color: #eff4f8;
 }
 
 input[type=button] {
@@ -113,8 +113,8 @@ h2.clair {
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
 }
 .theme-toggler.clair {
-  background: #E3EDF7;
-  box-shadow: 7px 7px 17px #bac2cb, -7px -7px 17px #ffffff;
+  background: #eff4f8;
+  box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
   position: relative;
 }
 
@@ -139,8 +139,8 @@ h2.clair {
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
 }
 .theme-toggler2.clair {
-  background: #E3EDF7;
-  box-shadow: 7px 7px 17px #bac2cb, -7px -7px 17px #ffffff;
+  background: #eff4f8;
+  box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
   -webkit-transform: translateX(-50px);
   transform: translateX(-50px);
 }
@@ -164,7 +164,7 @@ div[contenteditable]:focus {
   background-color: #2A343D;
 }
 div[contenteditable]:focus.clair {
-  background-color: #E3EDF7;
+  background-color: #eff4f8;
 }
 
 .text-create-publication[placeholder]:empty:before {
@@ -216,8 +216,8 @@ div[contenteditable]:focus.clair {
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
 }
 .publication.clair {
-  background: #E3EDF7;
-  box-shadow: 7px 7px 17px #bac2cb, -7px -7px 17px #ffffff;
+  background: #eff4f8;
+  box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
 }
 
 .photoProfil {
@@ -291,8 +291,8 @@ div[contenteditable]:focus.clair {
   margin: 20px;
 }
 .tabs button.clair {
-  background: #E3EDF7;
-  box-shadow: 7px 7px 17px #bac2cb, -7px -7px 17px #ffffff;
+  background: #eff4f8;
+  box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
   color: #7A8AA3;
 }
 .tabs button.sombre {
@@ -301,7 +301,7 @@ div[contenteditable]:focus.clair {
   color: #fff;
 }
 .tabs button.active.clair {
-  background: #E3EDF7;
+  background: #eff4f8;
   box-shadow: 0px 0px 0px #bac2cb, 0px 0px 0px #ffffff;
   color: #7A8AA3;
 }

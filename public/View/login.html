@@ -7,40 +7,35 @@ and open the template in the editor.
 <html>
 
 <head>
-    <title>Gretagram</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
-        -->
-
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="View/css/login.css">
-    <link href="View/css/fontawesome/css/all.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="View/ressources/favicon.ico">
-
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-    <script defer src="View/css/fontawesome/js/all.js"></script>
-    <!-- Controller -->
-    <script src="Controller/js/connexion.js"></script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <!-- Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
+    <!-- Controller -->
+    <script src="Controller/js/connexion.js"></script>
+
+
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="View/css/login.css">
+    <link href="View/css/fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="View/ressources/favicon.ico">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+
+    <title>Gretagram</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 
 <body>
@@ -111,7 +106,8 @@ and open the template in the editor.
                         </div>
                     </div>
                 </div>
-                <p class="mail-false" style="margin-left: 30px; display:none;color:red !important;">Vous devez rentrer un mail vailde.</p>
+                <p class="mail-false" style="margin-left: 30px; display:none;color:red !important;">Vous devez rentrer
+                    un mail vailde.</p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                     <button type="button" class="btn btn-success btn-send-mail">Envoyer mail</button>
@@ -150,7 +146,6 @@ and open the template in the editor.
         var verifMail = () => {
             var drap = true;
             var mail = $("#mdp-forget").val();
-            console.log($("#mdp-forget"));
 
             if (!mail.includes("@") || mail.includes(" ") || mail.includes("é")) {
                 $("#mdp-forget").parent().parent().addClass("invalid");
@@ -158,7 +153,6 @@ and open the template in the editor.
             } else {
                 $("#mdp-forget").parent().parent().removeClass("invalid");
                 var tabmail = mail.split("@");
-                console.log(tabmail[1]);
                 if (tabmail.length > 2) {
                     drap = false;
                 }
@@ -175,7 +169,6 @@ and open the template in the editor.
                 drap = true;
             }
 
-            console.log(drap);
 
             if (drap) {
                 $("#mdp-forget").parent().parent().removeClass("invalid");
@@ -196,7 +189,6 @@ and open the template in the editor.
             verifMail();
         });
         $('.btn-send-mail').click((e) => {
-            console.log($('#mdp-forget').val());
             if ($('.h5mail').hasClass("invalid")) {
                 e.preventDefault();
             } else {
@@ -222,7 +214,6 @@ and open the template in the editor.
             if ($("input").eq(i).val() != "") {
                 $("input").eq(i).parent().parent().addClass("focus");
             }
-            console.log($("input").eq(i).val());
 
         })
 

@@ -1,5 +1,5 @@
 $primary-dark : #2A343D;
-$primary-light : #E3EDF7;
+$primary-light : #eff4f8;
 $accent-color : #8e9b55;
 
 
@@ -140,9 +140,9 @@ h2 {
     }
 
     &.clair {
-        background: #E3EDF7;
-        box-shadow: 7px 7px 17px #bac2cb,
-            -7px -7px 17px #ffffff;
+        background: $primary-light;
+            box-shadow: 11px 11px 15px #ced2d5,
+        -11px -11px 15px #ffffff;
         position: relative;
     }
 }
@@ -171,9 +171,9 @@ h2 {
     }
 
     &.clair {
-        background: #E3EDF7;
-        box-shadow: 7px 7px 17px #bac2cb,
-            -7px -7px 17px #ffffff;
+        background: $primary-light;
+            box-shadow: 11px 11px 15px #ced2d5,
+        -11px -11px 15px #ffffff;
         -webkit-transform: translateX(-50px);
         transform: translateX(-50px);
     }
@@ -259,9 +259,9 @@ div[contenteditable] {
     }
 
     &.clair {
-        background: #E3EDF7;
-        box-shadow: 7px 7px 17px #bac2cb,
-            -7px -7px 17px #ffffff;
+        background: $primary-light;
+            box-shadow: 11px 11px 15px #ced2d5,
+        -11px -11px 15px #ffffff;
     }
 }
 
@@ -344,9 +344,9 @@ div[contenteditable] {
     margin: 20px;
 
     &.clair {
-        background: #E3EDF7;
-        box-shadow: 7px 7px 17px #bac2cb,
-            -7px -7px 17px #ffffff;
+        background: $primary-light;
+            box-shadow: 11px 11px 15px #ced2d5,
+        -11px -11px 15px #ffffff;
         color: #7A8AA3;
     }
 
@@ -358,7 +358,7 @@ div[contenteditable] {
     }
 
     &.active.clair {
-        background: #E3EDF7;
+        background: $primary-light;
         box-shadow: 0px 0px 0px #bac2cb,
             0px 0px 0px #ffffff;
         color: #7A8AA3;
