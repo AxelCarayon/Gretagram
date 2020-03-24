@@ -71,7 +71,7 @@ h2.clair {
   text-align: center;
   border: none;
   background-color: transparent;
-  transition: ease-in-out 1s;
+  transition: ease-in-out 0.5s;
 }
 .searchbar.clair {
   box-shadow: 7px 7px 14px #6bd4d4, -7px -7px 14px #8dffff !important;
@@ -209,7 +209,7 @@ div[contenteditable]:focus.clair {
 
 .publication {
   border-radius: 13px;
-  margin-top: 20px;
+  margin-top: 60px;
 }
 .publication.sombre {
   background: #2A343D;
@@ -424,6 +424,133 @@ label.filled:hover {
   -moz-transform: rotate(-135deg);
   -o-transform: rotate(-135deg);
   transform: rotate(-135deg);
+}
+
+.nomTemplate {
+  background-color: #867f7f;
+  color: #867f7f;
+}
+
+.template p {
+  background-image: linear-gradient(to right, #c3b4b4, #e2dada, #c3b4b4);
+  color: transparent !important;
+  background-size: 200%;
+  border-radius: 5px;
+  background-position: left;
+  cursor: default;
+  animation: templateAnim 6s infinite;
+}
+.template p .coeur {
+  background-color: none;
+}
+
+@keyframes templateAnim {
+  0% {
+    background-position: left;
+  }
+  25% {
+    background-position: right;
+  }
+  50% {
+    background-position: left;
+  }
+  75% {
+    background-position: right;
+  }
+  100% {
+    background-position: left;
+  }
+}
+.profil {
+  margin-top: 50px;
+  color: #7A8AA3;
+  border-bottom: 1px solid #6d6666 !important;
+}
+.profil .profilName {
+  color: #6b778a;
+  text-align: center;
+  font-size: 2em;
+  margin-top: 10px;
+}
+.profil .donnees {
+  cursor: pointer;
+  font-size: 1.5em;
+  text-align: center;
+  margin: 40px 0px;
+}
+.profil .donnee:hover {
+  color: #363f4e;
+}
+.profil .profilPicture {
+  height: 150px;
+  width: 150px;
+  transform: translateY(10%);
+}
+
+.btn-profil {
+  font-size: 1.8em;
+  color: #6b778a;
+  transition: 0.5s;
+}
+.btn-profil.active {
+  border-top: 1px solid #6d6666 !important;
+}
+
+.btn-profil:focus {
+  outline: none !important;
+}
+
+.btn-profil:focus,
+.btn-profil:active:focus,
+.btn-profil.active:focus,
+.btn-profil.focus,
+.btn-profil:active.focus,
+.btn-profil.active.focus {
+  outline: none !important;
+}
+
+.btn-profil:focus,
+.btn-profil:active:focus,
+.btn-profil.active:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.publicationsProfil {
+  font-size: 1.2em !important;
+  margin-top: 50px !important;
+}
+
+div.ng-show-add,
+div.ng-show-remove {
+  transition: all 0.5s linear;
+}
+
+div.ng-show-add {
+  transition: all 0.5s linear;
+}
+
+div.ng-show-add.ng-show-add-active {
+  transition: all 0.5s linear;
+}
+
+div.ng-show-remove {
+  transition: all 0.5s linear;
+}
+
+div.ng-show-remove.ng-show-remove-active {
+  transition: all 0.5s linear;
+}
+
+.card.publication {
+  margin: 10px;
+}
+
+p.card-text.clair {
+  color: #4f5763;
+}
+p.card-text.sombre {
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,8 +1,6 @@
-$primary-dark : #2A343D;
-$primary-light : #eff4f8;
-$accent-color : #8e9b55;
-
-
+$primary-dark: #2A343D;
+$primary-light: #eff4f8;
+$accent-color: #8e9b55;
 html,
 body,
 h1,
@@ -11,10 +9,8 @@ h3,
 h4,
 p,
 a {
-
     font-family: 'Sen', sans-serif !important;
 }
-
 
 .badge.badge-success {
     font-size: 1em;
@@ -23,11 +19,9 @@ a {
 
 body {
     overflow-x: hidden;
-
     &.sombre {
         background-color: $primary-dark;
     }
-
     &.clair {
         background-color: $primary-light;
     }
@@ -44,20 +38,16 @@ input[type="button"]::-moz-focus-inner {
 a {
     &.sombre {
         color: rgb(206, 221, 236) !important;
-
         &:hover {
             color: lighten(rgb(206, 221, 236), 10%) !important;
         }
     }
-
     &.clair {
         color: #7A8AA3 !important;
-
         &:hover {
             color: lighten(#7A8AA3, 10%) !important;
         }
     }
-
 }
 
 a.dropdown-item {
@@ -73,7 +63,6 @@ h2 {
     &.sombre {
         color: #fff;
     }
-
     &.clair {
         color: #7A8AA3;
     }
@@ -89,18 +78,14 @@ h2 {
     text-align: center;
     border: none;
     background-color: transparent;
-    transition: ease-in-out 1s;
-
+    transition: ease-in-out .5s;
     &.clair {
         // background: #80ffff;
-        box-shadow: 7px 7px 14px #6bd4d4,
-            -7px -7px 14px #8dffff !important;
+        box-shadow: 7px 7px 14px #6bd4d4, -7px -7px 14px #8dffff !important;
     }
-
     &.sombre {
         // background: $primary-dark;
-        box-shadow: 7px 7px 17px #222b32,
-            -7px -7px 17px #323d48 !important;
+        box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
     }
 }
 
@@ -108,7 +93,6 @@ h2 {
     border: none !important;
     outline: none !important;
     border-color: transparent !important;
-
 }
 
 #searchbar {
@@ -131,24 +115,19 @@ h2 {
     height: 40px;
     border-radius: 20px;
     cursor: pointer;
-
     &.sombre {
         background: $primary-dark;
         position: relative;
-        box-shadow: 7px 7px 17px #222b32,
-            -7px -7px 17px #323d48;
+        box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
     }
-
     &.clair {
         background: $primary-light;
-            box-shadow: 11px 11px 15px #ced2d5,
-        -11px -11px 15px #ffffff;
+        box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
         position: relative;
     }
 }
 
 .theme-toggler2 {
-
     content: "";
     position: absolute;
     top: -1.5px;
@@ -163,17 +142,13 @@ h2 {
     transition: -webkit-transform .5s;
     transition: transform .5s;
     transition: transform .5s, -webkit-transform .5s;
-
     &.sombre {
         background: $primary-dark;
-        box-shadow: 7px 7px 17px #222b32,
-            -7px -7px 17px #323d48;
+        box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
     }
-
     &.clair {
         background: $primary-light;
-            box-shadow: 11px 11px 15px #ced2d5,
-        -11px -11px 15px #ffffff;
+        box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
         -webkit-transform: translateX(-50px);
         transform: translateX(-50px);
     }
@@ -193,11 +168,9 @@ div[contenteditable] {
     color: #7A8AA3;
     font-size: 1.5em;
     margin-bottom: 30px;
-
     &:focus {
         background-color: $primary-dark;
     }
-
     &:focus.clair {
         background-color: $primary-light;
     }
@@ -216,20 +189,15 @@ div[contenteditable] {
     margin-right: 10px;
     color: rgb(247, 242, 242);
     border-radius: 10px;
-
     &.sombre {
         background-color: lighten($color: $primary-dark, $amount: 10%);
-
         &:hover {
             background-color: lighten($color: $primary-dark, $amount: 15%);
             color: rgb(247, 242, 242) !important;
         }
-
     }
-
     &.clair {
         background-color: lighten($color: $primary-dark, $amount: 40%);
-
         &:hover {
             background-color: lighten($color: $primary-dark, $amount: 45%);
             color: rgb(247, 242, 242) !important;
@@ -250,18 +218,14 @@ div[contenteditable] {
 
 .publication {
     border-radius: 13px;
-    margin-top: 20px;
-
+    margin-top: 60px;
     &.sombre {
         background: $primary-dark;
-        box-shadow: 7px 7px 17px #222b32,
-            -7px -7px 17px #323d48;
+        box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
     }
-
     &.clair {
         background: $primary-light;
-            box-shadow: 11px 11px 15px #ced2d5,
-        -11px -11px 15px #ffffff;
+        box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
     }
 }
 
@@ -276,15 +240,12 @@ div[contenteditable] {
     position: absolute;
     top: 25px;
     left: 80px;
-
     &.sombre {
         color: white;
     }
-
     &.clair {
         color: #7A8AA3;
     }
-
 }
 
 .publicationDate {
@@ -298,12 +259,10 @@ div[contenteditable] {
 
 .publicationTexte {
     position: relative;
-
     &.sombre {
         color: white;
         margin: 60px 100px;
     }
-
     &.clair {
         color: #7A8AA3;
         margin: 60px 10%;
@@ -330,7 +289,6 @@ div[contenteditable] {
     &.sombre {
         color: white;
     }
-
     &.clair {
         color: #7A8AA3;
     }
@@ -342,32 +300,24 @@ div[contenteditable] {
 
 .tabs button {
     margin: 20px;
-
     &.clair {
         background: $primary-light;
-            box-shadow: 11px 11px 15px #ced2d5,
-        -11px -11px 15px #ffffff;
+        box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
         color: #7A8AA3;
     }
-
     &.sombre {
         background: $primary-dark;
-        box-shadow: 7px 7px 17px #222b32,
-            -7px -7px 17px #323d48;
+        box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
         color: #fff;
     }
-
     &.active.clair {
         background: $primary-light;
-        box-shadow: 0px 0px 0px #bac2cb,
-            0px 0px 0px #ffffff;
+        box-shadow: 0px 0px 0px #bac2cb, 0px 0px 0px #ffffff;
         color: #7A8AA3;
     }
-
     &.active.sombre {
         background: $primary-dark;
-        box-shadow: 0px 0px 0px #222b32,
-            0px 0px 0px #323d48;
+        box-shadow: 0px 0px 0px #222b32, 0px 0px 0px #323d48;
         color: #fff;
     }
 }
@@ -389,9 +339,7 @@ div[contenteditable] {
     position: relative;
     z-index: 2;
     right: -2000px;
-
 }
-
 
 .inputfile-1+label {
     color: #f1e5e6;
@@ -403,10 +351,8 @@ div[contenteditable] {
 
 label {
     text-align: right;
-
     &.filled {
         background-color: rgb(150, 158, 79);
-
         &:hover {
             background-color: lighten($color: rgb(150, 158, 79), $amount: 10%)
         }
@@ -415,10 +361,8 @@ label {
 
 .inputfile-1 {
     text-align: right;
-
     &.filled {
         background-color: rgb(150, 158, 79);
-
         &:hover {
             background-color: lighten($color: rgb(150, 158, 79), $amount: 10%)
         }
@@ -430,7 +374,6 @@ label {
 .inputfile-1+label:hover {
     background-color: lighten($color: $primary-dark, $amount: 15%)
 }
-
 
 .animated-icon1 {
     width: 30px;
@@ -446,8 +389,7 @@ label {
     -o-transition: .5s ease-in-out;
     transition: .5s ease-in-out;
     cursor: pointer;
-
-    span{
+    span {
         display: block;
         position: absolute;
         height: 3px;
@@ -464,7 +406,6 @@ label {
         -o-transition: .25s ease-in-out;
         transition: .25s ease-in-out;
         background: #868484;
-
         &:nth-child(1) {
             top: 0px;
         }
@@ -475,22 +416,21 @@ label {
             top: 20px;
         }
     }
-
-    &.open{
-        span{
-            &:nth-child(1){
+    &.open {
+        span {
+            &:nth-child(1) {
                 top: 11px;
                 -webkit-transform: rotate(135deg);
                 -moz-transform: rotate(135deg);
                 -o-transform: rotate(135deg);
                 transform: rotate(135deg);
             }
-            &:nth-child(2){
+            &:nth-child(2) {
                 top: 11px;
                 opacity: 0;
                 left: -60px;
             }
-            &:nth-child(3){
+            &:nth-child(3) {
                 top: 11px;
                 -webkit-transform: rotate(-135deg);
                 -moz-transform: rotate(-135deg);
@@ -498,5 +438,141 @@ label {
                 transform: rotate(-135deg);
             }
         }
+    }
+}
+
+.nomTemplate {
+    background-color: #867f7f;
+    color: #867f7f;
+}
+
+.template p {
+    background-image: linear-gradient(to right, #c3b4b4, #e2dada, #c3b4b4);
+    color: transparent !important;
+    background-size: 200%;
+    border-radius: 5px;
+    background-position: left;
+    cursor: default;
+    animation: templateAnim 6s infinite;
+    .coeur {
+        background-color: none;
+    }
+}
+
+@keyframes templateAnim {
+    0% {
+        background-position: left;
+    }
+    25% {
+        background-position: right;
+    }
+    50% {
+        background-position: left;
+    }
+    75% {
+        background-position: right;
+    }
+    100% {
+        background-position: left;
+    }
+}
+
+// =====================================================================================================================================
+// ================================== PROFIL =============================================================================================
+// =====================================================================================================================================
+.profil {
+    margin-top: 50px;
+    color: #7A8AA3;
+    border-bottom: 1px solid #6d6666 !important;
+    .profilName {
+        color: #6b778a;
+        text-align: center;
+        font-size: 2em;
+        margin-top: 10px;
+    }
+    .donnees {
+        cursor: pointer;
+        font-size: 1.5em;
+        text-align: center;
+        margin: 40px 0px;
+    }
+    .donnee{
+        &:hover{
+            color: darken(#7A8AA3, 30%)
+        }
+    }
+    .profilPicture {
+        height: 150px;
+        width: 150px;
+        transform: translateY(10%);
+    }
+}
+
+.btn-profil {
+    font-size: 1.8em;
+    color: #6b778a;
+    &.active {
+        border-top: 1px solid #6d6666 !important;
+        ;
+    }
+    transition: .5s;
+}
+
+.btn-profil:focus {
+    outline: none !important;
+}
+
+.btn-profil:focus,
+.btn-profil:active:focus,
+.btn-profil.active:focus,
+.btn-profil.focus,
+.btn-profil:active.focus,
+.btn-profil.active.focus {
+    outline: none !important;
+}
+
+.btn-profil:focus,
+.btn-profil:active:focus,
+.btn-profil.active:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.publicationsProfil {
+    font-size: 1.2em !important;
+    margin-top: 50px !important;
+}
+
+div.ng-show-add,
+div.ng-show-remove {
+    transition: all 0.5s linear;
+}
+
+div.ng-show-add {
+    transition: all 0.5s linear
+}
+
+div.ng-show-add.ng-show-add-active {
+    transition: all 0.5s linear
+}
+
+div.ng-show-remove {
+    transition: all 0.5s linear
+}
+
+div.ng-show-remove.ng-show-remove-active {
+    transition: all 0.5s linear
+}
+
+.card.publication {
+    margin: 10px;
+}
+
+p.card-text {
+    &.clair {
+        color: #4f5763;
+    }
+    &.sombre {
+        color: white;
     }
 }
