@@ -55,20 +55,6 @@ app.get('/testUser', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/tests/testsBDD.html'));
 });
 
-app.get('/showUser', function(req, res) {
-    var userId = parseInt(req.query.user);
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("gretagram");
-        var query = { _id: userId };
-        dbo.collection("users").find(query).toArray(function(err, result) {
-            if (err) throw err;
-            db.close();
-            res.send(result);
-        });
-    });
-});
-
 app.post('/uploadPicture', upload.single('photo'), function(req, res) {
 
     if (req.file) {
