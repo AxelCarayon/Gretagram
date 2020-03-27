@@ -1,5 +1,6 @@
 // userModel.js
 var mongoose = require('mongoose'); // Setup schema
+var bcrypt = require('bcrypt');
 var userSchema = mongoose.Schema({
     nom: {
         type: String,
@@ -22,6 +23,15 @@ var userSchema = mongoose.Schema({
     pp: String,
     photos: [{ path: String }]
 });
+
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
+};
+
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
 // Export User model
 var User = module.exports = mongoose.model('user', userSchema);
 module.exports.get = function(callback, limit) {
