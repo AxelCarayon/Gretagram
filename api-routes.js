@@ -21,11 +21,7 @@ router.route('/user')
 router.route('/login')
     .get(userController.login);
 
-// router.route('/users/:user_id')
-//     .get(userController.view)
-//     .patch(userController.update)
-//     .put(userController.update)
-//     .delete(userController.delete);
+
 
 // Export API routes
 module.exports = router;
