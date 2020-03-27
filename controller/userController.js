@@ -1,7 +1,7 @@
-// Import user model
 const User = require('../model/userModel'); // Handle index actions
 const jwt = require('jsonwebtoken');
 
+//vérifie si un token est correct ou non
 function authenticateToken(token) {
     // pas autorisé
     if (token == null) {
@@ -18,9 +18,10 @@ function authenticateToken(token) {
     });
 }
 
+// log un utilisateur
 exports.login = function(req, res) {
-    username = req.query.username;
-    password = req.query.password;
+    username = req.body.username;
+    password = req.body.password;
     User.findOne({ 'email': username }, function(err, user) {
         if (err) {
             res.send(err);
@@ -37,7 +38,8 @@ exports.login = function(req, res) {
     })
 };
 
-exports.index = function(req, res) {
+// affiche un utilisateur
+exports.view = function(req, res) {
     token = req.body.token;
     userToken = authenticateToken(token)
     if (userToken === null) {
@@ -48,11 +50,11 @@ exports.index = function(req, res) {
                 res.send(err);
             }
             res.send(user);
-        })
+        });
     }
 };
 
-// Handle create user actions
+// crée un nouvel utilisateur 
 exports.new = function(req, res) {
     var user = new User();
     user.nom = req.body.nom;
@@ -61,7 +63,7 @@ exports.new = function(req, res) {
     user.email = req.body.email;
     user.password = user.generateHash(req.body.password);
     user.age = req.body.age;
-    // save the user and check for errors
+
     user.save(function(err) {
         if (err)
             res.json(err);
@@ -72,48 +74,55 @@ exports.new = function(req, res) {
     });
 };
 
-// Handle view user info
-exports.view = function(req, res) {
-    User.findById(req.params.user_id, function(err, user) {
-        if (err)
-            res.send(err);
-        res.json({
-            message: 'User details loading..',
-            data: user
-        });
-    });
 
-}; // Handle update user info
+// met à jour un utilisateur
 exports.update = function(req, res) {
-    User.findById(req.params.user_id, function(err, user) {
-        if (err)
-            res.send(err);
-        user.nom = req.body.nom;
-        user.prenom = req.body.prenom;
-        user.gender = req.body.gender;
-        user.email = req.body.email;
-        user.password = req.body.password;
-        user.age = req.body.age;
-        // save the user and check for errors
-        user.save(function(err) {
+    token = req.body.token;
+    userToken = authenticateToken(token)
+    if (userToken === null) {
+        res.sendStatus(403);
+    } else {
+        User.findById(userToken._id, function(err, user) {
             if (err)
-                res.json(err);
-            res.json({
-                message: 'User Info updated',
-                data: user
+                res.send(err);
+            try {
+                user.nom = req.body.nom;
+                user.prenom = req.body.prenom;
+                user.gender = req.body.gender;
+                user.email = req.body.email;
+                user.password = user.generateHash(req.body.password);
+                user.age = req.body.age;
+
+                user.save(function(err) {
+                    if (err)
+                        res.json(err);
+                    res.json({
+                        message: 'User Info updated',
+                        data: user
+                    });
+                });
+            } catch (err) {
+                res.sendStatus(500);
+                console.log(err);
+            }
+        });
+    }
+};
+
+// supprime un utilisateur
+exports.delete = function(req, res) {
+    token = req.body.token;
+    userToken = authenticateToken(token)
+    if (userToken === null) {
+        res.sendStatus(403);
+    } else {
+        User.deleteOne({ '_id': userToken._id }, function(err, user) {
+            if (err) {
+                res.send(err);
+            }
+            res.send({
+                message: 'User deleted'
             });
         });
-    });
-}; // Handle delete user
-exports.delete = function(req, res) {
-    User.remove({
-        _id: req.params.user_id
-    }, function(err, user) {
-        if (err)
-            res.send(err);
-        res.json({
-            status: "success",
-            message: 'User deleted'
-        });
-    });
+    };
 };
