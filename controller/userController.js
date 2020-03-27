@@ -86,13 +86,24 @@ exports.update = function(req, res) {
             if (err)
                 res.send(err);
             try {
-                user.nom = req.body.nom;
-                user.prenom = req.body.prenom;
-                user.gender = req.body.gender;
-                user.email = req.body.email;
-                user.password = user.generateHash(req.body.password);
-                user.age = req.body.age;
-
+                if (req.body.nom != "") {
+                    user.nom = req.body.nom;
+                };
+                if (req.body.prenom != "") {
+                    user.prenom = req.body.prenom;
+                }
+                if (req.body.gender != "") {
+                    user.gender = req.body.gender;
+                }
+                if (req.body.email != "") {
+                    user.email = req.body.email;
+                }
+                if (req.body.password != "") {
+                    user.password = user.generateHash(req.body.password);
+                }
+                if (req.body.age != "") {
+                    user.age = req.body.age;
+                }
                 user.save(function(err) {
                     if (err)
                         res.json(err);
