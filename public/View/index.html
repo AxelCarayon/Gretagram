@@ -5,19 +5,26 @@
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <!-- Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <!-- Leaflet -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+        
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -47,7 +54,6 @@
 
 <body class="clair" ng-app="app" ng-controller="ctrl">
     <ng-nav select="changeTheme()"></ng-nav>
-
     <div class="container" style="margin-top:50px;">
         <div class="row justify-content-center">
             <div class=" form-control searchbar col-6">
@@ -79,13 +85,17 @@
                                 <div class="container-fluid col-10">
                                     <div class="row">
                                         <p class="hashtest"></p>
-                                        <div contenteditable="true" placeholder="Exprimez vous..." class="col-12 text-create-publication">
+                                        <div contenteditable="true" placeholder="Exprimez vous..."
+                                            class="col-12 text-create-publication">
                                         </div>
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="content ">
-                                            <div class="box " style="margin-right: -30px;height: 40px;min-width: 200px;">
-                                                <input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1 " data-multiple-caption="{count} files selected" multiple />
+                                            <div class="box "
+                                                style="margin-right: -30px;height: 40px;min-width: 200px;">
+                                                <input type="file" name="file-1[]" id="file-1"
+                                                    class="inputfile inputfile-1 "
+                                                    data-multiple-caption="{count} files selected" multiple />
                                                 <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                         height="17" viewBox="0 0 20 17">
                                                         <path
@@ -106,22 +116,25 @@
     </div>
     <div class=" container tabs">
         <div class="row justify-content-center">
-            <button type="button" ng-click="aboFunction()" class="btnAbo btn-tabs clair btn  col-2" name="button">Abonnements</button>
-            <button type="button" ng-click="trendFunction()" class="btnTrend btn-tabs active clair btn  col-2" name="button">Trend</button>
-            <button type="button" ng-click="procheFunction()" class="btnProche btn-tabs clair btn  col-2" name="button">Proche</button>
+            <button type="button" ng-click="aboFunction()" class="btnAbo btn-tabs clair btn  col-2"
+                name="button">Abonnements</button>
+            <button type="button" ng-click="trendFunction()" class="btnTrend btn-tabs active clair btn  col-2"
+                name="button">Trend</button>
+            <button type="button" ng-click="procheFunction()" class="btnProche btn-tabs clair btn  col-2"
+                name="button">Proche</button>
         </div>
     </div>
-
     <div class="container containerPublications template" ng-show="loading">
         <div class="row publicationContainer">
             <div class="col-12 publication clair">
                 <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
                 <p class="nomProfil clair">Maurice Lestin</p>
                 <p class="publicationDate">12 février 1945</p>
-                <p class="publicationTexte clair">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero soluta cum assumenda necessitatibus, earum, et oui. </p>
+                <p class="publicationTexte clair">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero
+                    soluta cum assumenda necessitatibus, earum, et oui. </p>
                 <div class="likes">
-                    <span class="nbLike clair">{{x.nblikes}} <span class="coeur"><svg aria-label='J’aime' class='_8-yf5 '
-                                fill='#c3b4b4' height='24' viewBox='0 0 48 48' width='24'>
+                    <span class="nbLike clair">{{x.nblikes}} <span class="coeur"><svg aria-label='J’aime'
+                                class='_8-yf5 ' fill='#c3b4b4' height='24' viewBox='0 0 48 48' width='24'>
                                 <path clip-rule='evenodd'
                                     d='M34.3 3.5C27.2 3.5 24 8.8 24 8.8s-3.2-5.3-10.3-5.3C6.4 3.5.5 9.9.5 17.8s6.1 12.4 12.2 17.8c9.2 8.2 9.8 8.9 11.3 8.9s2.1-.7 11.3-8.9c6.2-5.5 12.2-10 12.2-17.8 0-7.9-5.9-14.3-13.2-14.3zm-1 29.8c-5.4 4.8-8.3 7.5-9.3 8.1-1-.7-4.6-3.9-9.3-8.1-5.5-4.9-11.2-9-11.2-15.6 0-6.2 4.6-11.3 10.2-11.3 4.1 0 6.3 2 7.9 4.2 3.6 5.1 1.2 5.1 4.8 0 1.6-2.2 3.8-4.2 7.9-4.2 5.6 0 10.2 5.1 10.2 11.3 0 6.7-5.7 10.8-11.2 15.6z'
                                     fill-rule='evenodd'></path>
@@ -130,15 +143,15 @@
             </div>
         </div>
     </div>
-
-
     <!-- <h1 ng-show="loading">CHARGEMENT</h1> -->
     <!-- ========================================================================================== -->
     <!-- PUBLICATIONS ============================================================================= -->
     <!-- ========================================================================================== -->
     <div class="container containerPublications" ng-show="trend">
         <div class="row publicationContainer">
-            <publication-template></publication-template>
+            <div class="col-12 publication clair" ng-repeat="x in publications">
+                <publication-template></publication-template>
+            </div>
         </div>
     </div>
     <!-- ========================================================================================== -->
@@ -146,7 +159,9 @@
     <!-- ========================================================================================== -->
     <div class="container containerPublications" ng-show="abonnements">
         <div class="row publicationContainer">
-            <publication-template></publication-template>
+            <div class="col-12 publication clair" ng-repeat="x in abos">
+                <publication-template></publication-template>
+            </div>
         </div>
     </div>
     <!-- ========================================================================================== -->
@@ -162,11 +177,12 @@
     <div class="container containerPublications" ng-show="proche">
         <div class="row publicationContainer">
             <div class="col-12 col-12-sm container containerPublicationsProche">
-                <publication-template></publication-template>
+                <div class="col-12 publication clair" ng-repeat="x in proches">
+                    <publication-template></publication-template>
+                </div>
             </div>
         </div>
     </div>
-
     <script src="Controller/js/js-beautify.js" charset="utf-8"></script>
     <script src="View/plugin/custom-file-input.js"></script>
     <script src="Controller/js/map.js" charset="utf-8"></script>

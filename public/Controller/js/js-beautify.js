@@ -1,5 +1,14 @@
 // Ici ce ne sont que des fonctions cosmétiques
+
+
+
+function changeScreenSize() {        
+    window.resizeTo(screen.width-300,screen.height-500)   
+}
+
 $(document).ready(() => {
+
+
     var sombre = true; // Meme variable que dans map.js
     if (sombre) { // Si sombre est false le theme est clair sinon dark
         $('*').removeClass('sombre');
@@ -20,17 +29,19 @@ $(document).ready(() => {
     });
     //Agrandissement de la barre de recherche
     $(".form-control").focusin(() => {
-            $(".form-control").addClass('col-10');
-            $(".form-control").addClass('searchbar-hover');
-            $(".form-control").removeClass('col-6');
-            $('.search-items').fadeIn();
-        }).focusout(() => {
-            $(".form-control").addClass('col-6');
-            $(".form-control").removeClass('col-10');
-            $(".form-control").removeClass('searchbar-hover');
-            $('.search-items').fadeOut();
-        })
-        //Ajout des hashtag dans la creation de publication
+        $(".form-control").addClass('col-10');
+        $(".form-control").addClass('searchbar-hover');
+        $(".form-control").removeClass('col-6');
+        $('.search-items').fadeIn();
+        $('.searchbar').addClass('active');
+    }).focusout(() => {
+        $(".form-control").addClass('col-6');
+        $(".form-control").removeClass('col-10');
+        $(".form-control").removeClass('searchbar-hover');
+        $('.search-items').fadeOut();
+        $('.searchbar').removeClass('active');
+    });
+    //Ajout des hashtag dans la creation de publication
     var dieze = false;
     var cptText = 0;
     var tab = [];
@@ -55,19 +66,19 @@ $(document).ready(() => {
         for (let index = 0; index < $('.hashtest').children().length; index++) {
             tab.push($('.hashtest').children().eq(index).text());
         }
-    })
+    });
     var placeholderTrigger = false;
     $(".text-create-publication").focus(() => {
         if (!placeholderTrigger) {
             placeholderTrigger = !placeholderTrigger;
             $(".text-create-publication").text("");
         }
-    })
+    });
     $("#file-1").on('change', (e) => {
         $("#file-1").addClass("filled");
         $("label").addClass("filled");
         console.log(e.currentTarget.value);
-        $('.imgtest').append($("<img></img>").attr("src", e.currentTarget.value))
+        $('.imgtest').append($("<img></img>").attr("src", e.currentTarget.value));
     });
     $(".text-create-publication").text("Exprimez vous...");
     $(".text-create-publication").focusout(

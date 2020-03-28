@@ -4,7 +4,7 @@ function showCurrentPublications($scope) {
 
 var app = angular.module('app', []);
 
-app.factory('dataFactory', function($http, $q, ) {
+app.factory('dataFactory', function($http, $q ) {
 
     var factory = {
         publications: false,
@@ -57,7 +57,7 @@ app.controller("ctrl", function($scope, dataFactory) {
             right: '-2000px'
         });
 
-    }
+    };
     $scope.trendFunction = () => { // Quand on appuie sur le bouton trend le container des trend s'affichent les autres se cachent
         $scope.abonnements = false;
         $scope.trend = true;
@@ -66,7 +66,7 @@ app.controller("ctrl", function($scope, dataFactory) {
             right: '-2000px'
         });
 
-    }
+    };
     $scope.procheFunction = () => { // Quand on appuie sur le bouton proche le container des proche s'affichent les autres se cachent
         $scope.abonnements = false;
         $scope.trend = false;
@@ -74,7 +74,7 @@ app.controller("ctrl", function($scope, dataFactory) {
         $(".map-container").animate({ // La map s'affiche
             right: '0%'
         });
-    }
+    };
 
 
 
@@ -106,16 +106,25 @@ app.controller("profilCtrl", function($scope, $http, dataFactory, profilFactory)
 
     $scope.loading = true;
 
+    $scope.like = function() {
+        var pub = ($(this)[0]).pub;
+        console.log(pub);
+        // Requete AJAX de quand on like un comment 
+
+    };
+
     $scope.changeTheme = function() {
         $('*').toggleClass('sombre');
         $('*').toggleClass('clair');
-    }
+    };
 
     $scope.pubs = profilFactory.getPublications().then(function(publications) {
         $scope.pubs = publications.data;
         $scope.profilPubs = true;
         $scope.profilStats = false;
         $scope.loading = false;
+        console.log($scope.pubs);
+
     }, function(msg) {
         alert(msg);
 

@@ -1,23 +1,23 @@
-app.directive('ngNav',function(){
+app.directive('ngNav', function() {
     return {
-        restrict : 'E',
-        scope : {
-            select : '&select'
+        restrict: 'E',
+        scope: {
+            select: '&select'
         },
-        templateUrl : "Controller/js/directives/nav.html"
-    }
-});
-
-app.directive('cardTemplate',function(){
-    return {
-        restrict : 'E',
-        templateUrl : "Controller/js/directives/card.html"
+        templateUrl: "Controller/js/directives/nav.html"
     };
 });
 
-app.directive('publicationTemplate',function(){
+app.directive('cardTemplate', function() {
     return {
-        restrict : 'E',
-        templateUrl : "Controller/js/directives/publication.html"
+        restrict: 'E',
+        templateUrl: "Controller/js/directives/card.html"
+    };
+});
+
+app.directive('publicationTemplate', function() {
+    return {
+        restrict: 'E',
+        templateUrl: "Controller/js/directives/publication.html"
     };
 });

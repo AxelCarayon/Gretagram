@@ -14,6 +14,8 @@
     </script>
     <!-- Leaflet -->
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bricklayer/0.4.2/bricklayer.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bricklayer/0.4.2/bricklayer.min.js"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Leaflet CSS -->
@@ -43,46 +45,10 @@
     <link rel="stylesheet" type="text/css" href="View/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="View/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="View/css/component.css" />
-    <style>
-        div {
-            border-color: black;
-        }
-    </style>
 </head>
 
-<body class="clair" ng-app="app" ng-controller="profilCtrl">
-    <!-- <nav class="mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
-        <a class="navbar-brand" href="#">
-            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30" class="d-inline-block " alt=""> Gretagram</a>
-        <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-            <div class="animated-icon1"><span></span><span></span><span></span></div>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-            <ul class="navbar-nav ml-auto nav-flex-icons">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Mon compte</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Abonnements</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Abonnés</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a style="cursor: pointer;" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Parametres </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a href="#" class="dropdown-item">Paramètres du compte</a>
-                        <a href="#" class="dropdown-item change-theme">Changement du thème</a>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
-    /.Navbar -->
-
+<body onload="changeScreenSize()" class="clair" ng-app="app" ng-controller="profilCtrl">
     <ng-nav select="changeTheme()"></ng-nav>
-
     <div class="container profil">
         <div class="row">
             <div class="col-2">
@@ -114,28 +80,27 @@
             <button class="col-3 btn-profil  btn btnStat" ng-click="statFunction()">Statistiques</button>
         </div>
     </div>
-
     <div class="publicationsProfil container" ng-show='loading'>
         <div class="card-columns">
             <div class="card publication clair template">
                 <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente
-                    </p>
-                    <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine date</small></p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente </p>
+                    <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine
+                            date</small></p>
                 </div>
             </div>
             <div class="card publication clair template">
                 <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente
-                    </p>
-                    <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine date</small></p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente </p>
+                    <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine
+                            date</small></p>
                 </div>
             </div>
             <div class="card publication clair template">
                 <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente
-                    </p>
-                    <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine date</small></p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente </p>
+                    <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine
+                            date</small></p>
                 </div>
             </div>
         </div>
@@ -143,21 +108,12 @@
 
     <div class="publicationsProfil container" ng-show='profilPubs'>
         <div class="card-columns">
-            <!-- <div class="card publication clair" ng-repeat="pub in pubs">
-                <img src="{{pub.image}}" class="card-img-top" alt="">
-                <div class="card-body">
-                    <p class="card-text">{{pub.msg}}
-                    </p>
-                    <p class="card-text"><small class="text-muted">{{pub.date}}</small></p>
-                </div>
-            </div> -->
             <card-template></card-template>
         </div>
     </div>
     <div class="publicationsProfil container" ng-show='profilStats'>
         <h1>Statistiques</h1>
     </div>
-
     <script src="View/plugin/custom-file-input.js"></script>
     <script src="Controller/js/publication.js" charset="utf-8"></script>
     <script src="Controller/js/factory.js" charset="utf-8"></script>

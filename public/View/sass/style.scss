@@ -76,16 +76,31 @@ h2 {
     border-radius: 50px;
     padding: 10px;
     text-align: center;
-    border: none;
     background-color: transparent;
     transition: ease-in-out .5s;
     &.clair {
-        // background: #80ffff;
-        box-shadow: 7px 7px 14px #6bd4d4, -7px -7px 14px #8dffff !important;
+        border: 1px solid rgb(206, 205, 205);
+        &:hover {
+            box-shadow: 7px 7px 14px #6bd4d4, -7px -7px 14px #8dffff !important;
+            border: none;
+        }
     }
     &.sombre {
-        // background: $primary-dark;
-        box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
+        border: 1px solid #8d7373;
+        &:hover {
+            box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
+            border: none;
+        }
+    }
+    &.active {
+        &.clair {
+            box-shadow: 7px 7px 14px #6bd4d4, -7px -7px 14px #8dffff !important;
+            border: none;
+        }
+        &.sombre {
+            box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
+            border: none;
+        }
     }
 }
 
@@ -283,6 +298,10 @@ div[contenteditable] {
     right: 30px;
     text-align: right;
     cursor: pointer;
+}
+
+.card .likes {
+    bottom: 15px !important;
 }
 
 .nbLike {
@@ -496,8 +515,8 @@ label {
         text-align: center;
         margin: 40px 0px;
     }
-    .donnee{
-        &:hover{
+    .donnee {
+        &:hover {
             color: darken(#7A8AA3, 30%)
         }
     }
@@ -576,3 +595,17 @@ p.card-text {
         color: white;
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .bricklayer-column-sizer {
+      /* divide by 3. */
+      width: 33.3%;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .bricklayer-column-sizer {
+      /* divide by 2. */
+      width: 50%;
+    }
+  }
