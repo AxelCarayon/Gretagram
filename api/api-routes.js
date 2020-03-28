@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
 
 // Import user controller
 var userController = require('./controller/userController'); // User routes
+var loginController = require('./controller/loginController');
 router.route('/user')
     .get(userController.view)
     .patch(userController.update)
@@ -19,7 +20,7 @@ router.route('/user')
     .delete(userController.delete);
 
 router.route('/login')
-    .get(userController.login);
+    .get(loginController.login);
 
 
 

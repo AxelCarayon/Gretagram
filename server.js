@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost/gretagram', { useNewUrlParser: true, useUn
 
 
 // Import routes
-let apiRoutes = require("./api-routes") // Use Api routes in the App
+let apiRoutes = require("./api/api-routes") // Use Api routes in the App
 app.use('/api', apiRoutes);
 
 //==============================================================================================
