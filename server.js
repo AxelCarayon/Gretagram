@@ -7,12 +7,10 @@ const path = require('path');
 const multer = require('multer');
 const mongoose = require('mongoose'); // Configure bodyparser to handle post requests
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
 const upload = multer({ dest: __dirname + '/Photos' });
 //===================================================================
 
+require('dotenv').config();
 app.use(express.static(__dirname + '/public'));
 
 // Import Body parser
@@ -20,12 +18,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json()); // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/gretagram', { useNewUrlParser: true });
-var db = mongoose.connection;
+mongoose.connect('mongodb://localhost/gretagram', { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 // Import routes
-let apiRoutes = require("./api-routes") // Use Api routes in the App
-app.use('/api', apiRoutes)
+let apiRoutes = require("./api/api-routes") // Use Api routes in the App
+app.use('/api', apiRoutes);
 
 //==============================================================================================
 
@@ -54,20 +52,6 @@ app.post('/connect', function(req, res) {
 
 app.get('/testUser', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/tests/testsBDD.html'));
-});
-
-app.get('/showUser', function(req, res) {
-    var userId = parseInt(req.query.user);
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("gretagram");
-        var query = { _id: userId };
-        dbo.collection("users").find(query).toArray(function(err, result) {
-            if (err) throw err;
-            db.close();
-            res.send(result);
-        });
-    });
 });
 
 app.post('/uploadPicture', upload.single('photo'), function(req, res) {
