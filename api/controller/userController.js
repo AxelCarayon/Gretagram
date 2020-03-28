@@ -1,14 +1,13 @@
-const User = require('../model/userModel'); // Handle index actions
+const User = require('../model/userModel');
 const authenticateToken = require('./loginController').authenticateToken;
 
 // affiche un utilisateur
 exports.view = function(req, res) {
-    token = req.body.token;
-    userToken = authenticateToken(token)
-    if (userToken === null) {
+    token = authenticateToken(req.body.token)
+    if (token === null) {
         res.sendStatus(403);
     } else {
-        User.findOne({ '_id': userToken._id }, function(err, user) {
+        User.findOne({ '_id': token._id }, function(err, user) {
             if (err) {
                 res.send(err);
             }
@@ -25,7 +24,9 @@ exports.new = function(req, res) {
     user.gender = req.body.gender;
     user.email = req.body.email;
     user.password = user.generateHash(req.body.password);
-    user.age = req.body.age;
+    user.age = new Date(req.body.age);
+    user.photos = [];
+    user.pp = null;
 
     user.save(function(err) {
         if (err)
@@ -40,40 +41,30 @@ exports.new = function(req, res) {
 
 // met à jour un utilisateur
 exports.update = function(req, res) {
-    token = req.body.token;
-    userToken = authenticateToken(token)
-    if (userToken === null) {
+    token = authenticateToken(req.body.token)
+    if (token === null) {
         res.sendStatus(403);
     } else {
-        User.findById(userToken._id, function(err, user) {
+        User.findById(token._id, function(err, user) {
             if (err)
                 res.send(err);
             try {
-                if (req.body.nom != "") {
-                    user.nom = req.body.nom;
-                };
-                if (req.body.prenom != "") {
-                    user.prenom = req.body.prenom;
-                }
-                if (req.body.gender != "") {
-                    user.gender = req.body.gender;
-                }
-                if (req.body.email != "") {
-                    user.email = req.body.email;
-                }
-                if (req.body.password != "") {
-                    user.password = user.generateHash(req.body.password);
-                }
-                if (req.body.age != "") {
-                    user.age = req.body.age;
+                for (const [key, value] of Object.entries(req.body)) {
+                    if (key === "password") {
+                        user.password = user.generateHash(value);
+                    } else {
+                        user[key] = value;
+                    }
                 }
                 user.save(function(err) {
                     if (err)
                         res.json(err);
-                    res.json({
-                        message: 'User Info updated',
-                        data: user
-                    });
+                    else {
+                        res.json({
+                            message: 'User Info updated',
+                            data: user
+                        });
+                    }
                 });
             } catch (err) {
                 res.sendStatus(500);
@@ -85,18 +76,18 @@ exports.update = function(req, res) {
 
 // supprime un utilisateur
 exports.delete = function(req, res) {
-    token = req.body.token;
-    userToken = authenticateToken(token)
-    if (userToken === null) {
+    token = authenticateToken(req.body.token)
+    if (token === null) {
         res.sendStatus(403);
     } else {
-        User.deleteOne({ '_id': userToken._id }, function(err, user) {
+        User.deleteOne({ '_id': token._id }, function(err, user) {
             if (err) {
                 res.send(err);
+            } else {
+                res.send({
+                    message: 'User deleted'
+                });
             }
-            res.send({
-                message: 'User deleted'
-            });
         });
     };
 };

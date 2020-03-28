@@ -21,7 +21,6 @@ app.use(bodyParser.json()); // Connect to Mongoose and set connection variable
 mongoose.connect('mongodb://localhost/gretagram', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-
 // Import routes
 let apiRoutes = require("./api/api-routes") // Use Api routes in the App
 app.use('/api', apiRoutes);

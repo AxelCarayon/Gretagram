@@ -1,6 +1,6 @@
-// userModel.js
-var mongoose = require('mongoose'); // Setup schema
+var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+
 var userSchema = mongoose.Schema({
     nom: {
         type: String,
@@ -21,7 +21,7 @@ var userSchema = mongoose.Schema({
     gender: String,
     age: Date,
     pp: String,
-    photos: [{ path: String }]
+    photos: []
 });
 
 userSchema.methods.generateHash = function(password) {
