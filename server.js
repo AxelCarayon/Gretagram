@@ -61,6 +61,10 @@ app.post('/uploadPicture', upload.single('photo'), function(req, res) {
     } else throw 'error';
 });
 
+app.get('*', function(req, res) {
+    res.status(404).send("eh gros nul 202 + 202 ça fait combien mdr bah ouais 404 comme ton erreur mon pote ahahah quel looser il sait même pas taper comme il faut une URL");
+});
+
 app.listen(8080, function() {
     console.log('Serveur lancé sur le port 8080');
     console.log('Répertoire du serveur : ' + __dirname);

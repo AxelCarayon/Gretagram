@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var userSchema = mongoose.Schema({
+var publicationSchema = mongoose.Schema({
     date: {
         type: Date,
         required: true
@@ -18,7 +18,7 @@ var userSchema = mongoose.Schema({
 });
 
 // Export Publication model
-var Publication = module.exports = mongoose.model('publication', userSchema);
+var Publication = module.exports = mongoose.model('publication', publicationSchema);
 module.exports.get = function(callback, limit) {
     Publication.find(callback).limit(limit);
 }

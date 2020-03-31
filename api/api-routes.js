@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
 var userController = require('./controller/userController');
 var loginController = require('./controller/loginController');
 var publicationController = require('./controller/publicationController');
+var hashtagController = require('./controller/HashtagController');
 // ============================================================================
 
 
@@ -30,8 +31,14 @@ router.route('/publication')
     .get(publicationController.view) //afficher
     .patch(publicationController.update) //modifier
     .post(publicationController.new) //ajouter
-    .delete(publicationController.delete) //supprimer
-    // ============================================================================
+    .delete(publicationController.delete); //supprimer
+
+router.route('/hashtag')
+    .get(hashtagController.view) //afficher
+    .patch(hashtagController.update) //modifier
+    .post(hashtagController.new) //ajouter
+    .delete(hashtagController.delete); //supprimer
+// ============================================================================
 
 
 // export des routes

@@ -13,9 +13,8 @@ exports.view = function(req, res) {
 
 // crée une nouvelle publication
 exports.new = function(req, res) {
-    token = req.body.token;
-    userToken = authenticateToken(token);
-    if (userToken === null) {
+    token = authenticateToken(req.body.token);
+    if (token === null) {
         res.sendStatus(403);
     } else {
         var publication = new Publication();
@@ -23,7 +22,7 @@ exports.new = function(req, res) {
             publication[key] = value;
         }
         publication.date = new Date();
-        publication.userID = userToken._id;
+        publication.userID = token._id;
 
         publication.save(function(err) {
             if (err) {
@@ -33,7 +32,7 @@ exports.new = function(req, res) {
                     message: 'New publication crated!',
                     data: publication
                 });
-            }
+            };
         });
     };
 };
@@ -96,7 +95,6 @@ exports.delete = function(req, res) {
                 console.log("tentative de supprimer un post qui ne lui appartient pas");
                 res.sendStatus(403);
             }
-
         });
     };
 };
