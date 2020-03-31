@@ -45,8 +45,6 @@ $(document).ready(() => {
     var dieze = false;
     var cptText = 0;
     var tab = [];
-    var test = "oui";
-    console.log(test[0]);
     $(".text-create-publication").keyup((e) => {
         tab = [];
         var text = $(".text-create-publication").text();
