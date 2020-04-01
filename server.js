@@ -4,10 +4,11 @@ const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
 const app = express();
 const path = require('path');
-const multer = require('multer');
 const mongoose = require('mongoose'); // Configure bodyparser to handle post requests
 const bodyParser = require('body-parser');
-const upload = multer({ dest: __dirname + '/Photos' });
+app.use(bodyParser.urlencoded({ extended: true }));
+var fileupload = require("express-fileupload");
+app.use(fileupload());
 //===================================================================
 
 require('dotenv').config();
@@ -48,17 +49,6 @@ app.post('/connect', function(req, res) {
     console.log(`password : ${password}`);
 
 
-});
-
-app.get('/testUser', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/tests/testsBDD.html'));
-});
-
-app.post('/uploadPicture', upload.single('photo'), function(req, res) {
-
-    if (req.file) {
-        res.json(req.file);
-    } else throw 'error';
 });
 
 app.get('*', function(req, res) {
