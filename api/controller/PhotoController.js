@@ -6,13 +6,8 @@ const uuidv4 = require("uuid/v4")
 
 // affiche une photo
 exports.view = function(req, res) {
-    token = authenticateToken(req.body.token)
-    if (token === null) {
-        res.sendStatus(403);
-    } else {
-        chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos', token._id.toString(), req.body.photo);
-        res.sendFile(chemin);
-    }
+    chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos', req.body.user, req.body.photo);
+    res.sendFile(chemin);
 };
 
 // upload une nouvelle photo
@@ -99,6 +94,24 @@ exports.update = function(req, res) {
     if (token === null) {
         res.sendStatus(403);
     } else {
+        User.findOne({ '_id': token._id }, function(err, user) {
+            if (err) {
+                res.send(err);
+            }
+            if (user.photos.includes(req.body.photo)) {
+                user.pp = req.body.photo
+                user.save(function(err) {
+                    if (err)
+                        res.json(err);
+                    res.json({
+                        message: 'Profile picture set!',
+                        data: user
+                    });
+                });
+            } else {
+                res.status(403).send("cette photo n'appartient pas à l'utilisateur.");
+            }
 
+        });
     }
 }
