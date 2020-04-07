@@ -32,7 +32,8 @@ router.route('/publication')
     .get(publicationController.view) //afficher
     .patch(publicationController.update) //modifier
     .post(publicationController.new) //ajouter
-    .delete(publicationController.delete); //supprimer
+    .delete(publicationController.delete) //supprimer
+    .put(publicationController.like); //liker une photo
 
 router.route('/hashtag')
     .get(hashtagController.view) //afficher
@@ -46,7 +47,6 @@ router.route('/photo')
     .delete(photoController.delete) //supprimer
     .patch(photoController.update) //mettre à jour une pp
     // ============================================================================
-
 
 // export des routes
 module.exports = router;

@@ -2,11 +2,11 @@ const User = require('../model/userModel');
 const authenticateToken = require('./loginController').authenticateToken;
 const path = require('path');
 const fs = require('fs');
-const uuidv4 = require("uuid/v4")
+const uuidv4 = require("uuid/v4");
 
 // affiche une photo
 exports.view = function(req, res) {
-    chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos', req.body.user, req.body.photo);
+    chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos/', req.body.photo);
     res.sendFile(chemin);
 };
 
@@ -27,7 +27,7 @@ exports.new = function(req, res) {
                 }
                 let photo = req.files.photo;
                 let id = uuidv4() + path.extname(photo.name);
-                photo.mv('./photos/' + user._id.toString() + "/" + id, function(err) {
+                photo.mv('./photos/' + id, function(err) {
                     if (err)
                         return res.status(500).send(err);
                     user.photos.push(id);
@@ -69,7 +69,7 @@ exports.delete = function(req, res) {
                 }
             }
 
-            chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos', token._id.toString(), req.body.photo);
+            chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos/', req.body.photo);
             try {
                 fs.unlinkSync(chemin);
             } catch (err) {

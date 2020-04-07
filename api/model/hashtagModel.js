@@ -6,7 +6,7 @@ var HashtagSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    l_Publications: [],
+    l_publications: [],
     nbr: Number
 
 });

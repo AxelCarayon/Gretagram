@@ -20,8 +20,7 @@ exports.new = function(req, res) {
     } else {
         var hashtag = new Hashtag();
         hashtag.name = req.body.name;
-        hashtag.nbr = 0;
-
+        hashtag.l_publications = [req.body.publicationID];
         hashtag.save(function(err) {
             if (err) {
                 res.json(err);
@@ -43,17 +42,17 @@ exports.update = function(req, res) {
     if (userToken === null) {
         res.sendStatus(403);
     } else {
-        Hashtag.findById(req.body.id, function(err, hashtag) {
+        Hashtag.findOne({ 'name': req.body.name }, function(err, hashtag) {
             if (err) {
                 res.status(500).send(err);
             }
             try {
-                hashtag.nbr++;
-                liste = hashtag.l_publications;
-                hashtag.l_Publications.push(userToken._id);
+                console.log(hashtag.l_publications);
+                //liste = hashtag.l_publications.push(req.body.publicationID);
+                hashtag.l_publications.push(req.body.publicationID);
                 hashtag.save(function(err) {
                     if (err) {
-                        res.status(500).send(json(err));
+                        console.log(err);
                     } else {
                         res.json({
                             message: 'Hashtag updated',
@@ -63,7 +62,7 @@ exports.update = function(req, res) {
                 });
             } catch (err) {
                 console.log(err)
-                res.status(500).send(err);
+                    //res.status(500).send(err);
             }
         });
     };

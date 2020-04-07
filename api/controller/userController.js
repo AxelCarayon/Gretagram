@@ -1,6 +1,5 @@
 const User = require('../model/userModel');
 const authenticateToken = require('./loginController').authenticateToken;
-var mkdirp = require('mkdirp');
 var path = require('path');
 
 // affiche un utilisateur
@@ -29,9 +28,6 @@ exports.new = function(req, res) {
     user.age = new Date(req.body.age);
     user.photos = [];
     user.pp = null;
-    chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos', user._id.toString());
-    mkdirp(chemin).then(made =>
-        console.log(`folder created : ${made}`));
 
     user.save(function(err) {
         if (err)
