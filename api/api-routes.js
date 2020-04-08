@@ -14,8 +14,9 @@ var userController = require('./controller/userController');
 var loginController = require('./controller/loginController');
 var publicationController = require('./controller/publicationController');
 var hashtagController = require('./controller/HashtagController');
-var photoController = require('./controller/PhotoController')
-    // ============================================================================
+var photoController = require('./controller/PhotoController');
+var likeCommentController = require('./controller/likeCommentController');
+// ============================================================================
 
 
 //routes ======================================================================
@@ -33,7 +34,6 @@ router.route('/publication')
     .patch(publicationController.update) //modifier
     .post(publicationController.new) //ajouter
     .delete(publicationController.delete) //supprimer
-    .put(publicationController.like); //liker une photo
 
 router.route('/hashtag')
     .get(hashtagController.view) //afficher
@@ -46,6 +46,13 @@ router.route('/photo')
     .post(photoController.new) //ajouter
     .delete(photoController.delete) //supprimer
     .patch(photoController.update) //mettre à jour une pp
+
+router.route('/publication/like')
+    .get(likeCommentController.view) //afficher nb likes
+    .post(likeCommentController.like); //ajouter/enlever like
+
+router.route('/publication/comment')
+    .post(likeCommentController.new) //ajouter commententaire
     // ============================================================================
 
 // export des routes

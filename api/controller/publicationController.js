@@ -78,9 +78,6 @@ exports.view = function(req, res) {
     });
 };
 
-exports.like = function(req, res) {
-    res.send("TODO");
-};
 
 // crée une nouvelle publication
 exports.new = function(req, res) {
