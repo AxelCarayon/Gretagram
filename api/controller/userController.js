@@ -29,12 +29,21 @@ exports.new = function(req, res) {
     user.photos = [];
     user.pp = null;
 
-    user.save(function(err) {
-        if (err)
-            res.json(err);
-        res.json({
-            message: 'New user created!',
-            data: user
+    User.findOne({ 'email': req.body.email }, function(err, foundUser) {
+        let message = "New user created!";
+        let data = null;
+        if (foundUser) {
+            message = "l'adresse mail est déjà utilisée";
+        } else {
+            data = user;
+        }
+        user.save(function(err) {
+            if (err)
+                res.json(err);
+            res.json({
+                message: message,
+                data: data
+            });
         });
     });
 };
