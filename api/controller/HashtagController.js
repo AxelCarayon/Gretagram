@@ -47,7 +47,6 @@ exports.update = function(req, res) {
                 res.status(500).send(err);
             }
             try {
-                console.log(hashtag.l_publications);
                 //liste = hashtag.l_publications.push(req.body.publicationID);
                 hashtag.l_publications.push(req.body.publicationID);
                 hashtag.save(function(err) {

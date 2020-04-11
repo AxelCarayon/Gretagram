@@ -51,7 +51,6 @@ async function sendHashtags(hashtags, token, publicationID) {
         } else {
             options.method = 'POST'; // on crée le # si il n'existe pas
         }
-        console.log(rep);
         let req = http.request(options, (res) => {
             //console.log('statusCode:', res.statusCode);
             //console.log('headers:', res.headers);

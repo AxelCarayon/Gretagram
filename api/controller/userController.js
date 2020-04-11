@@ -35,15 +35,15 @@ exports.new = function(req, res) {
         if (foundUser) {
             message = "l'adresse mail est déjà utilisée";
         } else {
+            user.save(function(err) {
+                if (err)
+                    res.json(err);
+            });
             data = user;
         }
-        user.save(function(err) {
-            if (err)
-                res.json(err);
-            res.json({
-                message: message,
-                data: data
-            });
+        res.json({
+            message: message,
+            data: data
         });
     });
 };
