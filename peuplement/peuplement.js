@@ -3,7 +3,12 @@ const fs = require('fs');
 const querystring = require('querystring');
 const http = require('http');
 const readline = require('readline');
+const { createCanvas } = require('canvas');
+const faker = require('faker');
 
+const fichier = 'MOCK_DATA.csv'
+
+//Fonctions auxiliaires=======================================================================
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -12,24 +17,76 @@ function is_numeric(str) {
     return /^\d+$/.test(str);
 }
 
-function readfile(file) {
-    console.log("début de lecture des utilisateurs du fichier CSV")
-    return new Promise(resolve => {
-        let data = [];
-        fs.createReadStream(file)
-            .pipe(csv())
-            .on('data', (row) => {
-                data.push(row);
-            })
-            .on('end', () => {
-                console.log('fin de lecture des utilisateurs dans le fichier CSV');
-                resolve(data);
-            });
-    });
-};
+function createRandomImage(width, height, nbImg) {
+    let cpt = 0;
+
+    while (cpt < nbImg) {
+        cpt++;
+        const canvas = createCanvas(width, height);
+        const ctx = canvas.getContext('2d');
+        const stream = canvas.pngStream();
+        const out = fs.createWriteStream(__dirname + '/image' + cpt + ".png");
+        stream.on('data', function(chunk) {
+            out.write(chunk); // On écrit le stream à un chemin précedemment défini
+        });
+        stream.on('end', function() {});
+        for (let x = 0; x < width; x++) {
+            for (let y = 0; y < height; y++) {
+                ctx.fillStyle = getRndColor(); // set random color
+                ctx.fillRect(x, y, 1, 1);
+            }
+        }
+    }
+}
+
+function getRndColor() {
+    var r = 255 * Math.random() | 0,
+        g = 255 * Math.random() | 0,
+        b = 255 * Math.random() | 0;
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+//============================================================================================
+
+//Fonctions principales=======================================================================
+
+//Crée un utilisateur
+function newUser() {
+    let nom = faker.name.firstName();
+    let prenom = faker.name.lastName();
+    let date = faker.date.past();
+    let gender;
+    if (getRandomInt(2) == 1) {
+        gender = "male";
+    } else {
+        gender = "female";
+    }
+    let user = {
+        'nom': nom,
+        'prenom': prenom,
+        'email': nom + "." + prenom + "@example.com",
+        'password': faker.internet.password(),
+        'gender': gender,
+        'age': date.getFullYear() + "-" + ("0" + (1 + getRandomInt(12))).slice(-2) + "-" + ("0" + (1 + getRandomInt(28))).slice(-2)
+    };
+    return user;
+}
+
+//Crée plusieurs utilisateurs
+function genUsers(nbr) {
+    let users = [];
+    let user = newUser();
+
+    for (let i = 0; i < nbr; i++) {
+        while (users.includes(user)) {
+            user = newUser();
+        }
+        users.push(user);
+    }
+    return users;
+}
 //log chaque utilisateur et va chercher son username,password et un token
-async function getTokens() {
-    console.log("début de création des tokens");
+async function getTokens(users) {
+    console.log("récupération des tokens sur le site ...");
     let tokens = [];
     let cpt = 0;
     let options = { // les options de la requête AJAX
@@ -43,8 +100,7 @@ async function getTokens() {
         }
     };
     return await new Promise(async resolve => {
-        const data = await readfile('MOCK_DATA.csv'); //on va chercher les utilisateurs dans le csv
-        data.forEach(element => { //pour chaque utilisateur on va faire une requête 
+        users.forEach(element => { //pour chaque utilisateur on va faire une requête 
             let postData = querystring.stringify({ //on ajoute dans le body de la requête les éléments de l'utilisateur
                 'username': element.email,
                 'password': element.password,
@@ -61,7 +117,7 @@ async function getTokens() {
                         'username': element.email
                     }
                     tokens.push(user);
-                    if (cpt == data.length) { //si on as autant d'utlisateurs que dans le CSV on as fini les requêtes
+                    if (cpt == users.length) { //si on as autant d'utlisateurs que dans le CSV on as fini les requêtes
                         console.log("fin de récupération des tokens")
                         resolve(tokens); // on résoud donc la requête en renvoyant la liste d'utilisateurs
                     }
@@ -77,9 +133,9 @@ async function getTokens() {
 };
 
 //crée les utilisateurs dans la base de donnée
-async function createUsers() {
+async function createUsers(users) {
+    console.log("envoi des utilisateurs sur le site ...");
     return new Promise(async resolve => {
-        console.log("début de la création des utilisateurs")
         let cpt = 0;
         let options = { // les options de la requête AJAX
             hostname: "localhost",
@@ -91,8 +147,7 @@ async function createUsers() {
                 'Content-Length': 0
             }
         };
-        const data = await readfile('MOCK_DATA.csv');
-        data.forEach(element => {
+        users.forEach(element => {
             let postData = querystring.stringify({
                 'nom': element.nom,
                 'prenom': element.prenom,
@@ -105,7 +160,7 @@ async function createUsers() {
             let req = http.request(options, (res) => {
                 res.on('data', (d) => {
                     cpt++;
-                    if (cpt == data.length) {
+                    if (cpt == users.length) {
                         resolve(console.log("fin de création des utilisateurs"));
                     }
                 });
@@ -188,31 +243,70 @@ async function createComments(tokens, lPublications, nbrCommentaire) {
     });
 };
 
-async function lancerTest(nbPublications, nbCommentaires) {
-    await createUsers();
-    const tokens = await getTokens();
+async function likePublications(tokens, lPublications) {
+    return new Promise(async resolve => {
+        let options = { // les options de la requête AJAX
+            hostname: "localhost",
+            port: 8080,
+            path: '/api/publication/like',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': 0
+            }
+        };
+        let element = tokens[getRandomInt(tokens.length)];
+        let id = lPublications[getRandomInt(lPublications.length)];
+        let postData = querystring.stringify({
+            'token': element.token,
+            'id': id
+        });
+        options.headers["Content-Length"] = postData.length;
+        let req = http.request(options, (res) => {
+            res.on('data', (d) => {
+                resolve();
+            });
+        });
+        req.on('error', (e) => {
+            console.error(e);
+        });
+        req.write(postData);
+        req.end();
+    });
+};
+
+async function lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes) {
+    console.log("génération des utilisateurs ...");
+    const users = genUsers(nbUtilisateurs);
+    console.log("fin de la génération des utilisateurs");
+    await createUsers(users);
+    const tokens = await getTokens(users);
     let cptPublications = 0;
     let cptCommentaires = 0;
-    console.log("début de création des publications");
+    let cptLikes = 0;
     let lPublications = [];
+    console.log("génération et envoi des publications sur le site ...");
     lPublications.push(await createPublications(tokens, cptPublications + 1));
     setTimeout(async() => {
         while (cptPublications < (nbPublications - 1)) {
             cptPublications++;
             lPublications.push(await createPublications(tokens, cptPublications + 1));
         }
-        console.log(lPublications);
-        console.log("fin de la création des publications");
-        console.log("debut de création des commentaires");
-        while (cptCommentaires < (nbCommentaires)) {
+        console.log("fin de l'envoi des publications");
+        console.log("génération et envoi des commentaires sur le site ...");
+        while (cptCommentaires < nbCommentaires) {
             cptCommentaires++;
             await createComments(tokens, lPublications, cptCommentaires);
         }
-        console.log("fin de création des commentaires");
-
-        console.log("fin du peuplement de la base de données")
+        console.log("fin de l'envoi des commentaires");
+        console.log("envoi des likes sur le site ...");
+        while (cptLikes < nbLikes) {
+            cptLikes++;
+            await likePublications(tokens, lPublications);
+        }
+        console.log("fin de l'envoi des likes");
+        console.log("fin du peuplement de la base de données");
     }, 100);
-
 }
 
 
@@ -221,29 +315,51 @@ const r1 = readline.createInterface({
     output: process.stdout
 });
 
-console.log("Ce programme génère automatiquement des utilisateurs d'après le fichier MOCK_DATA.csv puis crée des publications/commentaires réparti de façon aléatoire.");
+console.log("Ce programme permet de peupler la base de données de Gretagram avec les données entrées");
 
-var lancerQuestions1 = function() {
-    r1.question('Combien de publications à générer ?\n', function(answer) {
-        if (is_numeric(answer)) { //we need some base case, for recursion
-            lancerQuestions2(answer);
+let lancerQuestions0 = function() {
+    r1.question("Combien d'utilisateurs à générer ?\n", function(answer) {
+        if (is_numeric(answer)) {
+            lancerQuestions1(answer);
         } else {
-            console.log("erreur : le nombre de publications doit être un chiffre.");
-            lancerQuestions1();
+            console.log("erreur : le nombre d'utilisateurs doit être un chiffre.");
+            lancerQuestions0();
         }
     });
 };
 
-var lancerQuestions2 = function(nbPublications) {
+let lancerQuestions1 = function(nbUtilisateurs) {
+    r1.question('Combien de publications à générer ?\n', function(answer) {
+        if (is_numeric(answer)) {
+            lancerQuestions2(nbUtilisateurs, answer);
+        } else {
+            console.log("erreur : le nombre de publications doit être un chiffre.");
+            lancerQuestions1(nbUtilisateurs);
+        }
+    });
+};
+
+let lancerQuestions2 = function(nbUtilisateurs, nbPublications) {
     r1.question('Combien de commentaires à générer ?\n', function(answer) {
-        if (is_numeric(answer)) { //we need some base case, for recursion
-            lancerTest(nbPublications, answer);
+        if (is_numeric(answer)) {
+            lancerQuestions3(nbUtilisateurs, nbPublications, answer);
+        } else {
+            console.log("erreur : le nombre de commentaires doit être un chiffre.");
+            lancerQuestions2(nbUtilisateurs, nbPublications);
+        }
+    });
+};
+
+let lancerQuestions3 = function(nbUtilisateurs, nbPublications, nbCommentaires) {
+    r1.question('Combien de likes à générer ?\n', function(answer) {
+        if (is_numeric(answer)) {
+            lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, answer);
             return r1.close();
         } else {
             console.log("erreur : le nombre de commentaires doit être un chiffre.");
-            lancerQuestions2();
+            lancerQuestions3(nbUtilisateurs, nbPublications, nbCommentaires);
         }
     });
-};
+}
 
-lancerQuestions1();
+lancerQuestions0();

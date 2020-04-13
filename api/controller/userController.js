@@ -37,7 +37,7 @@ exports.new = function(req, res) {
         } else {
             user.save(function(err) {
                 if (err)
-                    res.json(err);
+                    console.log(err);
             });
             data = user;
         }
