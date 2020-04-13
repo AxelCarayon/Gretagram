@@ -101,3 +101,40 @@ exports.delete = function(req, res) {
         });
     };
 };
+
+exports.subscribe = function(req, res) {
+    token = authenticateToken(req.body.token);
+    if (token === null) {
+        res.sendStatus(403);
+    } else {
+        let status = "";
+        User.findOne({ '_id': req.body.id }, function(err, user) {
+            User.findOne({ '_id': token._id }, function(err, nouvelAbonne) {
+                const index = nouvelAbonne.abonnements.findIndex(x => x._id == req.body.id);
+                if (index != -1) {
+                    const index2 = user.abonnements.findIndex(x => x._id == token._id);
+                    nouvelAbonne.abonnements.splice(index, 1);
+                    user.abonnes.splice(index2, 1);
+                    status = "abonnement supprimé";
+                } else {
+                    nouvelAbonne.abonnements.push(user._id);
+                    user.abonnes.push(token._id);
+                    status = "abonnement ajouté";
+                }
+                user.save(function(err) {
+                    if (err) {
+                        res.json(err);
+                    }
+                });
+                nouvelAbonne.save(function(err) {
+                    if (err) {
+                        res.json(err);
+                    }
+                });
+                res.json({
+                    status: status
+                });
+            });
+        });
+    }
+}

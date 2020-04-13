@@ -10,12 +10,12 @@ router.get('/', function(req, res) {
 });
 
 // Lien vers les controlleurs==================================================
-var userController = require('./controller/userController');
-var loginController = require('./controller/loginController');
-var publicationController = require('./controller/publicationController');
-var hashtagController = require('./controller/HashtagController');
-var photoController = require('./controller/PhotoController');
-var likeCommentController = require('./controller/likeCommentController');
+let userController = require('./controller/userController');
+let loginController = require('./controller/loginController');
+let publicationController = require('./controller/publicationController');
+let hashtagController = require('./controller/HashtagController');
+let photoController = require('./controller/PhotoController');
+let likeCommentController = require('./controller/likeCommentController');
 // ============================================================================
 
 
@@ -24,7 +24,8 @@ router.route('/user')
     .get(userController.view) //afficher
     .patch(userController.update) //modifier
     .post(userController.new) //ajouter
-    .delete(userController.delete); //supprimer
+    .delete(userController.delete) //supprimer
+    .put(userController.subscribe); //abonnner/désabonner
 
 router.route('/login')
     .get(loginController.login); //se logger
