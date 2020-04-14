@@ -108,3 +108,5 @@ typings/
 # fichier photos vide
 photos/*
 !photos/.gitkeep
+
+!.env
