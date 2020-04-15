@@ -21,7 +21,9 @@ var userSchema = mongoose.Schema({
     gender: String,
     age: Date,
     pp: String,
-    photos: []
+    photos: [],
+    abonnements: [],
+    abonnes: []
 });
 
 userSchema.methods.generateHash = function(password) {

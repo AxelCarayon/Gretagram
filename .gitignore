@@ -104,3 +104,9 @@ typings/
 
 # fichier editeur intellijIDEA
 .idea/
+
+# fichier photos vide
+photos/*
+!photos/.gitkeep
+
+!.env

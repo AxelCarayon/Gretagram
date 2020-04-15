@@ -13,7 +13,11 @@ var publicationSchema = mongoose.Schema({
     message: String,
     userID: String,
     likes: [{ userID: String }],
-    commentaires: [{ message: String }],
+    commentaires: [{
+        userID: String,
+        message: String,
+        date: Date
+    }],
     hashtag: []
 });
 

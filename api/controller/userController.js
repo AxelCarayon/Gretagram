@@ -1,5 +1,6 @@
 const User = require('../model/userModel');
 const authenticateToken = require('./loginController').authenticateToken;
+var path = require('path');
 
 // affiche un utilisateur
 exports.view = function(req, res) {
@@ -28,12 +29,21 @@ exports.new = function(req, res) {
     user.photos = [];
     user.pp = null;
 
-    user.save(function(err) {
-        if (err)
-            res.json(err);
+    User.findOne({ 'email': req.body.email }, function(err, foundUser) {
+        let message = "New user created!";
+        let data = null;
+        if (foundUser) {
+            message = "l'adresse mail est déjà utilisée";
+        } else {
+            user.save(function(err) {
+                if (err)
+                    console.log(err);
+            });
+            data = user;
+        }
         res.json({
-            message: 'New user created!',
-            data: user
+            message: message,
+            data: data
         });
     });
 };
@@ -91,3 +101,40 @@ exports.delete = function(req, res) {
         });
     };
 };
+
+exports.subscribe = function(req, res) {
+    token = authenticateToken(req.body.token);
+    if (token === null) {
+        res.sendStatus(403);
+    } else {
+        let status = "";
+        User.findOne({ '_id': req.body.id }, function(err, user) {
+            User.findOne({ '_id': token._id }, function(err, nouvelAbonne) {
+                const index = nouvelAbonne.abonnements.findIndex(x => x._id == req.body.id);
+                if (index != -1) {
+                    const index2 = user.abonnements.findIndex(x => x._id == token._id);
+                    nouvelAbonne.abonnements.splice(index, 1);
+                    user.abonnes.splice(index2, 1);
+                    status = "abonnement supprimé";
+                } else {
+                    nouvelAbonne.abonnements.push(user._id);
+                    user.abonnes.push(token._id);
+                    status = "abonnement ajouté";
+                }
+                user.save(function(err) {
+                    if (err) {
+                        res.json(err);
+                    }
+                });
+                nouvelAbonne.save(function(err) {
+                    if (err) {
+                        res.json(err);
+                    }
+                });
+                res.json({
+                    status: status
+                });
+            });
+        });
+    }
+}
