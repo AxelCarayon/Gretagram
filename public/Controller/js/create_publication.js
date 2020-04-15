@@ -2,13 +2,14 @@
 
 var resetPub = function(){
     $(".text-create-publication").html("");
+    console.log($('.fileSpan'));
+    
     $('.fileSpan').text('Choisis une photo');
-    $('#blah').attr('src', "").css("display","none");
+    $('.img-create-publication').attr('src', "").css("display","none");
 }
 
 $(".geoImg").click((e) => {
     $(e.target).toggleClass('disabled');
-
 });
 
 
@@ -17,7 +18,10 @@ function readURL(input) {
       var reader = new FileReader();
       
       reader.onload = function(e) {
-        $('#blah').attr('src', e.target.result);
+          console.log(`on passe bien ici : ${e}` );
+          console.log(e );
+        //   e.target.result
+        $(".img-create-publication").attr("src", e.target.result);
       }
       
       reader.readAsDataURL(input.files[0]); // convert to base64 string

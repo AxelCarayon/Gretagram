@@ -1,21 +1,23 @@
+var user = "lestin";
+
 function showCurrentPublications($scope) {
     // TODO: afficher les publications qui se trouvent dans la zone géographique actuellement sélectionnée
 }
 
 var app = angular.module('app', []);
 
-app.factory('dataFactory', function($http, $q ) {
+app.factory('dataFactory', function ($http, $q) {
 
     var factory = {
         publications: false,
-        getPublications: function() {
+        getPublications: function () {
             var deferred = $q.defer();
             $http.get('View/data/test.json')
-                .then(function(data, status) {
+                .then(function (data, status) {
                     factory.publications = data;
                     deferred.resolve(factory.publications);
 
-                }).catch(function(data, status) {
+                }).catch(function (data, status) {
                     console.log("error" + status);
                     deferred.reject("Impossible de récupérer les trucs");
 
@@ -26,11 +28,10 @@ app.factory('dataFactory', function($http, $q ) {
     return factory;
 });
 
-app.controller("ctrl", function($scope, dataFactory) {
-
+app.controller("ctrl", function ($scope, dataFactory) {
     $scope.loading = true;
 
-    $scope.data = dataFactory.getPublications().then(function(data) {
+    $scope.data = dataFactory.getPublications().then(function (data) {
         $scope.data = data.data;
         // console.log(data);
         $scope.proches = $scope.data.proches;
@@ -42,11 +43,88 @@ app.controller("ctrl", function($scope, dataFactory) {
         $scope.trend = true;
         $scope.proche = false;
         $scope.loading = false;
+    
+        
+        for (const index in Object.entries($scope.publications)) {
+           var t = $scope.publications[index].publicationID + "liked";
+           if ($scope.publications[index].likes.includes(user)) {
+               $scope[t] = true;
+           } 
+        }
+        for (const index in Object.entries($scope.abos)) {
+           var t = $scope.abos[index].publicationID + "liked";
+           if ($scope.abos[index].likes.includes(user)) {
+               $scope[t] = true;
+           } 
+        }
+        for (const index in Object.entries($scope.proches)) {
+           var t = $scope.proches[index].publicationID + "liked";
+           if ($scope.proches[index].likes.includes(user)) {
+               $scope[t] = true;
+           } 
+        }
 
-    }, function(msg) {
+
+    }, function (msg) {
         console.log(msg);
 
     });
+
+    $scope.verifComment = ($event) => {
+
+        if ($($event.target).val()) {
+            $($event.target).next().attr('disabled', false);
+        } else {
+            $($event.target).next().attr('disabled', true);
+        }
+    }
+
+    $scope.sendComment = ($event) => {
+        var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
+        var comment = $($event.target).prev().val(); //Le message du commentaire
+        var user_ID; // A récupérer via les cookies 
+
+        console.log(`commentaire ${comment} ajouté à la publication ${publication_id}`);
+
+        //TODO: Requete AJAX pour ajouter un commentaire à la publication   
+
+        $($event.target).prev().val("")
+        $($event.target).attr('disabled', true);
+    }
+
+    $scope.like = ($event, $index) => {
+        $event.preventDefault();
+        var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
+        var t = publication_id+'liked';    
+
+        var publication_theme;
+        
+        if ($($event.target).is("div")) {
+            publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
+        } else if ($($event.target).is("svg")) {
+            publication_theme = $($event.target).parent().parent().parent().parent().parent().attr('publication-theme');
+        } else if ($($event.target).is("path")) {
+            publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
+        }
+
+        
+        var publication = $scope[publication_theme][$index];
+        if (publication.likes.includes(user)) {
+            var index =  $scope[publication_theme][$index].likes.indexOf(user);
+            if (index > -1) {
+                $scope[publication_theme][$index].likes.splice(index, 1);
+            }
+
+            $scope[t] = false
+        } else {
+            $scope[publication_theme][$index].likes.push(user);
+            $scope[t] = true
+        }
+
+        //TODO: Requet Ajax pour likes
+
+    }
+
 
 
     $scope.aboFunction = () => {
@@ -80,17 +158,17 @@ app.controller("ctrl", function($scope, dataFactory) {
 
 });
 
-app.factory('profilFactory', function($http, $q) {
+app.factory('profilFactory', function ($http, $q) {
 
     var factory = {
         publications: false,
-        getPublications: function() {
+        getPublications: function () {
             var deferred = $q.defer();
             $http.get('View/data/testProfil.json')
-                .then(function(data, status) {
+                .then(function (data, status) {
                     factory.publications = data;
                     deferred.resolve(factory.publications);
-                }).catch(function(data, status) {
+                }).catch(function (data, status) {
                     console.log("error" + status);
                     deferred.reject("Impossible de récupérer les trucs");
 
@@ -102,30 +180,30 @@ app.factory('profilFactory', function($http, $q) {
 });
 
 
-app.controller("profilCtrl", function($scope, $http, dataFactory, profilFactory) {
+app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory) {
 
     $scope.loading = true;
 
-    $scope.like = function() {
-        var pub = ($(this)[0]).pub;
-        console.log(pub);
-        // Requete AJAX de quand on like un comment 
-
-    };
-
-    $scope.changeTheme = function() {
+    $scope.changeTheme = function () {
         $('*').toggleClass('sombre');
         $('*').toggleClass('clair');
     };
 
-    $scope.pubs = profilFactory.getPublications().then(function(publications) {
+    $scope.pubs = profilFactory.getPublications().then(function (publications) {
         $scope.pubs = publications.data;
         $scope.profilPubs = true;
         $scope.profilStats = false;
         $scope.loading = false;
         console.log($scope.pubs);
 
-    }, function(msg) {
+        for (const index in ($scope.pubs)) {
+            var t = $scope.pubs[index].publicationID + "liked";
+            if ($scope.pubs[index].likes.includes(user)) {
+                $scope[t] = true;
+            } 
+         }
+
+    }, function (msg) {
         alert(msg);
 
     });
@@ -145,6 +223,72 @@ app.controller("profilCtrl", function($scope, $http, dataFactory, profilFactory)
         $('.btnPub').removeClass('active');
         $('.btnStat').addClass('active');
     };
+
+
+    $scope.verifComment = ($event) => {
+
+        if ($($event.target).val()) {
+            $($event.target).next().attr('disabled', false);
+        } else {
+            $($event.target).next().attr('disabled', true);
+        }
+    }
+
+    $scope.sendComment = ($event) => {
+        var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
+        var comment = $($event.target).prev().val(); //Le message du commentaire
+        var user_ID; // A récupérer via les cookies 
+
+        console.log(`commentaire ${comment} ajouté à la publication ${publication_id}`);
+
+        //TODO: Requete AJAX pour ajouter un commentaire à la publication   
+
+        $($event.target).prev().val("")
+        $($event.target).attr('disabled', true);
+    }
+
+    $scope.like = ($event, $index) => {
+        $event.preventDefault();
+        var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
+        var t = publication_id+'liked';    
+
+        var publication_theme;
+        
+        if ($($event.target).is("div")) {
+            publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
+        } else if ($($event.target).is("svg")) {
+            publication_theme = $($event.target).parent().parent().parent().parent().parent().attr('publication-theme');
+        } else if ($($event.target).is("path")) {
+            publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
+        }
+
+        
+        var publication = $scope[publication_theme][$index];
+        if (publication.likes.includes(user)) {
+            var index =  $scope[publication_theme][$index].likes.indexOf(user);
+            if (index > -1) {
+                $scope[publication_theme][$index].likes.splice(index, 1);
+            }
+
+            $scope[t] = false
+        } else {
+            $scope[publication_theme][$index].likes.push(user);
+            $scope[t] = true
+        }
+
+        //TODO: Requet Ajax pour likes
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 });

@@ -47,7 +47,7 @@
     <link rel="stylesheet" type="text/css" href="View/css/component.css" />
 </head>
 
-<body onload="changeScreenSize()" class="clair" ng-app="app" ng-controller="profilCtrl">
+<body  class="clair" ng-app="app" ng-controller="profilCtrl">
     <ng-nav select="changeTheme()"></ng-nav>
     <div class="container profil">
         <div class="row">
@@ -106,9 +106,13 @@
         </div>
     </div>
 
-    <div class="publicationsProfil container" ng-show='profilPubs'>
-        <div class="card-columns">
-            <card-template></card-template>
+    <div class="container containerPublications" ng-show="profilPubs">
+        <div class="row publicationContainer">
+            <div class="col-12 col-12-sm container containerPublicationsProche">
+                <div class="col-12 publication clair" ng-repeat="x in pubs">
+                    <publication-template publication-theme="pubs"></publication-template>
+                </div>
+            </div>
         </div>
     </div>
     <div class="publicationsProfil container" ng-show='profilStats'>

@@ -9,6 +9,18 @@ a {
   font-family: "Sen", sans-serif !important;
 }
 
+*, *:focus, *:hover, *:active {
+  outline: 0 !important;
+  outline: none !important;
+}
+
+a, a:focus, a:active, a:hover {
+  border: 0 !important;
+  outline: 0 !important !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .badge.badge-success {
   font-size: 1em;
   padding: 2px;
@@ -93,6 +105,20 @@ h2.clair {
 .searchbar.active.sombre {
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
   border: none;
+}
+
+.geoImg {
+  position: absolute;
+  opacity: 1;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+
+.geoImg.disabled {
+  opacity: 0.2;
 }
 
 .navbar-toggler {
@@ -211,6 +237,10 @@ div[contenteditable]:focus.clair {
   color: #f7f2f2 !important;
 }
 
+.img-create-publication {
+  margin-bottom: 30px;
+}
+
 .btn-publier {
   margin-right: 10px;
   color: #f7f2f2;
@@ -223,8 +253,10 @@ div[contenteditable]:focus.clair {
 }
 
 .publication {
-  border-radius: 13px;
-  margin-top: 60px;
+  border-radius: 7px;
+  margin: 40px 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 .publication.sombre {
   background: #2A343D;
@@ -264,31 +296,90 @@ div[contenteditable]:focus.clair {
 }
 
 .publicationTexte {
-  position: relative;
+  margin: 60px 30px 0 30px;
+  margin-bottom: -20px;
 }
 .publicationTexte.sombre {
   color: white;
-  margin: 60px 100px;
 }
 .publicationTexte.clair {
   color: #7A8AA3;
-  margin: 60px 10%;
+}
+
+.comment {
+  display: flex;
+  position: relative;
+  padding: 20px 0;
+  border-bottom: 1px solid #e2c4c4;
+}
+.comment:last-child {
+  border-bottom: none;
+}
+.comment .comment-body {
+  margin-left: 50px;
+}
+.comment .comment-img img {
+  top: 0px !important;
+  left: 20px !important;
+  height: 50px;
+}
+.comment .comment-nom {
+  color: #7A8AA3;
+  font-weight: 600;
+  font-size: 18px;
+}
+.comment p {
+  color: #7A8AA3;
 }
 
 .imagePublication {
   position: relative;
   width: 100%;
-  padding-left: 50px;
-  padding-right: 50px;
-  margin-bottom: 80px;
+  margin-top: 60px;
 }
 
-.likes {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  text-align: right;
-  cursor: pointer;
+.stat-publication {
+  text-decoration: none;
+  display: inline-block;
+  margin: 25px 10px;
+}
+.stat-publication:hover {
+  text-decoration: none;
+}
+.stat-publication:first-child {
+  margin-left: 30px !important;
+}
+
+.add-comment {
+  border-top: 1px solid #f3e3e3;
+  padding-top: 10px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  height: 50px;
+}
+.add-comment input {
+  width: 100%;
+  background: none;
+  border: none;
+  margin-left: 20px;
+  color: #d0c0c0;
+}
+.add-comment .send-comment {
+  color: #707e93;
+  font-weight: 600;
+  width: 100px;
+  flex: none;
+  text-align: center;
+  margin-left: 10px;
+  border: none;
+  height: 100%;
+  background: none;
+}
+.add-comment .send-comment:disabled {
+  color: rgba(142, 155, 174, 0.435);
 }
 
 .card .likes {

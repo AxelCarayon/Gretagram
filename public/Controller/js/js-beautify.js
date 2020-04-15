@@ -1,12 +1,8 @@
 // Ici ce ne sont que des fonctions cosmétiques
 
-
-
-function changeScreenSize() {        
-    window.resizeTo(screen.width-300,screen.height-500)   
-}
-
 $(document).ready(() => {
+
+    $('[data-toggle="tooltip"]').tooltip();
 
 
     var sombre = true; // Meme variable que dans map.js
@@ -43,13 +39,10 @@ $(document).ready(() => {
     });
     //Ajout des hashtag dans la creation de publication
     var dieze = false;
-    var cptText = 0;
     var tab = [];
     $(".text-create-publication").keyup((e) => {
         tab = [];
         var text = $(".text-create-publication").text();
-        var textbrut = $(".text-create-publication").html();
-        var textReplace;
         if (e.keyCode == 51) {
             dieze = true;
         }
@@ -75,8 +68,8 @@ $(document).ready(() => {
     $("#file-1").on('change', (e) => {
         $("#file-1").addClass("filled");
         $("label").addClass("filled");
-        console.log(e.currentTarget.value);
-        $('.imgtest').append($("<img></img>").attr("src", e.currentTarget.value));
+        // console.log(e.currentTarget.value);
+        // $('.imgtest').append($("<img></img>").attr("src", e.currentTarget.value));
     });
     $(".text-create-publication").text("Exprimez vous...");
     $(".text-create-publication").focusout(
@@ -89,4 +82,7 @@ $(document).ready(() => {
     $('.first-button').on('click', function() {
         $('.animated-icon1').toggleClass('open');
     });
+
+
+
 });
