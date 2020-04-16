@@ -70,7 +70,7 @@ app.controller("ctrl", function ($scope, dataFactory) {
 
     });
 
-    $scope.verifComment = ($event) => {
+    $scope.verifComment = ($event,$index) => {
 
         if ($($event.target).val()) {
             $($event.target).next().attr('disabled', false);
@@ -79,14 +79,16 @@ app.controller("ctrl", function ($scope, dataFactory) {
         }
     }
 
-    $scope.sendComment = ($event) => {
+    $scope.sendComment = ($event,$index) => {
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         var comment = $($event.target).prev().val(); //Le message du commentaire
         var user_ID; // A récupérer via les cookies 
 
-        console.log(`commentaire ${comment} ajouté à la publication ${publication_id}`);
-
         //TODO: Requete AJAX pour ajouter un commentaire à la publication   
+        
+        var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
+        
+        $scope[publication_theme][$index].comments.push({"nom" : user, "comment" : comment , "date" : new Date()});
 
         $($event.target).prev().val("")
         $($event.target).attr('disabled', true);

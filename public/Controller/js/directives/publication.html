@@ -20,7 +20,7 @@
 
     <form class="add-comment">
         <input class="input-comment" ng-keydown="verifComment($event)" type="text" placeholder="Ajouter un commentaire...">
-        <button disabled publication-id="{{x.publicationID}}" type="submit" ng-click="sendComment($event)" class=" send-comment">Publier</button>
+        <button disabled publication-id="{{x.publicationID}}" type="submit" ng-click="sendComment($event,$index)" class=" send-comment">Publier</button>
     </form>
     
 </div>
@@ -37,12 +37,13 @@
             </button>
         </div>
         <div class="modal-body">
-            <div class="comment" ng-repeat="comment in x.comments">
+            <div class="comment" ng-repeat="comment in x.comments | orderBy:'-'">
                 <div class="comment-img">
                     <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
                 </div>
                 <div class="comment-body">
                     <div class="comment-nom">{{comment.nom}}</div>
+                    <p class="date">{{comment.date | date:'MM-dd-yyyy'}}</p>
                     <p>{{comment.comment}}</p>
                 </div>
                 

@@ -331,6 +331,12 @@ div[contenteditable]:focus.clair {
 .comment p {
   color: #7A8AA3;
 }
+.comment p.date {
+  font-size: 0.7em;
+  font-style: italic;
+  color: #7A8AA3;
+  font-style: italic;
+}
 
 .imagePublication {
   position: relative;
@@ -351,7 +357,6 @@ div[contenteditable]:focus.clair {
 }
 
 .add-comment {
-  border-top: 1px solid #f3e3e3;
   padding-top: 10px;
   margin-top: 10px;
   display: flex;
@@ -359,6 +364,12 @@ div[contenteditable]:focus.clair {
   justify-content: space-between;
   padding-bottom: 10px;
   height: 50px;
+}
+.add-comment.clair {
+  border-top: 1px solid #f3e3e3;
+}
+.add-comment.sombre {
+  border-top: 1px solid #544d4d;
 }
 .add-comment input {
   width: 100%;

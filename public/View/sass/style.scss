@@ -340,9 +340,15 @@ div[contenteditable] {
             font-weight: 600;
             font-size: 18px;        
     }
-
     p{
         color: #7A8AA3;
+    }
+    
+    p.date {
+        font-size: .7em;
+        font-style: italic;
+        color: #7A8AA3;
+        font-style: italic;
     }
 }
 
@@ -374,7 +380,13 @@ div[contenteditable] {
 }
 
 .add-comment{
-    border-top: 1px solid #f3e3e3;
+    
+    &.clair{
+        border-top: 1px solid #f3e3e3;
+    }
+    &.sombre{
+        border-top: 1px solid #544d4d;
+    }
     padding-top: 10px;
     margin-top: 10px;
     display: flex;

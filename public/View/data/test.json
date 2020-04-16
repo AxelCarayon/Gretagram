@@ -11,8 +11,8 @@
         "date": "prout",
         "publicationID" : "id_1",
         "comments" : [
-            { "nom" : "Lestin le bg", "comment" :"premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"}
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Mathilde",
@@ -29,8 +29,8 @@
         "date": "prout",
         "publicationID" : "id_2",
         "comments" : [
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "second commentaire"}
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -43,8 +43,8 @@
         "date": "prout",
         "publicationID" : "id_3",
         "comments" : [
-            { "nom" : "Lestin le bg", "comment" :"premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"}
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -58,8 +58,8 @@
         "date": "prout",
         "publicationID" : "id_4",
         "comments" : [
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"}
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -73,8 +73,8 @@
         "date": "prout",
         "publicationID" : "id_5",
         "comments" : [
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"}
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }] ,
     "trend" : [{
@@ -93,22 +93,22 @@
         "date": "prout",
         "publicationID" : "id_6",
         "comments" : [
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"quatrieme commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"quatrieme commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"quatrieme commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"quatrieme commentaire"}
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"quatrieme commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"quatrieme commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"quatrieme commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"quatrieme commentaire"}
 
         ]
     }, {
@@ -124,8 +124,8 @@
         "date": "prout",
         "publicationID" : "id_7",
         "comments" : [
-            { "nom" : "Lestin le bg", "comment" :"premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"}
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -138,9 +138,9 @@
         "date": "prout",
         "publicationID" : "id_8",
         "comments" : [
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"troisieme commentaire"}
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"troisieme commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -154,8 +154,8 @@
         "date": "prout",
         "publicationID" : "id_9",
         "comments" : [
-            { "nom" : "Lestin le bg", "comment" :"premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"}
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -169,8 +169,8 @@
         "date": "prout",
         "publicationID" : "id_10",
         "comments" : [
-            { "nom" : "Lestin le bg", "comment" :"premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"}
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }] ,
     "abos" :[{
@@ -185,8 +185,8 @@
         "date": "prout",
         "publicationID" : "id_11",
         "comments" : [
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "second commentaire"}
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }, {
         "nom": "Mathilde",
@@ -199,8 +199,8 @@
         "date": "prout",
         "publicationID" : "id_12",
         "comments" : [
-            { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" : "second commentaire"}
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -213,8 +213,8 @@
         "date": "prout",
         "publicationID" : "id_13",
         "comments" : [
-            { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" : "second commentaire"}
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -228,8 +228,8 @@
         "date": "prout",
         "publicationID" : "id_14",
         "comments" : [
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-            { "nom" : "Lestin le bg", "comment" :"second commentaire"}
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
@@ -243,8 +243,8 @@
         "date": "prout",
         "publicationID" : "id_15",
         "comments" : [
-           { "nom" : "Lestin le bg", "comment" : "premier commentaire"},
-           { "nom" : "Lestin le bg", "comment" : "second commentaire"}
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
+           { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }]
 }
