@@ -6,9 +6,11 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose'); // Configure bodyparser to handle post requests
 const bodyParser = require('body-parser');
+const cors = require('cors');
 app.use(bodyParser.urlencoded({ extended: true }));
 var fileupload = require("express-fileupload");
 app.use(fileupload());
+app.use(cors());
 //===================================================================
 
 require('dotenv').config();
@@ -49,6 +51,9 @@ app.post('/connect', function(req, res) {
     console.log(`password : ${password}`);
 
 
+});
+app.get('/test', function(req, res) {
+    res.sendFile(__dirname + '/test.html');
 });
 
 app.get('*', function(req, res) {
