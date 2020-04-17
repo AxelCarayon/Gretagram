@@ -12,8 +12,6 @@ exports.view = function(req, res) {
             res.json({
                 nom: user.nom,
                 prenom: user.prenom,
-                gender: user.gender,
-                age: user.age,
                 pp: user.pp,
                 photos: user.photos,
                 publications: user.publications,
@@ -25,6 +23,27 @@ exports.view = function(req, res) {
         }
     });
 };
+
+//affiche toutes les infos d'un utlisateur si il as un token valide
+exports.view = function(req, res) {
+    token = authenticateToken(req.body.token)
+    if (token === null) {
+        res.sendStatus(403);
+    } else {
+        User.findOne({ '_id': req.query.id }, function(err, user) {
+            if (err) {
+                res.send(err);
+            }
+            if (user) {
+                res.json({
+                    data: user
+                })
+            } else {
+                res.send("utilisateur inexistant");
+            }
+        });
+    }
+}
 
 // crée un nouvel utilisateur 
 exports.new = function(req, res) {

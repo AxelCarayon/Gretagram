@@ -119,7 +119,7 @@ exports.new = function(req, res) {
                 res.json(err);
             } else {
                 //si on as des hashtags
-                if (hashtags != []) {
+                if (hashtags) {
                     sendHashtags(hashtags, req.body.token, publication._id);
                 }
                 res.json({
