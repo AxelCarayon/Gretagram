@@ -28,135 +28,139 @@ app.factory('dataFactory', function ($http, $q) {
     return factory;
 });
 
-app.controller("ctrl", function ($scope, dataFactory) {
+app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect) {
     $scope.loading = true;
 
-    $scope.data = dataFactory.getPublications().then(function (data) {
-        $scope.data = data.data;
-        // console.log(data);
-        $scope.proches = $scope.data.proches;
-        $scope.abos = $scope.data.abos;
-        $scope.publications = $scope.data.trend;
+    if (!serviceIsConnect){
+        window.location.href = "/login";
+    }else {
 
 
-        $scope.abonnements = true; // Je passe uniquement les trends en true pour qu'il n'y ait que ça d'afficher
-        $scope.trend = true;
-        $scope.proche = false;
-        $scope.loading = false;
-    
-        
-        for (const index in Object.entries($scope.publications)) {
-           var t = $scope.publications[index].publicationID + "liked";
-           if ($scope.publications[index].likes.includes(user)) {
-               $scope[t] = true;
-           } 
-        }
-        for (const index in Object.entries($scope.abos)) {
-           var t = $scope.abos[index].publicationID + "liked";
-           if ($scope.abos[index].likes.includes(user)) {
-               $scope[t] = true;
-           } 
-        }
-        for (const index in Object.entries($scope.proches)) {
-           var t = $scope.proches[index].publicationID + "liked";
-           if ($scope.proches[index].likes.includes(user)) {
-               $scope[t] = true;
-           } 
-        }
+        $scope.data = dataFactory.getPublications().then(function (data) {
+            $scope.data = data.data;
+            // console.log(data);
+            $scope.proches = $scope.data.proches;
+            $scope.abos = $scope.data.abos;
+            $scope.publications = $scope.data.trend;
 
 
-    }, function (msg) {
-        console.log(msg);
+            $scope.abonnements = true; // Je passe uniquement les trends en true pour qu'il n'y ait que ça d'afficher
+            $scope.trend = true;
+            $scope.proche = false;
+            $scope.loading = false;
 
-    });
 
-    $scope.verifComment = ($event,$index) => {
-
-        if ($($event.target).val()) {
-            $($event.target).next().attr('disabled', false);
-        } else {
-            $($event.target).next().attr('disabled', true);
-        }
-    }
-
-    $scope.sendComment = ($event,$index) => {
-        var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
-        var comment = $($event.target).prev().val(); //Le message du commentaire
-        var user_ID; // A récupérer via les cookies 
-
-        //TODO: Requete AJAX pour ajouter un commentaire à la publication   
-        
-        var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
-        
-        $scope[publication_theme][$index].comments.push({"nom" : user, "comment" : comment , "date" : new Date()});
-
-        $($event.target).prev().val("")
-        $($event.target).attr('disabled', true);
-    }
-
-    $scope.like = ($event, $index) => {
-        $event.preventDefault();
-        var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
-        var t = publication_id+'liked';    
-
-        var publication_theme;
-        
-        if ($($event.target).is("div")) {
-            publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
-        } else if ($($event.target).is("svg")) {
-            publication_theme = $($event.target).parent().parent().parent().parent().parent().attr('publication-theme');
-        } else if ($($event.target).is("path")) {
-            publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
-        }
-
-        
-        var publication = $scope[publication_theme][$index];
-        if (publication.likes.includes(user)) {
-            var index =  $scope[publication_theme][$index].likes.indexOf(user);
-            if (index > -1) {
-                $scope[publication_theme][$index].likes.splice(index, 1);
+            for (const index in Object.entries($scope.publications)) {
+                var t = $scope.publications[index].publicationID + "liked";
+                if ($scope.publications[index].likes.includes(user)) {
+                    $scope[t] = true;
+                }
+            }
+            for (const index in Object.entries($scope.abos)) {
+                var t = $scope.abos[index].publicationID + "liked";
+                if ($scope.abos[index].likes.includes(user)) {
+                    $scope[t] = true;
+                }
+            }
+            for (const index in Object.entries($scope.proches)) {
+                var t = $scope.proches[index].publicationID + "liked";
+                if ($scope.proches[index].likes.includes(user)) {
+                    $scope[t] = true;
+                }
             }
 
-            $scope[t] = false
-        } else {
-            $scope[publication_theme][$index].likes.push(user);
-            $scope[t] = true
+
+        }, function (msg) {
+            console.log(msg);
+
+        });
+
+        $scope.verifComment = ($event, $index) => {
+
+            if ($($event.target).val()) {
+                $($event.target).next().attr('disabled', false);
+            } else {
+                $($event.target).next().attr('disabled', true);
+            }
         }
 
-        //TODO: Requet Ajax pour likes
+        $scope.sendComment = ($event, $index) => {
+            var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
+            var comment = $($event.target).prev().val(); //Le message du commentaire
+            var user_ID; // A récupérer via les cookies
+
+            //TODO: Requete AJAX pour ajouter un commentaire à la publication
+
+            var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
+
+            $scope[publication_theme][$index].comments.push({"nom": user, "comment": comment, "date": new Date()});
+
+            $($event.target).prev().val("")
+            $($event.target).attr('disabled', true);
+        }
+
+        $scope.like = ($event, $index) => {
+            $event.preventDefault();
+            var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
+            var t = publication_id + 'liked';
+
+            var publication_theme;
+
+            if ($($event.target).is("div")) {
+                publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
+            } else if ($($event.target).is("svg")) {
+                publication_theme = $($event.target).parent().parent().parent().parent().parent().attr('publication-theme');
+            } else if ($($event.target).is("path")) {
+                publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
+            }
+
+
+            var publication = $scope[publication_theme][$index];
+            if (publication.likes.includes(user)) {
+                var index = $scope[publication_theme][$index].likes.indexOf(user);
+                if (index > -1) {
+                    $scope[publication_theme][$index].likes.splice(index, 1);
+                }
+
+                $scope[t] = false
+            } else {
+                $scope[publication_theme][$index].likes.push(user);
+                $scope[t] = true
+            }
+
+            //TODO: Requet Ajax pour likes
+
+        }
+
+
+        $scope.aboFunction = () => {
+            $scope.abonnements = true; // Quand on appuie sur le bouton abonnement le container des abonnements s'affichent les autres se cachent
+            $scope.trend = false;
+            $scope.proche = false;
+            $(".map-container").animate({ // La map reste se cache
+                right: '-2000px'
+            });
+
+        };
+        $scope.trendFunction = () => { // Quand on appuie sur le bouton trend le container des trend s'affichent les autres se cachent
+            $scope.abonnements = false;
+            $scope.trend = true;
+            $scope.proche = false;
+            $(".map-container").animate({ // La map reste se cache
+                right: '-2000px'
+            });
+
+        };
+        $scope.procheFunction = () => { // Quand on appuie sur le bouton proche le container des proche s'affichent les autres se cachent
+            $scope.abonnements = false;
+            $scope.trend = false;
+            $scope.proche = true;
+            $(".map-container").animate({ // La map s'affiche
+                right: '0%'
+            });
+        };
 
     }
-
-
-
-    $scope.aboFunction = () => {
-        $scope.abonnements = true; // Quand on appuie sur le bouton abonnement le container des abonnements s'affichent les autres se cachent
-        $scope.trend = false;
-        $scope.proche = false;
-        $(".map-container").animate({ // La map reste se cache 
-            right: '-2000px'
-        });
-
-    };
-    $scope.trendFunction = () => { // Quand on appuie sur le bouton trend le container des trend s'affichent les autres se cachent
-        $scope.abonnements = false;
-        $scope.trend = true;
-        $scope.proche = false;
-        $(".map-container").animate({ // La map reste se cache 
-            right: '-2000px'
-        });
-
-    };
-    $scope.procheFunction = () => { // Quand on appuie sur le bouton proche le container des proche s'affichent les autres se cachent
-        $scope.abonnements = false;
-        $scope.trend = false;
-        $scope.proche = true;
-        $(".map-container").animate({ // La map s'affiche
-            right: '0%'
-        });
-    };
-
-
 
 });
 

@@ -10,8 +10,11 @@ function getFormData($form) {
 }
 
 angular.module('app',[])
-    .controller('connexionCtrl',['$scope','serviceConnexionAjax','serviceSession',function ($scope,serviceConnexionAjax, serviceSession) {
+    .controller('connexionCtrl',['$scope','serviceConnexionAjax','serviceSession','serviceIsConnect',function ($scope,serviceConnexionAjax, serviceSession,serviceIsConnect) {
 
+        if (serviceIsConnect){
+            serviceSession.destroyItem('token');
+        }
         $scope.connexionAct = function(){
             var datas = getFormData($('#codeForm'));
             console.log("datas", datas);
