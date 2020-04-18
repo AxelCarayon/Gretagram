@@ -21,3 +21,10 @@ app.directive('publicationTemplate', function() {
         templateUrl: "Controller/js/directives/publication.html"
     };
 });
+
+app.directive('publicationStatTemplate', function() {
+    return {
+        restrict: 'E',
+        templateUrl: "Controller/js/directives/publicationStat.html"
+    };
+});

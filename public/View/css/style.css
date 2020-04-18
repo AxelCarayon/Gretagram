@@ -9,12 +9,19 @@ a {
   font-family: "Sen", sans-serif !important;
 }
 
-*, *:focus, *:hover, *:active {
+*,
+*:focus,
+*:hover,
+*:active {
   outline: 0 !important;
   outline: none !important;
+  box-sizing: border-box;
 }
 
-a, a:focus, a:active, a:hover {
+a,
+a:focus,
+a:active,
+a:hover {
   border: 0 !important;
   outline: 0 !important !important;
   outline: none !important;
@@ -663,28 +670,59 @@ div.ng-show-remove.ng-show-remove-active {
   transition: all 0.5s linear;
 }
 
-.card.publication {
+.card-graf {
+  margin: 50px 0;
+  height: 600px !important;
+  position: relative;
+}
+.card-graf.sombre {
+  background: #2A343D;
+  box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
+}
+.card-graf.clair {
+  background: #eff4f8;
+  box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
+}
+.card-graf #myChart {
+  height: 400px !important;
+}
+.card-graf .card-stat-header {
+  font-size: 1em;
+  color: #a09292;
+  line-height: 1;
+}
+
+.card-stat {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin: 10px;
 }
+.card-stat .card-stat-header {
+  font-size: 1em;
+  color: #a09292;
+}
+.card-stat .card-stat-body {
+  font-size: 3em;
+  color: #c3b4b4;
+}
+.card-stat.sombre {
+  background: #2A343D;
+  box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
+}
+.card-stat.clair {
+  background: #eff4f8;
+  box-shadow: 11px 11px 15px #ced2d5, -11px -11px 15px #ffffff;
+}
 
-p.card-text.clair {
-  color: #4f5763;
+.modal-color.clair {
+  background-color: #eff4f8;
 }
-p.card-text.sombre {
-  color: white;
-}
-
-@media screen and (min-width: 1200px) {
-  .bricklayer-column-sizer {
-    /* divide by 3. */
-    width: 33.3%;
-  }
-}
-@media screen and (min-width: 768px) {
-  .bricklayer-column-sizer {
-    /* divide by 2. */
-    width: 50%;
-  }
+.modal-color.sombre {
+  background-color: #2A343D;
 }
 
 /*# sourceMappingURL=style.css.map */
