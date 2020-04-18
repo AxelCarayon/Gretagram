@@ -6,7 +6,7 @@ const uuidv4 = require("uuid/v4");
 
 // affiche une photo
 exports.view = function(req, res) {
-    chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos/', req.body.photo);
+    chemin = path.join(path.dirname(path.dirname(__dirname)), 'photos/', req.query.photo);
     res.sendFile(chemin);
 };
 

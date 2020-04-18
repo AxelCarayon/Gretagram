@@ -23,7 +23,8 @@ var userSchema = mongoose.Schema({
     pp: String,
     photos: [],
     abonnements: [],
-    abonnes: []
+    abonnes: [],
+    publications: []
 });
 
 userSchema.methods.generateHash = function(password) {

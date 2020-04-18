@@ -3,7 +3,7 @@ const authenticateToken = require('./loginController').authenticateToken;
 
 // affiche un hashtag
 exports.view = function(req, res) {
-    Hashtag.findOne({ '_id': req.body.id }, function(err, hashtag) {
+    Hashtag.findOne({ '_id': req.query.id }, function(err, hashtag) {
         if (err) {
             res.send(err);
         }

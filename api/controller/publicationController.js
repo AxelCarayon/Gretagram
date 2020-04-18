@@ -1,5 +1,6 @@
 const Publication = require('../model/publicationModel');
 const Hashtag = require('../model/hashtagModel');
+const User = require('../model/userModel')
 const authenticateToken = require('./loginController').authenticateToken;
 const http = require('http');
 const querystring = require('querystring');
@@ -69,11 +70,15 @@ async function sendHashtags(hashtags, token, publicationID) {
 
 // affiche une publication
 exports.view = function(req, res) {
-    Publication.findOne({ '_id': req.body.id }, function(err, publication) {
+    Publication.findOne({ '_id': req.query.id }, function(err, publication) {
         if (err) {
             res.send(err);
         }
-        res.send(publication);
+        if (publication) {
+            res.send(publication);
+        } else {
+            res.send("aucune publication");
+        }
     });
 };
 
@@ -97,12 +102,24 @@ exports.new = function(req, res) {
         publication.userID = token._id;
         publication.hashtag = hashtags;
 
+        User.findOne({ '_id': token._id }, function(err, user) {
+            if (err) {
+                res.send(err);
+            }
+            user.publications.push(publication._id);
+            user.save(function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
+        });
+
         publication.save(function(err) {
             if (err) {
                 res.json(err);
             } else {
                 //si on as des hashtags
-                if (hashtags != []) {
+                if (hashtags) {
                     sendHashtags(hashtags, req.body.token, publication._id);
                 }
                 res.json({
@@ -160,13 +177,27 @@ exports.delete = function(req, res) {
     if (token === null) {
         res.sendStatus(403);
     } else {
-        Publication.deleteOne({ '_id': token._id }, function(err, publication) {
+        Publication.deleteOne({ '_id': req.body.id }, function(err, publication) {
             if (token._id === publication.userID) {
                 if (err) {
                     res.send(err);
                 } else {
-                    res.send({
-                        message: 'Publication deleted'
+                    User.findOne({ '_id': token._id }, function(err, user) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            const index = user.publications.findIndex(x => x._id == req.body.id);
+                            user.publications.splice(index, 1);
+                            user.save(function(err) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    res.send({
+                                        message: 'Publication deleted'
+                                    });
+                                }
+                            })
+                        }
                     });
                 }
             } else {

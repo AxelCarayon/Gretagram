@@ -14,8 +14,6 @@ and open the template in the editor.
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <!-- Controller -->
-    <script src="Controller/js/connexion.js"></script>
 
 
 
@@ -35,6 +33,13 @@ and open the template in the editor.
     <title>Gretagram</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <!-- Controller -->
+    <script src="../scripts/controllers/connexion.js"></script>
+    <script src="../scripts/services/serviceSession.js"></script>
+    <script src="../scripts/services/serviceConnexionAjax.js"></script>
+    <script src="../scripts/services/serviceIsConnect.js"></script>
 
 </head>
 
@@ -47,7 +52,7 @@ and open the template in the editor.
             <h1 style="font-size: 3em;border-right: 3px solid rgb(64, 64, 66);padding-right: 40px;">Gretagram</h1>
         </div>
         <div class="login-container">
-            <form id="codeForm">
+            <form id="codeForm" ng-app="app" ng-controller="connexionCtrl">
                 <img class="avatar" src="View/ressources/avatar.svg">
                 <h2>Bienvenue</h2>
                 <div class="input-div username">
@@ -75,7 +80,7 @@ and open the template in the editor.
                     un mot de passe et/ou un nom d'utilisateur.</p>
                 <a class="forget" href="#" data-toggle="modal" data-target="#Model-mdp-oublie">Mot de passe oublié ?</a>
 
-                <input type="submit" class="btn btn-connexion" value="Connexion">
+                <input class="btn btn-connexion" value="Connexion" type="button" ng-click="connexionAct()">
                 <a class="compte" href="/createUser">Créer un <b>compte</b></a>
             </form>
         </div>
@@ -142,6 +147,7 @@ and open the template in the editor.
         <p><i class="fas fa-copyright"></i> Copyright Gretagram Inc.</p>
     </footer>
 
+
     <script type="text/javascript">
         var verifMail = () => {
             var drap = true;
@@ -203,11 +209,11 @@ and open the template in the editor.
 
         })
 
-        $('.btn-connexion').click((e) => {
+       /* $('.btn-connexion').click((e) => {
             e.preventDefault();
             window.location.href = "/";
 
-        })
+        })*/
 
         $("input").each((i) => {
             var input = $("input").eq(i);

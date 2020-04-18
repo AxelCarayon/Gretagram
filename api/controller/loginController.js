@@ -20,8 +20,8 @@ exports.authenticateToken = function authenticateToken(token) {
 
 // log un utilisateur
 exports.login = function(req, res) {
-    let username = req.body.username;
-    let password = req.body.password;
+    let username = req.query.username;
+    let password = req.query.password;
     User.findOne({ 'email': username }, function(err, user) {
         if (err) {
             res.send(err);

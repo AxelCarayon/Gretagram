@@ -77,7 +77,7 @@ exports.new = function(req, res) {
 
 //affiche le nombre de likes et les personnes
 exports.view = function(req, res) {
-    Publication.findOne({ '_id': req.body.id }, function(err, publication) {
+    Publication.findOne({ '_id': req.query.id }, function(err, publication) {
         if (err) {
             res.send(err);
         }

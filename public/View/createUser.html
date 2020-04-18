@@ -15,8 +15,7 @@ and open the template in the editor.
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
         </script>
         <!-- Controller -->
-        <script src="Controller/js/connexion.js"></script>
-    
+
     
     
         <!-- Styles -->
@@ -58,7 +57,7 @@ and open the template in the editor.
             <div class="w-100"></div>
             <div class="col-12 container">
                 <div class="row justify-content-center">
-                    <form class="col-12">
+                    <form id="formNewUser" class="col-12" ng-app="app" ng-controller="userCtrl">
                         <div class="container" style="width: 85%;">
                             <div class="row">
                                 <div class="input-div col-12 col-md-3 prenom">
@@ -85,7 +84,7 @@ and open the template in the editor.
                                     </div>
                                     <div>
                                         <h5 class="h5mail">Email</h5>
-                                        <input class="input shadow-none "  id="mail" name="mail" type="email">
+                                        <input class="input shadow-none "  id="mail" name="email" type="email">
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +147,7 @@ and open the template in the editor.
 
                             </div>
                             <div class="row justify-content-end">
-                                <input type="submit" class="btn" value="Création du compte">
+                                <input type="button" class="btn" value="Création du compte" ng-click="newUserAct()">
                             </div>
                         </div>
 
@@ -202,7 +201,7 @@ and open the template in the editor.
                 $(".mail-false").fadeIn();
             }
 
-        }
+        };
 
         function verifMdp() {
             if ($("#mdp1").val() != $("#mdp2").val() ) {
@@ -247,6 +246,12 @@ and open the template in the editor.
 
         })
     </script>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <!-- Controller -->
+    <script src="../scripts/controllers/user.js"></script>
+    <script src="../scripts/services/serviceUserAjax.js"></script>
+    <script src="../scripts/services/serviceSession.js"></script>
 </body>
 
 </html>

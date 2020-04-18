@@ -4,18 +4,46 @@ var path = require('path');
 
 // affiche un utilisateur
 exports.view = function(req, res) {
+    User.findOne({ '_id': req.query.id }, function(err, user) {
+        if (err) {
+            res.send(err);
+        }
+        if (user) {
+            res.json({
+                nom: user.nom,
+                prenom: user.prenom,
+                pp: user.pp,
+                photos: user.photos,
+                publications: user.publications,
+                abonnements: user.abonnements,
+                abonnes: user.abonnes
+            })
+        } else {
+            res.send("utilisateur inexistant");
+        }
+    });
+};
+
+//affiche toutes les infos d'un utlisateur si il as un token valide
+exports.view = function(req, res) {
     token = authenticateToken(req.body.token)
     if (token === null) {
         res.sendStatus(403);
     } else {
-        User.findOne({ '_id': token._id }, function(err, user) {
+        User.findOne({ '_id': req.query.id }, function(err, user) {
             if (err) {
                 res.send(err);
             }
-            res.send(user);
+            if (user) {
+                res.json({
+                    data: user
+                })
+            } else {
+                res.send("utilisateur inexistant");
+            }
         });
     }
-};
+}
 
 // crée un nouvel utilisateur 
 exports.new = function(req, res) {
