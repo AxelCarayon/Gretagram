@@ -26,7 +26,7 @@ exports.view = function(req, res) {
 
 //affiche toutes les infos d'un utlisateur si il as un token valide
 exports.private = function(req, res) {
-    token = authenticateToken(req.body.token)
+    token = authenticateToken(req.query.token)
     if (token === null) {
         res.sendStatus(403);
     } else {
