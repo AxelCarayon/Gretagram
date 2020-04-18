@@ -82,6 +82,19 @@ exports.view = function(req, res) {
     });
 };
 
+exports.all = function(req, res) {
+    Publication.find({ 'userID': req.query.id }, function(err, publication) {
+        if (err) {
+            res.send(err);
+        }
+        if (publication) {
+            res.send(publication);
+        } else {
+            res.send("aucune publication");
+        }
+    });
+}
+
 
 // crée une nouvelle publication
 exports.new = function(req, res) {

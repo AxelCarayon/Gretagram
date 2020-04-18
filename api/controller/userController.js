@@ -25,7 +25,7 @@ exports.view = function(req, res) {
 };
 
 //affiche toutes les infos d'un utlisateur si il as un token valide
-exports.view = function(req, res) {
+exports.private = function(req, res) {
     token = authenticateToken(req.body.token)
     if (token === null) {
         res.sendStatus(403);
@@ -53,27 +53,32 @@ exports.new = function(req, res) {
     user.gender = req.body.gender;
     user.email = req.body.email;
     user.password = user.generateHash(req.body.password);
-    user.age = new Date(req.body.age);
+    if (req.body.age) {
+        user.age = new Date(req.body.age);
+    }
     user.photos = [];
     user.pp = null;
-
-    User.findOne({ 'email': req.body.email }, function(err, foundUser) {
-        let message = "New user created!";
-        let data = null;
-        if (foundUser) {
-            message = "l'adresse mail est déjà utilisée";
-        } else {
-            user.save(function(err) {
-                if (err)
-                    console.log(err);
+    if (!req.body.nom || !req.body.prenom || !req.body.email || !req.body.password) {
+        res.status(400).send("Toutes les données requises n'ont pas été entrées.");
+    } else {
+        User.findOne({ 'email': req.body.email }, function(err, foundUser) {
+            let message = "New user created!";
+            let data = null;
+            if (foundUser) {
+                message = "l'adresse mail est déjà utilisée";
+            } else {
+                user.save(function(err) {
+                    if (err)
+                        console.log(err);
+                });
+                data = user;
+            }
+            res.json({
+                message: message,
+                data: data
             });
-            data = user;
-        }
-        res.json({
-            message: message,
-            data: data
         });
-    });
+    }
 };
 
 
