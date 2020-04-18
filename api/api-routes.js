@@ -27,6 +27,9 @@ router.route('/user')
     .delete(userController.delete) //supprimer
     .put(userController.subscribe); //abonnner/désabonner
 
+router.route('/private')
+    .get(userController.private);
+
 router.route('/login')
     .get(loginController.login); //se logger
 
@@ -34,7 +37,10 @@ router.route('/publication')
     .get(publicationController.view) //afficher
     .patch(publicationController.update) //modifier
     .post(publicationController.new) //ajouter
-    .delete(publicationController.delete) //supprimer
+    .delete(publicationController.delete); //supprimer
+
+router.route('/publication/all')
+    .get(publicationController.all);
 
 router.route('/hashtag')
     .get(hashtagController.view) //afficher
@@ -46,15 +52,15 @@ router.route('/photo')
     .get(photoController.view) //afficher
     .post(photoController.new) //ajouter
     .delete(photoController.delete) //supprimer
-    .patch(photoController.update) //mettre à jour une pp
+    .patch(photoController.update); //mettre à jour une pp
 
 router.route('/publication/like')
     .get(likeCommentController.view) //afficher nb likes
     .post(likeCommentController.like); //ajouter/enlever like
 
 router.route('/publication/comment')
-    .post(likeCommentController.new) //ajouter commententaire
-    // ============================================================================
+    .post(likeCommentController.new); //ajouter commententaire
+// ============================================================================
 
 // export des routes
 module.exports = router;
