@@ -30,7 +30,7 @@ exports.private = function(req, res) {
     if (token === null) {
         res.sendStatus(403);
     } else {
-        User.findOne({ '_id': req.query.id }, function(err, user) {
+        User.findOne({ '_id': token._id }, function(err, user) {
             if (err) {
                 res.send(err);
             }
