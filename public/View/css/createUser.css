@@ -16,6 +16,15 @@ a {
   color: #404042 !important;
 }
 
+*,
+*:hover,
+*:focus,
+*:active {
+  outline: 0 !important;
+  outline: none !important;
+  box-sizing: border-box;
+}
+
 .publication {
   border-radius: 13px;
   background: #eff4f8;
@@ -217,8 +226,89 @@ form h2 {
   font-size: 15px;
 }
 
-.fa-at.invalid, .mdps.invalid, .fa-key.invalid, .h5mail.invalid {
+.fa-at.invalid,
+.mdps.invalid,
+.fa-key.invalid,
+.h5mail.invalid {
   color: red;
+}
+
+#genre {
+  background: none;
+  border: none;
+  top: 7px;
+  position: relative;
+  outline: 0 !important;
+  outline: none !important;
+  box-sizing: border-box;
+  appearance: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
+#genre::after {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: url();
+}
+
+option {
+  background: none;
+}
+
+#genre-title {
+  top: -5px;
+  font-size: 15px;
+}
+
+.inputfile-1 + label {
+  color: #f1e5e6;
+  border-radius: 10px;
+  background-color: gainsboro;
+  padding: 10px;
+  text-align: right;
+}
+
+#file-1 {
+  left: 110px;
+  position: relative;
+  opacity: 0.5;
+}
+
+label {
+  text-align: right;
+}
+label.filled {
+  background-color: #969e4f;
+}
+label.filled:hover {
+  background-color: #aeb56b;
+}
+
+.inputfile-1 {
+  text-align: right;
+}
+.inputfile-1.filled {
+  background-color: #969e4f;
+}
+.inputfile-1.filled:hover {
+  background-color: #aeb56b;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+  background-color: #e8e8e8;
+}
+
+#file-label {
+  position: relative;
+  top: -30px;
+  left: 20px;
+  background-color: #80bb8b;
 }
 
 /*# sourceMappingURL=createUser.css.map */

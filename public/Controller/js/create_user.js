@@ -1,5 +1,5 @@
 var compte = {};
-
+$('.datepicker').pickadate();
 var creerCompte = () => {
     var tab = $("input").serializeArray();
     try {

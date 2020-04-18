@@ -16,6 +16,15 @@ a {
     color: rgb(64, 64, 66) !important;
 }
 
+*,
+*:hover,
+*:focus,
+*:active {
+    outline: 0 !important;
+    outline: none !important;
+    box-sizing: border-box;
+}
+
 .publication {
     border-radius: 13px;
     background: #eff4f8;
@@ -65,7 +74,7 @@ form h2 {
     padding: 5px 0;
     border-bottom: 2px solid rgb(72, 116, 80);
 
-    &.invalid{
+    &.invalid {
         border-bottom: 3px solid rgb(209, 23, 23);
 
     }
@@ -142,7 +151,7 @@ form h2 {
 
     form h2 {
         margin: 8px 0;
-        
+
     }
 
     .img img {
@@ -189,36 +198,37 @@ form h2 {
     background-position: right;
 }
 
-.footer{
+.footer {
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 60px;
     background-color: #aaa;
 
-    p{
+    p {
         position: absolute;
         color: white !important;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         background-color: transparent !important;
         top: 50%;
     }
 }
 
-.logo{
+.logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     top: 40px;
 }
-.greta{
+
+.greta {
     position: relative;
     top: 5px;
     font-family: 'Sen', sans-serif !important;
 }
 
-.fleche{
+.fleche {
     position: absolute;
     left: 40px;
     top: 40px;
@@ -236,6 +246,96 @@ form h2 {
     font-size: 15px;
 }
 
-.fa-at.invalid,.mdps.invalid,.fa-key.invalid,.h5mail.invalid{
-    color:red;
+.fa-at.invalid,
+.mdps.invalid,
+.fa-key.invalid,
+.h5mail.invalid {
+    color: red;
+}
+
+
+#genre {
+    background: none;
+    border: none;
+    top: 7px;
+    position: relative;
+    outline: 0 !important;
+    outline: none !important;
+    box-sizing: border-box;
+    appearance: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+
+    &::after {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: url();
+    }
+}
+
+option {
+    background: none;
+}
+
+#genre-title {
+    top: -5px;
+    font-size: 15px;
+}
+
+
+.inputfile-1+label {
+    color: #f1e5e6;
+    border-radius: 10px;
+    background-color: lighten($color: #c2c2c2, $amount: 10%);
+    padding: 10px;
+    text-align: right;
+}
+
+#file-1 {
+    left: 110px;
+    position: relative;
+    opacity: 0.5;
+}
+
+label {
+    text-align: right;
+
+    &.filled {
+        background-color: rgb(150, 158, 79);
+
+        &:hover {
+            background-color: lighten($color: rgb(150, 158, 79), $amount: 10%)
+        }
+    }
+}
+
+.inputfile-1 {
+    text-align: right;
+
+    &.filled {
+        background-color: rgb(150, 158, 79);
+
+        &:hover {
+            background-color: lighten($color: rgb(150, 158, 79), $amount: 10%)
+        }
+    }
+}
+
+.inputfile-1:focus+label,
+.inputfile-1.has-focus+label,
+.inputfile-1+label:hover {
+    background-color: lighten($color: #c2c2c2, $amount: 15%)
+}
+
+#file-label {
+
+    position: relative;
+    top: -30px;
+    left: 20px;
+    background-color: #80bb8b;
+
 }

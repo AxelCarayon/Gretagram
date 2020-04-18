@@ -6,36 +6,36 @@ and open the template in the editor.
 -->
 <html>
 
-    <head>
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <!-- Bootstrap -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-        </script>
-        <!-- Controller -->
+<head>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <!-- Controller -->
 
-    
-    
-        <!-- Styles -->
-        <link rel="stylesheet" href="View/css/createUser.css">
-        <link href="View/css/fontawesome/css/all.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="View/ressources/favicon.ico">
-    
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-    
-        <title>Gretagram</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    </head>
+
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="View/css/createUser.css">
+    <link href="View/css/fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="View/ressources/favicon.ico">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+
+    <title>Gretagram</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
 
 <body>
 
@@ -43,9 +43,9 @@ and open the template in the editor.
 
     <div class="logo">
 
-        <h1 style="font-size: 3em;">        
+        <h1 style="font-size: 3em;">
             <img style="width: 80px;height: 80px;" src="View/ressources/leaf.png" width="30" height="30" alt="">
-        <span class="greta">Gretagram</span></h1>
+            <span class="greta">Gretagram</span></h1>
     </div>
 
 
@@ -84,40 +84,51 @@ and open the template in the editor.
                                     </div>
                                     <div>
                                         <h5 class="h5mail">Email</h5>
-                                        <input class="input shadow-none "  id="mail" name="email" type="email">
+                                        <input class="input shadow-none " id="mail" name="email" type="email">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <p class="mail-false" style="margin-right: 20px; text-align: right; display:none;color: red !important;font-size: 14px;">L'adresse mail n'est pas correct.        </p>
+                                <p class="mail-false"
+                                    style="margin-right: 20px; text-align: right; display:none;color: red !important;font-size: 14px;">
+                                    L'adresse mail n'est pas correct. </p>
 
                             </div>
                             <div class="row">
-                                <div class="input-div col-12 col-md-5 adress">
+                                <div class="input-div col-12 col-md-3 date focus">
                                     <div class="i">
-                                        <i class="fas fa-home"></i>
+                                        <i class="fas fa-calendar-day"></i>
                                     </div>
                                     <div>
-                                        <h5>Adresse</h5>
-                                        <input class="input" id="adress" name="adress" type="text">
+                                        <h5>Date</h5>
+                                        <input class="input " id="date" name="date" type="date">
                                     </div>
                                 </div>
-                                <div class="input-div col-12 col-md-3 cp">
+                                <div class="input-div col-12 col-md-3 genre">
                                     <div class="i">
-                                        <i class="fas fa-home"></i>
+                                        <i class="fas fa-venus-mars"></i>
                                     </div>
                                     <div>
-                                        <h5>Code postal</h5>
-                                        <input class="input" id="cp" name="cp" type="text">
+                                        <h5 id="genre-title">Genre</h5>
+                                        <select id="genre" class="form-control">
+                                            <option>Femme</option>
+                                            <option>Homme</option>
+                                            <option>Autre</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="input-div col-12 col-md-3 ville">
+                                <div class="input-div col-12 col-md-3 profil-picture ">
                                     <div class="i">
-                                        <i class="fas fa-city"></i>
+                                        <i class="fas fa-images"></i>
                                     </div>
-                                    <div>
-                                        <h5>Ville</h5>
-                                        <input class="input" id="ville" name="ville" type="text">
+                                    <div class="box " style="margin-right: -30px;height: 40px;min-width: 200px;">
+                                        <input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1 "
+                                            data-multiple-caption="{count} files selected" multiple />
+                                        <label id="file-label" for="file-1"><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="20" height="17" viewBox="0 0 20 17">
+                                                <path
+                                                    d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                                            </svg> <span class="fileSpan">Choisis une photo</span></label>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +152,8 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <p class="mdp-false" style="display:none;color: red !important;font-size: 14px;">Les 2 mots de passe ne correspondent pas.</p>
+                                    <p class="mdp-false" style="display:none;color: red !important;font-size: 14px;">Les
+                                        2 mots de passe ne correspondent pas.</p>
 
                                 </div>
 
@@ -164,76 +176,12 @@ and open the template in the editor.
 
 
     <script type="text/javascript">
-
-        var verifMail = ()=>{
-            var drap = true;
-            var mail = $("#mail").val();
-            if ( !mail.includes("@") || mail.includes(" ") ||  mail.includes("é")) {
-                $("#mail").parent().parent().addClass("invalid");       
-                drap = false;         
-            }else{
-                $("#mail").parent().parent().removeClass("invalid");
-                var tabmail = mail.split("@");
-                if (tabmail.length > 2) {
-                    drap = false;
-                }
-                var tabmailpoint = tabmail[1].split('.');
-                if (tabmailpoint.length > 2) {
-                    drap = false;
-                }
-                if (!tabmail[1].includes(".")) {
-                    drap = false
-                }
-            }
-
-            if (mail == "") {
-                drap = true;
-            }
-            if (drap) {
-                $("#mail").parent().parent().removeClass("invalid"); 
-                $('.fa-at').removeClass("invalid");
-                $('.h5mail').removeClass("invalid");
-                $(".mail-false").fadeOut();
-            }else{
-                $("#mail").parent().parent().addClass("invalid");
-                $('.fa-at').addClass("invalid");
-                $('.h5mail').addClass("invalid");
-                $(".mail-false").fadeIn();
-            }
-
-        };
-
-        function verifMdp() {
-            if ($("#mdp1").val() != $("#mdp2").val() ) {
-                $("#mdp1").parent().parent().addClass("invalid");
-                $("#mdp2").parent().parent().addClass("invalid");
-                $('.fa-key').addClass('invalid');
-                $('.mdps').addClass('invalid');
-                $(".mdp-false").fadeIn();
-            }else{
-                $("#mdp1").parent().parent().removeClass("invalid");
-                $("#mdp2").parent().parent().removeClass("invalid");
-                $('.fa-key').removeClass('invalid');
-                $('.mdps').removeClass('invalid');
-                $(".mdp-false").fadeOut();
-            }
-        }
-
-        verifMail();
-        verifMdp();
-        $('#mdp1,#mdp2').focusout((e)=>{
-            verifMdp();
-        })
-        $("#mail").focusout((e)=>{
-            verifMail();
-        })
-    
-        $("input").each((i)=>{
+        $("input").each((i) => {
             var input = $("input").eq(i);
             if ($("input").eq(i).val() != "") {
                 $("input").eq(i).parent().parent().addClass("focus");
             }
-            
+
         })
 
         $("input").focus(function (e) {
@@ -247,7 +195,7 @@ and open the template in the editor.
         })
     </script>
     <!-- Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script> -->
     <!-- Controller -->
     <script src="../scripts/controllers/user.js"></script>
     <script src="../scripts/services/serviceUserAjax.js"></script>
