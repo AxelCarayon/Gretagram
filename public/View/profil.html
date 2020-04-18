@@ -5,21 +5,33 @@
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <!-- Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <!-- Leaflet -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <!-- Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bricklayer/0.4.2/bricklayer.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/bricklayer/0.4.2/bricklayer.min.js"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -47,8 +59,36 @@
     <link rel="stylesheet" type="text/css" href="View/css/component.css" />
 </head>
 
-<body  class="clair" ng-app="app" ng-controller="profilCtrl">
-    <ng-nav select="changeTheme()"></ng-nav>
+<body class="clair" ng-app="app" ng-controller="profilCtrl">
+    <nav class="clair mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
+        <a class="clair navbar-brand" href="/">
+            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30" class="clair d-inline-block " alt=""> Gretagram</a>
+        <button class="clair navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="clair animated-icon1"><span></span><span></span><span></span></div>
+        </button>
+        <div class="clair collapse navbar-collapse" id="navbarSupportedContent-333">
+            <ul class="clair navbar-nav ml-auto nav-flex-icons">
+                <li class="clair nav-item">
+                    <a class="clair nav-link" href="/profil">Mon compte</a>
+                </li>
+                <li class="clair nav-item">
+                    <a class="clair nav-link" href="#">Abonnements</a>
+                </li>
+                <li class="clair nav-item">
+                    <a class="clair nav-link" href="#">Abonnés</a>
+                </li>
+                <li class="clair nav-item dropdown">
+                    <a style="cursor: pointer;" class="clair nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Parametres </a>
+                    <div class="clair dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                        <a href="#" class="clair dropdown-item">Paramètres du compte</a>
+                        <a href="#" class="clair dropdown-item change-theme"  ng-click="select()">Changement du thème</a>
+                    </div>
+                </li>
+            </ul>
+    
+        </div>
+    </nav>
+    <!--/.Navbar -->
     <div class="container profil">
         <div class="row">
             <div class="col-2">
@@ -60,14 +100,14 @@
                         <div class="col profilName">Maurice Lestin</div>
                     </div>
                     <div class="row donnees">
-                        <div class="col-12 col-sm-4 donnee">
-                            <p> <strong>10</strong> <br>Publications</p>
+                        <div class="col-12 col-sm-4 donnee" ng-click="pubFunction()">
+                            <p> <strong>{{nbPublications}}</strong> <br>Publications</p>
                         </div>
-                        <div class="col-12 col-sm-4 donnee">
-                            <p> <strong>128</strong> <br>Abonnés</p>
+                        <div class="col-12 col-sm-4 donnee " data-toggle="modal" data-target="#modal-abonnés">
+                            <p> <strong>{{abonnes.length}}</strong> <br>Abonnés</p>
                         </div>
-                        <div class="col-12 col-sm-4 donnee">
-                            <p> <strong>12</strong> <br>Abonnements</p>
+                        <div class="col-12 col-sm-4 donnee" data-toggle="modal" data-target="#modal-abonnements">
+                            <p> <strong>{{abonnements.length}}</strong> <br>Abonnements</p>
                         </div>
                     </div>
                 </div>
@@ -84,21 +124,24 @@
         <div class="card-columns">
             <div class="card publication clair template">
                 <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente </p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam
+                        doloribus deleniti nulla sapiente </p>
                     <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine
                             date</small></p>
                 </div>
             </div>
             <div class="card publication clair template">
                 <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente </p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam
+                        doloribus deleniti nulla sapiente </p>
                     <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine
                             date</small></p>
                 </div>
             </div>
             <div class="card publication clair template">
                 <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam doloribus deleniti nulla sapiente </p>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, eum. Numquam
+                        doloribus deleniti nulla sapiente </p>
                     <p class="card-text"><small class="text-muted" style="color: transparent !important;">Une certaine
                             date</small></p>
                 </div>
@@ -116,13 +159,141 @@
         </div>
     </div>
     <div class="publicationsProfil container" ng-show='profilStats'>
-        <h1>Statistiques</h1>
+
+
+        <div class="container">
+            <h2 style="margin-top: 50px;text-align: center;">Parlons un peu de vos chiffres </h2>
+
+            <div class="row justify-content-center">
+                <div class="card-stat col-11 col-sm-4 col-md-3">
+                    <div class="card-stat-header">Nombre de likes total</div>
+                    <div class="card-stat-body">{{nbLike}}</div>
+                </div>
+                <div class="card-stat col-11 col-sm-4 col-md-3">
+                    <div class="card-stat-header">Nombre de commentaires total</div>
+                    <div class="card-stat-body">{{nbComment}}</div>
+                </div>
+                <div class="card-stat col-11 col-sm-4 col-md-3">
+                    <div class="card-stat-header">Nombre de publications</div>
+                    <div class="card-stat-body">{{nbPublications}}</div>
+                </div>
+                <div class="card-stat col-11 col-sm-4 col-md-3">
+                    <div class="card-stat-header">Moyenne de j'aime par publications</div>
+                    <div class="card-stat-body">{{moyLikeParPub}}</div>
+                </div>
+                <div class="card-stat col-11 col-sm-4 col-md-3">
+                    <div class="card-stat-header">Moyenne de commentaires par publications</div>
+                    <div class="card-stat-body">{{moyCommentParPub}}</div>
+                </div>
+                <div class="card-stat col-11 col-sm-4 col-md-3">
+                    <div class="card-stat-header">Nombre de personnes différentes ayant aimés vos contenus</div>
+                    <div class="card-stat-body">{{nbDifLikes}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container containerPublications">
+            <div class="row publicationContainer">
+                <div class="col-lg  containerPublicationsProche">
+                    <h2 style="margin-top: 50px;">Ta publication que les gens ont le plus aimé</h2>
+                    <div class="col-12 publication clair" ng-repeat="x in laPlusLike">
+                        <publication-stat-template publication-theme="proches"></publication-stat-template>
+                    </div>
+                </div>
+                <div class="col-lg  containerPublicationsProche">
+                    <h2 style="margin-top: 50px;">Ta publication que les gens ont le plus commenté</h2>
+                    <div class="col-lg publication clair" ng-repeat="x in laPlusComment">
+                        <publication-stat-template publication-theme="proches"></publication-stat-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <h2 style="margin-top: 50px;text-align: center;">Votre évolution sur les dernieres pulications</h2>
+            <div class="row justify-content-center">
+
+                <div class=" col-12 col-md-6 container">
+                    <div class="row card-graf justify-content-center">
+                        <div style="text-align: center;padding-left: 30px; padding-right: 30px ; padding-top:30px"
+                            class="card-stat-header">Evolution des commentaires et des likes sur les n dernières
+                            publications</div>
+                        <canvas class="col-12" style="margin-top: 0;" id="myChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+                <div class=" col-12 col-md-6 container">
+                    <div class="row card-graf justify-content-center">
+                        <div style="text-align: center;padding-left: 30px; padding-right: 30px ; padding-top:30px"
+                            class="card-stat-header">Evolution des commentaires et des likes sur les n dernières
+                            publications</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <div class="modal fade" id="modal-abonnés" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
+    aria-hiddn="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content modal-color">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle">{{abonnes.length}} Abonnes</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="comment" ng-repeat="abonne in abonnes | orderBy:'toString()' ">
+                    <div class="comment-img">
+                        <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+                    </div>
+                    <div class="comment-body">
+                        <a username="{{abonne}}" ng-click="redirectName($event)" style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonne}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-abonnements"  tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
+    aria-hiddn="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered"  role="document">
+        <div class="modal-content modal-color">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle">{{abonnements.length}} Abonnements</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="comment" ng-repeat="abonnement in abonnements | orderBy:'toString()' ">
+                    <div class="comment-img">
+                        <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+                    </div>
+                    <div class="comment-body">
+                        <a username="{{abonnement}}" ng-click="redirectName($event)" style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonnement}}</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
     <script src="View/plugin/custom-file-input.js"></script>
     <script src="Controller/js/publication.js" charset="utf-8"></script>
     <script src="Controller/js/factory.js" charset="utf-8"></script>
     <script src="Controller/js/directives.js" charset="utf-8"></script>
     <script src="Controller/js/js-beautify.js" charset="utf-8"></script>
+
 </body>
 
 </html>

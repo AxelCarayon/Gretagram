@@ -4,6 +4,11 @@ function showCurrentPublications($scope) {
     // TODO: afficher les publications qui se trouvent dans la zone géographique actuellement sélectionnée
 }
 
+function redirectName($event){
+    var link = $event.target;
+    console.log("redirection to " + link.getAttribute('username') + " page");
+}
+
 var app = angular.module('app', []);
 
 app.factory('dataFactory', function ($http, $q) {
@@ -43,26 +48,45 @@ app.controller("ctrl", function ($scope, dataFactory) {
         $scope.trend = true;
         $scope.proche = false;
         $scope.loading = false;
-    
-        
+
+
         for (const index in Object.entries($scope.publications)) {
-           var t = $scope.publications[index].publicationID + "liked";
-           if ($scope.publications[index].likes.includes(user)) {
-               $scope[t] = true;
-           } 
+            var t = $scope.publications[index].publicationID + "liked";
+            if ($scope.publications[index].likes.includes(user)) {
+                $scope[t] = true;
+            }
         }
         for (const index in Object.entries($scope.abos)) {
-           var t = $scope.abos[index].publicationID + "liked";
-           if ($scope.abos[index].likes.includes(user)) {
-               $scope[t] = true;
-           } 
+            var t = $scope.abos[index].publicationID + "liked";
+            if ($scope.abos[index].likes.includes(user)) {
+                $scope[t] = true;
+            }
         }
         for (const index in Object.entries($scope.proches)) {
-           var t = $scope.proches[index].publicationID + "liked";
-           if ($scope.proches[index].likes.includes(user)) {
-               $scope[t] = true;
-           } 
+            var t = $scope.proches[index].publicationID + "liked";
+            if ($scope.proches[index].likes.includes(user)) {
+                $scope[t] = true;
+            }
         }
+
+        $scope.redirectName = ($event) =>  redirectName($event)
+
+        $scope.test = ($event,$index) => {
+            console.log($index);
+
+            var publication_theme;
+            if ($($event.target).is("div")) {
+                publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
+            } else if ($($event.target).is("svg")) {
+                publication_theme = $($event.target).parent().parent().parent().parent().parent().attr('publication-theme');
+            } else if ($($event.target).is("path")) {
+                publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
+            }
+            
+            $scope.modal = $scope[publication_theme][$index].comments;
+            
+        }
+
 
 
     }, function (msg) {
@@ -70,7 +94,7 @@ app.controller("ctrl", function ($scope, dataFactory) {
 
     });
 
-    $scope.verifComment = ($event,$index) => {
+    $scope.verifComment = ($event, $index) => {
 
         if ($($event.target).val()) {
             $($event.target).next().attr('disabled', false);
@@ -79,16 +103,20 @@ app.controller("ctrl", function ($scope, dataFactory) {
         }
     }
 
-    $scope.sendComment = ($event,$index) => {
+    $scope.sendComment = ($event, $index) => {
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         var comment = $($event.target).prev().val(); //Le message du commentaire
         var user_ID; // A récupérer via les cookies 
 
         //TODO: Requete AJAX pour ajouter un commentaire à la publication   
-        
+
         var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
-        
-        $scope[publication_theme][$index].comments.push({"nom" : user, "comment" : comment , "date" : new Date()});
+
+        $scope[publication_theme][$index].comments.push({
+            "nom": user,
+            "comment": comment,
+            "date": new Date()
+        });
 
         $($event.target).prev().val("")
         $($event.target).attr('disabled', true);
@@ -97,10 +125,10 @@ app.controller("ctrl", function ($scope, dataFactory) {
     $scope.like = ($event, $index) => {
         $event.preventDefault();
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
-        var t = publication_id+'liked';    
+        var t = publication_id + 'liked';
 
         var publication_theme;
-        
+
         if ($($event.target).is("div")) {
             publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
         } else if ($($event.target).is("svg")) {
@@ -109,10 +137,10 @@ app.controller("ctrl", function ($scope, dataFactory) {
             publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
         }
 
-        
+
         var publication = $scope[publication_theme][$index];
         if (publication.likes.includes(user)) {
-            var index =  $scope[publication_theme][$index].likes.indexOf(user);
+            var index = $scope[publication_theme][$index].likes.indexOf(user);
             if (index > -1) {
                 $scope[publication_theme][$index].likes.splice(index, 1);
             }
@@ -191,19 +219,121 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
         $('*').toggleClass('clair');
     };
 
-    $scope.pubs = profilFactory.getPublications().then(function (publications) {
-        $scope.pubs = publications.data;
+    $scope.user = profilFactory.getPublications().then(function (publications) {
+        $scope.user = publications.data;
         $scope.profilPubs = true;
         $scope.profilStats = false;
         $scope.loading = false;
-        console.log($scope.pubs);
+        $scope.pubs = $scope.user.publications;
+        $scope.abonnes = $scope.user.abonnes
+        $scope.abonnements = $scope.user.abonnements
 
         for (const index in ($scope.pubs)) {
             var t = $scope.pubs[index].publicationID + "liked";
             if ($scope.pubs[index].likes.includes(user)) {
                 $scope[t] = true;
-            } 
-         }
+            }
+        }
+
+        console.log($scope.pubs);
+
+        //STATS ---------------------------------------------------------------------------------------------------------------------------------------------
+
+        $scope.nbPublications = $scope.pubs.length; //Nb total de publications 
+        var likes = 0;
+        var comments = 0;
+        var pubLaPlusLike;
+        var pubLaPlusComment;
+        var maxLike = 0;
+        var maxComment = 0;
+        var list_likes = [];
+        var date = {};
+        var labelsTab = [];
+        var datasetLike = [];
+        var datasetComment = [];
+
+        for (const i in Object.entries($scope.pubs)) {
+
+            likes = likes + $scope.pubs[i].likes.length; //Nb total de likes
+            comments = comments + $scope.pubs[i].comments.length; //Nb total de commentaires
+            list_likes = list_likes.concat($scope.pubs[i].likes);
+            if (maxLike < $scope.pubs[i].likes.length) {
+                pubLaPlusLike = $scope.pubs[i]
+                maxLike = $scope.pubs[i].likes.length;
+            }
+            if (maxComment < $scope.pubs[i].comments.length) {
+                pubLaPlusComment = $scope.pubs[i]
+                maxComment = $scope.pubs[i].comments.length;
+            }
+
+            if (i < 50) {
+                date[i] = { "likes" : $scope.pubs[i].likes.length, "comments" : $scope.pubs[i].comments.length }
+                labelsTab.unshift($scope.pubs[i].date)
+                datasetLike.unshift($scope.pubs[i].likes.length)
+                datasetComment.unshift($scope.pubs[i].comments.length)
+            }
+
+            
+        }
+        
+        $scope.test = ($event,$index) => {          
+            $scope.modal = $scope.pubs[$index].comments;
+            
+        }
+
+        $scope.nbLike = likes;
+        $scope.nbComment = comments;
+        $scope.moyLikeParPub = likes / $scope.nbPublications;
+        $scope.moyCommentParPub = comments / $scope.nbPublications;
+        $scope.nbDifLikes = new Set(list_likes).size;
+        $scope.laPlusLike = [pubLaPlusLike]
+        $scope.laPlusComment = [pubLaPlusComment]
+
+
+        $scope.redirectName = ($event) =>  redirectName($event)
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var gradientFill = ctx.createLinearGradient(500, 0, 100, 0);
+        gradientFill.addColorStop(0, "rgba(133, 250, 176, 0.7)");
+        gradientFill.addColorStop(1, "rgba(143, 211, 244, 0.7)");
+
+        var gradientFill2 = ctx.createLinearGradient(500, 0, 100, 0);
+        gradientFill2.addColorStop(0, "rgba(255, 236, 210, 0.7)");
+        gradientFill2.addColorStop(1, "rgba(252, 182, 159, 0.7)");
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labelsTab,
+                datasets: [{
+                        label: 'likes',
+                        data: datasetLike,
+                        backgroundColor: gradientFill,
+                        borderColor: "rgba(252, 223, 87, 1)",
+                        borderWidth: 5,
+
+                    },
+                    {
+                        label: 'commentaires',
+                        data: datasetComment,
+                        backgroundColor: gradientFill2,
+                        borderColor: "rgba(252, 182, 159, 1)",
+                        borderWidth: 5
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                responsive:true
+            }
+        });
+
 
     }, function (msg) {
         alert(msg);
@@ -236,14 +366,20 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
         }
     }
 
-    $scope.sendComment = ($event) => {
+    $scope.sendComment = ($event, $index) => {
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         var comment = $($event.target).prev().val(); //Le message du commentaire
         var user_ID; // A récupérer via les cookies 
 
-        console.log(`commentaire ${comment} ajouté à la publication ${publication_id}`);
-
         //TODO: Requete AJAX pour ajouter un commentaire à la publication   
+
+        var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
+
+        $scope[publication_theme][$index].comments.push({
+            "nom": user,
+            "comment": comment,
+            "date": new Date()
+        });
 
         $($event.target).prev().val("")
         $($event.target).attr('disabled', true);
@@ -252,10 +388,10 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
     $scope.like = ($event, $index) => {
         $event.preventDefault();
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
-        var t = publication_id+'liked';    
+        var t = publication_id + 'liked';
 
         var publication_theme;
-        
+
         if ($($event.target).is("div")) {
             publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
         } else if ($($event.target).is("svg")) {
@@ -264,10 +400,10 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
             publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
         }
 
-        
+
         var publication = $scope[publication_theme][$index];
         if (publication.likes.includes(user)) {
-            var index =  $scope[publication_theme][$index].likes.indexOf(user);
+            var index = $scope[publication_theme][$index].likes.indexOf(user);
             if (index > -1) {
                 $scope[publication_theme][$index].likes.splice(index, 1);
             }
@@ -281,14 +417,6 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
         //TODO: Requet Ajax pour likes
 
     }
-
-
-
-
-
-
-
-
 
 
 
