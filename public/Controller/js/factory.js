@@ -38,6 +38,7 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect) {
 
     if (!serviceIsConnect){
         window.location.href = "/login";
+        
     }else {
 
 
@@ -80,6 +81,22 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect) {
             console.log(msg);
 
         });
+
+        $scope.showModal = ($event,$index) =>{
+            
+            
+            var publication_theme;
+            if ($($event.target).is("div")) {
+                publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
+            } else if ($($event.target).is("svg")) {
+                publication_theme = $($event.target).parent().parent().parent().parent().parent().attr('publication-theme');
+            } else if ($($event.target).is("path")) {
+                publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
+            }
+            
+            $scope.modal = $scope[publication_theme][$index].comments
+            
+        }
 
         $scope.verifComment = ($event, $index) => {
 
@@ -258,7 +275,7 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
             
         }
         
-        $scope.test = ($event,$index) => {          
+        $scope.showModal = ($event,$index) => {          
             $scope.modal = $scope.pubs[$index].comments;
             
         }

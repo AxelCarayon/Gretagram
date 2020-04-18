@@ -32,7 +32,7 @@
 
     </a>
 
-    <a ng-click="test($event,$index)" class="stat-publication" href="#" data-toggle="modal" data-target="#test">
+    <a ng-click="showModal($event,$index)" class="stat-publication" href="#" data-toggle="modal" data-target="#modal-comment">
         <div class=" clair">{{x.comments.length}} <span class="coeur"><svg aria-label="Commenter" class="_8-yf5 "
                     fill="#ed4956" height="24" viewBox="0 0 48 48" width="24">
                     <path clip-rule="evenodd"
@@ -50,7 +50,7 @@
 </div>
 
 
-<div class="modal fade" id="test" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
+<div class="modal fade" id="modal-comment" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
     aria-hiddn="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content modal-color">
