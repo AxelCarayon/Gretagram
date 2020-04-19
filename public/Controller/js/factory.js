@@ -94,7 +94,7 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect) {
                 publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
             }
             
-            $scope.modal = $scope[publication_theme][$index].comments
+            $scope.modal = $scope[publication_theme][$index].commentaires
             
         }
 
@@ -116,7 +116,7 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect) {
 
             var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
 
-            $scope[publication_theme][$index].comments.push({"nom": user, "comment": comment, "date": new Date()});
+            $scope[publication_theme][$index].commentaires.push({"nom": user, "comment": comment, "date": new Date()});
 
             $($event.target).prev().val("")
             $($event.target).attr('disabled', true);
@@ -209,6 +209,7 @@ app.factory('profilFactory', function ($http, $q) {
 });
 
 
+
 app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory) {
 
     $scope.loading = true;
@@ -233,14 +234,14 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
                 $scope[t] = true;
             }
         }
-
+    console.log($scope.user);
         console.log($scope.pubs);
 
         //STATS ---------------------------------------------------------------------------------------------------------------------------------------------
 
         $scope.nbPublications = $scope.pubs.length; //Nb total de publications 
         var likes = 0;
-        var comments = 0;
+        var commentaires = 0;
         var pubLaPlusLike;
         var pubLaPlusComment;
         var maxLike = 0;
@@ -254,36 +255,36 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
         for (const i in Object.entries($scope.pubs)) {
 
             likes = likes + $scope.pubs[i].likes.length; //Nb total de likes
-            comments = comments + $scope.pubs[i].comments.length; //Nb total de commentaires
+            commentaires = commentaires + $scope.pubs[i].commentaires.length; //Nb total de commentaires
             list_likes = list_likes.concat($scope.pubs[i].likes);
             if (maxLike < $scope.pubs[i].likes.length) {
                 pubLaPlusLike = $scope.pubs[i]
                 maxLike = $scope.pubs[i].likes.length;
             }
-            if (maxComment < $scope.pubs[i].comments.length) {
+            if (maxComment < $scope.pubs[i].commentaires.length) {
                 pubLaPlusComment = $scope.pubs[i]
-                maxComment = $scope.pubs[i].comments.length;
+                maxComment = $scope.pubs[i].commentaires.length;
             }
 
             if (i < 50) {
-                date[i] = { "likes" : $scope.pubs[i].likes.length, "comments" : $scope.pubs[i].comments.length }
+                date[i] = { "likes" : $scope.pubs[i].likes.length, "comments" : $scope.pubs[i].commentaires.length }
                 labelsTab.unshift($scope.pubs[i].date)
                 datasetLike.unshift($scope.pubs[i].likes.length)
-                datasetComment.unshift($scope.pubs[i].comments.length)
+                datasetComment.unshift($scope.pubs[i].commentaires.length)
             }
 
             
         }
         
         $scope.showModal = ($event,$index) => {          
-            $scope.modal = $scope.pubs[$index].comments;
+            $scope.modal = $scope.pubs[$index].commentaires;
             
         }
 
         $scope.nbLike = likes;
-        $scope.nbComment = comments;
+        $scope.nbComment = commentaires;
         $scope.moyLikeParPub = likes / $scope.nbPublications;
-        $scope.moyCommentParPub = comments / $scope.nbPublications;
+        $scope.moyCommentParPub = commentaires / $scope.nbPublications;
         $scope.nbDifLikes = new Set(list_likes).size;
         $scope.laPlusLike = [pubLaPlusLike]
         $scope.laPlusComment = [pubLaPlusComment]
@@ -374,7 +375,7 @@ app.controller("profilCtrl", function ($scope, $http, dataFactory, profilFactory
 
         var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
 
-        $scope[publication_theme][$index].comments.push({
+        $scope[publication_theme][$index].commentaires.push({
             "nom": user,
             "comment": comment,
             "date": new Date()

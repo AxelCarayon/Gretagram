@@ -1,22 +1,22 @@
 {
     "proches":[{
         "nom": "proche",
-        "msg": "Salut Salut les amis mon nom c'est Lestin et pas C'est Lestin.",
-        "image": "View/ressources/paysage.jpg",
+        "message": "Salut Salut les amis mon nom c'est Lestin et pas C'est Lestin.",
+        "photo": "View/ressources/paysage.jpg",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_1",
-        "comments" : [
+        "_id" : "id_1",
+        "commentaires" : [
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Mathilde",
-        "msg": "Coucou Gretagram je suis nouvelle chez toi hihi",
+        "message": "Coucou Gretagram je suis nouvelle chez toi hihi",
         "likes" : [
             "mathilde",
             "machin",
@@ -27,60 +27,60 @@
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_2",
-        "comments" : [
+        "_id" : "id_2",
+        "commentaires" : [
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
+        "message": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_3",
-        "comments" : [
+        "_id" : "id_3",
+        "commentaires" : [
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "image": "View/ressources/verticale.jpg",
+        "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "photo": "View/ressources/verticale.jpg",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_4",
-        "comments" : [
+        "_id" : "id_4",
+        "commentaires" : [
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "image": "View/ressources/verticale.jpg",
+        "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "photo": "View/ressources/verticale.jpg",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_5",
-        "comments" : [
+        "_id" : "id_5",
+        "commentaires" : [
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }] ,
     "trend" : [{
         "nom": "testtestetstetstststt",
-        "msg": "Salut Salut les amis mon nom c'est Lestin et pas C'est Lestin.",
-        "image": "View/ressources/paysage.jpg",
+        "message": "Salut Salut les amis mon nom c'est Lestin et pas C'est Lestin.",
+        "photo": "View/ressources/paysage.jpg",
         "likes" : [
             "mathilde",
             "lestin",
@@ -91,8 +91,8 @@
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_6",
-        "comments" : [
+        "_id" : "id_6",
+        "commentaires" : [
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"},
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "troisieme commentaire"},
@@ -113,7 +113,7 @@
         ]
     }, {
         "nom": "Mathilde",
-        "msg": "Coucou Gretagram je suis nouvelle chez toi hihi",
+        "message": "Coucou Gretagram je suis nouvelle chez toi hihi",
         "likes" : [
             "mathilde",
             "machin",
@@ -122,127 +122,127 @@
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_7",
-        "comments" : [
+        "_id" : "id_7",
+        "commentaires" : [
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
+        "message": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_8",
-        "comments" : [
+        "_id" : "id_8",
+        "commentaires" : [
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"troisieme commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "image": "View/ressources/verticale.jpg",
+        "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "photo": "View/ressources/verticale.jpg",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_9",
-        "comments" : [
+        "_id" : "id_9",
+        "commentaires" : [
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "image": "View/ressources/verticale.jpg",
+        "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "photo": "View/ressources/verticale.jpg",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_10",
-        "comments" : [
+        "_id" : "id_10",
+        "commentaires" : [
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }] ,
     "abos" :[{
         "nom": "Abonnement",
-        "msg": "Message d'un abonné.",
-        "image": "View/ressources/verticale.jpg",
+        "message": "Message d'un abonné.",
+        "photo": "View/ressources/verticale.jpg",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_11",
-        "comments" : [
+        "_id" : "id_11",
+        "commentaires" : [
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }, {
         "nom": "Mathilde",
-        "msg": "Coucou Gretagram je suis nouvelle chez toi hihi",
+        "message": "Coucou Gretagram je suis nouvelle chez toi hihi",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_12",
-        "comments" : [
+        "_id" : "id_12",
+        "commentaires" : [
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
+        "message": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_13",
-        "comments" : [
+        "_id" : "id_13",
+        "commentaires" : [
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "image": "View/ressources/verticale.jpg",
+        "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "photo": "View/ressources/verticale.jpg",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_14",
-        "comments" : [
+        "_id" : "id_14",
+        "commentaires" : [
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
             { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" :"second commentaire"}
         ]
     }, {
         "nom": "Maurice Lestin",
-        "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "image": "View/ressources/verticale.jpg",
+        "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "photo": "View/ressources/verticale.jpg",
         "likes" : [
             "mathilde",
             "machin",
             "truc"
         ],
         "date": "prout",
-        "publicationID" : "id_15",
-        "comments" : [
+        "_id" : "id_15",
+        "commentaires" : [
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "premier commentaire"},
            { "date" : "yyyy-mm-dd" , "nom" : "Lestin le bg", "comment" : "second commentaire"}
         ]

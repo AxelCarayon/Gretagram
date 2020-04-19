@@ -14,6 +14,7 @@ angular.module('app',[])
 
         if (serviceIsConnect){
             serviceSession.destroyItem('token');
+            serviceSession.destroyItem('id');
         }
         $scope.connexionAct = function(){
             var datas = getFormData($('#codeForm'));
@@ -21,7 +22,9 @@ angular.module('app',[])
             if (datas.username != "" && datas.password != "") {
                 serviceConnexionAjax.connexion(datas)
                     .then(function (a) {
-                        serviceSession.setValue("token",a);
+                        console.log(a);
+                        serviceSession.setValue("token",a.token);
+                        serviceSession.setValue("id",a.id);
                         window.location.href = "/";
                     }, function (msg) {
                         console.log("Erreur serveur : ",msg);

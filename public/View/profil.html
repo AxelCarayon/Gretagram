@@ -59,7 +59,7 @@
     <link rel="stylesheet" type="text/css" href="View/css/component.css" />
 </head>
 
-<body class="clair" ng-app="app" ng-controller="profilCtrl">
+<body class="clair" ng-app="app"  ng-controller="testCtrl">
     <nav class="clair mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
         <a class="clair navbar-brand" href="/">
             <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30" class="clair d-inline-block " alt=""> Gretagram</a>
@@ -97,7 +97,7 @@
             <div class="col-10">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col profilName">Maurice Lestin</div>
+                        <div class="col profilName">{{prenomEtNom}}</div>
                     </div>
                     <div class="row donnees">
                         <div class="col-12 col-sm-4 donnee" ng-click="pubFunction()">
@@ -291,8 +291,16 @@
     <script src="View/plugin/custom-file-input.js"></script>
     <script src="Controller/js/publication.js" charset="utf-8"></script>
     <script src="Controller/js/factory.js" charset="utf-8"></script>
-    <script src="Controller/js/directives.js" charset="utf-8"></script>
+    <script src="../scripts/directives/directives.js" charset="utf-8"></script>
     <script src="Controller/js/js-beautify.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/profile.js"></script>
+    <script src="../scripts/services/servicePublicationAjax.js"></script>
+
+    <script src="../scripts/services/serviceSession.js"></script>
+    <script src="../scripts/services/serviceIsConnect.js"></script>
+    <script src="../scripts/services/factoryUserModele.js"></script>
+    <script src="../scripts/services/serviceUserAjax.js"></script>
+
 
 </body>
 
