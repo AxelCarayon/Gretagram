@@ -9,31 +9,35 @@ exports.like = function(req, res) {
     } else {
         Publication.findOne({ '_id': req.body.id }, function(err, publication) {
             let status = "";
-            if (err) {
-                res.send(err);
-            }
-            if (publication.likes) {
-                const index = publication.likes.findIndex(x => x._id == token._id);
-                if (index != -1) {
-                    publication.likes.splice(index, 1);
-                    status = "publication unlikée";
-                } else {
-                    publication.likes.push(token._id);
-                    status = "publication likée";
-                }
+            if (!publication) {
+                res.send("attention Marie c'est pas la bonne ID que tu as tapé");
             } else {
-                publication.likes = [token._id];
-            }
-            publication.save(function(err) {
                 if (err) {
-                    res.json(err);
+                    res.send(err);
+                }
+                if (publication.likes) {
+                    const index = publication.likes.findIndex(x => x._id == token._id);
+                    if (index != -1) {
+                        publication.likes.splice(index, 1);
+                        status = "publication unlikée";
+                    } else {
+                        publication.likes.push(token._id);
+                        status = "publication likée";
+                    }
                 } else {
-                    res.json({
-                        status: status,
-                        data: publication
-                    });
-                };
-            });
+                    publication.likes = [token._id];
+                }
+                publication.save(function(err) {
+                    if (err) {
+                        res.json(err);
+                    } else {
+                        res.json({
+                            status: status,
+                            data: publication
+                        });
+                    };
+                });
+            }
         });
     }
 };

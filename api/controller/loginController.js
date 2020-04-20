@@ -28,6 +28,7 @@ exports.login = function(req, res) {
         } else if (!user) {
             res.sendStatus(406); //pas d'utilisateur
         } else if (!user.validPassword(password)) {
+            console.log(password);
             res.sendStatus(406); //pas le bon mot de passe
         } else {
             const accesstoken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);

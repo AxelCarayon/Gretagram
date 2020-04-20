@@ -92,7 +92,7 @@ async function getTokens(users) {
     let options = { // les options de la requête AJAX
         hostname: "localhost",
         port: 8080,
-        path: '/api/login',
+        path: '',
         method: 'GET',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -106,6 +106,7 @@ async function getTokens(users) {
                 'password': element.password,
             });
             options.headers["Content-Length"] = postData.length;
+            options.path = "/api/login?username=" + element.email + "&password=" + element.password;
             // on précise la requête
             let req = http.request(options, (res) => {
                 res.on('data', (d) => { //quand le serveur nous renvoie des données
