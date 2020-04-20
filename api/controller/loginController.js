@@ -32,7 +32,7 @@ exports.login = function(req, res) {
             res.sendStatus(406); //pas le bon mot de passe
         } else {
             const accesstoken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
-            res.send(accesstoken);
+            res.send({'token':accesstoken,'id':user._id});
             //console.log(user);
         }
 

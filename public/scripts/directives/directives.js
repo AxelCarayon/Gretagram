@@ -4,27 +4,27 @@ app.directive('ngNav', function() {
         scope: {
             select: '&select'
         },
-        templateUrl: "Controller/js/directives/nav.html"
+        templateUrl: "View/templates/nav.html"
     };
 });
 
 app.directive('cardTemplate', function() {
     return {
         restrict: 'E',
-        templateUrl: "Controller/js/directives/card.html"
+        templateUrl: "View/templates/card.html"
     };
 });
 
 app.directive('publicationTemplate', function() {
     return {
         restrict: 'E',
-        templateUrl: "Controller/js/directives/publication.html"
+        templateUrl: "View/templates/publication.html"
     };
 });
 
 app.directive('publicationStatTemplate', function() {
     return {
         restrict: 'E',
-        templateUrl: "Controller/js/directives/publicationStat.html"
+        templateUrl: "View/templates/publicationStat.html"
     };
 });

@@ -1,30 +1,32 @@
-<img id="{{x.publicationID}}" src="View/ressources/profile.svg.png" class="photoProfil" alt="">
-<p username="{{x.nom}}" ng-click="redirectName($event)" style="cursor: pointer;" class="nomProfil clair">{{x.nom}}</p>
-<p class="publicationDate">{{x.date | date : "dd-mm-yyyy hh:ss"}}</p>
-<p class="publicationTexte clair">{{x.msg}}</p>
-<img src={{x.image}} class="imagePublication" alt="">
-<div class="publication-body">
+<img id="{{x._id}}" src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+<!-- TODO x.nom undefind -->
 
-    <a publication-section="{{x}}" publication-id="{{x.publicationID}}" like-list="{{x.likes}}" class="stat-publication"
+<p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;" class="nomProfil clair">nom{{x.userID}}</p>
+
+<p class="publicationDate">{{x.date | date : "dd-mm-yyyy hh:ss"}}</p>
+<p class="publicationTexte clair">{{x.message}}</p>
+<img src={{x.photo}} class="imagePublication" alt="">
+<div class="publication-body">
+    <a publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}" class="stat-publication"
         ng-click="like($event,$index)" href="">
-        <div publication-section="{{x}}" publication-id="{{x.publicationID}}" like-list="{{x.likes}}"
-            ng-show="{{x.publicationID+'liked'}}" class=" clair">{{x.likes.length}} <span publication-section="{{x}}"
-                publication-id="{{x.publicationID}}" like-list="{{x.likes}}" class="coeur"><svg
-                    publication-section="{{x}}" publication-id="{{x.publicationID}}" like-list="{{x.likes}}"
+        <div publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+            ng-show="{{x._id+'liked'}}" class=" clair">{{x.likes.length}} <span publication-section="{{x}}"
+                publication-id="{{x._id}}" like-list="{{x.likes}}" class="coeur"><svg
+                    publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
                     aria-label="Je n’aime plus" class="_8-yf5 " fill="#ed4956" height="24" viewBox="0 0 48 48"
                     width="24">
-                    <path publication-section="{{x}}" publication-id="{{x.publicationID}}" like-list="{{x.likes}}"
+                    <path publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
                         clip-rule="evenodd"
                         d="M35.3 35.6c-9.2 8.2-9.8 8.9-11.3 8.9s-2.1-.7-11.3-8.9C6.5 30.1.5 25.6.5 17.8.5 9.9 6.4 3.5 13.7 3.5 20.8 3.5 24 8.8 24 8.8s3.2-5.3 10.3-5.3c7.3 0 13.2 6.4 13.2 14.3 0 7.8-6.1 12.3-12.2 17.8z"
                         fill-rule="evenodd"></path>
                 </svg> </div>
-        <div publication-section="{{x}}" publication-id="{{x.publicationID}}" like-list="{{x.likes}}"
-            ng-show="!{{x.publicationID+'liked'}}" class=" clair">{{x.likes.length}} <span publication-section="{{x}}"
-                publication-id="{{x.publicationID}}" like-list="{{x.likes}}" class="coeur"><svg
-                    publication-section="{{x}}" publication-id="{{x.publicationID}}" like-list="{{x.likes}}"
+        <div publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+            ng-show="!{{x._id+'liked'}}" class=" clair">{{x.likes.length}} <span publication-section="{{x}}"
+                publication-id="{{x._id}}" like-list="{{x.likes}}" class="coeur"><svg
+                    publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
                     class="jaime" aria-label="J’aime" class="_8-yf5 " fill="#ed4956" height="24" viewBox="0 0 48 48"
                     width="24">
-                    <path publication-section="{{x}}" publication-id="{{x.publicationID}}" like-list="{{x.likes}}"
+                    <path publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
                         clip-rule="evenodd"
                         d="M34.3 3.5C27.2 3.5 24 8.8 24 8.8s-3.2-5.3-10.3-5.3C6.4 3.5.5 9.9.5 17.8s6.1 12.4 12.2 17.8c9.2 8.2 9.8 8.9 11.3 8.9s2.1-.7 11.3-8.9c6.2-5.5 12.2-10 12.2-17.8 0-7.9-5.9-14.3-13.2-14.3zm-1 29.8c-5.4 4.8-8.3 7.5-9.3 8.1-1-.7-4.6-3.9-9.3-8.1-5.5-4.9-11.2-9-11.2-15.6 0-6.2 4.6-11.3 10.2-11.3 4.1 0 6.3 2 7.9 4.2 3.6 5.1 1.2 5.1 4.8 0 1.6-2.2 3.8-4.2 7.9-4.2 5.6 0 10.2 5.1 10.2 11.3 0 6.7-5.7 10.8-11.2 15.6z"
                         fill-rule="evenodd"></path>
@@ -33,7 +35,7 @@
     </a>
 
     <a ng-click="showModal($event,$index)" class="stat-publication" href="#" data-toggle="modal" data-target="#modal-comment">
-        <div class=" clair">{{x.comments.length}} <span class="coeur"><svg aria-label="Commenter" class="_8-yf5 "
+        <div class=" clair">{{x.commentaires.length}} <span class="coeur"><svg aria-label="Commenter" class="_8-yf5 "
                     fill="#ed4956" height="24" viewBox="0 0 48 48" width="24">
                     <path clip-rule="evenodd"
                         d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
@@ -43,8 +45,8 @@
     <form class="add-comment">
         <input class="input-comment" ng-keydown="verifComment($event)" type="text"
             placeholder="Ajouter un commentaire...">
-        <button disabled publication-id="{{x.publicationID}}" type="submit" ng-click="sendComment($event,$index)"
-            class=" send-comment">Publier</button>
+        <button disabled publication-id="{{x._id}}" type="submit" ng-click="sendComment($event,$index)"
+            class="send-comment">Publier</button>
     </form>
 
 </div>
@@ -63,12 +65,13 @@
             <div class="modal-body">
                 <div class="comment" ng-repeat="comment in modal | orderBy:'-'">
                     <div class="comment-img">
+                        <!-- TODO photo -->
                         <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
                     </div>
                     <div class="comment-body">
-                        <div class="comment-nom">{{comment.nom}}</div>
+                        <div class="comment-nom">{{comment.userID}}</div><!-- TODO nom user -->
                         <p class="date">{{comment.date | date:'MM-dd-yyyy HH:mm'}}</p>
-                        <p>{{comment.comment}}</p>
+                        <p>{{comment.message}}</p>
                     </div>
 
                 </div>
@@ -76,18 +79,18 @@
         </div>
     </div>
 </div>
-<!-- <div class="modal fade" id="{{x.publicationID}}" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
+<!-- <div class="modal fade" id="{{x._id}}" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
     aria-hiddn="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLongTitle">{{x.comments.length}} Commentaires</h2>
+                <h2 class="modal-title" id="exampleModalLongTitle">{{x.commentaires.length}} Commentaires</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="comment" ng-repeat="comment in x.comments | orderBy:'-'">
+                <div class="comment" ng-repeat="comment in x.commentaires | orderBy:'-'">
                     <div class="comment-img">
                         <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
                     </div>

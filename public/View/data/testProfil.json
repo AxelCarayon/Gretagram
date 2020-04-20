@@ -8,8 +8,8 @@
   ],
   "publications": [{
     "nom": "testtestetstetstststt",
-    "msg": "Salut Salut les amis mon nom c'est Lestin et pas C'est Lestin.",
-    "image": "View/ressources/paysage.jpg",
+    "message": "Salut Salut les amis mon nom c'est Lestin et pas C'est Lestin.",
+    "photo": "View/ressources/paysage.jpg",
     "likes": [
       "mathilde",
       "lestin",
@@ -20,8 +20,8 @@
       "truc"
     ],
     "date": "12-4-2020",
-    "publicationID": "id_6",
-    "comments": [{
+    "_id": "id_6",
+    "commentaires": [{
         "nom": "Lestin le bg",
         "comment": "premier commentaire"
       },
@@ -89,7 +89,7 @@
     ]
   }, {
     "nom": "Mathilde",
-    "msg": "Coucou Gretagram je suis nouvelle chez toi hihi",
+    "message": "Coucou Gretagram je suis nouvelle chez toi hihi",
     "likes": [
       "mathilde",
       "machin",
@@ -98,8 +98,8 @@
       "truc"
     ],
     "date": "11-4-2020",
-    "publicationID": "id_7",
-    "comments": [{
+    "_id": "id_7",
+    "commentaires": [{
         "nom": "Lestin le bg",
         "comment": "premier commentaire"
       },
@@ -366,15 +366,15 @@
     ]
   }, {
     "nom": "Maurice Lestin",
-    "msg": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
+    "message": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
     "likes": [
       "mathilde",
       "machin",
       "truc"
     ],
     "date": "10-4-2020",
-    "publicationID": "id_8",
-    "comments": [{
+    "_id": "id_8",
+    "commentaires": [{
         "nom": "Lestin le bg",
         "comment": "premier commentaire"
       },
@@ -389,16 +389,16 @@
     ]
   }, {
     "nom": "Maurice Lestin",
-    "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image": "View/ressources/verticale.jpg",
+    "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "photo": "View/ressources/verticale.jpg",
     "likes": [
       "mathilde",
       "machin",
       "truc"
     ],
     "date": "9-4-2020",
-    "publicationID": "id_9",
-    "comments": [{
+    "_id": "id_9",
+    "commentaires": [{
         "nom": "Lestin le bg",
         "comment": "premier commentaire"
       },
@@ -529,16 +529,16 @@
     ]
   }, {
     "nom": "Maurice Lestin",
-    "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image": "View/ressources/verticale.jpg",
+    "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "photo": "View/ressources/verticale.jpg",
     "likes": [
       "mathilde",
       "machin",
       "truc"
     ],
     "date": "8-4-2020",
-    "publicationID": "id_10",
-    "comments": [{
+    "_id": "id_10",
+    "commentaires": [{
         "nom": "Lestin le bg",
         "comment": "premier commentaire"
       },

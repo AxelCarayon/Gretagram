@@ -1,28 +1,28 @@
 [{
     "nom": "Abonnement",
-    "msg": "Message d'un abonné.",
+    "message": "Message d'un abonné.",
     "image": "View/ressources/paysage.jpg",
     "nblikes": 126,
     "date": "prout"
 }, {
     "nom": "Mathilde",
-    "msg": "Coucou Gretagram je suis nouvelle chez toi hihi",
+    "message": "Coucou Gretagram je suis nouvelle chez toi hihi",
     "nblikes": 126,
     "date": "prout"
 }, {
     "nom": "Maurice Lestin",
-    "msg": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
+    "message": "OOooooh Mathilde, t'ici ?? C'est drole ca parce que je t'aime",
     "nblikes": 126,
     "date": "prout"
 }, {
     "nom": "Maurice Lestin",
-    "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image": "View/ressources/paysage.jpg",
     "nblikes": 126,
     "date": "prout"
 }, {
     "nom": "Maurice Lestin",
-    "msg": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "message": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image": "View/ressources/paysage.jpg",
     "nblikes": 126,
     "date": "prout"

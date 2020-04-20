@@ -30,13 +30,17 @@ function verifMail  (mail){
 
 angular.module('app',[])
     .controller('userCtrl',function ($scope,serviceUserAjax, serviceSession) {
-        $scope.newUserAct = function(e){
-           // e.preventDefault();
+        $scope.newUserAct = function(){
             var datas = getFormData($('#formNewUser'));
             console.log(datas);
             if(datas.nom!=='' && datas.prenom!=='' && verifMail(datas.email) && datas.password!=="" ){
-                serviceUserAjax.newUser(datas);
-
+               serviceUserAjax.newUser(datas).then(function (a) {
+                   console.log(a);
+                   // window.location.href = "/login";
+               }, function (msg) {
+                   console.log("Erreur serveur : ",msg);
+                   //TODO: msg Erreur
+               });
             }else{
                 console.log("Erreur information non valide.")
                 //TODO: msg Erreur
