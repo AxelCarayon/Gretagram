@@ -6,7 +6,8 @@ function showCurrentPublications($scope) {
 
 function redirectName($event){
     var link = $event.target;
-    console.log("redirection to " + link.getAttribute('username') + " page");
+    var id = link.getAttribute('userid');
+    console.log("redirection to " + link.getAttribute('userid') + " page");
 }
 
 var app = angular.module('app', []);
@@ -33,14 +34,16 @@ app.factory('dataFactory', function ($http, $q) {
     return factory;
 });
 
-app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect) {
+app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect,serviceSession) {
     $scope.loading = true;
+
 
     if (!serviceIsConnect){
         window.location.href = "/login";
         
     }else {
 
+        $scope.idUserConnect =  serviceSession.getValue('id');
 
         $scope.data = dataFactory.getPublications().then(function (data) {
             $scope.data = data.data;
@@ -182,6 +185,12 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect) {
                 right: '0%'
             });
         };
+
+        $scope.redirectProfil = ($event) => {
+            var link = $event.target;
+            var id = link.getAttribute('userid');
+            window.location.href = "/profil?id="+id;
+        }
 
     }
 

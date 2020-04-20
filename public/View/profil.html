@@ -92,7 +92,7 @@
     <div class="container profil">
         <div class="row">
             <div class="col-2">
-                <img src="View/ressources/profile.svg.png" class="profilPicture" alt="">
+                <img src={{ppProfil}} class="profilPicture" alt="">
             </div>
             <div class="col-10">
                 <div class="container-fluid">
@@ -152,7 +152,7 @@
     <div class="container containerPublications" ng-show="profilPubs">
         <div class="row publicationContainer">
             <div class="col-12 col-12-sm container containerPublicationsProche">
-                <div class="col-12 publication clair" ng-repeat="x in pubs">
+                <div class="col-12 publication clair" ng-repeat="x in pubs" ng-controller="likeCommentCtrl">
                     <publication-template publication-theme="pubs"></publication-template>
                 </div>
             </div>
@@ -300,6 +300,7 @@
     <script src="../scripts/services/serviceIsConnect.js"></script>
     <script src="../scripts/services/factoryUserModele.js"></script>
     <script src="../scripts/services/serviceUserAjax.js"></script>
+    <script src="../scripts/controllers/likeComment.js"></script>
 
 
 </body>

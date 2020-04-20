@@ -5,8 +5,23 @@ app.service('servicePublicationAjax', function ($http,$q) {
         setLike: function (data){
             //data = token , id:pub
             $.ajax({
-                url: url+"/like",
+                url: "/api/publication/like",
                 method: "POST",
+                data: data,
+                success: function(res){
+                    console.log(res);
+
+                },
+                error : function(res){
+                    console.log(res);
+                }
+            });
+        },
+        getLike: function (data){
+            //data = id:pub
+            $.ajax({
+                url: "/api/publication/like",
+                method: "GET",
                 data: data,
                 success: function(res){
                     console.log(res);
@@ -20,7 +35,7 @@ app.service('servicePublicationAjax', function ($http,$q) {
         setComment: function (data) {
             //data = token,id:pub,message
             $.ajax({
-                url: url+"/comment",
+                url: "/api/publication/comment",
                 method: "POST",
                 data: data,
                 success: function(res){

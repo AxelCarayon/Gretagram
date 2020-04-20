@@ -1,13 +1,12 @@
 <img id="{{x._id}}" src="View/ressources/profile.svg.png" class="photoProfil" alt="">
 <!-- TODO x.nom undefind -->
 
-<p username="{{x.nom}}" ng-click="redirectName($event)" style="cursor: pointer;" class="nomProfil clair">{{x.userID}}</p>
+<p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;" class="nomProfil clair">nom{{x.userID}}</p>
 
 <p class="publicationDate">{{x.date | date : "dd-mm-yyyy hh:ss"}}</p>
 <p class="publicationTexte clair">{{x.message}}</p>
 <img src={{x.photo}} class="imagePublication" alt="">
 <div class="publication-body">
-
     <a publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}" class="stat-publication"
         ng-click="like($event,$index)" href="">
         <div publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
@@ -47,7 +46,7 @@
         <input class="input-comment" ng-keydown="verifComment($event)" type="text"
             placeholder="Ajouter un commentaire...">
         <button disabled publication-id="{{x._id}}" type="submit" ng-click="sendComment($event,$index)"
-            class=" send-comment">Publier</button>
+            class="send-comment">Publier</button>
     </form>
 
 </div>
@@ -66,12 +65,13 @@
             <div class="modal-body">
                 <div class="comment" ng-repeat="comment in modal | orderBy:'-'">
                     <div class="comment-img">
+                        <!-- TODO photo -->
                         <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
                     </div>
                     <div class="comment-body">
-                        <div class="comment-nom">{{comment.nom}}</div>
+                        <div class="comment-nom">{{comment.userID}}</div><!-- TODO nom user -->
                         <p class="date">{{comment.date | date:'MM-dd-yyyy HH:mm'}}</p>
-                        <p>{{comment.comment}}</p>
+                        <p>{{comment.message}}</p>
                     </div>
 
                 </div>
