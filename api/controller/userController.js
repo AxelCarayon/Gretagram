@@ -58,7 +58,7 @@ exports.new = function(req, res) {
     if (req.body.age) {
         user.age = new Date(req.body.age);
     }
-    if (user.body.photo) {
+    if (req.body.photo) {
         try {
             if (!req.files || Object.keys(req.files).length === 0) {
                 return res.status(400).send('No files were uploaded.');
