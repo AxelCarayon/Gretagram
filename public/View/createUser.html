@@ -62,7 +62,7 @@ and open the template in the editor.
             <div class="w-100"></div>
             <div class="col-12 container">
                 <div class="row justify-content-center">
-                    <form id="formNewUser" class="col-12" ng-app="app" ng-controller="userCtrl">
+                    <form id="formNewUser" class="col-12" ng-app="app" ng-controller="createUserCtrl" enctype="multipart/form-data">
                         <div class="container" style="width: 85%;">
                             <div class="row">
                                 <div class="input-div col-12 col-md-3 prenom">
@@ -106,7 +106,7 @@ and open the template in the editor.
                                     </div>
                                     <div>
                                         <h5>Date</h5>
-                                        <input class="input " id="date" name="date" type="date">
+                                        <input class="input " id="date" name="age" type="date">
                                     </div>
                                 </div>
                                 <div class="input-div col-12 col-md-3 genre">
@@ -115,10 +115,10 @@ and open the template in the editor.
                                     </div>
                                     <div>
                                         <h5 id="genre-title">Genre</h5>
-                                        <select id="genre" class="form-control">
-                                            <option>Femme</option>
-                                            <option>Homme</option>
-                                            <option>Autre</option>
+                                        <select name="gender" id="genre" class="form-control">
+                                            <option value="Femme">Femme</option>
+                                            <option value="Homme">Homme</option>
+                                            <option value="Autre">Autre</option>
                                         </select>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@ and open the template in the editor.
                                         <i class="fas fa-images"></i>
                                     </div>
                                     <div class="box " style="margin-right: -30px;height: 40px;min-width: 200px;">
-                                        <input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1 "
+                                        <input type="file" name="pp" id="file-1" class="inputfile inputfile-1 "
                                             data-multiple-caption="{count} files selected" multiple />
                                         <label id="file-label" for="file-1"><svg xmlns="http://www.w3.org/2000/svg"
                                                 width="20" height="17" viewBox="0 0 20 17">
@@ -200,11 +200,11 @@ and open the template in the editor.
         })
     </script>
     <!-- Angular -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script> -->
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
     <!-- Controller -->
-    <script src="../scripts/controllers/user.js"></script>
-    <script src="../scripts/services/serviceUserAjax.js"></script>
-    <script src="../scripts/services/serviceSession.js"></script>
+    <script src="../scripts/controllers/create_user.js"></script>
+    <script src="../scripts/services/serviceConnexionAjax.js"></script>
+
 </body>
 
 </html>
