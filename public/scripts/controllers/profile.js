@@ -21,8 +21,8 @@ function getIdUrl (){
 
 
 angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax) {
-    if (serviceIsConnect){
-        window.location.href = "/";
+    if (!serviceIsConnect){
+        window.location.href = "/login";
     }else {
 
         var token = serviceSession.getValue('token');
