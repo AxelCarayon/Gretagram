@@ -255,4 +255,24 @@ footer p {
   color: red;
 }
 
+.bloc-alert {
+  display: none;
+  opacity: 0.8;
+  max-width: 300px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-radius: 7px;
+}
+.bloc-alert h2, .bloc-alert p {
+  color: #fff !important;
+  text-align: center;
+}
+.bloc-alert h2 {
+  margin-top: 20px;
+}
+.bloc-alert p {
+  padding: 20px 10px;
+}
+
 /*# sourceMappingURL=login.css.map */

@@ -339,3 +339,28 @@ label {
     background-color: #80bb8b;
 
 }
+
+
+.bloc-alert{
+    display: none;
+    opacity: .8;
+    max-width: 300px;
+
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 7px;
+
+    h2,p{
+        color: #fff !important;
+        text-align: center;
+    }
+
+    h2{
+        margin-top: 20px;
+    }
+    p{
+        padding: 20px 10px;
+    }
+
+}

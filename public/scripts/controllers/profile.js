@@ -21,7 +21,7 @@ function getIdUrl (){
 
 
 angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax) {
-    if (!serviceIsConnect){
+    if (serviceIsConnect){
         window.location.href = "/";
     }else {
 

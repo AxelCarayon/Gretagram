@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html,
 body,
 h1,
@@ -723,6 +724,59 @@ div.ng-show-remove.ng-show-remove-active {
 }
 .modal-color.sombre {
   background-color: #2A343D;
+}
+
+.bloc-alert {
+  display: none;
+  opacity: 0.8;
+  max-width: 300px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-radius: 7px;
+}
+.bloc-alert h2, .bloc-alert p {
+  color: #fff !important;
+  text-align: center;
+}
+.bloc-alert h2 {
+  margin-top: 20px;
+}
+.bloc-alert p {
+  padding: 20px 10px;
+}
+
+.follow {
+  font-size: 14px;
+  font-family: "Poppins", sans-serif !important;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #8e9b55;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 5px 6px 16px #8e9b557d;
+  color: #fff;
+  transition: 0.3s;
+  margin-left: 20px;
+}
+.follow:hover {
+  box-shadow: 3px 5px 12px #8e9b557d;
+  transform: scale(0.97);
+}
+.follow.followed {
+  background: none;
+  color: #876269;
+  box-shadow: none;
+}
+.follow.followed::after {
+  display: inline-block;
+  content: "✔";
+  padding-left: 10px;
+}
+
+.follow, .follow:hover, .follow:active, .follow:focus {
+  outline: none !important;
+  outline: 0 !important;
 }
 
 /*# sourceMappingURL=style.css.map */

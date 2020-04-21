@@ -59,11 +59,21 @@
     <link rel="stylesheet" type="text/css" href="View/css/component.css" />
 </head>
 
-<body class="clair" ng-app="app"  ng-controller="testCtrl">
+<body class="clair" ng-app="app" ng-controller="testCtrl">
+
+
+
+    <div class="bloc-alert">
+        <h2 class="bloc-alert-title"></h2>
+        <p class="bloc-alert-para"></p>
+    </div>
     <nav class="clair mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
         <a class="clair navbar-brand" href="/">
-            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30" class="clair d-inline-block " alt=""> Gretagram</a>
-        <button class="clair navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30"
+                class="clair d-inline-block " alt=""> Gretagram</a>
+        <button class="clair navbar-toggler first-button" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false"
+            aria-label="Toggle navigation">
             <div class="clair animated-icon1"><span></span><span></span><span></span></div>
         </button>
         <div class="clair collapse navbar-collapse" id="navbarSupportedContent-333">
@@ -78,14 +88,16 @@
                     <a class="clair nav-link" href="#">Abonnés</a>
                 </li>
                 <li class="clair nav-item dropdown">
-                    <a style="cursor: pointer;" class="clair nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Parametres </a>
-                    <div class="clair dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                    <a style="cursor: pointer;" class="clair nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Parametres </a>
+                    <div class="clair dropdown-menu dropdown-menu-right dropdown-default"
+                        aria-labelledby="navbarDropdownMenuLink-333">
                         <a href="#" class="clair dropdown-item">Paramètres du compte</a>
-                        <a href="#" class="clair dropdown-item change-theme"  ng-click="select()">Changement du thème</a>
+                        <a href="#" class="clair dropdown-item change-theme" ng-click="select()">Changement du thème</a>
                     </div>
                 </li>
             </ul>
-    
+
         </div>
     </nav>
     <!--/.Navbar -->
@@ -97,7 +109,7 @@
             <div class="col-10">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col profilName">{{prenomEtNom}}</div>
+                        <div class="col profilName">{{prenomEtNom}} <button class="follow">S'abonner</button></div>
                     </div>
                     <div class="row donnees">
                         <div class="col-12 col-sm-4 donnee" ng-click="pubFunction()">
@@ -236,56 +248,58 @@
     </div>
 
     <div class="modal fade" id="modal-abonnés" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
-    aria-hiddn="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content modal-color">
-            <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLongTitle">{{abonnes.length}} Abonnes</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="comment" ng-repeat="abonne in abonnes | orderBy:'toString()' ">
-                    <div class="comment-img">
-                        <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
-                    </div>
-                    <div class="comment-body">
-                        <a username="{{abonne}}" ng-click="redirectName($event)" style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonne}}</a>
-                    </div>
-
+        aria-hiddn="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content modal-color">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">{{abonnes.length}} Abonnes</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
+                <div class="modal-body">
+                    <div class="comment" ng-repeat="abonne in abonnes | orderBy:'toString()' ">
+                        <div class="comment-img">
+                            <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+                        </div>
+                        <div class="comment-body">
+                            <a username="{{abonne}}" ng-click="redirectName($event)"
+                                style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonne}}</a>
+                        </div>
 
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="modal-abonnements"  tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
-    aria-hiddn="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered"  role="document">
-        <div class="modal-content modal-color">
-            <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLongTitle">{{abonnements.length}} Abonnements</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="comment" ng-repeat="abonnement in abonnements | orderBy:'toString()' ">
-                    <div class="comment-img">
-                        <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
-                    </div>
-                    <div class="comment-body">
-                        <a username="{{abonnement}}" ng-click="redirectName($event)" style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonnement}}</a>
-                    </div>
-
+    <div class="modal fade" id="modal-abonnements" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
+        aria-hiddn="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content modal-color">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">{{abonnements.length}} Abonnements</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
+                <div class="modal-body">
+                    <div class="comment" ng-repeat="abonnement in abonnements | orderBy:'toString()' ">
+                        <div class="comment-img">
+                            <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+                        </div>
+                        <div class="comment-body">
+                            <a username="{{abonnement}}" ng-click="redirectName($event)"
+                                style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonnement}}</a>
+                        </div>
 
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 
 
     <script src="View/plugin/custom-file-input.js"></script>
@@ -301,6 +315,8 @@
     <script src="../scripts/services/factoryUserModele.js"></script>
     <script src="../scripts/services/serviceUserAjax.js"></script>
     <script src="../scripts/controllers/likeComment.js"></script>
+
+    <script src="Controller/js/follow.js" charset="utf-8"></script>
 
 
 </body>

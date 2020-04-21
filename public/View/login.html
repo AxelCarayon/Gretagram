@@ -40,10 +40,18 @@ and open the template in the editor.
     <script src="../scripts/services/serviceSession.js"></script>
     <script src="../scripts/services/serviceConnexionAjax.js"></script>
     <script src="../scripts/services/serviceIsConnect.js"></script>
+    <script src="Controller/js/alert.js" charset="utf-8"></script>
+    
 
 </head>
 
 <body>
+
+    <div class="bloc-alert">
+        <h2 class="bloc-alert-title"></h2>
+        <p class="bloc-alert-para"></p>
+    </div>
+
     <div class="container">
         <div class="img">
             <a class="navbar-brand" href="#">
@@ -54,7 +62,7 @@ and open the template in the editor.
         <div class="login-container">
             <form id="codeForm" ng-app="app" ng-controller="connexionCtrl">
                 <img class="avatar" src="View/ressources/avatar.svg">
-                <h2>Bienvenue</h2>
+                <h2 class="welcome">Bienvenue</h2>
                 <div class="input-div username">
                     <div class="i">
                         <i class="fas fa-user"></i>
@@ -147,8 +155,9 @@ and open the template in the editor.
         <p><i class="fas fa-copyright"></i> Copyright Gretagram Inc.</p>
     </footer>
 
-
+    
     <script type="text/javascript">
+
         var verifMail = () => {
             var drap = true;
             var mail = $("#mdp-forget").val();
