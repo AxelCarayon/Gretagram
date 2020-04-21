@@ -182,6 +182,7 @@ exports.new = function(req, res) {
         publication.date = new Date();
         publication.userID = token._id;
         publication.hashtag = hashtags;
+        publication.userName = token.prenom + " " + token.nom
 
         User.findOne({ '_id': token._id }, function(err, user) {
             if (err) {

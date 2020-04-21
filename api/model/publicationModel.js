@@ -12,6 +12,7 @@ var publicationSchema = mongoose.Schema({
     photo: String,
     message: String,
     userID: String,
+    userName: String,
     likes: [{ userID: String }],
     commentaires: [{
         userID: String,
