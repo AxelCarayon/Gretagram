@@ -95,6 +95,74 @@ exports.all = function(req, res) {
     });
 }
 
+//affiche les publications des abonnés
+exports.abonnes = function(req, res) {
+    token = authenticateToken(req.body.token);
+    if (token === null) {
+        res.sendStatus(403);
+    } else {
+        User.findOne({ '_id': token._id }, function(err, user) {
+            if (user.abonnements) {
+                Publication.find({ userID: { $in: user.abonnements } }, function(err, publications) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    res.json(publications);
+                });
+            }
+        })
+    }
+}
+
+//affiche les publications les plus populaires
+exports.populaire = function(req, res) {
+    if (req.query.size) {
+        Publication.aggregate(
+            [{
+                    "$project": {
+                        "date": 1,
+                        "position": 1,
+                        "photo": 1,
+                        "message": 1,
+                        "userID": 1,
+                        "likes": 1,
+                        "commentaires": 1,
+                        "hashtag": 1,
+                        "length": { "$size": "$likes" }
+                    }
+                },
+                { "$sort": { "length": -1 } },
+                { "$limit": parseInt(req.query.size) }
+            ],
+            function(err, results) {
+                if (err) console.log(err);
+                res.json(results);
+            }
+        )
+    } else {
+        Publication.aggregate(
+            [{
+                    "$project": {
+                        "date": 1,
+                        "position": 1,
+                        "photo": 1,
+                        "message": 1,
+                        "userID": 1,
+                        "likes": 1,
+                        "commentaires": 1,
+                        "hashtag": 1,
+                        "length": { "$size": "$likes" }
+                    }
+                },
+                { "$sort": { "length": -1 } }
+            ],
+            function(err, results) {
+                if (err) console.log(err);
+                res.json(results);
+            }
+        )
+    }
+}
 
 // crée une nouvelle publication
 exports.new = function(req, res) {

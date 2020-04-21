@@ -112,7 +112,7 @@ async function getTokens(users) {
                 res.on('data', (d) => { //quand le serveur nous renvoie des données
                     cpt++; //on incrémente un compteur à chaque fois qu'on as trouvé un élément
                     let user = {
-                        'token': Buffer.from(d, 'binary').toString('utf8'),
+                        'token': JSON.parse(Buffer.from(d, 'binary').toString('utf8')).token,
                         'prenom': element.prenom,
                         'nom': element.nom,
                         'username': element.email
@@ -120,6 +120,7 @@ async function getTokens(users) {
                     tokens.push(user);
                     if (cpt == users.length) { //si on as autant d'utlisateurs que dans le CSV on as fini les requêtes
                         console.log("fin de récupération des tokens")
+
                         resolve(tokens); // on résoud donc la requête en renvoyant la liste d'utilisateurs
                     }
                 });

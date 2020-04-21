@@ -39,8 +39,15 @@ router.route('/publication')
     .post(publicationController.new) //ajouter
     .delete(publicationController.delete); //supprimer
 
+
 router.route('/publication/all')
     .get(publicationController.all);
+
+router.route('/publication/abonnes')
+    .get(publicationController.abonnes);
+
+router.route('/publication/populaire')
+    .get(publicationController.populaire);
 
 router.route('/hashtag')
     .get(hashtagController.view) //afficher
