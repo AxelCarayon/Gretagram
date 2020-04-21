@@ -1,27 +1,102 @@
+angular.module('app',[])
+    .controller('createUserCtrl',function ($scope,serviceConnexionAjax) {
+
+        var drap2 = verifMail();
+        var drap3 = verifChamps();
+        var drap = drap2 && drap3;
+
+        if (drap) {
+            $('.btn-creer-compte').removeClass("disabled")
+            $('.btn-creer-compte').prop("disabled", false);
+            $('.btn-creer-compte').removeAttr("disabled");
+        } else {
+            $('.btn-creer-compte').addClass("disabled")
+            $('.btn-creer-compte').prop("disabled", true);
+
+        }
+
+        $('#mdp1,#mdp2').focusout((e) => {
+            verif();
+
+        })
+        $("#mail").focusout((e) => {
+            verif();
+
+        })
+
+        $("input").each((i) => {
+            var input = $("input").eq(i);
+            if ($("input").eq(i).val() != "") {
+                $("input").eq(i).parent().parent().addClass("focus");
+            }
+
+        })
+
+        $("input").focus(function (e) {
+            $(this).parent().parent().addClass("focus");
+        })
+
+        $("input").focusout(function () {
+            if ($(this).val() == "") {
+                $(this).parent().parent().removeClass("focus");
+            }
+
+        })
+
+        $scope.newUserAct = function(){
+            if (verif()){
+                var datas = creerCompte();
+                if (datas!={} && datas!=null){
+                    console.log(datas);
+                    serviceConnexionAjax.newUser(datas).then(function (data) {
+                        if (data.message === 'New user created!'){
+                            //TODO : alert succes
+                        }else{
+                            //TODO : alert error
+                        }
+                        console.log(data.message);
+                    }, function (msg) {
+                        console.log("Erreur serveur : "+msg);
+                        //TODO: alert error
+                    });
+                }else{
+                    console.log("Erreur information non valide.")
+                    //TODO: alert error
+                }
+            }
+
+        }
+    });
+
 var compte = {};
 $('.datepicker').pickadate();
-var creerCompte = () => {
+function creerCompte  ()  {
     var tab = $("input").serializeArray();
     try {
         $(tab).each((k, v) => {
             if (v.value == "") {
-                throw Error("error");
+                console.log("vname vide : ",v.name);
+               throw Error('error');
             }
-            compte[v.name] = v.value;
+            if (v.name=='prenom' ||v.name=='nom' || v.name=='email' ||v.name=='age' ){
+                compte[v.name] = v.value;
+            }
+            if (v.name=='mdp2') {
+                compte['password'] = v.value;
+            }
         });
+        compte['gender'] = $('#genre').val();
+        compte['pp'] = $('#file-1').val();
+        return compte;
 
-
-        //Requete Ajax avec l'objet compte en data
-        console.log(compte);
-        
     } catch (e) {
-        alert("Tout les champs doivent être remplis");
+        alert("Tout les champs doivent être remplis "+e);
 
     }
 
 }
 
-var verifMail = () => {
+function verifMail ()  {
     var drap = true;
     var mail = $("#mail").val();
     if (!mail.includes("@") || mail.includes(" ") || mail.includes("é")) {
@@ -125,52 +200,3 @@ function verif(){
     return drap1 && drap2 && drap3 ;
 }
 
-var drap2 = verifMail();
-var drap3 = verifChamps();
-var drap = drap2 && drap3;
-
-if (drap) {
-    $('.btn-creer-compte').removeClass("disabled")
-    $('.btn-creer-compte').prop("disabled", false);
-    $('.btn-creer-compte').removeAttr("disabled");
-} else {
-    $('.btn-creer-compte').addClass("disabled")
-    $('.btn-creer-compte').prop("disabled", true);
-
-}
-
-$('#mdp1,#mdp2').focusout((e) => {
-    verif();
-
-})
-$("#mail").focusout((e) => {
-    verif();
-
-})
-
-$("input").each((i) => {
-    var input = $("input").eq(i);
-    if ($("input").eq(i).val() != "") {
-        $("input").eq(i).parent().parent().addClass("focus");
-    }
-
-})
-
-$("input").focus(function (e) {
-    $(this).parent().parent().addClass("focus");
-})
-
-$("input").focusout(function () {
-    if ($(this).val() == "") {
-        $(this).parent().parent().removeClass("focus");
-    }
-
-})
-
-
-
-$(".btn-creer-compte").click((e) => {
-    e.preventDefault();
-    
-    creerCompte();
-})
