@@ -1,6 +1,8 @@
 const User = require('../model/userModel');
 const authenticateToken = require('./loginController').authenticateToken;
-var path = require('path');
+const path = require('path');
+const fs = require('fs');
+const uuidv4 = require("uuid/v4");
 
 // affiche un utilisateur
 exports.view = function(req, res) {
@@ -47,7 +49,7 @@ exports.private = function(req, res) {
 
 // crée un nouvel utilisateur 
 exports.new = function(req, res) {
-    var user = new User();
+    let user = new User();
     user.nom = req.body.nom;
     user.prenom = req.body.prenom;
     user.gender = req.body.gender;
@@ -56,8 +58,33 @@ exports.new = function(req, res) {
     if (req.body.age) {
         user.age = new Date(req.body.age);
     }
-    user.photos = [];
-    user.pp = null;
+    if (user.body.photo) {
+        try {
+            if (!req.files || Object.keys(req.files).length === 0) {
+                return res.status(400).send('No files were uploaded.');
+            }
+            let photo = req.files.photo;
+            let id = uuidv4() + path.extname(photo.name);
+            photo.mv('./photos/' + id, function(err) {
+                if (err)
+                    return res.status(500).send(err);
+                user.save(function(err) {
+                    if (err)
+                        res.json(err);
+                    user.pp = id;
+                    user.photos = [];
+                    user.photos.push(id);
+                });
+            });
+
+        } catch (err) {
+            console.log(err);
+            res.status(500).send("erreur envoi fichier")
+        }
+    } else {
+        user.pp = null;
+        user.photos = [];
+    }
     if (!req.body.nom || !req.body.prenom || !req.body.email || !req.body.password) {
         res.status(400).send("Toutes les données requises n'ont pas été entrées.");
     } else {
