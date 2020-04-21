@@ -9,7 +9,7 @@ function idInListOfObj(list,e){
 }
 
 
-angular.module('app').controller("likeCommentCtrl", function ($location,$scope,servicePublicationAjax,serviceSession) {
+angular.module('app').controller("likeCommentCtrl", function ($location,$scope,servicePublicationAjax,serviceSession,serviceUserAjax) {
 
     var idUserCo = serviceSession.getValue('id');
     var token = serviceSession.getValue('token');
@@ -74,9 +74,49 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
     };
 
     $scope.showModal = ($event,$index) => {
-        $scope.modal = $scope.pubs[$index].commentaires;
+        var commentaires = $scope.pubs[$index].commentaires;
+        $scope.modal = commentaires;
+        console.log(commentaires);
+
+// "View/ressources/profile.svg.png"
+        var mem;
+        for (var i = 0; i<commentaires.length;i++){
+            var id = commentaires[i].userID;
+            if (mem != id){
+                mem =id;
+                console.log(id);
+
+                serviceUserAjax.getUser({id:id}).then(function (user) {
+                        console.log(user);
+                        //console.log($('#'+user.id));
+                        var name = user.id+'name';
+                        var pp = user.id +'pp';
+
+                        $scope[name] = user.prenom +' '+user.nom;
+
+
+
+                        // $('#'+user.id+'name').each( function(){
+                        //     console.log($(this));
+                        //     $(this).innerText = user.prenom +' '+user.nom;
+                        // } );
+                        //
+                        // if (user.pp != null){
+                        //     $('#'+user.id+'pp').attr('src',user.pp);
+                        // }
+
+
+                    //commentaires[i].name = user.prenom +' '+user.nom;
+                    }
+                );
+            }
+
+        }
+
+
 
     };
 });
+
 
 

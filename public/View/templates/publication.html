@@ -66,10 +66,10 @@
                 <div class="comment" ng-repeat="comment in modal | orderBy:'-'">
                     <div class="comment-img">
                         <!-- TODO photo -->
-                        <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+                        <img  src="{{comment.userID+'pp'}}" class="photoProfil" alt="">
                     </div>
                     <div class="comment-body">
-                        <div class="comment-nom">{{comment.userID}}</div><!-- TODO nom user -->
+                        <div class="comment-nom"  userid="{{comment.userID}}" ng-click="redirectProfil($event)"><a href="#">{{ comment.userID+'name'}}</a> </div><!-- TODO nom user -->
                         <p class="date">{{comment.date | date:'MM-dd-yyyy HH:mm'}}</p>
                         <p>{{comment.message}}</p>
                     </div>
