@@ -32,7 +32,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
 
         if (getIdUrl()!=-1){
             idProfil = getIdUrl();
-        }else idProfil = id;
+        }else idProfil = idUser;
 
 
         $scope.idUserConnect = idUser;
