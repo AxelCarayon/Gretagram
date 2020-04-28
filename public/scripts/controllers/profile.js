@@ -58,7 +58,34 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             );
         };
 
+        var feel = function () {
+                $scope.profilPubs = true;
+                $scope.profilStats = false;
+                $('.btnPub').addClass('active');
+                $('.btnStat').removeClass('active');
 
+                //Récupération des publications
+                servicePublicationAjax.getPubUser({'id':idProfil}).
+                then(function (publications) {
+                    console.log('publications : ',publications);
+                    $scope.pubs = publications;
+
+                    console.log($scope.pubs);
+
+                    //TODO : coeur rouge
+                    for (const index in ($scope.pubs)) {
+                        var t =$scope.pubs[index]._id + "liked";
+                        // console.log(t);
+                        var likes = $scope.pubs[index].likes;
+                        if (idIsInListOfObj(likes,idUser)){
+                            $scope[t] = true;
+                            //console.log('ici');
+                        }
+                    }
+                }, function (msg) {
+                    console.log('erreur serveur recupération user : '+msg);
+                });
+        };
 
         if (getIdUrl()!=-1){
             idProfil = getIdUrl();
@@ -70,8 +97,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             $('.follow').addClass('d-none');
         }
 
-
-        $scope.idUserConnect = idUser;
+       // $scope.idUserConnect = idUser;
 
         // infos membre profil
         serviceUserAjax.getUser({'id':idProfil}).
@@ -96,52 +122,16 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 $('.follow').hasClass("followed");
                 $('.follow').removeClass("followed");
                 $('.follow').text("S'abonner");
-
             }
 
+            feel();
             $scope.followAct = follow;
-
-
+            $scope.pubFunction = feel;
 
         }, function (msg) {
+            //TODO Alert
             console.log('erreur serveur recupération user : '+msg);
         });
-
-        //afficher publication
-        $scope.pubFunction = function(){
-
-
-            $scope.profilPubs = true;
-            $scope.profilStats = false;
-            $('.btnPub').addClass('active');
-            $('.btnStat').removeClass('active');
-
-
-            //Récupération des publications
-            servicePublicationAjax.getPubUser({'id':idProfil}).
-            then(function (publications) {
-                console.log('publications : ',publications);
-                $scope.pubs = publications;
-
-                console.log($scope.pubs);
-
-                //TODO : coeur rouge
-                for (const index in ($scope.pubs)) {
-                    var t =$scope.pubs[index]._id + "liked";
-                   // console.log(t);
-                    var likes = $scope.pubs[index].likes;
-                    if (idIsInListOfObj(likes,idUser)){
-                        $scope[t] = true;
-                        //console.log('ici');
-                    }
-                }
-
-
-            }, function (msg) {
-                console.log('erreur serveur recupération user : '+msg);
-            });
-
-        };
 
         $scope.changeTheme = function () {
             $('*').toggleClass('sombre');
@@ -153,7 +143,5 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             var id = link.getAttribute('userid');
             window.location.href = "/profil?id="+id;
         }
-
     }
-
     });

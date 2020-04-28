@@ -64,7 +64,24 @@ app.service('servicePublicationAjax', function ($http,$q) {
 
             return deferred.promise;
 
+        },
+        getPub: function (id) {
+            //data = id:pub
+            var deferred = $q.defer();
+            $.ajax({
+                url: '/api/publication',
+                method: "GET",
+                data: {id:id},
+                success: function(res){
+                    deferred.resolve(res);
+                },
+                error : function(res,state,msg){
+                    deferred.reject(msg);
+                }
+            });
+            return deferred.promise;
         }
+
 
     };
 });

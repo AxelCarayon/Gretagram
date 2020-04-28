@@ -86,10 +86,13 @@ function creerCompte  ()  {
             }
         });
         compte['gender'] = $('#genre').val();
-        compte['pp'] = $('#file-1').val();
+
+        //TODO: Photo profil    data = photo: "C:\\fakepath\\img.jpg"
+       //compte['photo'] = $('#file-1').val();
         return compte;
 
     } catch (e) {
+        //TODO Alert
         alert("Tout les champs doivent être remplis "+e);
 
     }

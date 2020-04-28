@@ -8,6 +8,27 @@ function idInListOfObj(list,e){
     return -1;
 }
 
+function addNameinListOfObj (list , id, e){
+    for (var i = 0; i<list.length;i++){
+        if (list[i].userID == id) {
+            list[i].userName = e
+        }
+    }
+    return list;
+}
+
+function addPPinListOfObj (list , id, e){
+    if (e== null){
+        e = "View/ressources/profile.svg.png";
+    }
+    for (var i = 0; i<list.length;i++){
+        if (list[i].userID == id) {
+            list[i].pp = e
+        }
+    }
+    return list;
+}
+
 
 angular.module('app').controller("likeCommentCtrl", function ($location,$scope,servicePublicationAjax,serviceSession,serviceUserAjax) {
 
@@ -83,60 +104,29 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
 
         servicePublicationAjax.setComment({token:token,id:publication_id,message:comment}); //data = token,id:pub,message
         pubs();
-        var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
-
-        $scope[publication_theme][$index].commentaires.push({
-            "nom": idUserCo,
-            "message": comment,
-            "date": new Date()
-        });
 
         $($event.target).prev().val("");
         $($event.target).attr('disabled', true);
     };
 
     $scope.showModal = ($event,$index) => {
-        var commentaires = $scope.pubs[$index].commentaires;
-        $scope.modal = commentaires;
-        console.log(commentaires);
 
-// "View/ressources/profile.svg.png"
-        var mem;
-        for (var i = 0; i<commentaires.length;i++){
-            var id = commentaires[i].userID;
-            if (mem != id){
-                mem =id;
-                console.log(id);
+        $scope.modal = $scope.pubs[$index].commentaires;
+
+        var mem = [];
+        for (var i = 0; i<$scope.modal.length;i++){
+            var id = $scope.modal[i].userID;
+            if (!mem.includes( id)){
+                mem.push(id);
 
                 serviceUserAjax.getUser({id:id}).then(function (user) {
-                        console.log(user);
-                        //console.log($('#'+user.id));
-                        var name = user.id+'name';
-                        var pp = user.id +'pp';
-
-                        $scope[name] = user.prenom +' '+user.nom;
-
-
-
-                        // $('#'+user.id+'name').each( function(){
-                        //     console.log($(this));
-                        //     $(this).innerText = user.prenom +' '+user.nom;
-                        // } );
-                        //
-                        // if (user.pp != null){
-                        //     $('#'+user.id+'pp').attr('src',user.pp);
-                        // }
-
-
-                    //commentaires[i].name = user.prenom +' '+user.nom;
+                        var name = user.prenom +' '+user.nom;
+                        $scope.modal = addNameinListOfObj($scope.modal,user.id,name);
+                        $scope.modal = addPPinListOfObj($scope.modal,user.id,user.pp);
                     }
                 );
             }
-
         }
-
-
-
     };
 });
 

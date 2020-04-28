@@ -34,8 +34,8 @@
 
     </a>
 
-    <a ng-click="showModal($event,$index)" class="stat-publication" href="#" data-toggle="modal" data-target="#modal-comment">
-        <div class=" clair">{{x.commentaires.length}} <span class="coeur"><svg aria-label="Commenter" class="_8-yf5 "
+    <a ng-click="showModal($event,$index)"  class="stat-publication" href="#" data-toggle="modal" data-target="#modal-comment">
+        <div class=" clair">{{x.commentaires.length}} <span class="coeur"><svg publication-id="{{x._id}}" aria-label="Commenter" class="_8-yf5 "
                     fill="#ed4956" height="24" viewBox="0 0 48 48" width="24">
                     <path clip-rule="evenodd"
                         d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
@@ -65,11 +65,10 @@
             <div class="modal-body">
                 <div class="comment" ng-repeat="comment in modal | orderBy:'-'">
                     <div class="comment-img">
-                        <!-- TODO photo -->
-                        <img  src="{{comment.userID+'pp'}}" class="photoProfil" alt="">
+                        <img  src="{{comment.pp}}" class="photoProfil" alt="">
                     </div>
                     <div class="comment-body">
-                        <div class="comment-nom"  ><a href="#" userid="{{comment.userID}}" ng-click="redirectProfil($event)">{{ comment.userID}}</a> </div><!-- TODO nom user -->
+                        <div class="comment-nom"  ><a href="#" userid="{{comment.userID}}" ng-click="redirectProfil($event)">{{ comment.userName}}</a> </div><!-- TODO nom user -->
                         <p class="date">{{comment.date | date:'MM-dd-yyyy HH:mm'}}</p>
                         <p>{{comment.message}}</p>
                     </div>
