@@ -1,7 +1,7 @@
 <img id="{{x._id}}" src="View/ressources/profile.svg.png" class="photoProfil" alt="">
 <!-- TODO x.nom undefind -->
 
-<p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;" class="nomProfil clair">nom{{x.userID}}</p>
+<p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;" class="nomProfil clair">{{x.userName}}</p>
 
 <p class="publicationDate">{{x.date | date : "dd-mm-yyyy hh:ss"}}</p>
 <p class="publicationTexte clair">{{x.message}}</p>

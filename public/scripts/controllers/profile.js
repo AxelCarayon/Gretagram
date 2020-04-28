@@ -20,6 +20,7 @@ function getIdUrl (){
 
 
 
+
 angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax) {
     if (!serviceIsConnect){
         window.location.href = "/login";
@@ -30,9 +31,44 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
         var idProfil;
         var ppDefault = 'View/ressources/profile.svg.png';
 
+        //follow-unfollow
+        var follow = function () {
+            console.log('followAct');
+            serviceUserAjax.setFollow(token,idProfil).then(
+                function (res) {
+                    if (res.status == "abonnement supprimé"){
+                        $('.follow').hasClass("followed");
+                        $('.follow').removeClass("followed");
+                        $('.follow').text("S'abonner");
+                    } else {
+                        $('.follow').addClass("followed");
+                        $('.follow').text("Abonné");
+                    }
+                    //maj abo
+                    serviceUserAjax.getUser({'id':idProfil}).
+                    then(function (user) {
+                        $scope.abonnes = user.abonnes;
+                    },function (rep) {
+                        //TODO Alert
+                        console.log('error',rep);
+                    });
+                },function (res) {
+                    console.log(res);
+                }
+            );
+        };
+
+
+
         if (getIdUrl()!=-1){
             idProfil = getIdUrl();
-        }else idProfil = idUser;
+        }else {
+            idProfil = idUser;
+        }
+
+        if (idProfil == idUser){
+            $('.follow').addClass('d-none');
+        }
 
 
         $scope.idUserConnect = idUser;
@@ -49,6 +85,21 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             if (user.pp ='' || user.pp == null){
                 $scope.ppProfil = ppDefault;
             }else $scope.ppProfil = user.pp;
+
+            console.log('abonné :',user.abonnes.includes(idUser));
+
+            if (user.abonnes.includes(idUser)){
+                $('.follow').addClass("followed");
+                $('.follow').text("Abonné");
+
+            }else {
+                $('.follow').hasClass("followed");
+                $('.follow').removeClass("followed");
+                $('.follow').text("S'abonner");
+
+            }
+
+            $scope.followAct = follow;
 
 
 

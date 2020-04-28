@@ -109,7 +109,7 @@
             <div class="col-10">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col profilName">{{prenomEtNom}} <button class="follow">S'abonner</button></div>
+                        <div class="col profilName">{{prenomEtNom}} <button class="follow" ng-click="followAct()">S'abonner</button></div>
                     </div>
                     <div class="row donnees">
                         <div class="col-12 col-sm-4 donnee" ng-click="pubFunction()">
@@ -315,9 +315,6 @@
     <script src="../scripts/services/factoryUserModele.js"></script>
     <script src="../scripts/services/serviceUserAjax.js"></script>
     <script src="../scripts/controllers/likeComment.js"></script>
-
-    <script src="Controller/js/follow.js" charset="utf-8"></script>
-
 
 </body>
 
