@@ -69,7 +69,7 @@
                         <img  src="{{comment.userID+'pp'}}" class="photoProfil" alt="">
                     </div>
                     <div class="comment-body">
-                        <div class="comment-nom"  userid="{{comment.userID}}" ng-click="redirectProfil($event)"><a href="#">{{ comment.userID+'name'}}</a> </div><!-- TODO nom user -->
+                        <div class="comment-nom"  ><a href="#" userid="{{comment.userID}}" ng-click="redirectProfil($event)">{{ comment.userID}}</a> </div><!-- TODO nom user -->
                         <p class="date">{{comment.date | date:'MM-dd-yyyy HH:mm'}}</p>
                         <p>{{comment.message}}</p>
                     </div>
