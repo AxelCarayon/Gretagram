@@ -12,6 +12,7 @@ exports.view = function(req, res) {
         }
         if (user) {
             res.json({
+                id: user._id,
                 nom: user.nom,
                 prenom: user.prenom,
                 pp: user.pp,

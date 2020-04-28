@@ -13,6 +13,28 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
 
     var idUserCo = serviceSession.getValue('id');
     var token = serviceSession.getValue('token');
+    var idProfil;
+
+    if (getIdUrl()!=-1){
+        idProfil = getIdUrl();
+    }else {
+        idProfil = idUserCo;
+    }
+
+    var pubs = function(){
+        //Récupération des publications
+        servicePublicationAjax.getPubUser({'id':idProfil}).
+        then(function (publications) {
+            console.log('publications : ',publications);
+            $scope.pubs = publications;
+
+        },function (rep) {
+            //TODO Alert
+            console.log('error',rep);
+        });
+
+
+    };
 
     $scope.like = ($event, $index) => {
         $event.preventDefault();
@@ -60,7 +82,7 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
         var comment = $($event.target).prev().val(); //Le message du commentaire
 
         servicePublicationAjax.setComment({token:token,id:publication_id,message:comment}); //data = token,id:pub,message
-
+        pubs();
         var publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
 
         $scope[publication_theme][$index].commentaires.push({
