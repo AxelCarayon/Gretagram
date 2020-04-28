@@ -1,4 +1,4 @@
-function idIsInListOfObj(list,e){
+function _idIsInListOfObj(list,e){
     for (var i = 0; i<list.length;i++){
         //console.log(likes[i]._id);
         if (list[i]._id == e) {
@@ -7,6 +7,16 @@ function idIsInListOfObj(list,e){
     }
     return false;
 }
+function idIsInListOfObj(list,e){
+    for (var i = 0; i<list.length;i++){
+        //console.log(likes[i]._id);
+        if (list[i].id == e) {
+            return true
+        }
+    }
+    return false;
+}
+
 
 function getIdUrl (){
     var param = window.location.search.slice(1,window.location.search.length);
@@ -81,7 +91,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 }
             );
         };
-
+        // file de l'user
         var feel = function () {
                 $scope.profilPubs = true;
                 $scope.profilStats = false;
@@ -101,7 +111,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                         var t =$scope.pubs[index]._id + "liked";
                         // console.log(t);
                         var likes = $scope.pubs[index].likes;
-                        if (idIsInListOfObj(likes,idUser)){
+                        if (_idIsInListOfObj(likes,idUser)){
                             $scope[t] = true;
                             //console.log('ici');
                         }
@@ -154,13 +164,18 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 );
             }
 
+            //photo de profil
             if (user.pp ='' || user.pp == null){
                 $scope.ppProfil = ppDefault;
             }else $scope.ppProfil = user.pp;
 
             console.log('abonné :',user.abonnes.includes(idUser));
 
-            if (user.abonnes.includes(idUser)){
+            //Bouton s'abonner
+            console.log('include : ',user.abonnes.includes(idUser));
+            console.log('abonne : ',user.abonnes,idUser);
+            
+            if (idIsInListOfObj(user.abonnes,idUser)){
                 $('.follow').addClass("followed");
                 $('.follow').text("Abonné");
 
