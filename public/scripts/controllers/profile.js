@@ -17,8 +17,32 @@ function getIdUrl (){
     }
     return -1;
 }
+function listToObjList (list){
+    for (var i = 0; list.length>i;i++){
+        list[i]={id:list[i]};
+    }
+    return list;
+}
+function addNameinObjList (list , id, e){
+    for (var i = 0; i<list.length;i++){
+        if (list[i].id == id) {
+            list[i].userName = e;
+        }
+    }
+    return list;
+}
 
-
+function addPPinListOfObj2 (list , id, e){
+    if (e== null){
+        e = "View/ressources/profile.svg.png";
+    }
+    for (var i = 0; i<list.length;i++){
+        if (list[i].id == id) {
+            list[i].pp = e;
+        }
+    }
+    return list;
+}
 
 
 angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax) {
@@ -105,8 +129,30 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             console.log(user);
             $scope.nbPublications = user.publications.length;
             $scope.prenomEtNom = user.prenom +' '+user.nom;
-            $scope.abonnes = user.abonnes;
-            $scope.abonnements = user.abonnements;
+            $scope.abonnes = listToObjList(user.abonnes);
+            $scope.abonnements = listToObjList(user.abonnements);
+
+            //ajout des nom des abonnements
+            for (var i = 0; i<$scope.abonnements.length;i++){
+                var id = $scope.abonnements[i].id;
+                serviceUserAjax.getUser({id:id}).then(function (user) {
+                        var name = user.prenom +' '+user.nom;
+                        $scope.abonnements = addNameinObjList($scope.abonnements,user.id,name);
+                        $scope.abonnements = addPPinListOfObj2($scope.abonnements,user.id,user.pp);
+                    }
+                );
+            }
+
+            //ajout des nom des abonnés
+            for (var i = 0; i<$scope.abonnes.length;i++){
+                var id = $scope.abonnes[i].id;
+                serviceUserAjax.getUser({id:id}).then(function (user) {
+                        var name = user.prenom +' '+user.nom;
+                        $scope.abonnes = addNameinObjList($scope.abonnes,user.id,name);
+                        $scope.abonnes = addPPinListOfObj2($scope.abonnes,user.id,user.pp);
+                    }
+                );
+            }
 
             if (user.pp ='' || user.pp == null){
                 $scope.ppProfil = ppDefault;

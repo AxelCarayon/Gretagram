@@ -260,11 +260,11 @@
                 <div class="modal-body">
                     <div class="comment" ng-repeat="abonne in abonnes | orderBy:'toString()' ">
                         <div class="comment-img">
-                            <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+                            <img src="{{abonne.pp}}" class="photoProfil" alt="">
                         </div>
                         <div class="comment-body">
-                            <a userid="{{abonne}}" ng-click="redirectProfil($event)"
-                                style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonne}}</a>
+                            <a userid="{{abonne.id}}" ng-click="redirectProfil($event)"
+                                style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonne.userName}}</a>
                         </div>
 
                     </div>
@@ -288,11 +288,11 @@
                     <div class="comment" ng-repeat="abonnement in abonnements | orderBy:'toString()' ">
                         <div class="comment-img">
                             <!-- TODO Photo profil -->
-                            <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+                            <img src="{{abonnement.pp}}" class="photoProfil" alt="">
                         </div>
                         <div class="comment-body">
-                            <a userid="{{abonnement}}" ng-click="redirectProfil($event)"
-                                style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonnement}}</a>
+                            <a userid="{{abonnement.id}}" ng-click="redirectProfil($event)"
+                                style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonnement.userName}}</a>
                         </div>
 
                     </div>
