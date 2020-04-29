@@ -42,6 +42,9 @@ app.get('/createUser', function(req, res) {
 app.get('/profil', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/View/profil.html'));
 });
+app.get('/parametres', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/View/modifyUser.html'));
+});
 
 app.post('/connect', function(req, res) {
     var username = req.body.username; // Le nom d'utilisateur et le mot de passe sont récupérés ici
