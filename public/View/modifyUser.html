@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+<head>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <!-- Controller -->
+
+
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="View/css/createUser.css">
+    <link href="View/css/fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="View/ressources/favicon.ico">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+
+    <title>Gretagram</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+    <a href="/login"><span class="fleche"><i class="fas fa-arrow-left"></i></span></a>
+
+    <div class="logo">
+
+        <h1 style="font-size: 3em;">
+            <img style="width: 80px;height: 80px;" src="View/ressources/leaf.png" width="30" height="30" alt="">
+            <span class="greta">Gretagram</span></h1>
+    </div>
+
+    <div class="bloc-alert">
+        <h2 class="bloc-alert-title"></h2>
+        <p class="bloc-alert-para"></p>
+    </div>
+
+
+    <div class="container publication">
+        <div class="row justify-content-center">
+            <img class="avatar" style="width: 150px;" src="View/ressources/avatar.svg">
+            <div class="w-100"></div>
+            <h2 class="col-6" style="text-align: center;">Modification du compte</h2>
+            <div class="w-100"></div>
+            <div class="col-12 container">
+                <div class="row justify-content-center">
+                    <form id="formNewUser" class="col-12" ng-app="app" ng-controller="createUserCtrl" enctype="multipart/form-data">
+                        <div class="container" style="width: 85%;">
+                            <div class="row">
+                                <div class="input-div col-12 col-md-3 prenom">
+                                    <div class="i">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Prénom</h5>
+                                        <input class="input" id="prenom" name="prenom" type="text">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-3 nom ">
+                                    <div class="i">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Nom</h5>
+                                        <input class="input" id="nom" name="nom" type="text">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-5 mail ">
+                                    <div class="i">
+                                        <i class="fas fa-at"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="h5mail">Email</h5>
+                                        <input class="input shadow-none " id="mail" name="email" type="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <p class="mail-false"
+                                    style="margin-right: 20px; text-align: right; display:none;color: red !important;font-size: 14px;">
+                                    L'adresse mail n'est pas correct. </p>
+
+                            </div>
+                            <div class="row">
+                                <div class="input-div col-12 col-md-3 date focus">
+                                    <div class="i">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </div>
+                                    <div>
+                                        <h5>Date</h5>
+                                        <input class="input " id="date" name="age" type="date">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-3 genre">
+                                    <div class="i">
+                                        <i class="fas fa-venus-mars"></i>
+                                    </div>
+                                    <div>
+                                        <h5 id="genre-title">Genre</h5>
+                                        <select name="gender" id="genre" class="form-control">
+                                            <option value="Femme">Femme</option>
+                                            <option value="Homme">Homme</option>
+                                            <option value="Autre">Autre</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-3 profil-picture ">
+                                    <div class="i">
+                                        <i class="fas fa-images"></i>
+                                    </div>
+                                    <div class="box " style="margin-right: -30px;height: 40px;min-width: 200px;">
+                                        <input type="file" name="pp" id="file-1" class="inputfile inputfile-1 "
+                                            data-multiple-caption="{count} files selected" multiple />
+                                        <label id="file-label" for="file-1"><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="20" height="17" viewBox="0 0 20 17">
+                                                <path
+                                                    d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                                            </svg> <span class="fileSpan">Choisis une photo</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-div col-12 col-md-5 mdp1">
+                                    <div class="i">
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mdps">Mot de passe</h5>
+                                        <input class="input" id="mdp1" name="mdp1" type="password">
+                                    </div>
+                                </div>
+                                <div class="input-div col-12 col-md-5 mdp2">
+                                    <div class="i">
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mdps">Répétez votre mot de passe</h5>
+                                        <input class="input" id="mdp2" name="mdp2" type="password">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <p class="mdp-false" style="display:none;color: red !important;font-size: 14px;">Les
+                                        2 mots de passe ne correspondent pas.</p>
+
+                                </div>
+
+                            </div>
+                            <div class="row justify-content-end">
+                                <input type="button" class="btn" value="Création du compte" ng-click="newUserAct()">
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" footer">
+        <p><i class="fas fa-copyright    "></i> Copyright Gretagram Inc.</p>
+    </div>
+
+
+    <script type="text/javascript">
+        $("input").each((i) => {
+            var input = $("input").eq(i);
+            if ($("input").eq(i).val() != "") {
+                $("input").eq(i).parent().parent().addClass("focus");
+            }
+
+        })
+
+        $("input").focus(function (e) {
+            $(this).parent().parent().addClass("focus");
+        })
+        $("input").focusout(function () {
+            if ($(this).val() == "") {
+                $(this).parent().parent().removeClass("focus");
+            }
+
+        })
+    </script>
+    <!-- Angular -->
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <!-- Controller -->
+    <script src="../scripts/services/serviceConnexionAjax.js"></script>
+
+</body>
+
+</html>

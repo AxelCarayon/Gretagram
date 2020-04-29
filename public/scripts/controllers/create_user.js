@@ -69,7 +69,7 @@ angular.module('app',[])
     });
 
 var compte = {};
-$('.datepicker').pickadate();
+// $('.datepicker').pickadate();
 function creerCompte  ()  {
     var tab = $("input").serializeArray();
     try {
