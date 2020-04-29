@@ -121,14 +121,110 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 });
         };
 
+        //Statistique user
+        var stat = function () {
+            $scope.profilPubs = false;
+            $scope.profilStats = true;
+            $('.btnPub').removeClass('active');
+            $('.btnStat').addClass('active');
+
+            var likes = 0;
+            var commentaires = 0;
+            var pubLaPlusLike;
+            var pubLaPlusComment;
+            var maxLike = 0;
+            var maxComment = 0;
+            var list_likes = [];
+            var date = {};
+            var labelsTab = [];
+            var datasetLike = [];
+            var datasetComment = [];
+
+            for (const i in Object.entries($scope.pubs)) {
+                likes = likes + $scope.pubs[i].likes.length; //Nb total de likes
+                commentaires = commentaires + $scope.pubs[i].commentaires.length; //Nb total de commentaires
+                list_likes = list_likes.concat($scope.pubs[i].likes);
+                if (maxLike < $scope.pubs[i].likes.length) {
+                    pubLaPlusLike = $scope.pubs[i]
+                    maxLike = $scope.pubs[i].likes.length;
+                }
+                if (maxComment < $scope.pubs[i].commentaires.length) {
+                    pubLaPlusComment = $scope.pubs[i]
+                    maxComment = $scope.pubs[i].commentaires.length;
+                }
+
+                if (i < 50) {
+                    date[i] = { "likes" : $scope.pubs[i].likes.length, "comments" : $scope.pubs[i].commentaires.length }
+                    labelsTab.unshift($scope.pubs[i].date)
+                    datasetLike.unshift($scope.pubs[i].likes.length)
+                    datasetComment.unshift($scope.pubs[i].commentaires.length)
+                }
+            }
+            $scope.nbLike = likes;
+            $scope.nbComment = commentaires;
+            $scope.moyLikeParPub = likes / $scope.nbPublications;
+            $scope.moyCommentParPub = commentaires / $scope.nbPublications;
+            $scope.nbDifLikes = new Set(list_likes).size;
+            $scope.laPlusLike = [pubLaPlusLike]
+            $scope.laPlusComment = [pubLaPlusComment]
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var gradientFill = ctx.createLinearGradient(500, 0, 100, 0);
+            gradientFill.addColorStop(0, "rgba(133, 250, 176, 0.7)");
+            gradientFill.addColorStop(1, "rgba(143, 211, 244, 0.7)");
+
+            var gradientFill2 = ctx.createLinearGradient(500, 0, 100, 0);
+            gradientFill2.addColorStop(0, "rgba(255, 236, 210, 0.7)");
+            gradientFill2.addColorStop(1, "rgba(252, 182, 159, 0.7)");
+
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelsTab,
+                    datasets: [{
+                        label: 'likes',
+                        data: datasetLike,
+                        backgroundColor: gradientFill,
+                        borderColor: "rgba(252, 223, 87, 1)",
+                        borderWidth: 5,
+
+                    },
+                        {
+                            label: 'commentaires',
+                            data: datasetComment,
+                            backgroundColor: gradientFill2,
+                            borderColor: "rgba(252, 182, 159, 1)",
+                            borderWidth: 5
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    responsive:true
+                }
+            });
+        }
+
         if (getIdUrl()!=-1){
             idProfil = getIdUrl();
         }else {
             idProfil = idUser;
         }
 
+        //Test si userprofil = user
         if (idProfil == idUser){
             $('.follow').addClass('d-none');
+            $scope.statFunction = stat;
+            $scope.pubFunction = feel;
+        }else {
+            $('.btnStat').addClass('d-none');
+            $scope.followAct = follow;
         }
 
        // $scope.idUserConnect = idUser;
@@ -169,12 +265,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 $scope.ppProfil = ppDefault;
             }else $scope.ppProfil = user.pp;
 
-            console.log('abonné :',user.abonnes.includes(idUser));
-
             //Bouton s'abonner
-            console.log('include : ',user.abonnes.includes(idUser));
-            console.log('abonne : ',user.abonnes,idUser);
-            
             if (idIsInListOfObj(user.abonnes,idUser)){
                 $('.follow').addClass("followed");
                 $('.follow').text("Abonné");
@@ -186,8 +277,6 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             }
 
             feel();
-            $scope.followAct = follow;
-            $scope.pubFunction = feel;
 
         }, function (msg) {
             //TODO Alert
