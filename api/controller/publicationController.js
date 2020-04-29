@@ -97,7 +97,7 @@ exports.all = function(req, res) {
 
 //affiche les publications des abonnés
 exports.abonnes = function(req, res) {
-    token = authenticateToken(req.body.token);
+    token = authenticateToken(req.query.token);
     if (token === null) {
         res.sendStatus(403);
     } else {
