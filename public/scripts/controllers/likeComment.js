@@ -34,60 +34,23 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
 
     var idUserCo = serviceSession.getValue('id');
     var token = serviceSession.getValue('token');
-    var idProfil;
-
-    if (getIdUrl()!=-1){
-        idProfil = getIdUrl();
-    }else {
-        idProfil = idUserCo;
-    }
-
-    //TODO
-    var pubs = function(){
-        //Récupération des publications
-        servicePublicationAjax.getPubUser({'id':idProfil}).
-        then(function (publications) {
-            console.log('publications : ',publications);
-            $scope.pubs = publications;
-
-        },function (rep) {
-            //TODO Alert
-            console.log('error',rep);
-        });
-
-
-    };
 
     $scope.like = ($event, $index) => {
         $event.preventDefault();
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         var t = 'liked' + publication_id;
-
-        var publication_theme;
-
-        if ($($event.target).is("div")) {
-            publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
-        } else if ($($event.target).is("svg")) {
-            publication_theme = $($event.target).parent().parent().parent().parent().parent().attr('publication-theme');
-        } else if ($($event.target).is("path")) {
-            publication_theme = $($event.target).parent().parent().parent().parent().parent().parent().attr('publication-theme');
-        }
-
-
-        var publication = $scope[publication_theme][$index];
+        var publication = $scope.pubs[$index];
         var index = idInListOfObj(publication.likes,idUserCo);
 
         if (index > -1) {
-            $scope[publication_theme][$index].likes.splice(index, 1);
-            $scope[t] = false // TODO Coeur rouge
+            $scope.pubs[$index].likes.splice(index, 1);
+            $scope[t] = false
         }
         else {
-            $scope[publication_theme][$index].likes.push({_id:idUserCo});
+            $scope.pubs[$index].likes.push({_id:idUserCo});
             $scope[t] = true
         }
-
         servicePublicationAjax.setLike({'id':publication._id, 'token': token });
-
     };
 
     $scope.verifComment = ($event, $index) => {
@@ -103,26 +66,29 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         var comment = $($event.target).prev().val(); //Le message du commentaire
 
-        servicePublicationAjax.setComment({token:token,id:publication_id,message:comment}); //data = token,id:pub,message
-        pubs();
+        servicePublicationAjax.setComment({token:token,id:publication_id,message:comment}).then(
+            function (rep) {
+                $scope.pubs[$index] = rep.data;
+            },function (rep) {
+                //TODO alert error
+                console.log(rep);
+            }
+        );
 
         $($event.target).prev().val("");
         $($event.target).attr('disabled', true);
     };
 
     $scope.showModal = ($event,$index) => {
-        // TODO
-        if ($scope.pubs!=null){
-         //   console.log('hey');
-            $scope.modal = $scope.pubs[$index].commentaires;
-        }else $scope.modal = $scope.abos[$index].commentaires;
 
-       // console.log('$scope.abos',$scope.abos);
-       // console.log('$scope.modal',$scope.modal,$index);
+        $scope.modal = $scope.pubs[$index].commentaires;
+
+        console.log('$scope.modal',$scope.modal,$index);
+        console.log('$scope.modal.length',$scope.modal.length);
 
         var mem = [];
         for (var i = 0; i<$scope.modal.length;i++){
-          //  console.log('coucou');
+            console.log('coucou');
             var id = $scope.modal[i].userID;
             if (!mem.includes( id)){
                 mem.push(id);

@@ -101,22 +101,17 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 //Récupération des publications
                 servicePublicationAjax.getPubUser({'id':idProfil}).
                 then(function (publications) {
-                    console.log('publications : ',publications);
                     $scope.pubs = publications;
 
-                    console.log($scope.pubs);
-
-                    //TODO : coeur rouge
                     for (const index in ($scope.pubs)) {
                         var t ='liked' + $scope.pubs[index]._id  ;
-                        // console.log(t);
                         var likes = $scope.pubs[index].likes;
                         if (_idIsInListOfObj(likes,idUser)){
                             $scope[t] = true;
-                            //console.log('ici');
                         }
                     }
                 }, function (msg) {
+                    //TODO alert error
                     console.log('erreur serveur recupération user : '+msg);
                 });
         };

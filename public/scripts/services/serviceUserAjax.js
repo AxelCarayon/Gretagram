@@ -1,13 +1,7 @@
-var url = "/api/user";
 var app = angular.module('app');
 
-app.factory('serviceUserAjax', function ($http,$q,User) {
+app.factory('serviceUserAjax', function ($http,$q) {
         return{
-
-            getUserPrivate: function(data){
-                return $http.get('/api/private?token='+ data).then(function(data) {
-                    return new User(data.data);
-            });},
 
             getUser: function (data) {
                 //data = id:user

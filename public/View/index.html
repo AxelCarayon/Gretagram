@@ -55,7 +55,7 @@
     <link rel="stylesheet" type="text/css" href="View/css/component.css" />
 </head>
 
-<body class="clair" ng-app="app" ng-controller="ctrl">
+<body class="clair" ng-app="app" ng-controller="ctrl2">
 
     <div class="bloc-alert">
         <h2 class="bloc-alert-title"></h2>
@@ -190,38 +190,41 @@
     <!-- ========================================================================================== -->
     <!-- PUBLICATIONS ============================================================================= -->
     <!-- ========================================================================================== -->
-    <div class="container containerPublications" ng-show="trend">
+   <!-- <div class="container containerPublications" ng-show="trend">
         <div class="row publicationContainer">
             <div class="col-12 publication clair" ng-repeat="x in publications">
                 <publication-template publication-theme="publications"></publication-template>
             </div>
         </div>
     </div>
-    <!-- ========================================================================================== -->
-    <!-- ABONNEMENTS ============================================================================= -->
-    <!-- ========================================================================================== -->
+    &lt;!&ndash; ========================================================================================== &ndash;&gt;
+    &lt;!&ndash; ABONNEMENTS ============================================================================= &ndash;&gt;
+    &lt;!&ndash; ========================================================================================== &ndash;&gt;
     <div class="container containerPublications" ng-show="abonnements">
         <div class="row publicationContainer">
-            <div class="col-12 publication clair" ng-repeat="x in abos">
+            <div class="col-12 publication clair" ng-controller="likeCommentCtrl" ng-repeat="x in abos">
                 <publication-template publication-theme="abos"></publication-template>
             </div>
         </div>
-    </div>
+    </div>-->
     <!-- ========================================================================================== -->
-    <!-- PROCHE ============================================================================= -->
+    <!-- MAP PROCHE ============================================================================= -->
     <!-- ========================================================================================== -->
-    <div class="container">
+    <div class="container" ng-show="proche">
         <div class="row justify-content-center">
             <div class="map-container" style="opacity: 1;">
                 <div id="macarte"></div>
             </div>
         </div>
     </div>
-    <div class="container containerPublications" ng-show="proche">
+    <!-- ========================================================================================== -->
+    <!-- PUBLICATIONS ============================================================================= -->
+    <!-- ========================================================================================== -->
+    <div class="container containerPublications">
         <div class="row publicationContainer">
             <div class="col-12 col-12-sm container containerPublicationsProche">
-                <div class="col-12 publication clair" ng-repeat="x in proches">
-                    <publication-template publication-theme="proches"></publication-template>
+                <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in pubs">
+                    <publication-template></publication-template>
                 </div>
             </div>
         </div>
@@ -229,12 +232,17 @@
     <script src="Controller/js/js-beautify.js" charset="utf-8"></script>
     <script src="View/plugin/custom-file-input.js"></script>
     <script src="Controller/js/map.js" charset="utf-8"></script>
-    <script src="Controller/js/factory.js" charset="utf-8"></script>
+<!--    <script src="Controller/js/factory.js" charset="utf-8"></script>-->
+    <script src="../scripts/controllers/home.js"></script>
+    <script src="../scripts/services/servicePublicationAjax.js"></script>
     <script src="../scripts/services/serviceSession.js"></script>
     <script src="../scripts/services/serviceIsConnect.js"></script>
+    <script src="../scripts/services/serviceUserAjax.js"></script>
+    <script src="../scripts/controllers/likeComment.js"></script>
     <script src="../scripts/directives/directives.js" charset="utf-8"></script>
     <script src="Controller/js/publication.js" charset="utf-8"></script>
     <script src="Controller/js/create_publication.js" charset="utf-8"></script>
+
 </body>
 
 </html>
