@@ -109,4 +109,8 @@ typings/
 photos/*
 !photos/.gitkeep
 
+# fichier environnement
 !.env
+
+# fichier des logins
+/peuplement/login.js
