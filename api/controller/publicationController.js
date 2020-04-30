@@ -4,7 +4,8 @@ const User = require('../model/userModel')
 const authenticateToken = require('./loginController').authenticateToken;
 const http = require('http');
 const querystring = require('querystring');
-var url = "";
+const uuidv4 = require("uuid/v4");
+
 
 //renvoie la liste de tous les # dans le texte donné
 function findHashtags(searchText) {
@@ -208,6 +209,18 @@ exports.new = function(req, res) {
         publication.userID = token._id;
         publication.hashtag = hashtags;
         publication.userName = token.prenom + " " + token.nom
+
+        if (!req.files || Object.keys(req.files).length === 0) {
+            return res.status(400).send('No files were uploaded.');
+        }
+        let photo = req.files.photo;
+        let id = uuidv4() + path.extname(photo.name);
+        photo.mv('./photos/' + id, function(err) {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            publication.photo = id;
+        });
 
         User.findOne({ '_id': token._id }, function(err, user) {
             if (err) {
