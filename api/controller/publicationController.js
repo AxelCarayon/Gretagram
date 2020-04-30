@@ -164,6 +164,31 @@ exports.populaire = function(req, res) {
     }
 }
 
+exports.proche = function(req, res) {
+    let long;
+    let lat;
+    let longSize;
+    let latSize;
+    try {
+        long = parseInt(req.query.long);
+        lat = parseInt(req.query.lat);
+        longSize = parseInt(req.query.longSize);
+        latSize = parseInt(req.query.latSize);
+    } catch {
+        res.send("valeurs invalide");
+    }
+    Publication.find({
+        "position.long": { $gt: (long - longSize), $lt: (long + longSize) },
+        "position.lat": { $gt: (lat - latSize), $lt: (lat + latSize) }
+    }, function(err, results) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
+
 // crée une nouvelle publication
 exports.new = function(req, res) {
     url = req.get('host');

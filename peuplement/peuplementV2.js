@@ -100,6 +100,7 @@ async function genPublications(nbr, users) {
             publication.userID = users[index]._id;
             publication.userName = users[index].prenom + " " + users[index].nom;
             publication.message = "Ceci est la publication numéro " + i + " par " + users[index].prenom + " " + users[index].nom;
+            publication.position = { lat: faker.address.latitude(), long: faker.address.longitude() };
             publicationsProgress.increment();
             publication.save(function(err) {
                 if (err) {

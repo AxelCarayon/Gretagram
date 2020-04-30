@@ -1,5 +1,5 @@
 // Initialize express router
-let router = require('express').Router();
+const router = require('express').Router();
 
 // Set default API response
 router.get('/', function(req, res) {
@@ -10,12 +10,12 @@ router.get('/', function(req, res) {
 });
 
 // Lien vers les controlleurs==================================================
-let userController = require('./controller/userController');
-let loginController = require('./controller/loginController');
-let publicationController = require('./controller/publicationController');
-let hashtagController = require('./controller/HashtagController');
-let photoController = require('./controller/PhotoController');
-let likeCommentController = require('./controller/likeCommentController');
+const userController = require('./controller/userController');
+const loginController = require('./controller/loginController');
+const publicationController = require('./controller/publicationController');
+const hashtagController = require('./controller/HashtagController');
+const photoController = require('./controller/PhotoController');
+const likeCommentController = require('./controller/likeCommentController');
 // ============================================================================
 
 
@@ -38,6 +38,9 @@ router.route('/publication')
     .patch(publicationController.update) //modifier
     .post(publicationController.new) //ajouter
     .delete(publicationController.delete); //supprimer
+
+router.route('/publication/proche')
+    .get(publicationController.proche);
 
 
 router.route('/publication/all')
