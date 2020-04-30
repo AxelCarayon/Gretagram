@@ -42,6 +42,7 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
         idProfil = idUserCo;
     }
 
+    //TODO
     var pubs = function(){
         //Récupération des publications
         servicePublicationAjax.getPubUser({'id':idProfil}).
@@ -60,7 +61,7 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
     $scope.like = ($event, $index) => {
         $event.preventDefault();
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
-        var t = publication_id + 'liked';
+        var t = 'liked' + publication_id;
 
         var publication_theme;
 
@@ -110,11 +111,18 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
     };
 
     $scope.showModal = ($event,$index) => {
+        // TODO
+        if ($scope.pubs!=null){
+         //   console.log('hey');
+            $scope.modal = $scope.pubs[$index].commentaires;
+        }else $scope.modal = $scope.abos[$index].commentaires;
 
-        $scope.modal = $scope.pubs[$index].commentaires;
+       // console.log('$scope.abos',$scope.abos);
+       // console.log('$scope.modal',$scope.modal,$index);
 
         var mem = [];
         for (var i = 0; i<$scope.modal.length;i++){
+          //  console.log('coucou');
             var id = $scope.modal[i].userID;
             if (!mem.includes( id)){
                 mem.push(id);
@@ -127,6 +135,8 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
                 );
             }
         }
+      //  console.log('$scope.modal 2 ',$scope.modal,$index);
+
     };
 });
 

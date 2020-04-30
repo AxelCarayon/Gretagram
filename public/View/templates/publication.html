@@ -10,7 +10,7 @@
     <a publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}" class="stat-publication"
         ng-click="like($event,$index)" href="">
         <div publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
-            ng-show="{{x._id+'liked'}}" class=" clair">{{x.likes.length}} <span publication-section="{{x}}"
+            ng-show="{{'liked'+x._id}}" class=" clair">{{x.likes.length}} <span publication-section="{{x}}"
                 publication-id="{{x._id}}" like-list="{{x.likes}}" class="coeur"><svg
                     publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
                     aria-label="Je n’aime plus" class="_8-yf5 " fill="#ed4956" height="24" viewBox="0 0 48 48"
@@ -21,7 +21,7 @@
                         fill-rule="evenodd"></path>
                 </svg> </div>
         <div publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
-            ng-show="!{{x._id+'liked'}}" class=" clair">{{x.likes.length}} <span publication-section="{{x}}"
+            ng-show="!{{'liked'+x._id}}" class=" clair">{{x.likes.length}} <span publication-section="{{x}}"
                 publication-id="{{x._id}}" like-list="{{x.likes}}" class="coeur"><svg
                     publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
                     class="jaime" aria-label="J’aime" class="_8-yf5 " fill="#ed4956" height="24" viewBox="0 0 48 48"

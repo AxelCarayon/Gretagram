@@ -108,7 +108,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
 
                     //TODO : coeur rouge
                     for (const index in ($scope.pubs)) {
-                        var t =$scope.pubs[index]._id + "liked";
+                        var t ='liked' + $scope.pubs[index]._id  ;
                         // console.log(t);
                         var likes = $scope.pubs[index].likes;
                         if (_idIsInListOfObj(likes,idUser)){
