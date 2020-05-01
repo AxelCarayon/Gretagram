@@ -7,6 +7,7 @@ const path = require('path');
 const mongoose = require('mongoose'); // Configure bodyparser to handle post requests
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const fs = require('fs');
 app.use(bodyParser.urlencoded({ extended: true }));
 var fileupload = require("express-fileupload");
 app.use(fileupload());
@@ -60,7 +61,14 @@ app.get('/test', function(req, res) {
 });
 
 app.get('*', function(req, res) {
-    res.status(404).send("eh gros nul 202 + 202 ça fait combien mdr bah ouais 404 comme ton erreur mon pote ahahah quel looser il sait même pas taper comme il faut une URL");
+    chemin = path.join(__dirname, 'photos/', req.url.substring(1));
+    try {
+        if (fs.existsSync(chemin)) {
+            res.sendFile(chemin);
+        }
+    } catch (err) {
+        res.status(404);
+    }
 });
 
 app.listen(8080, function() {
