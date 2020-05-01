@@ -53,7 +53,6 @@ app.controller("publicationFormCtrl", function($q, $scope, serviceIsConnect, ser
         for (let index = 0; index < $('.hashtest').children().length; index++) {
             tab.push($('.hashtest').children().eq(index).text());
         }
-        // console.log('tab # : ',tab);
     });
 
     //Publier
@@ -71,25 +70,17 @@ app.controller("publicationFormCtrl", function($q, $scope, serviceIsConnect, ser
             data.append('message', message); //le message
             data.append('lat', latitude); //la latitude
             data.append('long', longitude) //la longitude
-                //TODO hashtags
-            publication.hashtags = tab;
-
-
-
-            console.log('data check ', data.get('message'));
 
             if ($(".img-create-publication").attr("src") != null) {
                 data.append('photo', $("#file-1")[0].files[0]);
-                console.log()
             }
 
             console.log('data avant requete :', data.get('message'), data.get('photo'));
 
             servicePublicationAjax.newPub(data).then(
                 function(rep) {
-                    console.log('rep newPub ', rep);
                     resetPub();
-
+                    //TODO alert succes
                 },
                 function(msg) {
                     //TODO alert error
