@@ -130,7 +130,9 @@ exports.populaire = function(req, res) {
                         "likes": 1,
                         "commentaires": 1,
                         "hashtag": 1,
-                        "length": { "$size": "$likes" }
+                        "length": {
+                            "$size": { "$ifNull": ["$likes", []] }
+                        }
                     }
                 },
                 { "$sort": { "length": -1 } },
@@ -153,7 +155,9 @@ exports.populaire = function(req, res) {
                         "likes": 1,
                         "commentaires": 1,
                         "hashtag": 1,
-                        "length": { "$size": "$likes" }
+                        "length": {
+                            "$size": { "$ifNull": ["$likes", []] }
+                        }
                     }
                 },
                 { "$sort": { "length": -1 } }
