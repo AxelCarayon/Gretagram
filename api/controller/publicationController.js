@@ -248,7 +248,6 @@ exports.new = function(req, res) {
                 if (hashtags) {
                     sendHashtags(hashtags, req.body.token, publication._id);
                 }
-                console.log("publication ok");
                 res.json({
                     message: 'New publication crated!',
                     data: publication,

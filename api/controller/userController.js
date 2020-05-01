@@ -1,7 +1,6 @@
 const User = require('../model/userModel');
 const authenticateToken = require('./loginController').authenticateToken;
 const path = require('path');
-const fs = require('fs');
 const uuidv4 = require("uuid/v4");
 
 // affiche un utilisateur
@@ -48,6 +47,43 @@ exports.private = function(req, res) {
     }
 }
 
+exports.pp = function(req, res) {
+    token = authenticateToken(req.body.token);
+    if (token === null) {
+        res.sendStatus(403);
+    } else {
+        User.findOne({ '_id': token._id }, function(err, user) {
+            if (!req.files || Object.keys(req.files).length === 0) {
+                res.status(400).send("aucune photo n'as été envoyée");
+            } else {
+                let photo = req.files.photo;
+                let id = uuidv4() + path.extname(photo.name);
+                user.pp = id;
+                if (user.photos) {
+                    user.photos.push(id);
+                } else {
+                    user.photos = [id];
+                }
+                photo.mv('./photos/' + id, function(err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            }
+            user.save(function(err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.json({
+                        message: "photo de profil changée",
+                        data: user
+                    });
+                }
+            });
+        });
+    }
+}
+
 // crée un nouvel utilisateur 
 exports.new = function(req, res) {
     let user = new User();
@@ -59,32 +95,26 @@ exports.new = function(req, res) {
     if (req.body.age) {
         user.age = new Date(req.body.age);
     }
-    if (req.body.photo) {
-        try {
-            if (!req.files || Object.keys(req.files).length === 0) {
-                return res.status(400).send('No files were uploaded.');
-            }
+    try {
+        if (!req.files || Object.keys(req.files).length === 0) {
+            console.log("pas de photo");
+            user.pp = null;
+            user.photos = [];
+        } else {
             let photo = req.files.photo;
             let id = uuidv4() + path.extname(photo.name);
+            user.pp = id;
+            user.photos = [];
+            user.photos.push(id);
             photo.mv('./photos/' + id, function(err) {
-                if (err)
-                    return res.status(500).send(err);
-                user.save(function(err) {
-                    if (err)
-                        res.json(err);
-                    user.pp = id;
-                    user.photos = [];
-                    user.photos.push(id);
-                });
+                if (err) {
+                    console.log(err);
+                }
             });
-
-        } catch (err) {
-            console.log(err);
-            res.status(500).send("erreur envoi fichier")
         }
-    } else {
-        user.pp = null;
-        user.photos = [];
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("erreur envoi fichier")
     }
     if (!req.body.nom || !req.body.prenom || !req.body.email || !req.body.password) {
         res.status(400).send("Toutes les données requises n'ont pas été entrées.");

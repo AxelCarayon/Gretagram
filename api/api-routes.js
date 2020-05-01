@@ -27,6 +27,9 @@ router.route('/user')
     .delete(userController.delete) //supprimer
     .put(userController.subscribe); //abonnner/désabonner
 
+router.route('/user/pp')
+    .post(userController.pp) //change la PP
+
 router.route('/private')
     .get(userController.private);
 
