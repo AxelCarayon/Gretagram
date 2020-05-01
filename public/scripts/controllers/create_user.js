@@ -47,14 +47,13 @@ angular.module('app',[])
             if (verif()){
                 var datas = creerCompte();
                 if (datas!={} && datas!=null){
-                    console.log(datas);
                     serviceConnexionAjax.newUser(datas).then(function (data) {
                         if (data.message === 'New user created!'){
                             //TODO : alert succes
                         }else{
                             //TODO : alert error
                         }
-                        console.log(data.message);
+                        console.log(data);
                     }, function (msg) {
                         console.log("Erreur serveur : "+msg);
                         //TODO: alert error
@@ -68,7 +67,7 @@ angular.module('app',[])
         }
     });
 
-var compte = {};
+var compte = new FormData();
 // $('.datepicker').pickadate();
 function creerCompte  ()  {
     var tab = $("input").serializeArray();
@@ -79,16 +78,17 @@ function creerCompte  ()  {
                throw Error('error');
             }
             if (v.name=='prenom' ||v.name=='nom' || v.name=='email' ||v.name=='age' ){
-                compte[v.name] = v.value;
+                compte.append(v.name,  v.value);
             }
             if (v.name=='mdp2') {
-                compte['password'] = v.value;
+                compte.append('password',  v.value);
             }
         });
-        compte['gender'] = $('#genre').val();
+        compte.append('gender',  $('#genre').val());
 
-        //TODO: Photo profil    data = photo: "C:\\fakepath\\img.jpg"
-       //compte['photo'] = $('#file-1').val();
+        if ($('#file-1')[0].files && $('#file-1')[0].files[0]){
+            compte.append('photo',  $('#file-1')[0].files[0]);
+        }
         return compte;
 
     } catch (e) {

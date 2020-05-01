@@ -136,9 +136,9 @@ app.service('servicePublicationAjax', function ($http,$q) {
             var deferred = $q.defer();
             $.ajax({
                 url: '/api/publication',
-                data: data, //on envoie le formData dans le body
-                processData: false, //on force à ne pas convertir en string le body
-                contentType: false, //on ne défiinit pas le type de contenu (vu que mutiple photo ET string)
+                data: data,
+                processData: false,
+                contentType: false,
                 type: 'POST',
                 success: function(res){
                     deferred.resolve(res);
