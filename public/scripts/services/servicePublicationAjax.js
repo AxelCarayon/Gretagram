@@ -117,5 +117,23 @@ app.service('servicePublicationAjax', function ($http,$q) {
             });
             return deferred.promise;
         },
+        newPub: function (data) {
+            var deferred = $q.defer();
+            $.ajax({
+                url: '/api/publication',
+                data: data, //on envoie le formData dans le body
+                processData: false, //on force à ne pas convertir en string le body
+                contentType: false, //on ne défiinit pas le type de contenu (vu que mutiple photo ET string)
+                type: 'POST',
+                success: function(res){
+                    deferred.resolve(res);
+                },
+                error : function(res,state,msg){
+                    console.log('service rep :',res);
+                    deferred.reject(msg);
+                }
+            });
+            return deferred.promise;
+        },
     };
 });

@@ -103,6 +103,8 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 then(function (publications) {
                     $scope.pubs = publications;
 
+                    console.log('publications : ',publications);
+
                     for (const index in ($scope.pubs)) {
                         var t ='liked' + $scope.pubs[index]._id  ;
                         var likes = $scope.pubs[index].likes;
