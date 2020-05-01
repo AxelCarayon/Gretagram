@@ -159,8 +159,8 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             }
             $scope.nbLike = likes;
             $scope.nbComment = commentaires;
-            $scope.moyLikeParPub = likes / $scope.nbPublications;
-            $scope.moyCommentParPub = commentaires / $scope.nbPublications;
+            $scope.moyLikeParPub = Math.round(((likes / $scope.nbPublications) + Number.EPSILON) * 100) / 100 
+            $scope.moyCommentParPub = Math.round(((commentaires / $scope.nbPublications) + Number.EPSILON) * 100) / 100 
             $scope.nbDifLikes = new Set(list_likes).size;
             $scope.laPlusLike = [pubLaPlusLike]
             $scope.laPlusComment = [pubLaPlusComment]
