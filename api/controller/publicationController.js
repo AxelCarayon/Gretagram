@@ -5,6 +5,7 @@ const authenticateToken = require('./loginController').authenticateToken;
 const http = require('http');
 const querystring = require('querystring');
 const uuidv4 = require("uuid/v4");
+const path = require('path');
 
 
 //renvoie la liste de tous les # dans le texte donné
@@ -192,6 +193,7 @@ exports.proche = function(req, res) {
 
 // crée une nouvelle publication
 exports.new = function(req, res) {
+    console.log(req.body);
     url = req.get('host');
     let hashtags = []
     token = authenticateToken(req.body.token);
@@ -211,16 +213,17 @@ exports.new = function(req, res) {
         publication.userName = token.prenom + " " + token.nom
 
         if (!req.files || Object.keys(req.files).length === 0) {
-            return res.status(400).send('No files were uploaded.');
+            console.log("pas de photo");
+        } else {
+            let photo = req.files.photo;
+            let id = uuidv4() + path.extname(photo.name);
+            photo.mv('./photos/' + id, function(err) {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                publication.photo = id;
+            });
         }
-        let photo = req.files.photo;
-        let id = uuidv4() + path.extname(photo.name);
-        photo.mv('./photos/' + id, function(err) {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            publication.photo = id;
-        });
 
         User.findOne({ '_id': token._id }, function(err, user) {
             if (err) {
