@@ -111,8 +111,8 @@ app.service('servicePublicationAjax', function ($http,$q) {
                 success: function(res){
                     deferred.resolve(res);
                 },
-                error : function(res,state,msg){
-                    deferred.reject(msg);
+                error : function(res){
+                    deferred.reject(res);
                 }
             });
             return deferred.promise;
