@@ -50,7 +50,33 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             $(".map-container").animate({ // La map s'affiche
                 right: '0%'
             });
+
+            navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                var longSize = 10;
+                var latSize = 10;
+                var data = { long:longitude,
+                    lat:latitude,
+                    longSize: longSize,
+                    latSize: latSize
+                }
+                servicePublicationAjax.getProche(data).then(
+                    function (res) {
+                        $scope.pubs = addIdenty(res);
+                        console.log(res);
+                    },function (res) {
+                        //TODO alert error
+                        console.log(res)
+                    })
+
+
+            },function () {
+                //TODO alert error
+                alert('La géolocalisation est obligatoire pour utilisé nos services.');
+            })
         }
+
         function addIdenty (list){
             var mem = [];
             for (var i = 0; i<list.length;i++){
