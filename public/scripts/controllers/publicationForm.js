@@ -53,11 +53,12 @@ app.controller("publicationFormCtrl", function ($q,$scope,serviceIsConnect,servi
         for (let index = 0; index < $('.hashtest').children().length; index++) {
             tab.push($('.hashtest').children().eq(index).text());
         }
-        console.log('tab # : ',tab);
+        // console.log('tab # : ',tab);
     });
 
     //Publier
     $('.btn-publier').click(() => {
+        let message = $(".text-create-publication").text()
         navigator.geolocation.getCurrentPosition(function (position) { // Je créé une fonction pour récupérer les données de géolocalisation
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
@@ -67,13 +68,14 @@ app.controller("publicationFormCtrl", function ($q,$scope,serviceIsConnect,servi
             let data = new FormData(); //on crée un formData
 
             data.append('token', serviceSession.getValue('token')); //le token
-            data.append('message',$(".text-create-publication").text()); //le message
+            data.append('message',message); //le message
             data.append('lat', latitude); //la latitude
             data.append('long', longitude) //la longitude
 //TODO hashtags
             publication.hashtags = tab;
 
-            console.log('message : ', $(".text-create-publication").text());
+            
+            
             console.log('data check ',data.get('message'));
 
             if ($(".img-create-publication").attr("src") != null ){
