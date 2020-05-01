@@ -18,7 +18,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
             servicePublicationAjax.getAbonnements(token).then(
                 function (pubs) {
-                    $scope.pubs = pubs; //TODO question corentin
+                    $scope.pubs = addIdenty(pubs);
                 },function (res) {
                     //TODO alert error
                     console.log(res)
