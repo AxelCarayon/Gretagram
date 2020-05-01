@@ -79,7 +79,7 @@
         <div class="clair collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="clair navbar-nav ml-auto nav-flex-icons">
                 <li class="clair nav-item">
-                    <a class="clair nav-link" href="/profil">Mon compte</a>
+                    <a id="moncompte" class="clair nav-link" href="/profil">Mon compte</a>
                 </li>
                 <li class="clair nav-item">
                     <a class="clair nav-link" href="#">Abonnements</a>
@@ -165,7 +165,7 @@
     <div class="container containerPublications" ng-show="profilPubs">
         <div class="row publicationContainer">
             <div class="col-12 col-12-sm container containerPublicationsProche">
-                <div class="col-12 publication clair" ng-repeat="x in pubs" ng-controller="likeCommentCtrl">
+                <div class="col-12 publication clair" ng-repeat="x in pubs | orderBy:'date':true" ng-controller="likeCommentCtrl">
                     <publication-template></publication-template>
                 </div>
             </div>
