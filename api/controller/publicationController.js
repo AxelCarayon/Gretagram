@@ -193,7 +193,6 @@ exports.proche = function(req, res) {
 
 // crée une nouvelle publication
 exports.new = function(req, res) {
-    console.log(req.body);
     url = req.get('host');
     let hashtags = []
     token = authenticateToken(req.body.token);
@@ -211,6 +210,10 @@ exports.new = function(req, res) {
         publication.userID = token._id;
         publication.hashtag = hashtags;
         publication.userName = token.prenom + " " + token.nom
+        publication.position = {
+            lat: req.body.lat,
+            long: req.body.long
+        };
 
         if (!req.files || Object.keys(req.files).length === 0) {
             console.log("pas de photo");
@@ -245,6 +248,7 @@ exports.new = function(req, res) {
                 if (hashtags) {
                     sendHashtags(hashtags, req.body.token, publication._id);
                 }
+                console.log("publication ok");
                 res.json({
                     message: 'New publication crated!',
                     data: publication,

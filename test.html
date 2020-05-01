@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page de test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <form id="target">
+        lat <input type="number" id="lat" name="long">
+        <br> long <input type="number" id="long" name="long">
+        <br> message <input type="text" id="message" name="message">
+        <br><input type="file" id="file" name="file">
+        <br><input type="submit">
+    </form>
+</body>
+
+<script>
+    $(document).ready(() => {
+        token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG90b3MiOltdLCJhYm9ubmVtZW50cyI6W10sImFib25uZXMiOltdLCJwdWJsaWNhdGlvbnMiOltdLCJfaWQiOiI1ZWFhZTFiNzk0Nzg4MDM1MDBmMWU0OGEiLCJub20iOiJKb3JkeW4iLCJwcmVub20iOiJSaWNlIiwiZ2VuZGVyIjoiZmVtYWxlIiwiZW1haWwiOiJCcm9va2U1OUBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDA5JFlkcS5hQllFVC9FdnhrNHZhRFhocC5GRzlJc3JKaDNVQlRCYW4yREw1dnNxbDdnaVRZQzZxIiwiYWdlIjoiMjAxOS0wNi0xM1QwMDowMDowMC4wMDBaIiwiX192IjowLCJpYXQiOjE1ODgzMzQ0NjF9._Xuq33pF6oyqsEOVjs5P9Mrtphy44aDDNLiVIMZjpaY"
+        $("#target").submit(function(event) {
+            let fd = new FormData();
+            fd.append('token', token);
+            fd.append('photo', $("#file")[0].files[0]);
+            fd.append('message', $("#message").val());
+            fd.append('lat', $("#lat").val());
+            fd.append('long', $("#long").val())
+
+            $.ajax({
+                url: '/api/publication',
+                data: fd,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+            event.preventDefault();
+        });
+    });
+</script>
+
+</html>
