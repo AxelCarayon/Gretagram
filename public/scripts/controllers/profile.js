@@ -258,7 +258,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             }
 
             //photo de profil
-            if (user.pp ='' || user.pp == null){
+            if (user.pp =='' || user.pp == null){
                 $scope.ppProfil = ppDefault;
             }else $scope.ppProfil = user.pp;
 
