@@ -43,11 +43,11 @@ function addNameinObjList (list , id, e){
 }
 
 function addPPinListOfObj2 (list , id, e){
-    if (e== null){
+    if (e == null){
         e = "View/ressources/profile.svg.png";
     }
     for (var i = 0; i<list.length;i++){
-        if (list[i].id == id) {
+        if (list[i].id == id || list[i].userID == id) {
             list[i].pp = e;
         }
     }
@@ -87,12 +87,13 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                         console.log('error',rep);
                     });
                 },function (res) {
+                    //TODO Alert error
                     console.log(res);
                 }
             );
         };
         // file de l'user
-        var feel = function () {
+        var feel = function (pp) {
                 $scope.profilPubs = true;
                 $scope.profilStats = false;
                 $('.btnPub').addClass('active');
@@ -101,7 +102,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 //Récupération des publications
                 servicePublicationAjax.getPubUser({'id':idProfil}).
                 then(function (publications) {
-                    $scope.pubs = publications;
+                    $scope.pubs = addPPinListOfObj2(publications,idProfil,pp);
 
                     console.log('publications : ',publications);
 
@@ -273,7 +274,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 $('.follow').text("S'abonner");
             }
 
-            feel();
+            feel(user.pp);
 
         }, function (msg) {
             //TODO Alert
