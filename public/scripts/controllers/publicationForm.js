@@ -65,21 +65,17 @@ app.controller("publicationFormCtrl", function ($q,$scope,serviceIsConnect,servi
 
             var publication = {};
 
-            let data = new FormData(); //on crée un formData
+            let data = new FormData();
 
-            data.append('token', serviceSession.getValue('token')); //le token
-            data.append('message',message); //le message
-            data.append('lat', latitude); //la latitude
-            data.append('long', longitude) //la longitude
+            data.append('token', serviceSession.getValue('token'));
+            data.append('message',message);
+            data.append('lat', latitude);
+            data.append('long', longitude)
 //TODO hashtags
             publication.hashtags = tab;
 
-            
-            
-            console.log('data check ',data.get('message'));
-
             if ($(".img-create-publication").attr("src") != null ){
-                    data.append('photo', $("#file-1")[0].files[0]); //la photo
+                    data.append('photo', $("#file-1")[0]); //la photo
             }
 
             console.log('data avant requete :',data.get('message'), data.get('photo'));
@@ -92,7 +88,7 @@ app.controller("publicationFormCtrl", function ($q,$scope,serviceIsConnect,servi
                 },function (msg) {
                     //TODO alert error
                     console.log('rep error newPub ',msg);
-                })
+            })
 
         }, function () {
             //TODO alert error
