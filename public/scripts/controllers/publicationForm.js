@@ -1,9 +1,9 @@
-function resetPub (){
+function resetPub() {
     $(".text-create-publication").html("");
     console.log($('.fileSpan'));
 
     $('.fileSpan').text('Choisis une photo');
-    $('.img-create-publication').attr('src', "").css("display","none");
+    $('.img-create-publication').attr('src', "").css("display", "none");
 }
 
 
@@ -20,7 +20,7 @@ function readURL(input) {
 
 
 
-app.controller("publicationFormCtrl", function ($q,$scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax) {
+app.controller("publicationFormCtrl", function($q, $scope, serviceIsConnect, servicePublicationAjax, serviceSession, serviceUserAjax) {
     // TODO
     $(".geoImg").click((e) => {
         $(e.target).toggleClass('disabled');
@@ -59,7 +59,7 @@ app.controller("publicationFormCtrl", function ($q,$scope,serviceIsConnect,servi
     //Publier
     $('.btn-publier').click(() => {
         let message = $(".text-create-publication").text()
-        navigator.geolocation.getCurrentPosition(function (position) { // Je créé une fonction pour récupérer les données de géolocalisation
+        navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
 
@@ -68,33 +68,32 @@ app.controller("publicationFormCtrl", function ($q,$scope,serviceIsConnect,servi
             let data = new FormData(); //on crée un formData
 
             data.append('token', serviceSession.getValue('token')); //le token
-            data.append('message',message); //le message
+            data.append('message', message); //le message
             data.append('lat', latitude); //la latitude
             data.append('long', longitude) //la longitude
-//TODO hashtags
+                //TODO hashtags
             publication.hashtags = tab;
 
-            
-            
-            console.log('data check ',data.get('message'));
 
-            if ($(".img-create-publication").attr("src") != null ){
-                    data.append('photo', $("#file-1")[0].files[0]); //la photo
-            }
 
-            console.log('data avant requete :',data.get('message'), data.get('photo'));
+            console.log('data check ', data.get('message'));
+
+            data.append('photo', $("#file-1")[0].files[0]);
+
+            console.log('data avant requete :', data.get('message'), data.get('photo'));
 
             servicePublicationAjax.newPub(data).then(
-                function(rep){
-                    console.log('rep newPub ',rep);
+                function(rep) {
+                    console.log('rep newPub ', rep);
                     resetPub();
 
-                },function (msg) {
+                },
+                function(msg) {
                     //TODO alert error
-                    console.log('rep error newPub ',msg);
+                    console.log('rep error newPub ', msg);
                 })
 
-        }, function () {
+        }, function() {
             //TODO alert error
             alert('La géolocalisation est obligatoire pour utilisé nos services.');
         });

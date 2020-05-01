@@ -224,8 +224,8 @@ exports.new = function(req, res) {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                publication.photo = id;
             });
+            publication.photo = id;
         }
 
         User.findOne({ '_id': token._id }, function(err, user) {
