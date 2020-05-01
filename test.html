@@ -20,26 +20,31 @@
 
 <script>
     $(document).ready(() => {
+        //le token nécessaire pour identifier la personne
         token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG90b3MiOltdLCJhYm9ubmVtZW50cyI6W10sImFib25uZXMiOltdLCJwdWJsaWNhdGlvbnMiOltdLCJfaWQiOiI1ZWFhZTFiNzk0Nzg4MDM1MDBmMWU0OGEiLCJub20iOiJKb3JkeW4iLCJwcmVub20iOiJSaWNlIiwiZ2VuZGVyIjoiZmVtYWxlIiwiZW1haWwiOiJCcm9va2U1OUBob3RtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDA5JFlkcS5hQllFVC9FdnhrNHZhRFhocC5GRzlJc3JKaDNVQlRCYW4yREw1dnNxbDdnaVRZQzZxIiwiYWdlIjoiMjAxOS0wNi0xM1QwMDowMDowMC4wMDBaIiwiX192IjowLCJpYXQiOjE1ODgzMzQ0NjF9._Xuq33pF6oyqsEOVjs5P9Mrtphy44aDDNLiVIMZjpaY"
+
+        //quand on submit
         $("#target").submit(function(event) {
-            let fd = new FormData();
-            fd.append('token', token);
-            fd.append('photo', $("#file")[0].files[0]);
-            fd.append('message', $("#message").val());
-            fd.append('lat', $("#lat").val());
-            fd.append('long', $("#long").val())
+
+            let fd = new FormData(); //on crée un formData
+
+            fd.append('token', token); //le token
+            fd.append('photo', $("#file")[0].files[0]); //la photo
+            fd.append('message', $("#message").val()); //le message
+            fd.append('lat', $("#lat").val()); //la latitude
+            fd.append('long', $("#long").val()) //la longitude
 
             $.ajax({
                 url: '/api/publication',
-                data: fd,
-                processData: false,
-                contentType: false,
+                data: fd, //on envoie le formData dans le body
+                processData: false, //on force à ne pas convertir en string le body
+                contentType: false, //on ne défiinit pas le type de contenu (vu que mutiple photo ET string)
                 type: 'POST',
                 success: function(data) {
                     console.log(data);
                 }
             });
-            event.preventDefault();
+            event.preventDefault(); //on empèche de recharger la page
         });
     });
 </script>
