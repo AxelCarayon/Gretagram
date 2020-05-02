@@ -313,7 +313,10 @@ div[contenteditable] {
     position: relative;
     top: 20px;
     left: 20px;
-    height: 30px;
+    object-fit: cover;
+    width:50px;
+    height:50px;
+    border-radius: 50%;
 }
 
 .nomProfil {
@@ -392,9 +395,21 @@ div[contenteditable] {
     }
 }
 
+img[src*="undefined"]  {
+    height: 10px;
+    margin-bottom: -40px;
+}
+
+img[src=""] {
+    height: 10px;
+    margin-bottom: -40px;
+ }
+
 .imagePublication {
     position: relative;
     width: 100%;
+    height: 700px;
+    object-fit: cover;
     margin-top: 60px;
 }
 
@@ -710,9 +725,11 @@ label {
     }
 
     .profilPicture {
-        height: 150px;
-        width: 150px;
+        object-fit: cover;
+        width:150px;
+        height:150px;
         transform: translateY(10%);
+        border-radius : 50%;
     }
 }
 
