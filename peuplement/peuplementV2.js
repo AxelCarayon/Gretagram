@@ -5,6 +5,8 @@ const Publication = require('../api/model/publicationModel');
 const mongoose = require('mongoose');
 const cliProgress = require('cli-progress');
 const fs = require('fs');
+const request = require('request');
+const uuidv4 = require("uuid/v4");
 require('dotenv').config();
 
 //Fonctions auxiliaires=======================================================================
@@ -15,6 +17,16 @@ function getRandomInt(max) {
 function is_numeric(str) {
     return /^\d+$/.test(str);
 }
+
+async function download(size, filename) {
+    return new Promise(resolve => {
+        request.head("https://picsum.photos/" + size, function(err, res, body) {
+            request('https://picsum.photos/' + size).pipe(fs.createWriteStream(filename)).on('close', () => {
+                resolve();
+            });
+        });
+    });
+};
 //============================================================================================
 
 //Fonctions principales=======================================================================
@@ -86,7 +98,7 @@ async function genUsers(nbr, write) {
 }
 
 //Crée les publications
-async function genPublications(nbr, users) {
+async function genPublications(nbr, users, size) {
     let cpt = 0;
     let publications = [];
     return new Promise(async resolve => {
@@ -101,6 +113,14 @@ async function genPublications(nbr, users) {
             publication.userName = users[index].prenom + " " + users[index].nom;
             publication.message = "Ceci est la publication numéro " + i + " par " + users[index].prenom + " " + users[index].nom;
             publication.position = { lat: faker.address.latitude(), long: faker.address.longitude() };
+            await download(size, "photo.jpg");
+            let id = uuidv4() + ".jpg";
+            fs.rename('photo.jpg', '../photos/' + id, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+            publication.photo = id;
             publicationsProgress.increment();
             publication.save(function(err) {
                 if (err) {
@@ -203,7 +223,7 @@ async function genComments(nbr, publications, users) {
 }
 
 
-async function lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, write) {
+async function lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, write, size) {
     //utilisateurs
     console.log("Génération des utilisateurs en cours");
     usersProgress.start(nbUtilisateurs, 0, {
@@ -217,7 +237,7 @@ async function lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, nbLike
     publicationsProgress.start(nbPublications, 0, {
         speed: "N/A"
     });
-    let publications = await genPublications(nbPublications, users);
+    let publications = await genPublications(nbPublications, users, size);
     publicationsProgress.stop();
 
     //commentaires
@@ -304,16 +324,27 @@ let lancerQuestions3 = function(nbUtilisateurs, nbPublications, nbCommentaires) 
 
 let lancerQuestions4 = function(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes) {
     r1.question('Sauvegarder les username et mot de passe dans un fichier "login.txt" ? (o/n)\n', function(answer) {
-        if (answer == "o") {
-            lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, true);
-            return r1.close();
-        }
-        if (answer == "n") {
-            lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, false);
-            return r1.close();
+        if (answer === "o" || answer === "n") {
+            if (answer === "o") {
+                lancerQuestions5(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, true);
+            } else {
+                lancerQuestions5(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, false);
+            }
         } else {
             console.log("erreur : réponse o(oui) ou n(non) attendue");
             lancerQuestions4(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes);
+        }
+    });
+}
+
+let lancerQuestions5 = function(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, write) {
+    r1.question('Quelle taille (en pixels) pour les photos des publications ?\n', function(answer) {
+        if (is_numeric(answer)) {
+            lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, write, answer);
+            return r1.close();
+        } else {
+            console.log("erreur : le nombre de commentaires doit être un chiffre");
+            lancerQuestions5(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, write);
         }
     });
 }
