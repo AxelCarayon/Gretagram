@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="js" lang="fr" dir="ltr" >
+<html class="js" lang="fr" dir="ltr">
 
 <head>
     <!-- Angular -->
@@ -60,7 +60,7 @@
 
 <body class="clair" ng-app="app" ng-controller="testCtrl">
 
-<title>{{prenomEtNom}} Account</title>
+    <title>{{prenomEtNom}} Account</title>
 
 
     <div class="bloc-alert">
@@ -94,7 +94,7 @@
                         aria-labelledby="navbarDropdownMenuLink-333">
                         <a href="#" class="clair dropdown-item">Paramètres du compte</a>
                         <a href="#" class="clair dropdown-item change-theme" ng-click="select()">Changement du thème</a>
-                        <a href="/login" class="clair dropdown-item" >Déconnexion</a>
+                        <a href="/login" class="clair dropdown-item">Déconnexion</a>
                     </div>
                 </li>
             </ul>
@@ -110,7 +110,8 @@
             <div class="col-10">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col profilName">{{prenomEtNom}} <button class="follow" ng-click="followAct()">S'abonner</button></div>
+                        <div class="col profilName">{{prenomEtNom}} <button class="follow"
+                                ng-click="followAct()">S'abonner</button></div>
                     </div>
                     <div class="row donnees">
                         <div class="col-12 col-sm-4 donnee" ng-click="pubFunction()">
@@ -165,7 +166,8 @@
     <div class="container containerPublications" ng-show="profilPubs">
         <div class="row publicationContainer">
             <div class="col-12 col-12-sm container containerPublicationsProche">
-                <div class="col-12 publication clair" ng-repeat="x in pubs | orderBy:'date':true" ng-controller="likeCommentCtrl">
+                <div class="col-12 publication clair" ng-repeat="x in pubs | orderBy:'date':true"
+                    ng-controller="likeCommentCtrl">
                     <publication-template></publication-template>
                 </div>
             </div>
@@ -293,7 +295,8 @@
                         </div>
                         <div class="comment-body">
                             <a userid="{{abonnement.id}}" ng-click="redirectProfil($event)"
-                                style="cursor:pointer; margin-top: 30px;" class="comment-nom">{{abonnement.userName}}</a>
+                                style="cursor:pointer; margin-top: 30px;"
+                                class="comment-nom">{{abonnement.userName}}</a>
                         </div>
 
                     </div>
@@ -303,6 +306,34 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal-comment" ng-controller="likeCommentCtrl" tabindex="-1" role="dialog"
+        aria-labelledby="Model-mdp-oublieTitle" aria-hiddn="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content modal-color">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">{{modal.length}} Commentaires</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="comment" ng-repeat="comment in modal | orderBy:'-'">
+                        <div class="comment-img">
+                            <img src="{{comment.pp}}" class="photoProfil" alt="">
+                        </div>
+                        <div class="comment-body">
+                            <div class="comment-nom"><a href="#" userid="{{comment.userID}}"
+                                    ng-click="redirectProfil($event)">{{ comment.userName}}</a> </div>
+                            <!-- TODO nom user -->
+                            <p class="date">{{comment.date | date:'MM-dd-yyyy HH:mm'}}</p>
+                            <p>{{comment.message}}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="View/plugin/custom-file-input.js"></script>
     <script src="Controller/js/publication.js" charset="utf-8"></script>
