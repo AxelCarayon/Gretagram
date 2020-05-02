@@ -75,8 +75,10 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     color: 'rgb(199, 201, 249)',
                     fillColor: 'rgb(20, 122, 186)',
                     fillOpacity: 0.8,
-                    radius: 50
+                    radius: 200
                 })
+                console.log(circle);
+                
                 circle.bindPopup("Vous êtes ici.").openPopup();
                 circle.addTo(mymap);
                 // ------
