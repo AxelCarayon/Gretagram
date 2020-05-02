@@ -8,6 +8,18 @@ function idInListOfObj(list,e){
     return -1;
 }
 
+function getPublicationWithId ($scope,obj) {
+    let pub;
+    
+    for (const i in $scope.pubs) {     
+        if ($scope.pubs[i]._id == obj) {
+            pub = $scope.pubs[i];
+            break;
+        }
+    }   
+    return pub
+}
+
 function addNameinListOfObj (list , id, e){
     for (var i = 0; i<list.length;i++){
         if (list[i].userID == id) {
@@ -65,10 +77,17 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
     $scope.sendComment = ($event, $index) => {
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         var comment = $($event.target).prev().val(); //Le message du commentaire
-
+        console.log(publication_id);
+        
+        
         servicePublicationAjax.setComment({token:token,id:publication_id,message:comment}).then(
             function (rep) {
-                $scope.pubs[$index] = rep.data;
+                for (const i in $scope.pubs) {     
+                    if ($scope.pubs[i]._id == publication_id) {
+                        pub = $scope.pubs[i] = rep.data;
+                        break;
+                    }
+                }   
             },function (rep) {
                 //TODO alert error
                 console.log(rep);
@@ -79,31 +98,7 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
         $($event.target).attr('disabled', true);
     };
 
-    $scope.showModal = ($event,$index) => {
 
-        $scope.modal = $scope.pubs[$index].commentaires;
-
-        console.log('$scope.modal',$scope.modal,$index);
-        console.log('$scope.modal.length',$scope.modal.length);
-
-        var mem = [];
-        for (var i = 0; i<$scope.modal.length;i++){
-            console.log('coucou');
-            var id = $scope.modal[i].userID;
-            if (!mem.includes( id)){
-                mem.push(id);
-
-                serviceUserAjax.getUser({id:id}).then(function (user) {
-                        var name = user.prenom +' '+user.nom;
-                        $scope.modal = addNameinListOfObj($scope.modal,user.id,name);
-                        $scope.modal = addPPinListOfObj($scope.modal,user.id,user.pp);
-                    }
-                );
-            }
-        }
-      //  console.log('$scope.modal 2 ',$scope.modal,$index);
-
-    };
 });
 
 

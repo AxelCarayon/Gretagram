@@ -57,7 +57,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 right: '0%'
             });
             //theme carte
-            var sombre = true; // TODO: Cette variable sera une variable globale décidée par l'utilisateur
+            var sombre = true;
             themeMap(sombre,mymap);
             $('.change-theme').click(() => { // On change la map de couleur quand l'utilisateur switch de theme
                 sombre = !sombre;
@@ -84,28 +84,17 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 console.log('myPosition',mylatitude,mylongitude);
                 console.log('getBounds',mymap.getBounds());
 
-                var zone = mymap.getBounds();
-                var lat1 = zone._northEast.lat;
-                var long1 = zone._northEast.lng;
-                var lat2 = zone._southWest.lat;
-                var long2 = zone._southWest.lng;
-
-                var data = { lat1:lat1,
-                    long1:long1,
-                    lat2: lat2,
-                    long2: long2
-                }
-                pubsCarte(data);
+                //init les pubs avec ma position
+                pubsCarte(genarateData(mymap.getBounds()));
 
                 mymap.on('zoomend', function() {
-                    // callback
-                    console.log('zoomend',mymap.getBounds());
+                    console.log('zoomend');
+                    pubsCarte(genarateData(mymap.getBounds()));
                 });
 
                 mymap.on('dragend', function() {
-                    // callback
-                    console.log('dragend',mymap.getBounds());
-
+                    console.log('dragend');
+                    pubsCarte(genarateData(mymap.getBounds()));
                 });
 
             },function () {
@@ -183,6 +172,40 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             window.location.href = "/profil?id="+id;
         }
 
+        $scope.showModal = ($event,$index) => {
+
+            let pub;
+            let publication_id = $event.target.getAttribute("publication-id")
+            
+            for (const i in $scope.pubs) {     
+                if ($scope.pubs[i]._id == publication_id) {
+                    pub = $scope.pubs[i];
+                    break;
+                }
+            }             
+            
+            $scope.modal = pub.commentaires;
+    
+            console.log('$scope.modal',pub.commentaires);
+    
+            var mem = [];
+            for (var i = 0; i<$scope.modal.length;i++){
+                var id = $scope.modal[i].userID;
+                if (!mem.includes( id)){
+                    mem.push(id);
+    
+                    serviceUserAjax.getUser({id:id}).then(function (user) {
+                            var name = user.prenom +' '+user.nom;
+                            $scope.modal = addNameinListOfObj($scope.modal,user.id,name);
+                            $scope.modal = addPPinListOfObj($scope.modal,user.id,user.pp);
+                        }
+                    );
+                }
+            }
+          //  console.log('$scope.modal 2 ',$scope.modal,$index);
+    
+        };
+
     }
 })
 
@@ -253,4 +276,19 @@ function themeMap(sombre,mymap){
             maxZoom: 18
         }).addTo(mymap);
     }
+}
+
+function genarateData(zone) {
+    var lat1 = zone._northEast.lat;
+    var long1 = zone._northEast.lng;
+    var lat2 = zone._southWest.lat;
+    var long2 = zone._southWest.lng;
+
+    var data = { lat1:lat1,
+        long1:long1,
+        lat2: lat2,
+        long2: long2
+    }
+
+    return data;
 }
