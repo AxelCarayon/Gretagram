@@ -223,7 +223,7 @@
     <div class="container containerPublications">
         <div class="row publicationContainer">
             <div class="col-12 col-12-sm container containerPublicationsProche">
-                <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in pubs">
+                <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in pubs | orderBy:'date':true">
                     <publication-template></publication-template>
                 </div>
             </div>
