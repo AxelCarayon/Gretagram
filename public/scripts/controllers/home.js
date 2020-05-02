@@ -20,7 +20,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             servicePublicationAjax.getAbonnements(token).then(
                 function (pubs) {
                     $scope.pubs = addIdenty(pubs);
-                    coeurRouge($scope.pubs , idUser);
+                    coeurRouge();
 
                 },function (res) {
                     //TODO alert error
@@ -40,7 +40,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             servicePublicationAjax.getTrend(sizeTrend).then(
                 function (rep) {
                     $scope.pubs = addIdenty(rep);
-                    coeurRouge($scope.pubs,idUser);
+                    coeurRouge();
 
                 },function (res) {
                     //TODO alert error
@@ -69,7 +69,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 servicePublicationAjax.getProche(data).then(
                     function (res) {
                         $scope.pubs = addIdenty(res);
-                        coeurRouge($scope.pubs,idUser);
+                        coeurRouge();
                         console.log(res);
                     },function (res) {
                         //TODO alert error
