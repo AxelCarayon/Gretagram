@@ -181,6 +181,11 @@ exports.carre = function(req, res) {
             latMax = parseInt(req.query.lat2);
             longMin = parseInt(req.query.long1);
             longMax = parseInt(req.query.long2);
+        } else {
+            latMin = parseInt(req.query.lat2);
+            latMax = parseInt(req.query.lat1);
+            longMin = parseInt(req.query.long2);
+            longMax = parseInt(req.query.long1);
         }
     } catch {
         res.send("valeurs invalide");
