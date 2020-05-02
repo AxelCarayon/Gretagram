@@ -83,6 +83,9 @@ $(document).ready(() => {
         $('.animated-icon1').toggleClass('open');
     });
 
-
+    $('.imagePublication').click((e)=>{
+        console.log(e);
+        
+    })
 
 });
