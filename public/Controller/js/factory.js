@@ -87,7 +87,6 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect,serviceSes
 
         $scope.showModal = ($event,$index) =>{
             
-            
             var publication_theme;
             if ($($event.target).is("div")) {
                 publication_theme = $($event.target).parent().parent().parent().attr('publication-theme');
@@ -160,7 +159,7 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect,serviceSes
 
 
         $scope.aboFunction = () => {
-            $scope.abonnements = true; // Quand on appuie sur le bouton abonnement le container des abonnements s'affichent les autres se cachent
+            $scope.abonnements = true; // Quand on appuie sur le bouton abonnement le container des abonnements s'affiche les autres se cachent
             $scope.trend = false;
             $scope.proche = false;
             $(".map-container").animate({ // La map reste se cache
@@ -168,7 +167,7 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect,serviceSes
             });
 
         };
-        $scope.trendFunction = () => { // Quand on appuie sur le bouton trend le container des trend s'affichent les autres se cachent
+        $scope.trendFunction = () => { // Quand on appuie sur le bouton trend le container des trend s'affiche les autres se cachent
             $scope.abonnements = false;
             $scope.trend = true;
             $scope.proche = false;
@@ -177,7 +176,7 @@ app.controller("ctrl", function ($scope, dataFactory,serviceIsConnect,serviceSes
             });
 
         };
-        $scope.procheFunction = () => { // Quand on appuie sur le bouton proche le container des proche s'affichent les autres se cachent
+        $scope.procheFunction = () => { // Quand on appuie sur le bouton proche le container des proches s'affiche les autres se cachent
             $scope.abonnements = false;
             $scope.trend = false;
             $scope.proche = true;

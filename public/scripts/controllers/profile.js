@@ -119,6 +119,40 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 });
         };
 
+        $scope.showModal = ($event,$index) => {
+
+            let pub;
+            let publication_id = $event.target.getAttribute("publication-id")
+            
+            for (const i in $scope.pubs) {     
+                if ($scope.pubs[i]._id == publication_id) {
+                    pub = $scope.pubs[i];
+                    break;
+                }
+            }             
+            
+            $scope.modal = pub.commentaires;
+    
+            console.log('$scope.modal',pub.commentaires);
+    
+            var mem = [];
+            for (var i = 0; i<$scope.modal.length;i++){
+                var id = $scope.modal[i].userID;
+                if (!mem.includes( id)){
+                    mem.push(id);
+    
+                    serviceUserAjax.getUser({id:id}).then(function (user) {
+                            var name = user.prenom +' '+user.nom;
+                            $scope.modal = addNameinListOfObj($scope.modal,user.id,name);
+                            $scope.modal = addPPinListOfObj($scope.modal,user.id,user.pp);
+                        }
+                    );
+                }
+            }
+          //  console.log('$scope.modal 2 ',$scope.modal,$index);
+    
+        };
+
         //Statistique user
         var stat = function () {
             $scope.profilPubs = false;
