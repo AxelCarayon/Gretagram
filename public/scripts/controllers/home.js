@@ -8,6 +8,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
     } else {
         var token = serviceSession.getValue('token');
         var sizeTrend = 100;
+        var idUser = serviceSession.getValue('id');
 
         var getAbo = function (){
             $scope.proche = false;
@@ -19,6 +20,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             servicePublicationAjax.getAbonnements(token).then(
                 function (pubs) {
                     $scope.pubs = addIdenty(pubs);
+                    coeurRouge($scope.pubs , idUser);
+
                 },function (res) {
                     //TODO alert error
                     console.log(res)
@@ -37,6 +40,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             servicePublicationAjax.getTrend(sizeTrend).then(
                 function (rep) {
                     $scope.pubs = addIdenty(rep);
+                    coeurRouge($scope.pubs,idUser);
+
                 },function (res) {
                     //TODO alert error
                     console.log(res)
@@ -64,6 +69,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 servicePublicationAjax.getProche(data).then(
                     function (res) {
                         $scope.pubs = addIdenty(res);
+                        coeurRouge($scope.pubs,idUser);
                         console.log(res);
                     },function (res) {
                         //TODO alert error
@@ -96,6 +102,16 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             }
             return list;
         }
+
+        function coeurRouge(){
+            for (const index in ($scope.pubs)) {
+                var t ='liked' + $scope.pubs[index]._id  ;
+                var likes = $scope.pubs[index].likes;
+                if (_idIsInListOfObj(likes,idUser)){
+                    $scope[t] = true;
+                }
+            }
+        }
         getTrend();
 
         $scope.aboFunction = function() {
@@ -118,3 +134,12 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
     }
 })
+
+function _idIsInListOfObj(list,e){
+    for (var i = 0; i<list.length;i++){
+        if (list[i]._id == e) {
+            return true
+        }
+    }
+    return false;
+}
