@@ -176,23 +176,23 @@ exports.carre = function(req, res) {
     let longMin;
     let longMax;
     try {
-        if (parseInt(req.query.lat1) <= parseInt(req.query.lat2)) {
-            latMin = parseInt(req.query.lat1);
-            latMax = parseInt(req.query.lat2);
-            longMin = parseInt(req.query.long1);
-            longMax = parseInt(req.query.long2);
+        if (parseFloat(req.query.lat1) <= parseFloat(req.query.lat2)) {
+            latMin = parseFloat(req.query.lat1);
+            latMax = parseFloat(req.query.lat2);
+            longMin = parseFloat(req.query.long1);
+            longMax = parseFloat(req.query.long2);
         } else {
-            latMin = parseInt(req.query.lat2);
-            latMax = parseInt(req.query.lat1);
-            longMin = parseInt(req.query.long2);
-            longMax = parseInt(req.query.long1);
+            latMin = parseFloat(req.query.lat2);
+            latMax = parseFloat(req.query.lat1);
+            longMin = parseFloat(req.query.long2);
+            longMax = parseFloat(req.query.long1);
         }
     } catch {
         res.send("valeurs invalide");
     }
-    Publication.find({
-        "position.long": { $gt: longMin, $lt: longMax },
-        "position.lat": { $gt: latMin, $lt: latMax }
+    Publication.find({ //j'affiche toutes les publications ou :
+        "position.long": { $gt: longMin, $lt: longMax }, //la longitude est entre la longitude mini et maxi
+        "position.lat": { $gt: latMin, $lt: latMax } //la latitude est entre la latitude mini et maxi
     }, function(err, results) {
         if (err) {
             res.send(err);
@@ -208,10 +208,10 @@ exports.proche = function(req, res) {
     let longSize;
     let latSize;
     try {
-        long = parseInt(req.query.long);
-        lat = parseInt(req.query.lat);
-        longSize = parseInt(req.query.longSize);
-        latSize = parseInt(req.query.latSize);
+        long = parseFloat(req.query.long);
+        lat = parseFloat(req.query.lat);
+        longSize = parseFloat(req.query.longSize);
+        latSize = parseFloat(req.query.latSize);
     } catch {
         res.send("valeurs invalide");
     }
