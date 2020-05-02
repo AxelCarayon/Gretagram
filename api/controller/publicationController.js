@@ -170,6 +170,33 @@ exports.populaire = function(req, res) {
     }
 }
 
+exports.carre = function(req, res) {
+    let latMin;
+    let latMax;
+    let longMin;
+    let longMax;
+    try {
+        if (parseInt(req.query.lat1) <= parseInt(req.query.lat2)) {
+            latMin = parseInt(req.query.lat1);
+            latMax = parseInt(req.query.lat2);
+            longMin = parseInt(req.query.long1);
+            longMax = parseInt(req.query.long2);
+        }
+    } catch {
+        res.send("valeurs invalide");
+    }
+    Publication.find({
+        "position.long": { $gt: longMin, $lt: longMax },
+        "position.lat": { $gt: latMin, $lt: latMax }
+    }, function(err, results) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(results);
+        }
+    });
+}
+
 exports.proche = function(req, res) {
     let long;
     let lat;

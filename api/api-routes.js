@@ -45,6 +45,9 @@ router.route('/publication')
 router.route('/publication/proche')
     .get(publicationController.proche);
 
+router.route('/publication/zone')
+    .get(publicationController.carre);
+
 
 router.route('/publication/all')
     .get(publicationController.all);
