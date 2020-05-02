@@ -65,20 +65,36 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             });
 
             navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
-                var longSize = 10;
-                var latSize = 10;
-                var data = { long:longitude,
-                    lat:latitude,
-                    longSize: longSize,
-                    latSize: latSize
-                }
+                var mylatitude = position.coords.latitude;
+                var mylongitude = position.coords.longitude;
 
-                mymap.setView([latitude, longitude], longSize);
-                console.log('myPosition',latitude,longitude);
+                mymap.setView([mylatitude, mylongitude], 11);
+
+                //------TODO ça marche pas
+                var circle = L.circle([mylatitude, mylongitude], { // Ajout d'un cercle à l'emplacement de l'utilisateur
+                    color: 'rgb(199, 201, 249)',
+                    fillColor: 'rgb(20, 122, 186)',
+                    fillOpacity: 0.8,
+                    radius: 50
+                })
+                circle.bindPopup("Vous êtes ici.").openPopup();
+                circle.addTo(mymap);
+                // ------
+
+                console.log('myPosition',mylatitude,mylongitude);
                 console.log('getBounds',mymap.getBounds());
 
+                var zone = mymap.getBounds();
+                var lat1 = zone._northEast.lat;
+                var long1 = zone._northEast.lng;
+                var lat2 = zone._southWest.lat;
+                var long2 = zone._southWest.lng;
+
+                var data = { lat1:lat1,
+                    long1:long1,
+                    lat2: lat2,
+                    long2: long2
+                }
                 pubsCarte(data);
 
                 mymap.on('zoomend', function() {
@@ -92,12 +108,13 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
                 });
 
-
-
-
             },function () {
                 //TODO alert error
                 alert('La géolocalisation est obligatoire pour utilisé nos services.');
+            }, {
+                maximumAge: 600000,
+                timeout: 5000,
+                enableHighAccuracy: true
             })
         }
 
@@ -132,16 +149,17 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         }
 
         function pubsCarte(data) {
+            console.log('pubsCarte',data);
             servicePublicationAjax.getProche(data).then(
                 function (res) {
                     $scope.pubs = addIdenty(res);
-                    console.log(' $scope.pubs', $scope.pubs);
+                    console.log('pubsCarte res', res);
                     coeurRouge();
                     initMarker($scope.pubs,mymap);
 
                 },function (res) {
                     //TODO alert error
-                    console.log(res)
+                    console.log('pubsCarte error ',res);
             })
         }
 

@@ -120,7 +120,7 @@ app.service('servicePublicationAjax', function ($http,$q) {
         getProche: function (data) {
             var deferred = $q.defer();
             $.ajax({
-                url: '/api/publication/proche',
+                url: '/api/publication/zone',
                 method: "GET",
                 data: data,
                 success: function(res){
