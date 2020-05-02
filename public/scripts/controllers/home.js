@@ -8,6 +8,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
     } else {
         var token = serviceSession.getValue('token');
         var sizeTrend = 100;
+        var idUser = serviceSession.getValue('id');
 
         var getAbo = function (){
             $scope.proche = false;
@@ -19,6 +20,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             servicePublicationAjax.getAbonnements(token).then(
                 function (pubs) {
                     $scope.pubs = addIdenty(pubs);
+                    coeurRouge();
+
                 },function (res) {
                     //TODO alert error
                     console.log(res)
@@ -37,6 +40,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             servicePublicationAjax.getTrend(sizeTrend).then(
                 function (rep) {
                     $scope.pubs = addIdenty(rep);
+                    coeurRouge();
+
                 },function (res) {
                     //TODO alert error
                     console.log(res)
@@ -50,7 +55,34 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             $(".map-container").animate({ // La map s'affiche
                 right: '0%'
             });
+
+            navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                var longSize = 10;
+                var latSize = 10;
+                var data = { long:longitude,
+                    lat:latitude,
+                    longSize: longSize,
+                    latSize: latSize
+                }
+                servicePublicationAjax.getProche(data).then(
+                    function (res) {
+                        $scope.pubs = addIdenty(res);
+                        coeurRouge();
+                        console.log(res);
+                    },function (res) {
+                        //TODO alert error
+                        console.log(res)
+                    })
+
+
+            },function () {
+                //TODO alert error
+                alert('La géolocalisation est obligatoire pour utilisé nos services.');
+            })
         }
+
         function addIdenty (list){
             var mem = [];
             for (var i = 0; i<list.length;i++){
@@ -69,6 +101,16 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 }
             }
             return list;
+        }
+
+        function coeurRouge(){
+            for (const index in ($scope.pubs)) {
+                var t ='liked' + $scope.pubs[index]._id  ;
+                var likes = $scope.pubs[index].likes;
+                if (_idIsInListOfObj(likes,idUser)){
+                    $scope[t] = true;
+                }
+            }
         }
         getTrend();
 
@@ -92,3 +134,12 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
     }
 })
+
+function _idIsInListOfObj(list,e){
+    for (var i = 0; i<list.length;i++){
+        if (list[i]._id == e) {
+            return true
+        }
+    }
+    return false;
+}
