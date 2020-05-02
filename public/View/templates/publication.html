@@ -1,11 +1,11 @@
-<img  id="{{x._id}}" src="{{x.pp}}" class="photoProfil" alt="">
+<img  id="{{x._id}}" ng-src="{{x.pp}}" class="photoProfil" alt="">
 <!-- TODO x.nom undefind -->
 
 <p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;" class="nomProfil clair">{{x.userName}}</p>
 
 <p class="publicationDate">{{x.date | date : "dd-MM-yyyy hh:ss"}}</p>
 <p class="publicationTexte clair">{{x.message}}</p>
-<a href="{{x.photo}}"><img src={{x.photo}} class="imagePublication" alt=""></a>
+<a href="{{x.photo}}"><img ng-src="{{x.photo}}" class="imagePublication" alt=""></a>
 <div class="publication-body">
     <a publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}" class="stat-publication"
         ng-click="like($event,$index)" href="">

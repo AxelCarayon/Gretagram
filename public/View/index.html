@@ -243,7 +243,7 @@
             <div class="modal-body">
                 <div class="comment" ng-repeat="comment in modal | orderBy:'-'">
                     <div class="comment-img">
-                        <img  src="{{comment.pp}}" class="photoProfil" alt="">
+                        <img  ng-src="{{comment.pp}}" class="photoProfil" alt="">
                     </div>
                     <div class="comment-body">
                         <div class="comment-nom"  ><a href="#" userid="{{comment.userID}}" ng-click="redirectProfil($event)">{{ comment.userName}}</a> </div><!-- TODO nom user -->
