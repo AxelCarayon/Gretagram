@@ -89,3 +89,16 @@ exports.delete = function(req, res) {
         });
     }
 };
+
+exports.search = (req, res) => {
+    Hashtag.findOne({ name: req.query.hashtag }, (err, hashtag) => {
+        if (hashtag) {
+            res.json({
+                status: "hashtag trouvé",
+                data: hashtag
+            });
+        } else {
+            res.send({ status: "hashtag inexistant" });
+        }
+    });
+}

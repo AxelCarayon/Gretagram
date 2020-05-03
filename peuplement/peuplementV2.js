@@ -10,6 +10,8 @@ const request = require('request');
 const uuidv4 = require("uuid/v4");
 require('dotenv').config();
 
+const hashtags = ["#green", "#healthy", "#clean", "#proud", "#planet", "#ecologie", "#saveThePlanet", "#macronDemission"]
+
 //Fonctions auxiliaires=======================================================================
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -28,6 +30,8 @@ async function download(size, filename) {
         });
     });
 };
+
+//renvoie la liste de tous les # dans le texte donné
 //============================================================================================
 
 //Fonctions principales=======================================================================
@@ -111,17 +115,21 @@ async function genUsers(nbr, write, size) {
 async function genPublications(nbr, users, size) {
     let cpt = 0;
     let publications = [];
+
     return new Promise(async resolve => {
         if (nbr < 1) {
             resolve();
         }
+
         for (let i = 0; i < nbr; i++) {
+            //initialisation du contenu de la publication
             let index = getRandomInt(users.length);
             let publication = new Publication();
+            let hashtag = hashtags[getRandomInt(hashtags.length)]
             publication.date = new Date();
             publication.userID = users[index]._id;
             publication.userName = users[index].prenom + " " + users[index].nom;
-            publication.message = "Ceci est la publication numéro " + i + " par " + users[index].prenom + " " + users[index].nom;
+            publication.message = "Ceci est la publication numéro " + i + " par " + users[index].prenom + " " + users[index].nom + " " + hashtag;
             publication.position = { lat: faker.address.latitude(), long: faker.address.longitude() };
             await download(size, "photo.jpg");
             let id = uuidv4() + ".jpg";
@@ -130,7 +138,9 @@ async function genPublications(nbr, users, size) {
                     console.log(err);
                 }
             });
+            publication.photo = id;
 
+            //mise à jour de l'utilsateur
             User.findOne({ '_id': users[index]._id }, function(err, user) {
                 if (err) {
                     console.log(err);
@@ -147,7 +157,32 @@ async function genPublications(nbr, users, size) {
                 });
             });
 
-            publication.photo = id;
+            //mise à jour des #
+            Hashtag.findOne({ name: hashtag }, (err, hash) => {
+                if (hash) {
+                    hash.l_publications.push(publication._id);
+                    hash.nbr = hash.nbr + 1;
+
+                    hash.save((err) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                } else {
+                    let newHashtag = new Hashtag();
+                    newHashtag.name = hashtag;
+                    newHashtag.l_publications = [publication._id];
+                    newHashtag.nbr = 1;
+
+                    newHashtag.save((err) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                    })
+                }
+            })
+
+            //on enregistre tout et on progresse
             publicationsProgress.increment();
             publication.save(function(err) {
                 if (err) {

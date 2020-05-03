@@ -87,8 +87,7 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
                      }
                  }
             },function (rep) {
-                //TODO alert error
-                console.log(rep);
+                createAlert('ERROR',rep,'Impossible de commenter la publication.');
             }
         );
 

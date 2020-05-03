@@ -48,6 +48,11 @@ router.route('/publication/proche')
 router.route('/publication/zone')
     .get(publicationController.carre);
 
+router.route('/recherche/hashtag')
+    .get(hashtagController.search);
+
+router.route('/recherche/user')
+    .get(userController.search);
 
 router.route('/publication/all')
     .get(publicationController.all);

@@ -84,6 +84,29 @@ exports.pp = function(req, res) {
     }
 }
 
+exports.search = ((req, res) => {
+    if (!/\s/.test(req.query.nom)) {
+        //nom et prénom
+        console.log("un")
+        User.find({ $or: [{ nom: req.query.nom }, { prenom: req.query.nom }] }, (err, users) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(users);
+            }
+        });
+    } else {
+        console.log("deux");
+        User.find({ $or: [{ nom: req.query.nom.substr(req.query.nom.indexOf(' ') + 1) }, { prenom: req.query.nom.substr(0, req.query.nom.indexOf(' ')) }] }, (err, users) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(users);
+            }
+        });
+    }
+});
+
 // crée un nouvel utilisateur 
 exports.new = function(req, res) {
     let user = new User();
