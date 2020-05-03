@@ -108,25 +108,25 @@
     </div>
 
     <div class="" ng-show="recherche">
-        <div style="margin-top: 100px;" ng-show="recherche-user">
+        <div style="margin-top: 100px;" ng-show="rechercheUser">
             <div class="comment" ng-repeat="user in users | orderBy:'toString()' ">
                 <div class="comment-img">
                     <!-- TODO Photo profil -->
                     <img ng-src="{{user.pp}}" class="photoProfil" alt="">
                 </div>
                 <div class="comment-body">
-                    <a userid="{{user.id}}" ng-click="redirectProfil($event)"
+                    <a userid="{{user._id}}" ng-click="redirectProfil($event)"
                         style="cursor:pointer; margin-top: 30px;"
-                        class="comment-nom">{{user.userName}}</a>
+                        class="comment-nom">{{user.prenom}} {{user.nom}}</a>
                 </div>
 
             </div>
         </div>
-        <div style="margin-top: 100px;" ng-show="recherche-hashtag">
+        <div style="margin-top: 100px;" ng-show="rechercheHashtag">
             <div class="container containerPublications">
                 <div class="row publicationContainer">
                     <div class="col-12 col-12-sm container containerPublicationsProche">
-                        <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in hashtags | orderBy:'date':true">
+                        <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in pubs | orderBy:'date':true">
                             <publication-template></publication-template>
                         </div>
                     </div>
@@ -302,6 +302,7 @@
     <script src="../scripts/controllers/likeComment.js"></script>
     <script src="../scripts/directives/directives.js" charset="utf-8"></script>
     <script src="Controller/js/publication.js" charset="utf-8"></script>
+    <script src="../scripts/services/serviceRechercheAjax.js"></script>
 <!--    <script src="Controller/js/create_publication.js" charset="utf-8"></script>-->
 
 </body>

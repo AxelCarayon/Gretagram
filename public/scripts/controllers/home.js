@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax) {
+app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax,serviceRechercheAjax) {
     $scope.loading = true;
     $scope.totalPubs = 5;
     $scope.btnLoadMore = "Charger plus..."
@@ -234,6 +234,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                             $scope.pubs  =listToPubs(listID,$scope.pubs);
                             coeurRouge();
                         }
+                        console.log(data);
                     },function (data) {
                         console.log('getHPub error ' ,data);
                         createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
