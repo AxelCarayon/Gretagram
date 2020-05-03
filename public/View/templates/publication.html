@@ -9,7 +9,7 @@
     <span class="points"></span>
  </a>
 <div class="clair dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="btn-parametres-pub">
-    <a href="" ng-click="trashPub($event)" class="clair dropdown-item">Supprimer la publication</a>
+    <a href="" ng-show="{{'trashPub' + x.userID}}" publication-id="{{x._id}}" ng-click="trashPub($event)" class="clair dropdown-item">Supprimer la publication</a>
 
 </div>
 
