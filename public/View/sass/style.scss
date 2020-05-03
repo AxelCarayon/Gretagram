@@ -221,9 +221,23 @@ h2 {
 }
 
 .avatar-create-publication {
-    height: 60px;
+    height: 80px;
+    width: 80px;
     position: absolute;
     left: 10px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.avatar-ppUser {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    margin-right: 10px;
+    object-fit: cover;
+    border-radius: 50%;
+    right: 200px;
+    top: 16px;
 }
 
 div[contenteditable] {
@@ -315,8 +329,8 @@ div[contenteditable] {
     top: 20px;
     left: 20px;
     object-fit: cover;
-    width:50px;
-    height:50px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
@@ -396,16 +410,16 @@ div[contenteditable] {
     }
 }
 
-img[src*="undefined"]  {
+img[src*="undefined"] {
     height: 0px;
     margin-bottom: -20px;
-    cursor : auto;
+    cursor: auto;
 }
 
 img[src=""] {
     height: 10px;
     margin-bottom: -40px;
- }
+}
 
 .imagePublication {
     cursor: pointer;
@@ -729,10 +743,10 @@ label {
 
     .profilPicture {
         object-fit: cover;
-        width:150px;
-        height:150px;
+        width: 150px;
+        height: 150px;
         transform: translateY(10%);
-        border-radius : 50%;
+        border-radius: 50%;
     }
 }
 
@@ -853,17 +867,18 @@ div.ng-show-remove.ng-show-remove-active {
 
 }
 
-.modal-color{
-    &.clair{
-        background-color: $primary-light ;
+.modal-color {
+    &.clair {
+        background-color: $primary-light;
     }
-    &.sombre{
-        background-color: $primary-dark ;
+
+    &.sombre {
+        background-color: $primary-dark;
     }
 }
 
 
-.bloc-alert{
+.bloc-alert {
     display: none;
     opacity: .8;
     max-width: 300px;
@@ -873,21 +888,23 @@ div.ng-show-remove.ng-show-remove-active {
     right: 20px;
     border-radius: 7px;
 
-    h2,p{
+    h2,
+    p {
         color: #fff !important;
         text-align: center;
     }
 
-    h2{
+    h2 {
         margin-top: 20px;
     }
-    p{
+
+    p {
         padding: 20px 10px;
     }
 
 }
 
-.follow{
+.follow {
     font-size: 14px;
     font-family: 'Poppins', sans-serif !important;
     display: inline-block;
@@ -899,16 +916,18 @@ div.ng-show-remove.ng-show-remove-active {
     color: #fff;
     transition: .3s;
     margin-left: 20px;
-    &:hover{
+
+    &:hover {
         box-shadow: 3px 5px 12px #8e9b557d;
         transform: scale(.97);
     }
 
-    &.followed{
+    &.followed {
         background: none;
         color: #876269;
-        box-shadow : none;
-        &::after{
+        box-shadow: none;
+
+        &::after {
             display: inline-block;
             content: '✔';
             padding-left: 10px;
@@ -916,16 +935,19 @@ div.ng-show-remove.ng-show-remove-active {
     }
 }
 
-.follow, .follow:hover, .follow:active, .follow:focus{
+.follow,
+.follow:hover,
+.follow:active,
+.follow:focus {
     outline: none !important;
     outline: 0 !important;
 }
 
-#moncompte{
+#moncompte {
     cursor: pointer !important;
 }
 
-#btn-parametres-pub{
+#btn-parametres-pub {
     position: absolute;
     right: 15px;
     top: 10px;
@@ -933,10 +955,22 @@ div.ng-show-remove.ng-show-remove-active {
     background: transparent;
 }
 
-.points{
+.points {
     display: inline-block;
     height: 4px;
     width: 4px;
     border-radius: 50%;
     background-color: #222b32;
+}
+
+.loader {
+    position: absolute;
+    background-color: $primary-light;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
