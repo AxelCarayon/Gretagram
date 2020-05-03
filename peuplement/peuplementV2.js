@@ -129,6 +129,23 @@ async function genPublications(nbr, users, size) {
                     console.log(err);
                 }
             });
+
+            User.findOne({ '_id': users[index]._id }, function(err, user) {
+                if (err) {
+                    console.log(err);
+                }
+                if (user.publications) {
+                    user.publications.push(publication._id);
+                } else {
+                    user.publications = [publication._id];
+                }
+                user.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+            });
+
             publication.photo = id;
             publicationsProgress.increment();
             publication.save(function(err) {
@@ -358,7 +375,7 @@ let lancerQuestions5 = function(nbUtilisateurs, nbPublications, nbCommentaires, 
 }
 
 let lancerQuestions6 = function(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, write, sizePublication) {
-    r1.question('Quelle taille (en pixels) pour les photos des publications ?\n', function(answer) {
+    r1.question('Quelle taille (en pixels) pour les photos de profil?\n', function(answer) {
         if (is_numeric(answer)) {
             lancerTest(nbUtilisateurs, nbPublications, nbCommentaires, nbLikes, write, sizePublication, answer);
             return r1.close();
