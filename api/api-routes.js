@@ -51,6 +51,9 @@ router.route('/publication/zone')
 router.route('/recherche/hashtag')
     .get(hashtagController.search);
 
+router.route('/recherche/user')
+    .get(userController.search);
+
 router.route('/publication/all')
     .get(publicationController.all);
 
