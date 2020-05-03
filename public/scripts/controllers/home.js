@@ -2,6 +2,11 @@ var app = angular.module('app', []);
 
 app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax) {
     $scope.loading = true;
+    $scope.totalPubs = 5;
+    $scope.btnLoadMore = "Charger plus..."
+
+
+
     if (!serviceIsConnect) {
         window.location.href = "/login";
 
@@ -10,6 +15,21 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         var sizeTrend = 100;
         var idUser = serviceSession.getValue('id');
         var mymap = L.map('macarte');
+
+
+        $scope.loadMorePubs = () =>{
+           
+            if ($scope.totalPubs >= sizeTrend - 5   ) {
+                $scope.btnLoadMore = "Pas de publications supplémentaires"
+            } 
+            if ($scope.totalPubs >= sizeTrend) {
+                window.scrollTo(0,0)
+            }
+            else{
+                $scope.totalPubs = $scope.totalPubs + 5
+            }
+            
+        }
 
         var getAbo = function (){
             $scope.proche = false;

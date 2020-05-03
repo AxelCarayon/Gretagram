@@ -164,12 +164,14 @@
     <div class="container containerPublications" ng-show="profilPubs">
         <div class="row publicationContainer">
             <div class="col-12 col-12-sm container containerPublicationsProche">
-                <div class="col-12 publication clair" ng-repeat="x in pubs | orderBy:'date':true"
+                <div class="col-12 publication clair" ng-repeat="x in pubs | orderBy:'date':true | limitTo:totalPubs"
                     ng-controller="likeCommentCtrl">
                     <publication-template></publication-template>
                 </div>
+                <button class="btn-loadmore" ng-click="loadMorePubs()">{{btnLoadMore}}</button>
             </div>
         </div>
+        
     </div>
     <div class="publicationsProfil container" ng-show='profilStats'>
 

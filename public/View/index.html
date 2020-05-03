@@ -67,7 +67,7 @@
         <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="80" height="80" class="clair d-inline-block " alt="">
     </div>
     
-    <nav class="clair mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
+    <nav id="nav" class="clair mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
         <a class="clair navbar-brand" href="/">
             <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30" class="clair d-inline-block " alt=""> Gretagram</a>
         <button class="clair navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -253,12 +253,14 @@
         <div class="container containerPublications">
             <div class="row publicationContainer">
                 <div class="col-12 col-12-sm container containerPublicationsProche">
-                    <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in pubs | orderBy:'date':true">
+                    <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in pubs | orderBy:'date':true | limitTo:totalPubs">
                         <publication-template></publication-template>
                     </div>
                 </div>
             </div>
         </div>
+
+        <button class="btn-loadmore" ng-click="loadMorePubs()">{{btnLoadMore}}</button>
     </div>
 
     <div class="modal fade" id="modal-comment" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
