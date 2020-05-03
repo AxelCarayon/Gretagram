@@ -57,6 +57,7 @@ app.controller("publicationFormCtrl", function($q, $scope, serviceIsConnect, ser
 
     //Publier
     $('.btn-publier').click(() => {
+        $scope.recherche = false;
         let message = $(".text-create-publication").text()
         navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
             var latitude = position.coords.latitude;

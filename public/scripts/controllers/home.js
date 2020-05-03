@@ -1,17 +1,17 @@
 var app = angular.module('app', []);
 
-app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax) {
+app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax,serviceRechercheAjax) {
     $scope.loading = true;
     if (!serviceIsConnect) {
         window.location.href = "/login";
 
     } else {
-        var token = serviceSession.getValue('token');
-        var sizeTrend = 100;
-        var idUser = serviceSession.getValue('id');
-        var mymap = L.map('macarte');
+        let token = serviceSession.getValue('token');
+        let sizeTrend = 100;
+        let idUser = serviceSession.getValue('id');
+        let mymap = L.map('macarte');
 
-        var getAbo = function (){
+        let getAbo = function (){
             $scope.proche = false;
             $scope.loading = false;
             $(".map-container").animate({ // La map reste se cache
@@ -30,7 +30,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
 
         }
-        var getTrend = function (){
+        let getTrend = function (){
             $scope.proche = false;
             $scope.loading = false;
             $(".map-container").animate({ // La map reste se cache
@@ -41,6 +41,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 function (rep) {
                     $scope.pubs = addIdenty(rep);
                     coeurRouge();
+                    console.log('deb ' ,$scope.pubs);
+
 
                 },function (res) {
                     createAlert('ERROR','Problème chargement publications',res);
@@ -48,7 +50,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             )
         }
 
-        var getProche = function (){
+        let getProche = function (){
             $scope.proche = true;
             $scope.loading = false;
             $(".map-container").animate({ // La map s'affiche
@@ -104,9 +106,21 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             })
         }
 
+        function identity (e){
+            let id = e.userID;
+            serviceUserAjax.getUser({id:id}).then(function (user) {
+                    e.name = user.prenom +' '+user.nom;
+                    e.pp = user.pp;
+                },function (rep) {
+                    createAlert('ERROR','Problème récupération des données utilisateur',rep);
+                }
+            );
+
+            return e;
+        }
         function addIdenty (list){
             var mem = [];
-            for (var i = 0; i<list.length;i++){
+            for (const i in list){
                 var id = list[i].userID;
                 if (!mem.includes( id)){
                     mem.push(id);
@@ -120,8 +134,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                             list = addNameinListOfObj(list,user.id,name);
                             list = addPPinListOfObj(list,user.id,user.pp);
                         },function (rep) {
-                            createAlert('ERROR','Problème récupération des données utilisateur',res);
-
+                            createAlert('ERROR','Problème récupération des données utilisateur',rep);
                         }
                     );
                 }
@@ -140,11 +153,9 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         }
 
         function pubsCarte(data) {
-            console.log('pubsCarte',data);
             servicePublicationAjax.getProche(data).then(
                 function (res) {
                     $scope.pubs = addIdenty(res);
-                    console.log('pubsCarte res', res);
                     coeurRouge();
                     initMarker($scope.pubs,mymap);
 
@@ -153,6 +164,20 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             })
         }
 
+        function listToPubs (list,scope){
+            for(const i in list){
+                servicePublicationAjax.getPub(list[i]).then(
+                    function (data) {
+                        scope.push(identity(data));
+                    },function (data) {
+                        createAlert('error','Erreur serveur : ', "Nous somme désolé la demande n'a pu aboutir.")
+                    }
+                )
+            }
+            return scope;
+        }
+
+        //Ajout du nom et pp de l'user connecté
         serviceUserAjax.getUser({'id':idUser}).then(
             function (user){
                 $scope.nameConnected = user.prenom +' '+user.nom;
@@ -160,7 +185,55 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             }
         )
 
+        $scope.recherche = false;
         getTrend();
+
+        //Recherche
+        $('#btn-recherche').click(function () {
+            $scope.recherche = true;
+            let text = $('#searchbar').val();
+
+            if (text == '' || text == null || !text){
+                $scope.recherche = false;
+                getTrend();
+            }
+
+            if (text[0] == '#'){
+                $scope.rechercheHashtag = true;
+                $scope.rechercheUser = false;
+                let recherche = text.split(' ')[0];
+
+                serviceRechercheAjax.getHPub({hashtag:recherche}).then(
+                    function (data) {
+                        if (data.status == 'hashtag inexistant'){
+                            createAlert('error','hashtag inexistant','');
+                            $scope.recherche = false;
+                            getTrend();
+                        }else{
+                            let listID = data.data.l_publications
+                            $scope.pubs = [];
+                            $scope.pubs  =listToPubs(listID,$scope.pubs);
+                            coeurRouge();
+                        }
+                    },function (data) {
+                        console.log('getHPub error ' ,data);
+                        createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
+                    }
+                )
+            }else{
+                $scope.rechercheHashtag = false;
+                $scope.rechercheUser = true;
+                serviceRechercheAjax.getUsers(text).then(
+                    function (data) {
+                        console.log('getUsers success ' ,data);
+                        $scope.users = data;
+                    },function (data) {
+                        console.log('getUsers error ' ,data);
+                        createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
+                    }
+                )
+            }
+        })
 
         $scope.aboFunction = function() {
             getAbo();
@@ -175,6 +248,10 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             var link = $event.target;
             var id = link.getAttribute('userid');
             window.location.href = "/profil?id="+id;
+        }
+        $scope.redirectHome = () => {
+            $scope.recherche = false;
+            getTrend();
         }
 
         $scope.showModal = ($event) => {
