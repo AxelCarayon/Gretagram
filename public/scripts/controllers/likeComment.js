@@ -47,25 +47,25 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
     var idUserCo = serviceSession.getValue('id');
     var token = serviceSession.getValue('token');
 
-    $scope.like = ($event, $index) => {
-        $event.preventDefault();
+    $scope.like = ($event) => {
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         var t = 'liked' + publication_id;
-        var publication = $scope.pubs[$index];
+        var publication = getPublicationWithId($scope,publication_id);
+
         var index = idInListOfObj(publication.likes,idUserCo);
 
         if (index > -1) {
-            $scope.pubs[$index].likes.splice(index, 1);
+            publication.likes.splice(index, 1);
             $scope[t] = false
         }
         else {
-            $scope.pubs[$index].likes.push({_id:idUserCo});
+            publication.likes.push({_id:idUserCo});
             $scope[t] = true
         }
         servicePublicationAjax.setLike({'id':publication._id, 'token': token });
     };
 
-    $scope.verifComment = ($event, $index) => {
+    $scope.verifComment = ($event) => {
 
         if ($($event.target).val()) {
             $($event.target).next().attr('disabled', false);
@@ -74,20 +74,18 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
         }
     };
 
-    $scope.sendComment = ($event, $index) => {
+    $scope.sendComment = ($event) => {
         var publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         var comment = $($event.target).prev().val(); //Le message du commentaire
-        console.log(publication_id);
-        
-        
+
         servicePublicationAjax.setComment({token:token,id:publication_id,message:comment}).then(
             function (rep) {
-                for (const i in $scope.pubs) {     
-                    if ($scope.pubs[i]._id == publication_id) {
-                        pub = $scope.pubs[i] = rep.data;
-                        break;
-                    }
-                }   
+                 for (const i in $scope.pubs) {
+                     if ($scope.pubs[i]._id == publication_id) {
+                         $scope.pubs[i] = rep.data;
+                         break;
+                     }
+                 }
             },function (rep) {
                 //TODO alert error
                 console.log(rep);
@@ -97,9 +95,4 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
         $($event.target).prev().val("");
         $($event.target).attr('disabled', true);
     };
-
-
 });
-
-
-
