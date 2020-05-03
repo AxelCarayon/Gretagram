@@ -119,40 +119,6 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 });
         };
 
-        $scope.showModal = ($event,$index) => {
-
-            let pub;
-            let publication_id = $event.target.getAttribute("publication-id")
-            
-            for (const i in $scope.pubs) {     
-                if ($scope.pubs[i]._id == publication_id) {
-                    pub = $scope.pubs[i];
-                    break;
-                }
-            }             
-            
-            $scope.modal = pub.commentaires;
-    
-            console.log('$scope.modal',pub.commentaires);
-    
-            var mem = [];
-            for (var i = 0; i<$scope.modal.length;i++){
-                var id = $scope.modal[i].userID;
-                if (!mem.includes( id)){
-                    mem.push(id);
-    
-                    serviceUserAjax.getUser({id:id}).then(function (user) {
-                            var name = user.prenom +' '+user.nom;
-                            $scope.modal = addNameinListOfObj($scope.modal,user.id,name);
-                            $scope.modal = addPPinListOfObj($scope.modal,user.id,user.pp);
-                        }
-                    );
-                }
-            }
-          //  console.log('$scope.modal 2 ',$scope.modal,$index);
-    
-        };
-
         //Statistique user
         var stat = function () {
             $scope.profilPubs = false;
@@ -259,13 +225,12 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             $scope.followAct = follow;
         }
 
-       // $scope.idUserConnect = idUser;
 
         // infos membre profil
         serviceUserAjax.getUser({'id':idProfil}).
         then(function (user) {
             console.log(user);
-            $scope.nbPublications = user.publications.length;
+            $scope.nbPublications = user.publications.length; //TODO
             $scope.prenomEtNom = user.prenom +' '+user.nom;
             $scope.abonnes = listToObjList(user.abonnes);
             $scope.abonnements = listToObjList(user.abonnements);
@@ -324,6 +289,33 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             var link = $event.target;
             var id = link.getAttribute('userid');
             window.location.href = "/profil?id="+id;
+        }
+
+        $scope.showModal = ($event) => {
+            let publication_id = $event.target.getAttribute("publication-id")
+            let pub = getPublicationWithId($scope,publication_id);
+            $scope.modal = pub.commentaires;
+            addIdenty($scope.modal);
+        };
+
+        function addIdenty (list){
+            var mem = [];
+            for (var i = 0; i<list.length;i++){
+                var id = list[i].userID;
+                if (!mem.includes( id)){
+                    mem.push(id);
+                    serviceUserAjax.getUser({id:id}).then(function (user) {
+                            var name = user.prenom +' '+user.nom;
+                            list = addNameinListOfObj(list,user.id,name);
+                            list = addPPinListOfObj(list,user.id,user.pp);
+                        },function (rep) {
+                            //TODO alert error
+                            console.log(rep);
+                        }
+                    );
+                }
+            }
+            return list;
         }
     }
     });

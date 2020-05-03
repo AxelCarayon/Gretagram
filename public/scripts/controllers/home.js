@@ -158,15 +158,12 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
         $scope.aboFunction = function() {
             getAbo();
-            console.log('abo')
         }
         $scope.trendFunction =  function() {
             getTrend();
-            console.log('trend')
         }
         $scope.procheFunction =  function() {
             getProche();
-            console.log('proche')
         }
         $scope.redirectProfil = ($event) => {
             var link = $event.target;
@@ -174,40 +171,12 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             window.location.href = "/profil?id="+id;
         }
 
-        $scope.showModal = ($event,$index) => {
-
-            let pub;
+        $scope.showModal = ($event) => {
             let publication_id = $event.target.getAttribute("publication-id")
-            
-            for (const i in $scope.pubs) {     
-                if ($scope.pubs[i]._id == publication_id) {
-                    pub = $scope.pubs[i];
-                    break;
-                }
-            }             
-            
+            let pub = getPublicationWithId($scope,publication_id);
             $scope.modal = pub.commentaires;
-    
-            console.log('$scope.modal',pub.commentaires);
-    
-            var mem = [];
-            for (var i = 0; i<$scope.modal.length;i++){
-                var id = $scope.modal[i].userID;
-                if (!mem.includes( id)){
-                    mem.push(id);
-    
-                    serviceUserAjax.getUser({id:id}).then(function (user) {
-                            var name = user.prenom +' '+user.nom;
-                            $scope.modal = addNameinListOfObj($scope.modal,user.id,name);
-                            $scope.modal = addPPinListOfObj($scope.modal,user.id,user.pp);
-                        }
-                    );
-                }
-            }
-          //  console.log('$scope.modal 2 ',$scope.modal,$index);
-    
+            addIdenty($scope.modal);
         };
-
     }
 })
 
