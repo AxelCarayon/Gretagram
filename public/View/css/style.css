@@ -351,7 +351,7 @@ div[contenteditable]:focus.clair {
 }
 
 img[src*=undefined] {
-  height: 10px;
+  height: 0px;
   margin-bottom: -20px;
   cursor: auto;
 }
@@ -801,6 +801,22 @@ div.ng-show-remove.ng-show-remove-active {
 
 #moncompte {
   cursor: pointer !important;
+}
+
+#btn-parametres-pub {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  border: none;
+  background: transparent;
+}
+
+.points {
+  display: inline-block;
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background-color: #222b32;
 }
 
 /*# sourceMappingURL=style.css.map */
