@@ -128,7 +128,7 @@ h2 {
             border: none;
         }
 
-        #btn-recherche{
+        #btn-recherche {
             border-radius: 15px;
         }
     }
@@ -904,6 +904,7 @@ div.ng-show-remove.ng-show-remove-active {
     display: none;
     opacity: .8;
     max-width: 300px;
+    z-index: 2000;
 
     position: absolute;
     top: 20px;
@@ -918,12 +919,21 @@ div.ng-show-remove.ng-show-remove-active {
 
     h2 {
         margin-top: 20px;
+        font-size: 1.4em !important;
+        padding: 0 15px !important;
+
     }
 
     p {
         padding: 20px 10px;
     }
 
+}
+
+.bloc-alert-title{
+    margin-top: 20px;
+    font-size: 1.4em !important;
+    padding: 0 15px !important;
 }
 
 .follow {
