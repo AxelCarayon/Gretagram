@@ -3,6 +3,16 @@
 
 <p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;" class="nomProfil clair">{{x.userName}}</p>
 
+<a style="cursor: pointer;" class="clair nav-link" id="btn-parametres-pub" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+    <span class="points"></span>
+    <span class="points"></span>
+    <span class="points"></span>
+ </a>
+<div class="clair dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="btn-parametres-pub">
+    <a href="" ng-click="trashPub($event)" class="clair dropdown-item">Supprimer la publication</a>
+
+</div>
+
 <p class="publicationDate">{{x.date | date : "dd-MM-yyyy hh:ss"}}</p>
 <p class="publicationTexte clair">{{x.message}}</p>
 <a href="{{x.photo}}"><img ng-src="{{x.photo}}" class="imagePublication" alt=""></a>
