@@ -62,8 +62,6 @@ app.controller("publicationFormCtrl", function($q, $scope, serviceIsConnect, ser
             var latitude = position.coords.latitude;
             var longitude = position.coords.longitude;
 
-            var publication = {};
-
             let data = new FormData(); //on crée un formData
 
             data.append('token', serviceSession.getValue('token')); //le token
@@ -75,21 +73,17 @@ app.controller("publicationFormCtrl", function($q, $scope, serviceIsConnect, ser
                 data.append('photo', $("#file-1")[0].files[0]);
             }
 
-            console.log('data avant requete :', data.get('message'), data.get('photo'));
-
             servicePublicationAjax.newPub(data).then(
-                function(rep) {
+                function() {
                     resetPub();
-                    //TODO alert succes
+                    createAlert('success','Super !','Votre publication est en ligne.');
                 },
-                function(msg) {
-                    //TODO alert error
-                    console.log('rep error newPub ', msg);
+                function() {
+                    createAlert('error','Erreur :',"Votre publication n'a pas pu être publié, essayez de nouveau.");
                 })
 
         }, function() {
-            //TODO alert error
-            alert('La géolocalisation est obligatoire pour utilisé nos services.');
+            createAlert('error','Erreur :',"La géolocalisation est obligatoire pour utiliser nos services.");
         });
     });
 })

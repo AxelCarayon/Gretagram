@@ -2,6 +2,11 @@ var app = angular.module('app', []);
 
 app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax) {
     $scope.loading = true;
+    $scope.totalPubs = 5;
+    $scope.btnLoadMore = "Charger plus..."
+
+
+
     if (!serviceIsConnect) {
         window.location.href = "/login";
 
@@ -10,6 +15,21 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         var sizeTrend = 100;
         var idUser = serviceSession.getValue('id');
         var mymap = L.map('macarte');
+
+
+        $scope.loadMorePubs = () =>{
+           
+            if ($scope.totalPubs >= sizeTrend - 5   ) {
+                $scope.btnLoadMore = "Pas de publications supplémentaires"
+            } 
+            if ($scope.totalPubs >= sizeTrend) {
+                window.scrollTo(0,0)
+            }
+            else{
+                $scope.totalPubs = $scope.totalPubs + 5
+            }
+            
+        }
 
         var getAbo = function (){
             $scope.proche = false;
@@ -68,7 +88,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
                 mymap.setView([mylatitude, mylongitude], 11);
 
-                //------TODO ça marche pas
                 var circle = L.circle([mylatitude, mylongitude], { // Ajout d'un cercle à l'emplacement de l'utilisateur
                     color: 'rgb(199, 201, 249)',
                     fillColor: 'rgb(20, 122, 186)',
@@ -79,7 +98,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 
                 circle.bindPopup("Vous êtes ici.").openPopup();
                 circle.addTo(mymap);
-                // ------
 
                 console.log('myPosition',mylatitude,mylongitude);
                 console.log('getBounds',mymap.getBounds());
@@ -220,6 +238,7 @@ function initMarker(pubs,mymap){
     for (var i = 0; i<pubs.length;i++){
         var position = pubs[i].position;
         var message = pubs[i].message;
+        var nom = pubs[i].userName
         if (!message){
             message = '';
         }
@@ -229,7 +248,12 @@ function initMarker(pubs,mymap){
             msg: message,
             icon : greenIcon
         });
-        myMarker.bindPopup("<img style='height:50px;'  src='View/ressources/avatar.svg' alt=''><br><p style='text-align:center;'>" + message + "</p>").openPopup();
+
+        
+        myMarker.bindPopup(`
+        <p style='text-align:center;font-weight: 700'> ${nom} </p>
+        <p style='text-align:center;font-weight: 300'> ${message} </p>
+         `).openPopup();
 
         markers.addLayer(myMarker);
 

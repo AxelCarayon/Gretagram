@@ -59,11 +59,26 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
     if (!serviceIsConnect){
         window.location.href = "/login";
     }else {
-
+        $scope.btnLoadMore = "Charger plus..."
+        $scope.totalPubs = 5;
         var token = serviceSession.getValue('token');
         var idUser = serviceSession.getValue('id');
         var idProfil;
         var ppDefault = 'View/ressources/profile.svg.png';
+
+        $scope.loadMorePubs = () =>{
+           
+            if ($scope.totalPubs >= $scope.pubs.length - 5   ) {
+                $scope.btnLoadMore = "Pas de publications supplémentaires"
+            } 
+            if ($scope.totalPubs >= $scope.pubs.length) {
+                window.scrollTo(0,0)
+            }
+            else{
+                $scope.totalPubs = $scope.totalPubs + 5
+            }
+            
+        }
 
         //follow-unfollow
         var follow = function () {

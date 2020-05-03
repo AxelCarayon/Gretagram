@@ -106,21 +106,15 @@ h2 {
     transition: ease-in-out .5s;
 
     &.clair {
-        border: 1px solid rgb(206, 205, 205);
+        box-shadow: 7px 7px 14px #6bd4d4, -7px -7px 14px #8dffff !important;
+        border: none;
 
-        &:hover {
-            box-shadow: 7px 7px 14px #6bd4d4, -7px -7px 14px #8dffff !important;
-            border: none;
-        }
     }
 
     &.sombre {
         border: 1px solid #8d7373;
-
-        &:hover {
-            box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
-            border: none;
-        }
+        box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
+        border: none;
     }
 
     &.active {
@@ -133,7 +127,35 @@ h2 {
             box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
             border: none;
         }
+
+        #btn-recherche {
+            border-radius: 15px;
+        }
     }
+}
+
+#btn-recherche {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 21px;
+    border-radius: 26px;
+    border: none;
+    background: none;
+
+    &.clair {
+        background: $primary-light;
+        box-shadow: 8px 8px 16px #c4c8cb,
+            -8px -8px 16px #ffffff;
+    }
+
+    &.sombre {
+        background: $primary-dark;
+        box-shadow: 8px 8px 16px #222b32,
+            -8px -8px 16px #323d48;
+    }
+
 }
 
 .geoImg {
@@ -882,6 +904,7 @@ div.ng-show-remove.ng-show-remove-active {
     display: none;
     opacity: .8;
     max-width: 300px;
+    z-index: 2000;
 
     position: absolute;
     top: 20px;
@@ -896,12 +919,21 @@ div.ng-show-remove.ng-show-remove-active {
 
     h2 {
         margin-top: 20px;
+        font-size: 1.4em !important;
+        padding: 0 15px !important;
+
     }
 
     p {
         padding: 20px 10px;
     }
 
+}
+
+.bloc-alert-title{
+    margin-top: 20px;
+    font-size: 1.4em !important;
+    padding: 0 15px !important;
 }
 
 .follow {
@@ -973,4 +1005,19 @@ div.ng-show-remove.ng-show-remove-active {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.btn-loadmore{
+
+    
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
+        margin: 20px 0 50px 0;
+        background: none;
+        border: none;
+        text-transform: uppercase;
+        font-size: 2em;
+        color: #8d7373;
+
 }
