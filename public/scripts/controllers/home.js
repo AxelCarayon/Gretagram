@@ -24,8 +24,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     coeurRouge();
 
                 },function (res) {
-                    //TODO alert error
-                    console.log(res)
+                    createAlert('ERROR','Problème chargement publications',res);
                 }
             )
 
@@ -44,8 +43,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     coeurRouge();
 
                 },function (res) {
-                    //TODO alert error
-                    console.log(res)
+                    createAlert('ERROR','Problème chargement publications',res);
                 }
             )
         }
@@ -100,8 +98,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 });
 
             },function () {
-                //TODO alert error
-                alert('La géolocalisation est obligatoire pour utilisé nos services.');
+                createAlert('ERROR','Localisation','La géolocalisation est obligatoire pour utiliser nos services.');
             }, {
                 maximumAge: 600000,
                 timeout: 5000,
@@ -120,8 +117,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                             list = addNameinListOfObj(list,user.id,name);
                             list = addPPinListOfObj(list,user.id,user.pp);
                         },function (rep) {
-                            //TODO alert error
-                            console.log(rep);
+                            createAlert('ERROR','Problème récupération des données utilisateur',res);
+
                         }
                     );
                 }
@@ -149,8 +146,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     initMarker($scope.pubs,mymap);
 
                 },function (res) {
-                    //TODO alert error
-                    console.log('pubsCarte error ',res);
+                    createAlert('ERROR','Problème chargement publications',res);
             })
         }
 
