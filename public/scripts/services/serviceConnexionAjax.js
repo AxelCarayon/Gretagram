@@ -9,7 +9,7 @@ angular.module('app')
                     method: "GET",
                     data: data,
                     success: function(res){ deferred.resolve(res); },
-                    error : function(res,status,msg){ deferred.reject(msg); }
+                    error : function(res){ deferred.reject(res); }
                 });
                 return deferred.promise;
             },
