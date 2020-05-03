@@ -83,12 +83,10 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                     then(function (user) {
                         $scope.abonnes = user.abonnes;
                     },function (rep) {
-                        //TODO Alert
-                        console.log('error',rep);
+                        createAlert('ERROR',rep,"Impossible de mettre à jours les abonnés, rechargé la page pour résoudre le problème.");
                     });
                 },function (res) {
-                    //TODO Alert error
-                    console.log(res);
+                    createAlert('ERROR',rep,"Impossible de s'abonner à cet utilisateur.");
                 }
             );
         };
@@ -114,8 +112,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                         }
                     }
                 }, function (msg) {
-                    //TODO alert error
-                    console.log('erreur serveur recupération user : '+msg);
+                    createAlert('ERROR',msg,"Impossible de récupérer les publications.");
                 });
         };
 
@@ -238,7 +235,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
         serviceUserAjax.getUser({'id':idProfil}).
         then(function (user) {
             console.log('user',user);
-            $scope.nbPublications = user.publications.length; //TODO données vide
+            $scope.nbPublications = user.publications.length;
             $scope.prenomEtNom = user.prenom +' '+user.nom;
             $scope.abonnes = listToObjList(user.abonnes);
             $scope.abonnements = listToObjList(user.abonnements);
@@ -284,8 +281,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             feel(user.pp);
 
         }, function (msg) {
-            //TODO Alert
-            console.log('erreur serveur recupération user : '+msg);
+            createAlert('ERROR',msg,"Impossible de récupérer les informations de l'utilisateur.");
         });
 
         $scope.changeTheme = function () {
@@ -317,8 +313,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                             list = addNameinListOfObj(list,user.id,name);
                             list = addPPinListOfObj(list,user.id,user.pp);
                         },function (rep) {
-                            //TODO alert error
-                            console.log(rep);
+                            createAlert('ERROR',rep,"Impossible de récupérer les informations de l'utilisateur.");
                         }
                     );
                 }

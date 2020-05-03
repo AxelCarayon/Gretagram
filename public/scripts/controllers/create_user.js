@@ -49,18 +49,19 @@ angular.module('app',[])
                 if (datas!={} && datas!=null){
                     serviceConnexionAjax.newUser(datas).then(function (data) {
                         if (data.message === 'New user created!'){
-                            //TODO : alert succes
+                            createAlert('success',data.message,"Ne perdez pas 1 minute connectez-vous !");
+                            document.getElementById('formNewUser').reset();
+
                         }else{
-                            //TODO : alert error
+                            console.log(data.message);
+                            createAlert('error','Oups quelque chose ne va pas ..',data.message);
                         }
                         console.log(data);
-                    }, function (msg) {
-                        console.log("Erreur serveur : "+msg);
-                        //TODO: alert error
+                    }, function () {
+                        createAlert('error','Erreur serveur :','Impossible de créer ce compte');
                     });
                 }else{
-                    console.log("Erreur information non valide.")
-                    //TODO: alert error
+                    createAlert('error','Oups quelque chose ne va pas ..','Certaines de vos informations ne correspondent pas au format attendu, ou sont manquantes.');
                 }
             }
 
@@ -92,9 +93,7 @@ function creerCompte  ()  {
         return compte;
 
     } catch (e) {
-        //TODO Alert
-        alert("Tout les champs doivent être remplis "+e);
-
+        createAlert('error','Oups quelque chose ne va pas ..',"Tout les champs doivent être remplis "+e);
     }
 
 }

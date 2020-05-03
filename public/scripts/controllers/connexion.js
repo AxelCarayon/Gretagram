@@ -18,17 +18,14 @@ angular.module('app',[])
         }
         $scope.connexionAct = function(){
             var datas = getFormData($('#codeForm'));
-            console.log("datas", datas);
             if (datas.username != "" && datas.password != "") {
                 serviceConnexionAjax.connexion(datas)
                     .then(function (a) {
-                        console.log(a);
                         serviceSession.setValue("token",a.token);
                         serviceSession.setValue("id",a.id);
                         window.location.href = "/";
                     }, function (msg) {
-                        console.log("Erreur serveur : ",msg);
-                        //TODO: msg Erreur
+                        createAlert('error','Oups quelque chose ne va pas ..',msg.responseText);
                 });
             }else{
                 $('.error2').css("display","block");
