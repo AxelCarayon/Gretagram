@@ -68,7 +68,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
                 mymap.setView([mylatitude, mylongitude], 11);
 
-                //------TODO ça marche pas
                 var circle = L.circle([mylatitude, mylongitude], { // Ajout d'un cercle à l'emplacement de l'utilisateur
                     color: 'rgb(199, 201, 249)',
                     fillColor: 'rgb(20, 122, 186)',
@@ -79,7 +78,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 
                 circle.bindPopup("Vous êtes ici.").openPopup();
                 circle.addTo(mymap);
-                // ------
 
                 console.log('myPosition',mylatitude,mylongitude);
                 console.log('getBounds',mymap.getBounds());
