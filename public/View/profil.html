@@ -99,7 +99,7 @@
     <div class="container profil">
         <div class="row">
             <div class="col-2">
-                <img src={{ppProfil}} class="profilPicture" alt="">
+                <img ng-src={{ppProfil}} class="profilPicture" alt="">
             </div>
             <div class="col-10">
                 <div class="container-fluid">
@@ -257,7 +257,7 @@
                 <div class="modal-body">
                     <div class="comment" ng-repeat="abonne in abonnes | orderBy:'toString()' ">
                         <div class="comment-img">
-                            <img src="{{abonne.pp}}" class="photoProfil" alt="">
+                            <img ng-src="{{abonne.pp}}" class="photoProfil" alt="">
                         </div>
                         <div class="comment-body">
                             <a userid="{{abonne.id}}" ng-click="redirectProfil($event)"
@@ -285,7 +285,7 @@
                     <div class="comment" ng-repeat="abonnement in abonnements | orderBy:'toString()' ">
                         <div class="comment-img">
                             <!-- TODO Photo profil -->
-                            <img src="{{abonnement.pp}}" class="photoProfil" alt="">
+                            <img ng-src="{{abonnement.pp}}" class="photoProfil" alt="">
                         </div>
                         <div class="comment-body">
                             <a userid="{{abonnement.id}}" ng-click="redirectProfil($event)"
@@ -317,7 +317,7 @@
                         </div>
                         <div class="comment-body">
                             <div class="comment-nom"><a href="#" userid="{{comment.userID}}"
-                                    ng-click="redirectProfil($event)">{{ comment.userName}}</a> </div>
+                                    ng-click="redirectProfil($event)">{{comment.userName}}</a> </div>
                             <!-- TODO nom user -->
                             <p class="date">{{comment.date | date:'MM-dd-yyyy HH:mm'}}</p>
                             <p>{{comment.message}}</p>

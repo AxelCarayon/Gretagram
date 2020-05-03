@@ -397,8 +397,9 @@ div[contenteditable] {
 }
 
 img[src*="undefined"]  {
-    height: 10px;
+    height: 0px;
     margin-bottom: -20px;
+    cursor : auto;
 }
 
 img[src=""] {
