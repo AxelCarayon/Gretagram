@@ -339,29 +339,31 @@ exports.delete = function(req, res) {
     if (token === null) {
         res.sendStatus(403);
     } else {
-        Publication.deleteOne({ '_id': req.body.id }, function(err, publication) {
-            if (token._id === publication.userID) {
+        Publication.findOne({ '_id': req.body.id }, function(err, publication) {
+            console.log(token._id);
+            console.log(publication.userID);
+            if (token._id == publication.userID) {
+                Publication.deleteOne({ '_id': req.body.id }, (err, publication) => {});
                 if (err) {
                     res.send(err);
-                } else {
-                    User.findOne({ '_id': token._id }, function(err, user) {
-                        if (err) {
-                            console.log(err);
-                        } else {
-                            const index = user.publications.findIndex(x => x._id == req.body.id);
-                            user.publications.splice(index, 1);
-                            user.save(function(err) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    res.send({
-                                        message: 'Publication deleted'
-                                    });
-                                }
-                            })
-                        }
-                    });
                 }
+                User.findOne({ '_id': token._id }, function(err, user) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        const index = user.publications.findIndex(x => x._id == req.body.id);
+                        user.publications.splice(index, 1);
+                        user.save(function(err) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                res.send({
+                                    message: 'Publication deleted'
+                                });
+                            }
+                        })
+                    }
+                });
             } else {
                 console.log("tentative de supprimer un post qui ne lui appartient pas");
                 res.sendStatus(403);

@@ -150,5 +150,22 @@ app.service('servicePublicationAjax', function ($http,$q) {
             });
             return deferred.promise;
         },
+        trashPub: function (data) {
+            //data : token+id
+            var deferred = $q.defer();
+            $.ajax({
+                url: '/api/publication',
+                data: data,
+                type: 'DELETE',
+                success: function(res){
+                    deferred.resolve(res);
+                },
+                error : function(res,state,msg){
+                    console.log('service rep :',res,msg);
+                    deferred.reject(msg);
+                }
+            });
+            return deferred.promise;
+        },
     };
 });
