@@ -2,6 +2,7 @@ const readline = require('readline');
 const faker = require('faker');
 const User = require('../api/model/userModel');
 const Publication = require('../api/model/publicationModel');
+const Hashtag = require('../api/model/hashtagModel');
 const mongoose = require('mongoose');
 const cliProgress = require('cli-progress');
 const fs = require('fs');
