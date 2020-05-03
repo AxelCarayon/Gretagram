@@ -20,7 +20,7 @@
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
 
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -32,6 +32,7 @@
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- Style Principal -->
     <link rel="stylesheet" href="View/css/style.css">
     <!-- Markers Cluster  -->
@@ -62,6 +63,9 @@
         <p class="bloc-alert-para"></p>
     </div>
 
+    <div class="loader" ng-show="loading">
+        <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="80" height="80" class="clair d-inline-block " alt="">
+    </div>
     
     <nav class="clair mb-1 container navbar navbar-expand-lg navbar-dark default-color" style="margin-bottom:40px ;">
         <a class="clair navbar-brand" href="/">
@@ -90,7 +94,7 @@
     <div class="container" style="margin-top:50px;">
         <div class="row justify-content-center">
             <div class=" form-control searchbar col-6">
-                <input class="col-6" id="searchbar" type="search" placeholder="Search" aria-label="Search">
+                <input class="col-6" id="searchbar" type="search" placeholder="Search" aria-label="Search"><button id="btn-recherche"><i class="fas fa-search"></i></button>
                 <div class="search-items" style="display: none;">
                     <h5 style="margin-top: 10px;">Tendances</h5>
                     <p>
@@ -102,46 +106,78 @@
             </div>
         </div>
     </div>
-    <div class="container" style="margin-top: 50px;" ng-controller="publicationFormCtrl">
-        <div class="row justify-content-center">
-            <div class="col-10 ">
-                <div class="card publication clair">
-                    <div class="card-header">
-                        <h2 class="clair">Créer une publication</h1>
-                            <img class="geoImg" data-toggle="tooltip" data-placement="top"
-                                title="Partagez votre position" src="View/ressources/location.svg" alt="">
-                    </div>
-                    <div class="card-body">
-                        <div class="container-fluid">
-                            <div class="row justify-content-center">
-                                <div class="col-2">
-                                    <img class="avatar-create-publication" src="{{ppUser}}" alt="">
-                                </div>
-                                <div class="container-fluid col-10">
-                                    <div class="row">
-                                        <p class="hashtest"></p>
-                                        <div contenteditable="true" placeholder="Exprimez vous..."
-                                            class="col-12 text-create-publication">
-                                        </div>
-                                        <img id="#blah" class="img-create-publication" src="" alt="">
 
+    <div class="" ng-show="recherche">
+        <div style="margin-top: 100px;" ng-show="recherche-user">
+            <div class="comment" ng-repeat="user in users | orderBy:'toString()' ">
+                <div class="comment-img">
+                    <!-- TODO Photo profil -->
+                    <img ng-src="{{user.pp}}" class="photoProfil" alt="">
+                </div>
+                <div class="comment-body">
+                    <a userid="{{user.id}}" ng-click="redirectProfil($event)"
+                        style="cursor:pointer; margin-top: 30px;"
+                        class="comment-nom">{{user.userName}}</a>
+                </div>
+
+            </div>
+        </div>
+        <div style="margin-top: 100px;" ng-show="recherche-hashtag">
+            <div class="container containerPublications">
+                <div class="row publicationContainer">
+                    <div class="col-12 col-12-sm container containerPublicationsProche">
+                        <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in hashtags | orderBy:'date':true">
+                            <publication-template></publication-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="!recherche">
+
+        <div class="container" style="margin-top: 50px;" ng-controller="publicationFormCtrl">
+            <div class="row justify-content-center">
+                <div class="col-10 ">
+                    <div class="card publication clair">
+                        <div class="card-header">
+                            <h2 class="clair">Créer une publication</h1>
+                                <img class="geoImg" data-toggle="tooltip" data-placement="top"
+                                    title="Partagez votre position" src="View/ressources/location.svg" alt="">
+                        </div>
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <div class="row justify-content-center">
+                                    <div class="col-2">
+                                        <img class="avatar-create-publication" src="{{ppUser}}" alt="">
                                     </div>
-                                    <div class="row justify-content-end">
-                                        <div class="content ">
-                                            <div class="box "
-                                                style="margin-right: -30px;height: 40px;min-width: 200px;">
-                                                <input type="file" name="file-1[]" id="file-1"
-                                                    class="inputfile inputfile-1 "
-                                                    data-multiple-caption="{count} files selected" multiple />
-                                                <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                        height="17" viewBox="0 0 20 17">
-                                                        <path
-                                                            d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
-                                                    </svg> <span class="fileSpan">Choisis une photo</span></label>
+                                    <div class="container-fluid col-10">
+                                        <div class="row">
+                                            <p class="hashtest"></p>
+                                            <div contenteditable="true" placeholder="Exprimez vous..."
+                                                class="col-12 text-create-publication">
                                             </div>
+                                            <img id="#blah" class="img-create-publication" src="" alt="">
+    
                                         </div>
-                                        <button href="#" class=" btn btn-publication ">Tendances</button>
-                                        <button href="#" class=" btn btn-publier ">Publier</button>
+                                        <div class="row justify-content-end">
+                                            <div class="content ">
+                                                <div class="box "
+                                                    style="margin-right: -30px;height: 40px;min-width: 200px;">
+                                                    <input type="file" name="file-1[]" id="file-1"
+                                                        class="inputfile inputfile-1 "
+                                                        data-multiple-caption="{count} files selected" multiple />
+                                                    <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="17" viewBox="0 0 20 17">
+                                                            <path
+                                                                d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                                                        </svg> <span class="fileSpan">Choisis une photo</span></label>
+                                                </div>
+                                            </div>
+                                            <button href="#" class=" btn btn-publication ">Tendances</button>
+                                            <button href="#" class=" btn btn-publier ">Publier</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -150,79 +186,76 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class=" container tabs">
-        <div class="row justify-content-center">
-            <button type="button" ng-click="aboFunction()" class="btnAbo btn-tabs clair btn  col-2"
-                name="button">Abonnements</button>
-            <button type="button" ng-click="trendFunction()" class="btnTrend btn-tabs active clair btn  col-2"
-                name="button">Trend</button>
-            <button type="button" ng-click="procheFunction()" class="btnProche btn-tabs clair btn  col-2"
-                name="button">Proche</button>
+        <div class=" container tabs">
+            <div class="row justify-content-center">
+                <button type="button" ng-click="aboFunction()" class="btnAbo btn-tabs clair btn  col-2"
+                    name="button">Abonnements</button>
+                <button type="button" ng-click="trendFunction()" class="btnTrend btn-tabs active clair btn  col-2"
+                    name="button">Trend</button>
+                <button type="button" ng-click="procheFunction()" class="btnProche btn-tabs clair btn  col-2"
+                    name="button">Proche</button>
+            </div>
         </div>
-    </div>
-    <div class="container containerPublications template" ng-show="loading">
-        <div class="loader">
-            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="80" height="80" class="clair d-inline-block " alt="">
-            <h2>Gretagram</h2>
+        <div class="container containerPublications template" ng-show="loading">
+    
+            <!-- <div class="row publicationContainer">
+                <div class="col-12 publication clair">
+                    <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
+                    <p class="nomProfil clair">Maurice Lestin</p>
+                    <p class="publicationDate">12 février 1945</p>
+                    <p class="publicationTexte clair">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero
+                        soluta cum assumenda necessitatibus, earum, et oui. </p>
+                    <div class="likes">
+                        <span class="nbLike clair">{{x.nblikes}} <span class="coeur"><svg aria-label='J’aime'
+                                    class='_8-yf5 ' fill='#c3b4b4' height='24' viewBox='0 0 48 48' width='24'>
+                                    <path clip-rule='evenodd'
+                                        d='M34.3 3.5C27.2 3.5 24 8.8 24 8.8s-3.2-5.3-10.3-5.3C6.4 3.5.5 9.9.5 17.8s6.1 12.4 12.2 17.8c9.2 8.2 9.8 8.9 11.3 8.9s2.1-.7 11.3-8.9c6.2-5.5 12.2-10 12.2-17.8 0-7.9-5.9-14.3-13.2-14.3zm-1 29.8c-5.4 4.8-8.3 7.5-9.3 8.1-1-.7-4.6-3.9-9.3-8.1-5.5-4.9-11.2-9-11.2-15.6 0-6.2 4.6-11.3 10.2-11.3 4.1 0 6.3 2 7.9 4.2 3.6 5.1 1.2 5.1 4.8 0 1.6-2.2 3.8-4.2 7.9-4.2 5.6 0 10.2 5.1 10.2 11.3 0 6.7-5.7 10.8-11.2 15.6z'
+                                        fill-rule='evenodd'></path>
+                                </svg> </span>
+                    </div>
+                </div>
+            </div> -->
         </div>
-        <!-- <div class="row publicationContainer">
-            <div class="col-12 publication clair">
-                <img src="View/ressources/profile.svg.png" class="photoProfil" alt="">
-                <p class="nomProfil clair">Maurice Lestin</p>
-                <p class="publicationDate">12 février 1945</p>
-                <p class="publicationTexte clair">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero
-                    soluta cum assumenda necessitatibus, earum, et oui. </p>
-                <div class="likes">
-                    <span class="nbLike clair">{{x.nblikes}} <span class="coeur"><svg aria-label='J’aime'
-                                class='_8-yf5 ' fill='#c3b4b4' height='24' viewBox='0 0 48 48' width='24'>
-                                <path clip-rule='evenodd'
-                                    d='M34.3 3.5C27.2 3.5 24 8.8 24 8.8s-3.2-5.3-10.3-5.3C6.4 3.5.5 9.9.5 17.8s6.1 12.4 12.2 17.8c9.2 8.2 9.8 8.9 11.3 8.9s2.1-.7 11.3-8.9c6.2-5.5 12.2-10 12.2-17.8 0-7.9-5.9-14.3-13.2-14.3zm-1 29.8c-5.4 4.8-8.3 7.5-9.3 8.1-1-.7-4.6-3.9-9.3-8.1-5.5-4.9-11.2-9-11.2-15.6 0-6.2 4.6-11.3 10.2-11.3 4.1 0 6.3 2 7.9 4.2 3.6 5.1 1.2 5.1 4.8 0 1.6-2.2 3.8-4.2 7.9-4.2 5.6 0 10.2 5.1 10.2 11.3 0 6.7-5.7 10.8-11.2 15.6z'
-                                    fill-rule='evenodd'></path>
-                            </svg> </span>
+        <!-- <h1 ng-show="loading">CHARGEMENT</h1> -->
+        <!-- ========================================================================================== -->
+        <!-- PUBLICATIONS ============================================================================= -->
+        <!-- ========================================================================================== -->
+       <!-- <div class="container containerPublications" ng-show="trend">
+            <div class="row publicationContainer">
+                <div class="col-12 publication clair" ng-repeat="x in publications">
+                    <publication-template publication-theme="publications"></publication-template>
                 </div>
             </div>
-        </div> -->
-    </div>
-    <!-- <h1 ng-show="loading">CHARGEMENT</h1> -->
-    <!-- ========================================================================================== -->
-    <!-- PUBLICATIONS ============================================================================= -->
-    <!-- ========================================================================================== -->
-   <!-- <div class="container containerPublications" ng-show="trend">
-        <div class="row publicationContainer">
-            <div class="col-12 publication clair" ng-repeat="x in publications">
-                <publication-template publication-theme="publications"></publication-template>
+        </div>
+        &lt;!&ndash; ========================================================================================== &ndash;&gt;
+        &lt;!&ndash; ABONNEMENTS ============================================================================= &ndash;&gt;
+        &lt;!&ndash; ========================================================================================== &ndash;&gt;
+        <div class="container containerPublications" ng-show="abonnements">
+            <div class="row publicationContainer">
+                <div class="col-12 publication clair" ng-controller="likeCommentCtrl" ng-repeat="x in abos">
+                    <publication-template publication-theme="abos"></publication-template>
+                </div>
+            </div>
+        </div>-->
+        <!-- ========================================================================================== -->
+        <!-- MAP PROCHE ============================================================================= -->
+        <!-- ========================================================================================== -->
+        <div class="container" ng-show="proche">
+            <div class="row justify-content-center">
+                <div class="map-container" style="opacity: 1;">
+                    <div id="macarte"></div>
+                </div>
             </div>
         </div>
-    </div>
-    &lt;!&ndash; ========================================================================================== &ndash;&gt;
-    &lt;!&ndash; ABONNEMENTS ============================================================================= &ndash;&gt;
-    &lt;!&ndash; ========================================================================================== &ndash;&gt;
-    <div class="container containerPublications" ng-show="abonnements">
-        <div class="row publicationContainer">
-            <div class="col-12 publication clair" ng-controller="likeCommentCtrl" ng-repeat="x in abos">
-                <publication-template publication-theme="abos"></publication-template>
-            </div>
-        </div>
-    </div>-->
-    <!-- ========================================================================================== -->
-    <!-- MAP PROCHE ============================================================================= -->
-    <!-- ========================================================================================== -->
-    <div class="container" ng-show="proche">
-        <div class="row justify-content-center">
-            <div class="map-container" style="opacity: 1;">
-                <div id="macarte"></div>
-            </div>
-        </div>
-    </div>
-    <!-- ========================================================================================== -->
-    <!-- PUBLICATIONS ============================================================================= -->
-    <!-- ========================================================================================== -->
-    <div class="container containerPublications">
-        <div class="row publicationContainer">
-            <div class="col-12 col-12-sm container containerPublicationsProche">
-                <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in pubs | orderBy:'date':true">
-                    <publication-template></publication-template>
+        <!-- ========================================================================================== -->
+        <!-- PUBLICATIONS ============================================================================= -->
+        <!-- ========================================================================================== -->
+        <div class="container containerPublications">
+            <div class="row publicationContainer">
+                <div class="col-12 col-12-sm container containerPublicationsProche">
+                    <div class="col-12 publication clair"  ng-controller="likeCommentCtrl" ng-repeat="x in pubs | orderBy:'date':true">
+                        <publication-template></publication-template>
+                    </div>
                 </div>
             </div>
         </div>
@@ -244,7 +277,7 @@
                         <img  ng-src="{{comment.pp}}" class="photoProfil" alt="">
                     </div>
                     <div class="comment-body">
-                        <div class="comment-nom"  ><a href="#" userid="{{comment.userID}}" ng-click="redirectProfil($event)">{{ comment.userName}}</a> </div><!-- TODO nom user -->
+                        <div class="comment-nom"  ><a href="#" userid="{{comment.userID}}" ng-click="redirectProfil($event)">{{ comment.userName}}</a> </div>
                         <p class="date">{{comment.date | date:'MM-dd-yyyy HH:mm'}}</p>
                         <p>{{comment.message}}</p>
                     </div>

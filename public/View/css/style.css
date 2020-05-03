@@ -93,16 +93,11 @@ h2.clair {
   transition: ease-in-out 0.5s;
 }
 .searchbar.clair {
-  border: 1px solid #cecdcd;
-}
-.searchbar.clair:hover {
   box-shadow: 7px 7px 14px #6bd4d4, -7px -7px 14px #8dffff !important;
   border: none;
 }
 .searchbar.sombre {
   border: 1px solid #8d7373;
-}
-.searchbar.sombre:hover {
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
   border: none;
 }
@@ -113,6 +108,28 @@ h2.clair {
 .searchbar.active.sombre {
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
   border: none;
+}
+.searchbar.active #btn-recherche {
+  border-radius: 15px;
+}
+
+#btn-recherche {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding: 0 21px;
+  border-radius: 26px;
+  border: none;
+  background: none;
+}
+#btn-recherche.clair {
+  background: #eff4f8;
+  box-shadow: 8px 8px 16px #c4c8cb, -8px -8px 16px #ffffff;
+}
+#btn-recherche.sombre {
+  background: #2A343D;
+  box-shadow: 8px 8px 16px #222b32, -8px -8px 16px #323d48;
 }
 
 .geoImg {

@@ -209,14 +209,14 @@
             <div class="row publicationContainer">
                 <div class="col-lg  containerPublicationsProche">
                     <h2 style="margin-top: 50px;">Ta publication que les gens ont le plus aimé</h2>
-                    <div class="col-12 publication clair" ng-repeat="x in laPlusLike">
-                        <publication-stat-template publication-theme="proches"></publication-stat-template>
+                    <div class="col-12 publication clair" ng-controller="likeCommentCtrl" ng-repeat="x in laPlusLike">
+                        <publication-template></publication-template>
                     </div>
                 </div>
                 <div class="col-lg  containerPublicationsProche">
                     <h2 style="margin-top: 50px;">Ta publication que les gens ont le plus commenté</h2>
-                    <div class="col-lg publication clair" ng-repeat="x in laPlusComment">
-                        <publication-stat-template publication-theme="proches"></publication-stat-template>
+                    <div class="col-lg publication clair" ng-controller="likeCommentCtrl" ng-repeat="x in laPlusComment">
+                        <publication-template></publication-template>
                     </div>
                 </div>
             </div>
