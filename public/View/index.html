@@ -72,7 +72,7 @@
         <div class="clair collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="clair navbar-nav ml-auto nav-flex-icons">
                 <li class="clair nav-item">
-                    <a id="moncompte" class="clair nav-link" userid="{{idUserConnect}}" ng-click="redirectProfil($event)">Mon compte</a>
+                    <a id="moncompte" class="clair nav-link" userid="{{idUserConnect}}" ng-click="redirectProfil($event)">{{nameConnected}}</a>
                 </li>
                 <li class="clair nav-item dropdown">
                     <a style="cursor: pointer;" class="clair nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Parametres </a>
@@ -115,7 +115,7 @@
                         <div class="container-fluid">
                             <div class="row justify-content-center">
                                 <div class="col-2">
-                                    <img class="avatar-create-publication" src="View/ressources/avatar.svg" alt="">
+                                    <img class="avatar-create-publication" src="{{ppUser}}" alt="">
                                 </div>
                                 <div class="container-fluid col-10">
                                     <div class="row">
