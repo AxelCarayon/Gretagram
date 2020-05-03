@@ -99,17 +99,15 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
     $scope.trashPub = ($event) => {
         let publication_id = $($event.target).attr("publication-id"); // L'ID de la publication
         servicePublicationAjax.trashPub({token:token,id:publication_id}).then(
-            function (data) {
-                console.log('trash act : ',data);
+            function () {
                 for (const i in $scope.pubs) {
                     if ($scope.pubs[i]._id == publication_id) {
-                        $scope.pubs[i] = null; //TODO il faut supprimer du scope et pas juste mettre null
+                        $scope.pubs.splice(i, 1);
                         break;
                     }
                 }
             },function (msg) {
-                //TODO alert ERROR
-                console.log('trash act error : ',msg);
+                createAlert('ERROR',msg,'Impossible de supprimer la publication.')
             }
         )
     }
