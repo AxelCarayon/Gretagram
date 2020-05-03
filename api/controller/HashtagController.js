@@ -102,3 +102,13 @@ exports.search = (req, res) => {
         }
     });
 }
+
+exports.populaire = (req, res) => {
+    Hashtag.find({}, null, { sort: { nbr: -1 }, limit: 10 }, function(err, hashtags) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(hashtags);
+        }
+    })
+}
