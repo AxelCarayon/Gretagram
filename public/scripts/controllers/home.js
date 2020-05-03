@@ -154,6 +154,12 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             })
         }
 
+        serviceUserAjax.getUser({'id':idUser}).then(
+            function (user){
+                $scope.nameConnected = user.prenom +' '+user.nom;
+            }
+        )
+
         getTrend();
 
         $scope.aboFunction = function() {

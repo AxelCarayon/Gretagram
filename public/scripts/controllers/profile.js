@@ -225,12 +225,17 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             $scope.followAct = follow;
         }
 
+        serviceUserAjax.getUser({'id':idUser}).then(
+            function (user){
+                $scope.nameConnected = user.prenom +' '+user.nom;
+            }
+        )
 
         // infos membre profil
         serviceUserAjax.getUser({'id':idProfil}).
         then(function (user) {
-            console.log(user);
-            $scope.nbPublications = user.publications.length; //TODO
+            console.log('user',user);
+            $scope.nbPublications = user.publications.length; //TODO données vide
             $scope.prenomEtNom = user.prenom +' '+user.nom;
             $scope.abonnes = listToObjList(user.abonnes);
             $scope.abonnements = listToObjList(user.abonnements);
