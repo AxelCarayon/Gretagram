@@ -112,6 +112,11 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 var id = list[i].userID;
                 if (!mem.includes( id)){
                     mem.push(id);
+                    let val = 'trashPub'+id
+                    if (id != idUser){
+                        $scope[val] = false;
+                    } else $scope[val] = true;
+
                     serviceUserAjax.getUser({id:id}).then(function (user) {
                             var name = user.prenom +' '+user.nom;
                             list = addNameinListOfObj(list,user.id,name);
