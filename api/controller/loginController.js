@@ -26,13 +26,12 @@ exports.login = function(req, res) {
         if (err) {
             res.send(err);
         } else if (!user) {
-            res.sendStatus(406); //pas d'utilisateur
+            res.status(400).send("Utilisateur inexistant");
         } else if (!user.validPassword(password)) {
-            console.log(password);
-            res.sendStatus(406); //pas le bon mot de passe
+            res.status(400).send("Mot de passe incorrect"); //pas le bon mot de passe
         } else {
             const accesstoken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET);
-            res.send({'token':accesstoken,'id':user._id});
+            res.send({ 'token': accesstoken, 'id': user._id });
             //console.log(user);
         }
 
