@@ -1,5 +1,6 @@
 function resetPub() {
     $(".text-create-publication").html("");
+    $('.hashtest').empty()
     console.log($('.fileSpan'));
 
     $('.fileSpan').text('Choisis une photo');

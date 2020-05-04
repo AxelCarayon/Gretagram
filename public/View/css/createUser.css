@@ -315,7 +315,7 @@ label.filled:hover {
   display: none;
   opacity: 0.8;
   max-width: 300px;
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   border-radius: 7px;

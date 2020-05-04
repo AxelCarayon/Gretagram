@@ -782,7 +782,7 @@ div.ng-show-remove.ng-show-remove-active {
   opacity: 0.8;
   max-width: 300px;
   z-index: 2000;
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
   border-radius: 7px;
