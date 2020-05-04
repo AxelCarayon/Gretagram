@@ -5,6 +5,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
     $scope.totalPubs = 5;
     $scope.btnLoadMore = "Charger plus..."
 
+    $scope.hashtags = ["#planet","#clean","#humour","#hope","#greta"]
 
 
     if (!serviceIsConnect) {
@@ -17,8 +18,9 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let mymap = L.map('macarte');
 
 
+        
+        
         $scope.loadMorePubs = () =>{
-
             if ($scope.totalPubs >= sizeTrend - 5   ) {
                 $scope.btnLoadMore = "Pas de publications supplémentaires"
             }
@@ -28,7 +30,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             else{
                 $scope.totalPubs = $scope.totalPubs + 5
             }
-
         }
 
 
@@ -207,53 +208,117 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         $scope.recherche = false;
         getTrend();
 
-        //Recherche
-        $('#btn-recherche').click(function () {
-            $scope.recherche = true;
-            let text = $('#searchbar').val();
+        $scope.fillSearch = (hashtag) => {
+            $scope.confirmed = hashtag
+            $scope.empty()
+        }
 
-            if (text == '' || text == null || !text){
+        $scope.deleteRecherche = () => {
+            $scope.confirmed = ""
+            $scope.empty()
+        }
+
+        $scope.empty = () => {
+            let text = $scope.confirmed;
+
+            if (text == "") {
                 $scope.recherche = false;
-                getTrend();
-            }
-
-            if (text[0] == '#'){
-                $scope.rechercheHashtag = true;
-                $scope.rechercheUser = false;
-                let recherche = text.split(' ')[0];
-
-                serviceRechercheAjax.getHPub({hashtag:recherche}).then(
-                    function (data) {
-                        if (data.status == 'hashtag inexistant'){
-                            createAlert('error','hashtag inexistant','');
-                            $scope.recherche = false;
-                            getTrend();
-                        }else{
-                            let listID = data.data.l_publications
-                            $scope.pubs = [];
-                            $scope.pubs  =listToPubs(listID,$scope.pubs);
-                            coeurRouge();
-                        }
-                        console.log(data);
-                    },function (data) {
-                        console.log('getHPub error ' ,data);
-                        createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
-                    }
-                )
+                $('#icon-recherche').removeClass("fa-times")
+                $('#icon-recherche').addClass("fa-search")
+                
             }else{
-                $scope.rechercheHashtag = false;
-                $scope.rechercheUser = true;
-                serviceRechercheAjax.getUsers(text).then(
-                    function (data) {
-                        console.log('getUsers success ' ,data);
-                        $scope.users = data;
-                    },function (data) {
-                        console.log('getUsers error ' ,data);
-                        createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
-                    }
-                )
-            }
-        })
+                $scope.recherche = true;
+                $('#icon-recherche').addClass("fa-times")
+                $('#icon-recherche').removeClass("fa-search")
+                console.log($('#icon-recherche'));
+                
+                if (text[0] == '#'){
+                    $scope.rechercheHashtag = true;
+                    $scope.rechercheUser = false;
+                    let recherche = text.split(' ')[0];
+    
+                    serviceRechercheAjax.getHPub({hashtag:recherche}).then(
+                        function (data) {
+                            if (data.status == 'hashtag inexistant'){
+                                // createAlert('error','hashtag inexistant','');
+                                // $scope.recherche = false;
+                                // getTrend();
+                            }else{
+                                let listID = data.data.l_publications
+                                $scope.pubs = [];
+                                $scope.pubs  =listToPubs(listID,$scope.pubs);
+                                coeurRouge();
+                            }
+                            // console.log(data);
+                        },function (data) {
+                            console.log('getHPub error ' ,data);
+                            createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
+                        }
+                    )
+                }else{
+                    $scope.rechercheHashtag = false;
+                    $scope.rechercheUser = true;
+                    serviceRechercheAjax.getUsers(text).then(
+                        function (data) {
+                            // console.log('getUsers success ' ,data);
+                            $scope.users = data;
+                        },function (data) {
+                            console.log('getUsers error ' ,data);
+                            createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
+                        }
+                    )
+                }
+            }    
+
+        }
+
+        //Recherche
+        // $('#btn-recherche').click(function () {
+        //     $scope.recherche = true;
+        //     let text = $('#searchbar').val();
+
+        //     if (text == '' || text == null || !text){
+        //         $scope.recherche = false;
+        //         getTrend();
+        //     }
+
+        //     if (text[0] == '#'){
+        //         $scope.rechercheHashtag = true;
+        //         $scope.rechercheUser = false;
+        //         let recherche = text.split(' ')[0];
+
+        //         serviceRechercheAjax.getHPub({hashtag:recherche}).then(
+        //             function (data) {
+        //                 if (data.status == 'hashtag inexistant'){
+        //                     createAlert('error','hashtag inexistant','');
+        //                     $scope.recherche = false;
+        //                     getTrend();
+        //                 }else{
+        //                     let listID = data.data.l_publications
+        //                     $scope.pubs = [];
+        //                     $scope.pubs  =listToPubs(listID,$scope.pubs);
+        //                     coeurRouge();
+        //                 }
+        //                 console.log(data);
+        //             },function (data) {
+        //                 console.log('getHPub error ' ,data);
+        //                 createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
+        //             }
+        //         )
+        //     }else{
+        //         $scope.rechercheHashtag = false;
+        //         $scope.rechercheUser = true;
+        //         serviceRechercheAjax.getUsers(text).then(
+        //             function (data) {
+        //                 console.log('getUsers success ' ,data);
+        //                 $scope.users = data;
+        //             },function (data) {
+        //                 console.log('getUsers error ' ,data);
+        //                 createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
+        //             }
+        //         )
+        //     }
+        // })
 
         $scope.aboFunction = function() {
             getAbo();
