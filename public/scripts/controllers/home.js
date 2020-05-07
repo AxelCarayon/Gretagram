@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax,serviceRechercheAjax) {
+app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax,serviceRechercheAjax,serviceAddIdentity) {
     $scope.loading = true;
     $scope.totalPubs = 5;
     $scope.btnLoadMore = "Charger plus..."
@@ -46,7 +46,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
             servicePublicationAjax.getAbonnements(token).then(
                 function (pubs) {
-                    $scope.pubs = addIdenty(pubs);
+                    $scope.pubs = serviceAddIdentity.pubs(pubs);
                     coeurRouge();
 
                 },function (res) {
@@ -65,7 +65,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
             servicePublicationAjax.getTrend(sizeTrend).then(
                 function (rep) {
-                    $scope.pubs = addIdenty(rep);
+                    $scope.pubs = serviceAddIdentity.pubs(rep);
                     coeurRouge();
 
                 },function (res) {
@@ -142,29 +142,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
             return e;
         }
-        function addIdenty (list){
-            var mem = [];
-            for (const i in list){
-                var id = list[i].userID;
-                if (!mem.includes( id)){
-                    mem.push(id);
-                    let val = 'trashPub'+id
-                    if (id != idUser){
-                        $scope[val] = false;
-                    } else $scope[val] = true;
-
-                    serviceUserAjax.getUser({id:id}).then(function (user) {
-                            var name = user.prenom +' '+user.nom;
-                            list = addNameinListOfObj(list,user.id,name);
-                            list = addPPinListOfObj(list,user.id,user.pp);
-                        },function (rep) {
-                            createAlert('ERROR','Problème récupération des données utilisateur',rep);
-                        }
-                    );
-                }
-            }
-            return list;
-        }
 
         function coeurRouge(){
             for (const index in ($scope.pubs)) {
@@ -179,7 +156,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         function pubsCarte(data) {
             servicePublicationAjax.getProche(data).then(
                 function (res) {
-                    $scope.pubs = addIdenty(res);
+                    $scope.pubs = serviceAddIdentity.pubs(res);
                     coeurRouge();
                     initMarker($scope.pubs,mymap);
 
@@ -357,7 +334,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             let publication_id = $event.target.getAttribute("publication-id")
             let pub = getPublicationWithId($scope,publication_id);
             $scope.modal = pub.commentaires;
-            addIdenty($scope.modal);
+            serviceAddIdentity.pubs($scope.modal);
         };
     }
 })

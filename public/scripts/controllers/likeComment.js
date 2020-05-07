@@ -20,28 +20,6 @@ function getPublicationWithId ($scope,obj) {
     return pub
 }
 
-function addNameinListOfObj (list , id, e){
-    for (var i = 0; i<list.length;i++){
-        if (list[i].userID == id) {
-            list[i].userName = e
-        }
-    }
-    return list;
-}
-
-function addPPinListOfObj (list , id, e){
-    if (e== null){
-        e = "View/ressources/profile.svg.png";
-    }
-    for (var i = 0; i<list.length;i++){
-        if (list[i].userID == id) {
-            list[i].pp = e
-        }
-    }
-    return list;
-}
-
-
 angular.module('app').controller("likeCommentCtrl", function ($location,$scope,servicePublicationAjax,serviceSession,serviceUserAjax) {
 
     var idUserCo = serviceSession.getValue('id');

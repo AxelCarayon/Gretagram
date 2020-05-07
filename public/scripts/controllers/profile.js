@@ -16,8 +16,6 @@ function idIsInListOfObj(list,e){
     }
     return false;
 }
-
-
 function getIdUrl (){
     var param = window.location.search.slice(1,window.location.search.length);
     var val = param.split('=');
@@ -33,29 +31,8 @@ function listToObjList (list){
     }
     return list;
 }
-function addNameinObjList (list , id, e){
-    for (var i = 0; i<list.length;i++){
-        if (list[i].id == id) {
-            list[i].userName = e;
-        }
-    }
-    return list;
-}
 
-function addPPinListOfObj2 (list , id, e){
-    if (e == null){
-        e = "View/ressources/profile.svg.png";
-    }
-    for (var i = 0; i<list.length;i++){
-        if (list[i].id == id || list[i].userID == id) {
-            list[i].pp = e;
-        }
-    }
-    return list;
-}
-
-
-angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax) {
+angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax,serviceAddIdentity) {
     if (!serviceIsConnect){
         window.location.href = "/login";
     }else {
@@ -115,7 +92,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 //Récupération des publications
                 servicePublicationAjax.getPubUser({'id':idProfil}).
                 then(function (publications) {
-                    $scope.pubs = addIdenty(publications);
+                    $scope.pubs = serviceAddIdentity.pubs(publications);
 
                     console.log('publications : ',publications);
 
@@ -256,26 +233,9 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             $scope.abonnements = listToObjList(user.abonnements);
 
             //ajout des nom des abonnements
-            for (var i = 0; i<$scope.abonnements.length;i++){
-                var id = $scope.abonnements[i].id;
-                serviceUserAjax.getUser({id:id}).then(function (user) {
-                        var name = user.prenom +' '+user.nom;
-                        $scope.abonnements = addNameinObjList($scope.abonnements,user.id,name);
-                        $scope.abonnements = addPPinListOfObj2($scope.abonnements,user.id,user.pp);
-                    }
-                );
-            }
-
+            serviceAddIdentity.abo($scope.abonnements);
             //ajout des nom des abonnés
-            for (var i = 0; i<$scope.abonnes.length;i++){
-                var id = $scope.abonnes[i].id;
-                serviceUserAjax.getUser({id:id}).then(function (user) {
-                        var name = user.prenom +' '+user.nom;
-                        $scope.abonnes = addNameinObjList($scope.abonnes,user.id,name);
-                        $scope.abonnes = addPPinListOfObj2($scope.abonnes,user.id,user.pp);
-                    }
-                );
-            }
+            serviceAddIdentity.abo($scope.abonnes);
 
             //photo de profil
             if (user.pp =='' || user.pp == null){
@@ -314,27 +274,8 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             let publication_id = $event.target.getAttribute("publication-id")
             let pub = getPublicationWithId($scope,publication_id);
             $scope.modal = pub.commentaires;
-            addIdenty($scope.modal);
+            serviceAddIdentity.pubs($scope.modal);
         };
-
-        function addIdenty (list){
-            var mem = [];
-            for (var i = 0; i<list.length;i++){
-                var id = list[i].userID;
-                if (!mem.includes( id)){
-                    mem.push(id);
-                    serviceUserAjax.getUser({id:id}).then(function (user) {
-                            var name = user.prenom +' '+user.nom;
-                            list = addNameinListOfObj(list,user.id,name);
-                            list = addPPinListOfObj(list,user.id,user.pp);
-                        },function (rep) {
-                            createAlert('ERROR',rep,"Impossible de récupérer les informations de l'utilisateur.");
-                        }
-                    );
-                }
-            }
-            return list;
-        }
     }
     });
 
