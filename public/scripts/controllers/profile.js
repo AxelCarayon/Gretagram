@@ -115,7 +115,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 //Récupération des publications
                 servicePublicationAjax.getPubUser({'id':idProfil}).
                 then(function (publications) {
-                    $scope.pubs = addPPinListOfObj2(publications,idProfil,pp);
+                    $scope.pubs = addIdenty(publications);
 
                     console.log('publications : ',publications);
 
