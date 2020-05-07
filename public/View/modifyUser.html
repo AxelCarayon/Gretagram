@@ -54,15 +54,15 @@ and open the template in the editor.
     </div>
 
 
-    <div class="container publication">
+    <div class="container publication"  ng-app="app" ng-controller="infoUserCtrl">
         <div class="row justify-content-center">
-            <img class="avatar" style="width: 150px;" src="View/ressources/avatar.svg">
+            <img class="avatar" style="width: 150px;" src="{{user.pp}}">
             <div class="w-100"></div>
             <h2 class="col-6" style="text-align: center;">Modification du compte</h2>
             <div class="w-100"></div>
             <div class="col-12 container">
                 <div class="row justify-content-center">
-                    <form id="formNewUser" class="col-12" ng-app="app" ng-controller="createUserCtrl" enctype="multipart/form-data">
+                    <form id="formNewUser" class="col-12" enctype="multipart/form-data">
                         <div class="container" style="width: 85%;">
                             <div class="row">
                                 <div class="input-div col-12 col-md-3 prenom">
@@ -71,7 +71,7 @@ and open the template in the editor.
                                     </div>
                                     <div>
                                         <h5>Prénom</h5>
-                                        <input class="input" id="prenom" name="prenom" type="text">
+                                        <input value="{{user.prenom}}" class="input" id="prenom" name="prenom" type="text">
                                     </div>
                                 </div>
                                 <div class="input-div col-12 col-md-3 nom ">
@@ -80,7 +80,7 @@ and open the template in the editor.
                                     </div>
                                     <div>
                                         <h5>Nom</h5>
-                                        <input class="input" id="nom" name="nom" type="text">
+                                        <input value="{{user.nom}}" class="input" id="nom" name="nom" type="text">
                                     </div>
                                 </div>
                                 <div class="input-div col-12 col-md-5 mail ">
@@ -89,7 +89,7 @@ and open the template in the editor.
                                     </div>
                                     <div>
                                         <h5 class="h5mail">Email</h5>
-                                        <input class="input shadow-none " id="mail" name="email" type="email">
+                                        <input value="{{user.email}}" class="input shadow-none " id="mail" name="email" type="email">
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@ and open the template in the editor.
                                     </div>
                                     <div>
                                         <h5>Date</h5>
-                                        <input class="input " id="date" name="age" type="date">
+                                        <input value="{{user.age | date: 'yyyy-MM-dd'}}" class="input " id="date" name="age" type="date">
                                     </div>
                                 </div>
                                 <div class="input-div col-12 col-md-3 genre">
@@ -164,7 +164,7 @@ and open the template in the editor.
 
                             </div>
                             <div class="row justify-content-end">
-                                <input type="button" class="btn" value="Modification du compte" ng-click="newUserAct()">
+                                <input type="button" class="btn" value="Modification du compte" ng-click="modifier()">
                             </div>
                         </div>
 
@@ -202,7 +202,11 @@ and open the template in the editor.
     <!-- Angular -->
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
     <!-- Controller -->
-    <script src="../scripts/services/serviceConnexionAjax.js"></script>
+    <script src="../scripts/controllers/infoUser.js"></script>
+    <script src="../scripts/services/serviceSession.js"></script>
+    <script src="../scripts/services/serviceIsConnect.js"></script>
+    <script src="../scripts/services/serviceUserAjax.js"></script>
+    <script src="../scripts/alert.js"></script>
 
 </body>
 

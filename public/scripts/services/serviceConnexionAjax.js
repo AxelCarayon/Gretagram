@@ -1,4 +1,3 @@
-'use strict';
 angular.module('app')
     .service('serviceConnexionAjax', function ($http, $q) {
         return{
