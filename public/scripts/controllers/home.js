@@ -5,7 +5,11 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
     $scope.totalPubs = 5;
     $scope.btnLoadMore = "Charger plus..."
 
-    $scope.hashtags = ["#planet","#clean","#humour","#hope","#greta"]
+    // TOP 10 #
+    serviceRechercheAjax.getTopH().then(function (data) {
+            console.log(data);
+            $scope.hashtags = data;
+    });
 
 
     if (!serviceIsConnect) {
@@ -208,16 +212,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         $scope.recherche = false;
         getTrend();
 
-        $scope.fillSearch = (hashtag) => {
-            $scope.confirmed = hashtag
-            $scope.empty()
-        }
 
-        $scope.deleteRecherche = () => {
-            $scope.confirmed = ""
-            $scope.empty()
-        }
-
+        //RECHERCHE
         $scope.empty = () => {
             let text = $scope.confirmed;
 
@@ -230,7 +226,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 $scope.recherche = true;
                 $('#icon-recherche').addClass("fa-times")
                 $('#icon-recherche').removeClass("fa-search")
-                console.log($('#icon-recherche'));
+             //   console.log($('#icon-recherche'));
                 
                 if (text[0] == '#'){
                     $scope.rechercheHashtag = true;
@@ -248,6 +244,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                                 $scope.pubs = [];
                                 $scope.pubs  =listToPubs(listID,$scope.pubs);
                                 coeurRouge();
+                                $scope.nameH = recherche;
+
                             }
                             // console.log(data);
                         },function (data) {
@@ -320,6 +318,22 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         //     }
         // })
 
+        // Click sur TOP 10 #
+        $scope.fillSearch = (hashtag) => {
+            $scope.recherche = true;
+            $scope.rechercheHashtag = true;
+            $scope.rechercheUser = false;
+            $('#icon-recherche').addClass("fa-times")
+            $('#icon-recherche').removeClass("fa-search")
+            $scope.pubs = [];
+            $scope.pubs  =listToPubs(hashtag.l_publications,$scope.pubs);
+            $scope.nameH = hashtag.name;
+            $scope.confirmed =  hashtag.name;
+        }
+        $scope.deleteRecherche = () => {
+            $scope.confirmed = ""
+            $scope.empty()
+        }
         $scope.aboFunction = function() {
             getAbo();
         }

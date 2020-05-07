@@ -33,5 +33,19 @@ app.service('serviceRechercheAjax', function ($q) {
             });
             return deferred.promise;
         },
+        getTopH: function () {
+            let deferred = $q.defer();
+            $.ajax({
+                url: "/api/populaire/hashtag",
+                method: "GET",
+                success: function (res) {
+                    deferred.resolve(res);
+                },
+                error: function (res) {
+                    deferred.reject(res);
+                }
+            });
+            return deferred.promise;
+        },
     }
 })

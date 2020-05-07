@@ -109,7 +109,7 @@
                 <div class="search-items" style="display: none;">
                     <h5 style="margin-top: 10px;">Tendances</h5>
                     <p >
-                        <span ng-click="fillSearch(hashtag)" ng-repeat="hashtag in hashtags" style="margin:0 5px;padding: 5px 10px; cursor:pointer; display: inline;" class="badge badge-success"> {{hashtag}} </span>
+                        <span ng-click="fillSearch(hashtag)" ng-repeat="hashtag in hashtags" style="margin:0 5px;padding: 5px 10px; cursor:pointer; display: inline;" class="badge badge-success"> {{hashtag.name}} </span>
 
                     </p>
                 </div>
@@ -142,7 +142,7 @@
             <div class="container containerPublications">
                 <div class="row publicationContainer">
                     <div class="col-12 col-12-sm container containerPublicationsProche">
-                        <h1>Hashtags</h1>
+                        <h1>Hashtags {{nameH}}</h1>
                         <div class="col-12 publication clair" ng-controller="likeCommentCtrl"
                             ng-repeat="x in pubs | orderBy:'date':true">
                             <publication-template></publication-template>
