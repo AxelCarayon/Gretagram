@@ -116,12 +116,11 @@
             </div>
         </div>
     </div>
-
     <div class="" ng-show="recherche">
         <div style="margin-top: 100px;" ng-show="rechercheUser">
             <div class="container">
                 <h1>Utilisateurs</h1>
-
+                <h3 ng-if="users.length == 0">Aucun utilisateur portant ce nom</h3>
                 <div class="comment" ng-repeat="user in users | orderBy:'toString()' ">
                     <div class="row">
                         <div class="comment-img">
