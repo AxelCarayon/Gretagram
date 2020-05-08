@@ -1,10 +1,11 @@
 var app = angular.module('app', []);
 
-app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,serviceUserAjax) {
+app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,serviceUserAjax,serviceTheme) {
     if (!serviceIsConnect) {
         window.location.href = "/login";
     } else {
         let token =serviceSession.getValue('token');
+        serviceTheme.getTheme();
 
         serviceUserAjax.getUserPrivate(token).then(
             function (user) {
