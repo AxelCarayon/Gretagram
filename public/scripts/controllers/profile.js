@@ -42,6 +42,8 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
         var idUser = serviceSession.getValue('id');
         var idProfil;
         var ppDefault = 'View/ressources/profile.svg.png';
+        serviceTheme.getTheme();
+
 
         $scope.loadMorePubs = () =>{
            

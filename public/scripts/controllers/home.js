@@ -4,6 +4,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
     $scope.loading = true;
     $scope.totalPubs = 5;
     $scope.btnLoadMore = "Charger plus..."
+    serviceTheme.getTheme();
 
     // TOP 10 #
     serviceRechercheAjax.getTopH().then(function (data) {
@@ -185,7 +186,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
         $scope.recherche = false;
         getTrend();
-        serviceTheme.getTheme();
 
 
         $(".change-theme").click(() => {
