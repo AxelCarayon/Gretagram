@@ -20,7 +20,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let idUser = serviceSession.getValue('id');
         let mymap = L.map('macarte');
       //  let mapH = L.map('carteH');
-        let sombre = serviceSession.getValue('theme'); // Meme variable que dans map.js
 
 
 
@@ -84,12 +83,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 right: '0%'
             });
             //theme carte
-            var sombre = serviceSession.getValue('theme');
-            themeMap(sombre,mymap);
-            $('.change-theme').click(() => { // On change la map de couleur quand l'utilisateur switch de theme
-                sombre = !sombre;
-                themeMap(sombre,mymap);
-            });
+            serviceTheme.themeMap(mymap);
 
             navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
                 var mylatitude = position.coords.latitude;
@@ -377,37 +371,17 @@ function initMarker(pubs,map){
          `).openPopup();
 
         markers.addLayer(myMarker);
-
         map.addLayer(markers);
-    }
-
-}
-
-function themeMap(sombre,mymap){
-    var lightmap = "https://api.mapbox.com/styles/v1/cgobbo/ck6qkg6du0sc61ipgfmunfy2a/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2dvYmJvIiwiYSI6ImNrNmh3cnN4ZTA3aXozbWxvaGM3dGJzdWIifQ.xkLbDd0BUUKWQbAyUVrRew";
-    var darkmap = 'https://api.mapbox.com/styles/v1/cgobbo/ck6qiop5d3l131iofj94j7jpl/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2dvYmJvIiwiYSI6ImNrNmh3cnN4ZTA3aXozbWxvaGM3dGJzdWIifQ.xkLbDd0BUUKWQbAyUVrRew';
-    // Les 2 maps pour switcher entre les 2 thèmes
-
-    if (!sombre) { // Par rapport à la variable de l'utilisateur on met la map en light ou en dark
-        console.log('!sombre')
-        L.tileLayer(darkmap, {
-            maxZoom: 18
-        }).addTo(mymap);
-    } else {
-        console.log('sombre')
-        L.tileLayer(lightmap, {
-            maxZoom: 18
-        }).addTo(mymap);
     }
 }
 
 function genarateData(zone) {
-    var lat1 = zone._northEast.lat;
-    var long1 = zone._northEast.lng;
-    var lat2 = zone._southWest.lat;
-    var long2 = zone._southWest.lng;
+    let lat1 = zone._northEast.lat;
+    let long1 = zone._northEast.lng;
+    let lat2 = zone._southWest.lat;
+    let long2 = zone._southWest.lng;
 
-    var data = { lat1:lat1,
+    let data = { lat1:lat1,
         long1:long1,
         lat2: lat2,
         long2: long2
