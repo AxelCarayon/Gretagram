@@ -405,7 +405,7 @@ div[contenteditable] {
     left: 80px;
 
     &.sombre {
-        color: white;
+        color: #fff;
     }
 
     &.clair {
@@ -428,7 +428,7 @@ div[contenteditable] {
     margin-bottom: -20px;
 
     &.sombre {
-        color: white;
+        color: #fff;
 
     }
 
@@ -567,7 +567,7 @@ img[src=""] {
 
 .nbLike {
     &.sombre {
-        color: white;
+        color: #fff;
     }
 
     &.clair {
@@ -1064,3 +1064,40 @@ div.ng-show-remove.ng-show-remove-active {
         color: #8d7373;
 
 }
+
+a.sombre, .container.sombre a {
+    color: #ceddec !important;
+  }
+  a.sombre:hover ,.container.sombre a:hover{
+    color: #f3f7fa !important;
+  }
+
+  h2.sombre, .container.sombre h2 {
+    color: #fff !important;
+  }
+
+  .container.sombre .publication {
+    background: #2A343D !important;
+    box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48 !important;
+  }
+
+  .container.sombre .nomProfil {
+    color: #fff !important;
+  }
+
+  .container.sombre .publicationTexte {
+    color: #fff !important;
+  }
+
+  .container.sombre .add-comment {
+    border-top: 1px solid #544d4d !important;
+  }
+
+  .container.sombre .nbLike {
+    color: #fff !important;
+  }
+
+  #macarte, #carteH {
+    height: 400px !important;
+    border-radius: 20px !important;
+  }
