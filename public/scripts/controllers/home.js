@@ -131,7 +131,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         function identity (e){
             let id = e.userID;
             serviceUserAjax.getUser({id:id}).then(function (user) {
-                    e.name = user.prenom +' '+user.nom;
+                    e.userName = user.prenom +' '+user.nom;
                     e.pp = user.pp;
                 },function (rep) {
                     createAlert('ERROR','Problème récupération des données utilisateur',rep);
