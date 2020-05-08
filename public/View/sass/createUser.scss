@@ -55,7 +55,11 @@ form {
 }
 
 .avatar {
-    width: 50px;
+	width: 150px;
+	object-fit: cover;
+	/* border: ; */
+	border-radius: 50%;
+	height: 150px;
 }
 
 form h2 {
@@ -345,7 +349,7 @@ label {
     display: none;
     opacity: .8;
     max-width: 300px;
-
+    z-index: 2000;
     position: fixed;
     top: 20px;
     right: 20px;

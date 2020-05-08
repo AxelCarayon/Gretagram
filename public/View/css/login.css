@@ -259,6 +259,7 @@ footer p {
   display: none;
   opacity: 0.8;
   max-width: 300px;
+  z-index: 2000;
   position: fixed;
   top: 20px;
   right: 20px;
