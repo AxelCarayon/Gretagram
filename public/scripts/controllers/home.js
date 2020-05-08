@@ -98,24 +98,18 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     fillOpacity: 0.8,
                     radius: 200
                 })
-                console.log(circle);
-                
+
                 circle.bindPopup("Vous êtes ici.").openPopup();
                 circle.addTo(mymap);
-
-                console.log('myPosition',mylatitude,mylongitude);
-                console.log('getBounds',mymap.getBounds());
 
                 //init les pubs avec ma position
                 pubsCarte(genarateData(mymap.getBounds()));
 
                 mymap.on('zoomend', function() {
-                    console.log('zoomend');
                     pubsCarte(genarateData(mymap.getBounds()));
                 });
 
                 mymap.on('dragend', function() {
-                    console.log('dragend');
                     pubsCarte(genarateData(mymap.getBounds()));
                 });
 
@@ -227,7 +221,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                                 $scope.nameH = recherche;
 
                             }
-                            // console.log(data);
                         },function (data) {
                             console.log('getHPub error ' ,data);
                             createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
@@ -238,7 +231,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     $scope.rechercheUser = true;
                     serviceRechercheAjax.getUsers(text).then(
                         function (data) {
-                            // console.log('getUsers success ' ,data);
                             $scope.users = data;
                         },function (data) {
                             console.log('getUsers error ' ,data);
@@ -367,7 +359,7 @@ function initMarker(pubs,map){
 
         myMarker.bindPopup(`
         
-        <p style='text-align:center;font-weight: 700' userid="${userID}" ng-click="redirectProfil($event)"> 
+        <p style='text-align:center;font-weight: 700'> 
             <img src="${pp}" style="height: 50px;
                                     width: 50px;
                                     object-fit: cover;
