@@ -206,8 +206,35 @@ h2 {
 }
 
 .searchbar-hover {
-    height: auto;
+    height: 150px;
     border-radius: 13px;
+}
+
+@media screen and (max-width : 990px) {
+    .searchbar-hover {
+        height: 190px;
+    }
+    
+}
+@media screen and (max-width : 770px) {
+    .searchbar-hover {
+        height: 230px;
+    }
+    
+}
+@media screen and (max-width : 540px) {
+    .searchbar-hover {
+        height: 430px;
+    }
+
+    .tendance-wrapper{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0 80px;
+    }
+    
 }
 
 .theme-toggler {

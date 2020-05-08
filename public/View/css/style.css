@@ -52,10 +52,10 @@ input[type=button]::-moz-focus-inner {
   border: 0;
 }
 
-a.sombre, .container.sombre a {
+a.sombre {
   color: #ceddec !important;
 }
-a.sombre:hover ,.container.sombre a:hover{
+a.sombre:hover {
   color: #f3f7fa !important;
 }
 a.clair {
@@ -74,7 +74,7 @@ h1 {
   color: #c3b4b4;
 }
 
-h2.sombre, .container.sombre h2 {
+h2.sombre {
   color: #fff;
 }
 h2.clair {
@@ -177,10 +177,33 @@ h2.clair {
 }
 
 .searchbar-hover {
-  height: auto;
+  height: 150px;
   border-radius: 13px;
 }
 
+@media screen and (max-width: 990px) {
+  .searchbar-hover {
+    height: 190px;
+  }
+}
+@media screen and (max-width: 770px) {
+  .searchbar-hover {
+    height: 230px;
+  }
+}
+@media screen and (max-width: 540px) {
+  .searchbar-hover {
+    height: 430px;
+  }
+
+  .tendance-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 80px;
+  }
+}
 .theme-toggler {
   width: 100px;
   height: 40px;
@@ -311,7 +334,7 @@ div[contenteditable]:focus.clair {
   padding-right: 0;
   padding-left: 0;
 }
-.container.sombre .publication {
+.publication.sombre {
   background: #2A343D;
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
 }
@@ -336,7 +359,7 @@ div[contenteditable]:focus.clair {
   top: 25px;
   left: 80px;
 }
-.container.sombre .nomProfil {
+.nomProfil.sombre {
   color: white;
 }
 .nomProfil.clair {
@@ -356,7 +379,7 @@ div[contenteditable]:focus.clair {
   margin: 60px 30px 0 30px;
   margin-bottom: -20px;
 }
-.container.sombre .publicationTexte {
+.publicationTexte.sombre {
   color: white;
 }
 .publicationTexte.clair {
@@ -439,7 +462,7 @@ img[src=""] {
 .add-comment.clair {
   border-top: 1px solid #f3e3e3;
 }
-.container.sombre .add-comment {
+.add-comment.sombre {
   border-top: 1px solid #544d4d;
 }
 .add-comment input {
@@ -468,7 +491,7 @@ img[src=""] {
   bottom: 15px !important;
 }
 
-.container.sombre .nbLike {
+.nbLike.sombre {
   color: white;
 }
 .nbLike.clair {
@@ -508,7 +531,7 @@ img[src=""] {
   width: 50%;
 }
 
-#macarte, #carteH {
+#macarte {
   height: 400px;
   border-radius: 20px;
 }
