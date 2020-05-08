@@ -32,7 +32,7 @@ function listToObjList (list){
     return list;
 }
 
-angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax,serviceAddIdentity) {
+angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax,serviceAddIdentity,serviceTheme) {
     if (!serviceIsConnect){
         window.location.href = "/login";
     }else {
@@ -103,6 +103,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                             $scope[t] = true;
                         }
                     }
+                    serviceTheme.getTheme();
                 }, function (msg) {
                     createAlert('ERROR',msg,"Impossible de récupérer les publications.");
                 });
@@ -114,6 +115,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             $scope.profilStats = true;
             $('.btnPub').removeClass('active');
             $('.btnStat').addClass('active');
+            serviceTheme.getTheme();
 
             var likes = 0;
             var commentaires = 0;
@@ -259,10 +261,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             createAlert('ERROR',msg,"Impossible de récupérer les informations de l'utilisateur.");
         });
 
-        $scope.changeTheme = function () {
-            $('*').toggleClass('sombre');
-            $('*').toggleClass('clair');
-        };
+        $scope.changeTheme = function () {serviceTheme.setTheme();};
 
         $scope.redirectProfil = ($event) => {
             var link = $event.target;

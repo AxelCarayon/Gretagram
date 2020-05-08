@@ -4,20 +4,6 @@ $(document).ready(() => {
 
     $('[data-toggle="tooltip"]').tooltip();
 
-
-    var sombre = true; // Meme variable que dans map.js
-    if (sombre) { // Si sombre est false le theme est clair sinon dark
-        $('*').removeClass('sombre');
-        $('*').addClass('clair');
-    } else {
-        $('*').removeClass('clair');
-        $('*').addClass('sombre');
-    }
-    document.body.style.zoom = "80%"; //Dézoom de la page juste pour que ça soit plus beau 
-    $(".change-theme").click(() => { // Bouton de changement de theme 
-        $('*').toggleClass('sombre');
-        $('*').toggleClass('clair');
-    });
     $('.btn-tabs').click((e) => { // changement de classe des boutons pour changer d'aspect
         var btn = e.target;
         $('.btn-tabs').removeClass('active');

@@ -52,10 +52,10 @@ input[type=button]::-moz-focus-inner {
   border: 0;
 }
 
-a.sombre {
+a.sombre, .container.sombre a {
   color: #ceddec !important;
 }
-a.sombre:hover {
+a.sombre:hover ,.container.sombre a:hover{
   color: #f3f7fa !important;
 }
 a.clair {
@@ -74,7 +74,7 @@ h1 {
   color: #c3b4b4;
 }
 
-h2.sombre {
+h2.sombre, .container.sombre h2 {
   color: #fff;
 }
 h2.clair {
@@ -297,7 +297,7 @@ div[contenteditable]:focus.clair {
   padding-right: 0;
   padding-left: 0;
 }
-.publication.sombre {
+.container.sombre .publication {
   background: #2A343D;
   box-shadow: 7px 7px 17px #222b32, -7px -7px 17px #323d48;
 }
@@ -322,7 +322,7 @@ div[contenteditable]:focus.clair {
   top: 25px;
   left: 80px;
 }
-.nomProfil.sombre {
+.container.sombre .nomProfil {
   color: white;
 }
 .nomProfil.clair {
@@ -342,7 +342,7 @@ div[contenteditable]:focus.clair {
   margin: 60px 30px 0 30px;
   margin-bottom: -20px;
 }
-.publicationTexte.sombre {
+.container.sombre .publicationTexte {
   color: white;
 }
 .publicationTexte.clair {
@@ -425,7 +425,7 @@ img[src=""] {
 .add-comment.clair {
   border-top: 1px solid #f3e3e3;
 }
-.add-comment.sombre {
+.container.sombre .add-comment {
   border-top: 1px solid #544d4d;
 }
 .add-comment input {
@@ -454,7 +454,7 @@ img[src=""] {
   bottom: 15px !important;
 }
 
-.nbLike.sombre {
+.container.sombre .nbLike {
   color: white;
 }
 .nbLike.clair {
@@ -494,7 +494,7 @@ img[src=""] {
   width: 50%;
 }
 
-#macarte {
+#macarte, #carteH {
   height: 400px;
   border-radius: 20px;
 }

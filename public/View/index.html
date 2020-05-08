@@ -91,7 +91,7 @@
                     <div class="clair dropdown-menu dropdown-menu-right dropdown-default"
                         aria-labelledby="navbarDropdownMenuLink-333">
                         <a href="/parametres" class="clair dropdown-item">Paramètres du compte</a>
-                        <a href="#" class="clair dropdown-item change-theme" >Changement du thème</a>
+                        <a href="#" class="clair dropdown-item change-theme" ng-click="changeTheme()">Changement du thème</a>
                         <a href="/login" class="clair dropdown-item">Déconnexion</a>
                     </div>
                 </li>
@@ -143,6 +143,13 @@
                 <div class="row publicationContainer">
                     <div class="col-12 col-12-sm container containerPublicationsProche">
                         <h1>Hashtags {{nameH}}</h1>
+                        <!--<a ng-click="showCarte()">Afficher sur la carte </a>
+                            <div ng-show="carteH" class="row justify-content-center">
+                                <div class="map-container" style="opacity: 1;">
+                                    <div id="carteH"></div>
+                                </div>
+                            </div>
+                        </div>-->
                         <div class="col-12 publication clair" ng-controller="likeCommentCtrl"
                             ng-repeat="x in pubs | orderBy:'date':true">
                             <publication-template></publication-template>
@@ -323,6 +330,7 @@
     <script src="Controller/js/publication.js" charset="utf-8"></script>
     <script src="../scripts/services/serviceRechercheAjax.js"></script>
     <script src="../scripts/services/serviceAddIdentity.js"></script>
+    <script src="../scripts/services/serviceTheme.js"></script>
 </body>
 
 </html>

@@ -1,13 +1,12 @@
 var app = angular.module('app', []);
 
-app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax,serviceRechercheAjax,serviceAddIdentity) {
+app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax,serviceRechercheAjax,serviceAddIdentity,serviceTheme) {
     $scope.loading = true;
     $scope.totalPubs = 5;
     $scope.btnLoadMore = "Charger plus..."
 
     // TOP 10 #
     serviceRechercheAjax.getTopH().then(function (data) {
-            console.log(data);
             $scope.hashtags = data;
     });
 
@@ -20,10 +19,13 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let sizeTrend = 100;
         let idUser = serviceSession.getValue('id');
         let mymap = L.map('macarte');
+      //  let mapH = L.map('carteH');
+        let sombre = serviceSession.getValue('theme'); // Meme variable que dans map.js
 
 
-        
-        
+
+
+
         $scope.loadMorePubs = () =>{
             if ($scope.totalPubs >= sizeTrend - 5   ) {
                 $scope.btnLoadMore = "Pas de publications supplémentaires"
@@ -55,6 +57,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             )
 
 
+
         }
         let getTrend = function (){
             $scope.proche = false;
@@ -81,7 +84,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 right: '0%'
             });
             //theme carte
-            var sombre = true;
+            var sombre = serviceSession.getValue('theme');
             themeMap(sombre,mymap);
             $('.change-theme').click(() => { // On change la map de couleur quand l'utilisateur switch de theme
                 sombre = !sombre;
@@ -188,7 +191,12 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
         $scope.recherche = false;
         getTrend();
+        serviceTheme.getTheme();
 
+
+        $(".change-theme").click(() => {
+            serviceTheme.setTheme();
+        })
 
         //RECHERCHE
         $scope.empty = () => {
@@ -203,11 +211,11 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 $scope.recherche = true;
                 $('#icon-recherche').addClass("fa-times")
                 $('#icon-recherche').removeClass("fa-search")
-             //   console.log($('#icon-recherche'));
-                
+
                 if (text[0] == '#'){
                     $scope.rechercheHashtag = true;
                     $scope.rechercheUser = false;
+                    $scope.carteH = false;
                     let recherche = text.split(' ')[0];
     
                     serviceRechercheAjax.getHPub({hashtag:recherche}).then(
@@ -247,59 +255,33 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
         }
 
-        //Recherche
-        // $('#btn-recherche').click(function () {
-        //     $scope.recherche = true;
-        //     let text = $('#searchbar').val();
-
-        //     if (text == '' || text == null || !text){
-        //         $scope.recherche = false;
-        //         getTrend();
-        //     }
-
-        //     if (text[0] == '#'){
-        //         $scope.rechercheHashtag = true;
-        //         $scope.rechercheUser = false;
-        //         let recherche = text.split(' ')[0];
-
-        //         serviceRechercheAjax.getHPub({hashtag:recherche}).then(
-        //             function (data) {
-        //                 if (data.status == 'hashtag inexistant'){
-        //                     createAlert('error','hashtag inexistant','');
-        //                     $scope.recherche = false;
-        //                     getTrend();
-        //                 }else{
-        //                     let listID = data.data.l_publications
-        //                     $scope.pubs = [];
-        //                     $scope.pubs  =listToPubs(listID,$scope.pubs);
-        //                     coeurRouge();
-        //                 }
-        //                 console.log(data);
-        //             },function (data) {
-        //                 console.log('getHPub error ' ,data);
-        //                 createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
-        //             }
-        //         )
-        //     }else{
-        //         $scope.rechercheHashtag = false;
-        //         $scope.rechercheUser = true;
-        //         serviceRechercheAjax.getUsers(text).then(
-        //             function (data) {
-        //                 console.log('getUsers success ' ,data);
-        //                 $scope.users = data;
-        //             },function (data) {
-        //                 console.log('getUsers error ' ,data);
-        //                 createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
-        //             }
-        //         )
-        //     }
-        // })
+        //Afficher carte dans recherche #
+        /*$scope.showCarte = () => {
+            navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
+                let mylatitude = position.coords.latitude;
+                let mylongitude = position.coords.longitude;
+                $scope.carteH = true;
+                $(".map-container").animate({ // La map s'affiche
+                    right: '0%'
+                });
+                //theme carte
+                var sombre = true;
+                $('.change-theme').click(() => { // On change la map de couleur quand l'utilisateur switch de theme
+                    sombre = !sombre;
+                    themeMap(sombre,mapH);
+                });
+                themeMap(sombre,mapH);
+                initMarker($scope.pubs,mapH);
+                mapH.setView([mylatitude,mylongitude], 15);
+            });
+        }*/
 
         // Click sur TOP 10 #
         $scope.fillSearch = (hashtag) => {
             $scope.recherche = true;
             $scope.rechercheHashtag = true;
             $scope.rechercheUser = false;
+            $scope.carteH = false;
             $('#icon-recherche').addClass("fa-times")
             $('#icon-recherche').removeClass("fa-search")
             $scope.pubs = [];
@@ -313,12 +295,17 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         }
         $scope.aboFunction = function() {
             getAbo();
+            serviceTheme.getTheme();
+
         }
         $scope.trendFunction =  function() {
             getTrend();
+            serviceTheme.getTheme();
+
         }
         $scope.procheFunction =  function() {
             getProche();
+            serviceTheme.getTheme();
         }
         $scope.redirectProfil = ($event) => {
             var link = $event.target;
@@ -327,6 +314,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         }
         $scope.redirectHome = () => {
             $scope.recherche = false;
+            $scope.confirmed = "";
             getTrend();
         }
 
@@ -348,7 +336,7 @@ function _idIsInListOfObj(list,e){
     return false;
 }
 
-function initMarker(pubs,mymap){
+function initMarker(pubs,map){
 
     var greenIcon = new L.Icon({
         iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
@@ -390,13 +378,12 @@ function initMarker(pubs,mymap){
 
         markers.addLayer(myMarker);
 
-        mymap.addLayer(markers);
+        map.addLayer(markers);
     }
 
 }
 
 function themeMap(sombre,mymap){
-    console.log('themeMap');
     var lightmap = "https://api.mapbox.com/styles/v1/cgobbo/ck6qkg6du0sc61ipgfmunfy2a/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2dvYmJvIiwiYSI6ImNrNmh3cnN4ZTA3aXozbWxvaGM3dGJzdWIifQ.xkLbDd0BUUKWQbAyUVrRew";
     var darkmap = 'https://api.mapbox.com/styles/v1/cgobbo/ck6qiop5d3l131iofj94j7jpl/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2dvYmJvIiwiYSI6ImNrNmh3cnN4ZTA3aXozbWxvaGM3dGJzdWIifQ.xkLbDd0BUUKWQbAyUVrRew';
     // Les 2 maps pour switcher entre les 2 thèmes
