@@ -158,6 +158,14 @@ h2 {
 
 }
 
+.tendance-wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 50px;
+}
+
 .geoImg {
     position: absolute;
     opacity: 1;
@@ -187,10 +195,18 @@ h2 {
     border-color: transparent;
     outline: 0px !important;
     -webkit-appearance: none;
+
+    &.clair {
+        color: $primary-dark;
+    }
+
+    &.sombre {
+        color: $primary-light;
+    }
 }
 
 .searchbar-hover {
-    height: 100px;
+    height: auto;
     border-radius: 13px;
 }
 

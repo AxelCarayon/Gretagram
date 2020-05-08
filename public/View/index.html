@@ -107,11 +107,11 @@
                     placeholder="Search" aria-label="Search"><button ng-click="deleteRecherche()" id="btn-recherche"><i
                         id="icon-recherche" class="fas fa-search"></i></button>
                 <div class="search-items" style="display: none;">
-                    <h5 style="margin-top: 10px;">Tendances</h5>
-                    <p >
-                        <span ng-click="fillSearch(hashtag)" ng-repeat="hashtag in hashtags" style="margin:0 5px;padding: 5px 10px; cursor:pointer; display: inline;" class="badge badge-success"> {{hashtag.name}} </span>
+                    <h5 style="margin-top: 10px;">Top 10 des tendances</h5>
+                    <div class="tendance-wrapper">
+                        <span ng-click="fillSearch(hashtag)" ng-repeat="hashtag in hashtags" style="margin:5px 10px;padding: 5px 10px; cursor:pointer; display: inline-block;" class="badge badge-success"> {{hashtag.name}} </span>
 
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>
