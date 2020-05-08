@@ -17,10 +17,6 @@ angular.module('app')
                         );
                     }
                 }
-
-
-
-
                 return list;
             },
 

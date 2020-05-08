@@ -531,7 +531,7 @@ img[src=""] {
   width: 50%;
 }
 
-#macarte {
+#macarte, #carteH {
   height: 400px;
   border-radius: 20px;
 }

@@ -3,7 +3,6 @@ angular.module('app')
         return {
             getTheme: function () {
                 let sombre = serviceSession.getValue('theme');
-                console.log('getTheme', sombre);
                 if (sombre == 'false') { // Si sombre est false le theme est clair sinon dark
                     $('*').removeClass('sombre');
                     $('*').addClass('clair');
@@ -20,7 +19,6 @@ angular.module('app')
                 this.themeMap();
             },
             themeMap: function (mymap){
-                console.log('themeMap service');
                 let lightmap = "https://api.mapbox.com/styles/v1/cgobbo/ck6qkg6du0sc61ipgfmunfy2a/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2dvYmJvIiwiYSI6ImNrNmh3cnN4ZTA3aXozbWxvaGM3dGJzdWIifQ.xkLbDd0BUUKWQbAyUVrRew";
                 let darkmap = 'https://api.mapbox.com/styles/v1/cgobbo/ck6qiop5d3l131iofj94j7jpl/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiY2dvYmJvIiwiYSI6ImNrNmh3cnN4ZTA3aXozbWxvaGM3dGJzdWIifQ.xkLbDd0BUUKWQbAyUVrRew';
                 let sombre = serviceSession.getValue('theme');

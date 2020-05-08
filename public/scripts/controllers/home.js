@@ -98,24 +98,18 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     fillOpacity: 0.8,
                     radius: 200
                 })
-                console.log(circle);
-                
+
                 circle.bindPopup("Vous êtes ici.").openPopup();
                 circle.addTo(mymap);
-
-                console.log('myPosition',mylatitude,mylongitude);
-                console.log('getBounds',mymap.getBounds());
 
                 //init les pubs avec ma position
                 pubsCarte(genarateData(mymap.getBounds()));
 
                 mymap.on('zoomend', function() {
-                    console.log('zoomend');
                     pubsCarte(genarateData(mymap.getBounds()));
                 });
 
                 mymap.on('dragend', function() {
-                    console.log('dragend');
                     pubsCarte(genarateData(mymap.getBounds()));
                 });
 
@@ -131,7 +125,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         function identity (e){
             let id = e.userID;
             serviceUserAjax.getUser({id:id}).then(function (user) {
-                    e.name = user.prenom +' '+user.nom;
+                    e.userName = user.prenom +' '+user.nom;
                     e.pp = user.pp;
                 },function (rep) {
                     createAlert('ERROR','Problème récupération des données utilisateur',rep);
@@ -154,9 +148,10 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         function pubsCarte(data) {
             servicePublicationAjax.getProche(data).then(
                 function (res) {
-                    $scope.pubs = serviceAddIdentity.pubs(res);
+                    let pubs = serviceAddIdentity.pubs(res);
+                    $scope.pubs = pubs;
                     coeurRouge();
-                    initMarker($scope.pubs,mymap);
+                    initMarker(pubs,mymap);
 
                 },function (res) {
                     createAlert('ERROR','Problème chargement publications',res);
@@ -226,7 +221,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                                 $scope.nameH = recherche;
 
                             }
-                            // console.log(data);
                         },function (data) {
                             console.log('getHPub error ' ,data);
                             createAlert('error','Erreur serveur','Nous sommes pas dans la mesure de répondre à votre demande.');
@@ -237,7 +231,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     $scope.rechercheUser = true;
                     serviceRechercheAjax.getUsers(text).then(
                         function (data) {
-                            // console.log('getUsers success ' ,data);
                             $scope.users = data;
                         },function (data) {
                             console.log('getUsers error ' ,data);
@@ -345,25 +338,36 @@ function initMarker(pubs,map){
     });
 
     var markers = L.markerClusterGroup(); // Création du cluster group pour pouvoir afficher les markers meme si ils sont au meme enndroit
-
-    for (var i = 0; i<pubs.length;i++){
-        var position = pubs[i].position;
-        var message = pubs[i].message;
-        var nom = pubs[i].userName
+    for (const i in pubs){
+        console.log(pubs[i], pubs[i].pp, pubs[i].userName); //TODO pb dans les données
+        let position = pubs[i].position;
+        let message = pubs[i].message;
+        let nom = pubs[i].userName
+        let userID = pubs[i].userID;
+        let img = pubs[i].photo;
+        let pp = pubs[i].pp;
+        if (!pp){
+            pp = "View/ressources/profile.svg.png";
+        }
         if (!message){
             message = '';
         }
 
         var myMarker = new customMarker([position.lat, position.long], { // Marker test
-            username: pubs[i].userName,
-            msg: message,
             icon : greenIcon
         });
 
-        
         myMarker.bindPopup(`
-        <p style='text-align:center;font-weight: 700'> ${nom} </p>
+        
+        <p style='text-align:center;font-weight: 700'> 
+            <img src="${pp}" style="height: 50px;
+                                    width: 50px;
+                                    object-fit: cover;
+                                    border-radius: 50%;">
+                                    <a href="/profil?id=${userID}">${nom}</a> 
+        </p>
         <p style='text-align:center;font-weight: 300'> ${message} </p>
+        <img style="width: 100%;height:100%" src="${img}">
          `).openPopup();
 
         markers.addLayer(myMarker);
