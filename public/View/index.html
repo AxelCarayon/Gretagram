@@ -143,13 +143,12 @@
                 <div class="row publicationContainer">
                     <div class="col-12 col-12-sm container containerPublicationsProche">
                         <h1>Hashtags {{nameH}}</h1>
-                        <!--<a ng-click="showCarte()">Afficher sur la carte </a>
+                        <a id="showCarte" ng-click="showCarte()">Afficher sur la carte </a>
                             <div ng-show="carteH" class="row justify-content-center">
                                 <div class="map-container" style="opacity: 1;">
                                     <div id="carteH"></div>
                                 </div>
                             </div>
-                        </div>-->
                         <div class="col-12 publication clair" ng-controller="likeCommentCtrl"
                             ng-repeat="x in pubs | orderBy:'date':true">
                             <publication-template></publication-template>

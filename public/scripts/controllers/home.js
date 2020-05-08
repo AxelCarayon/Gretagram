@@ -20,7 +20,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let sizeTrend = 100;
         let idUser = serviceSession.getValue('id');
         let mymap = L.map('macarte');
-      //  let mapH = L.map('carteH');
+        let mapH = L.map('carteH');
 
 
 
@@ -250,25 +250,21 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         }
 
         //Afficher carte dans recherche #
-        /*$scope.showCarte = () => {
-            navigator.geolocation.getCurrentPosition(function(position) { // Je créé une fonction pour récupérer les données de géolocalisation
-                let mylatitude = position.coords.latitude;
-                let mylongitude = position.coords.longitude;
+        $scope.showCarte = () => {
+            if ($scope.carteH){
+                $('#showCarte').innerHTML = 'Masquer la carte.'
+                $scope.carteH = false;
+
+            }else{
                 $scope.carteH = true;
                 $(".map-container").animate({ // La map s'affiche
                     right: '0%'
                 });
-                //theme carte
-                var sombre = true;
-                $('.change-theme').click(() => { // On change la map de couleur quand l'utilisateur switch de theme
-                    sombre = !sombre;
-                    themeMap(sombre,mapH);
-                });
-                themeMap(sombre,mapH);
+                serviceTheme.themeMap(mapH);
+                mapH.setView([0,0], 1);
                 initMarker($scope.pubs,mapH);
-                mapH.setView([mylatitude,mylongitude], 15);
-            });
-        }*/
+            }
+        }
 
         // Click sur TOP 10 #
         $scope.fillSearch = (hashtag) => {
