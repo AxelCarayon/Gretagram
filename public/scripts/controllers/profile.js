@@ -45,6 +45,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
         serviceTheme.getTheme();
 
 
+
         $scope.loadMorePubs = () =>{
            
             if ($scope.totalPubs >= $scope.pubs.length - 5   ) {
@@ -96,7 +97,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                 then(function (publications) {
                     $scope.pubs = serviceAddIdentity.pubs(publications);
 
-                    console.log('publications : ',publications);
+                    // console.log('publications : ',publications);
 
                     for (const index in ($scope.pubs)) {
                         var t ='liked' + $scope.pubs[index]._id  ;
@@ -130,6 +131,11 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             var labelsTab = [];
             var datasetLike = [];
             var datasetComment = [];
+            $scope.paysStats = {
+                
+            }
+
+            
 
             for (const i in Object.entries($scope.pubs)) {
                 likes = likes + $scope.pubs[i].likes.length; //Nb total de likes
@@ -150,7 +156,33 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                     datasetLike.unshift($scope.pubs[i].likes.length)
                     datasetComment.unshift($scope.pubs[i].commentaires.length)
                 }
+
+                $.ajax({
+                    method: "GET",
+                    data : {
+                        lat : $scope.pubs[i].position.lat,
+                        lng : $scope.pubs[i].position.long,
+                        username : 'gretagram'
+                    }
+                    ,
+                    url : "http://api.geonames.org/countryCodeJSON?",
+                    success : function (res) {
+                        if (res.countryName in $scope.paysStats) {
+                            $scope.paysStats[res.countryName] ++
+                        } else {
+                            $scope.paysStats[res.countryName] = 0
+                        }
+                        
+                    }, 
+                    error : function (err) {
+                        console.log(err);
+                        
+                    }
+                })
             }
+
+            console.log($scope.paysStats);
+            
             $scope.nbLike = likes;
             $scope.nbComment = commentaires;
             $scope.moyLikeParPub = Math.round(((likes / $scope.nbPublications) + Number.EPSILON) * 100) / 100 
@@ -230,7 +262,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
         // infos membre profil
         serviceUserAjax.getUser({'id':idProfil}).
         then(function (user) {
-            console.log('user',user);
+            // console.log('user',user);
             $scope.nbPublications = user.publications.length;
             $scope.prenomEtNom = user.prenom +' '+user.nom;
             $scope.abonnes = listToObjList(user.abonnes);
