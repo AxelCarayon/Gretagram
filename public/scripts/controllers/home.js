@@ -286,6 +286,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     let dataForGraph =[];
                     setTimeout(function(){
                         console.log('fin',$scope.paysStatsH);
+                        $scope.paysStatsH.hashtag =  $scope.nameH; //Pour pas faire d'appel Ajax inutile
                         //Obj (pays,val)
                         let stat = $scope.paysStatsH[0];
                         //liste des noms de pays
