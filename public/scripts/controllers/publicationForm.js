@@ -36,7 +36,7 @@ app.controller("publicationFormCtrl", function($q, $scope, serviceIsConnect, ser
 
     $('#removePhoto').click(function () {
         $("#file-1").val('');
-        $('.img-create-publication').attr('src', "").css("display", "none");
+        $('.img-create-publication').attr('src', "");
         $('#removePhoto').addClass('d-none');
         $('.fileSpan').text('Choisis une photo');
     })
