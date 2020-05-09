@@ -17,6 +17,13 @@ angular.module('app',[])
             serviceSession.destroyItem('id');
             serviceSession.destroyItem('theme');
         }
+
+        $(window).keypress((e)=>{
+            if (e.which == 13) {
+                $scope.connexionAct()
+            }
+            
+        })
         $scope.connexionAct = function(){
             var datas = getFormData($('#codeForm'));
             if (datas.username != "" && datas.password != "") {

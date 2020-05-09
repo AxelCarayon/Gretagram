@@ -39,9 +39,9 @@
     <!-- Style Principal -->
     <link rel="stylesheet" href="View/css/style.css">
     <!-- Markers Cluster  -->
-<!--    <link rel="stylesheet" href="View/dist/MarkerCluster.css" />-->
-<!--    <link rel="stylesheet" href="View/dist/MarkerCluster.Default.css" />-->
-<!--    <script src="View/dist/leaflet.markercluster-src.js"></script>-->
+    <!--    <link rel="stylesheet" href="View/dist/MarkerCluster.css" />-->
+    <!--    <link rel="stylesheet" href="View/dist/MarkerCluster.Default.css" />-->
+    <!--    <script src="View/dist/leaflet.markercluster-src.js"></script>-->
     <!-- Favicon -->
     <link rel="shortcut icon" href="View/ressources/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,7 +87,8 @@
                     <div class="clair dropdown-menu dropdown-menu-right dropdown-default"
                         aria-labelledby="navbarDropdownMenuLink-333">
                         <a href="/parametres" class="clair dropdown-item">Paramètres du compte</a>
-                        <a href="#" class="clair dropdown-item change-theme" ng-click="changeTheme()">Changement du thème</a>
+                        <a href="#" class="clair dropdown-item change-theme" ng-click="changeTheme()">Changement du
+                            thème</a>
                         <a href="/login" class="clair dropdown-item">Déconnexion</a>
                     </div>
                 </li>
@@ -130,7 +131,8 @@
     </div>
     <div class="publicationsProfil container" ng-show='loading'>
         <div class="loader">
-            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="80" height="80" class="clair d-inline-block " alt="">
+            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="80" height="80"
+                class="clair d-inline-block " alt="">
             <h2>Gretagram</h2>
         </div>
         <!-- <div class="card-columns">
@@ -171,7 +173,7 @@
                 <button class="btn-loadmore" ng-click="loadMorePubs()">{{btnLoadMore}}</button>
             </div>
         </div>
-        
+
     </div>
     <div class="publicationsProfil container" ng-show='profilStats'>
 
@@ -208,16 +210,19 @@
         </div>
 
         <div class="container containerPublications">
-            <div class="row publicationContainer">
-                <div class="col-lg  containerPublicationsProche">
-                    <h2 style="margin-top: 50px;">Ta publication que les gens ont le plus aimé</h2>
+            <div class="row">
+                <div class="col-12 containerPublicationsProche">
+                    <h2 style="text-align:center;margin-top: 50px;">Ta publication que les gens ont le plus aimé</h2>
                     <div class="col-12 publication clair" ng-controller="likeCommentCtrl" ng-repeat="x in laPlusLike">
                         <publication-template></publication-template>
                     </div>
                 </div>
-                <div class="col-lg  containerPublicationsProche">
-                    <h2 style="margin-top: 50px;">Ta publication que les gens ont le plus commenté</h2>
-                    <div class="col-lg publication clair" ng-controller="likeCommentCtrl" ng-repeat="x in laPlusComment">
+            </div>
+            <div class="row">
+                <div class="col-12 containerPublicationsProche">
+                    <h2 style="text-align:center;margin-top: 50px;">Ta publication que les gens ont le plus commenté</h2>
+                    <div class="col-lg publication clair" ng-controller="likeCommentCtrl"
+                        ng-repeat="x in laPlusComment">
                         <publication-template></publication-template>
                     </div>
                 </div>
@@ -225,28 +230,32 @@
         </div>
 
 
-        <div class="container">
-            <h2 style="margin-top: 50px;text-align: center;">Votre évolution sur les dernieres pulications</h2>
-            <div class="row justify-content-center">
+    <div class="container">
+        <h2 style="margin-top: 50px;text-align: center;">Votre évolution sur les dernieres pulications</h2>
+        <div class="row justify-content-center">
 
-                <div class=" col-12 col-md-6 container">
-                    <div class="row card-graf justify-content-center">
-                        <div style="text-align: center;padding-left: 30px; padding-right: 30px ; padding-top:30px"
-                            class="card-stat-header">Evolution des commentaires et des likes sur les n dernières
-                            publications</div>
-                        <canvas class="col-12" style="margin-top: 0;" id="myChart" width="400" height="400"></canvas>
-                    </div>
+            <div class=" col-12 col-md-6 container">
+                <div class="row card-graf justify-content-center">
+                    <div style="text-align: center;padding-left: 30px; padding-right: 30px ; padding-top:30px"
+                        class="card-stat-header">Evolution des commentaires et des likes sur les n dernières
+                        publications</div>
+                    <canvas class="col-12" style="margin-top: 0;" id="myChart" width="400" height="400"></canvas>
                 </div>
-                <div class=" col-12 col-md-6 container">
-                    <div class="row card-graf justify-content-center">
-                        <div style="text-align: center;padding-left: 30px; padding-right: 30px ; padding-top:30px"
-                            class="card-stat-header">Evolution des commentaires et des likes sur les n dernières
-                            publications</div>
+            </div>
+            <div class=" col-12 col-md-6 container">
+                <div class="row card-graf justify-content-center">
+                    <div style="text-align: center;padding-left: 30px; padding-right: 30px ; padding-top:30px"
+                        class="card-stat-header">Evolution des commentaires et des likes sur les n dernières
+                        publications</div>
+                    
+                    <ul>
+                        <li ng-repeat="(pays,valeur) in paysStats">{{pays}} {{valeur}}</li>
+                    </ul>
 
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="modal fade" id="modal-abonnés" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
@@ -304,12 +313,12 @@
             </div>
         </div>
 
-        
+
 
     </div>
 
-    <div class="modal fade" id="modal-comment" tabindex="-1" role="dialog"
-        aria-labelledby="Model-mdp-oublieTitle" aria-hiddn="true">
+    <div class="modal fade" id="modal-comment" tabindex="-1" role="dialog" aria-labelledby="Model-mdp-oublieTitle"
+        aria-hiddn="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content modal-color">
                 <div class="modal-header">
