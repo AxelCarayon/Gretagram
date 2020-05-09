@@ -41,7 +41,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
         var token = serviceSession.getValue('token');
         var idUser = serviceSession.getValue('id');
         var idProfil;
-        var ppDefault = 'View/ressources/profile.svg.png';
+        var ppDefault = 'View/ressources/avatar.svg';
         serviceTheme.getTheme();
 
 

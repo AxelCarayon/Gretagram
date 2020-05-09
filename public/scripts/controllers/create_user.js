@@ -45,7 +45,14 @@ angular.module('app',[])
         $("#file-1").change(function() {
             changePP(this);
             $('#blah[ alt]').show();
+            $('#removePhoto').removeClass('d-none');
         });
+        $('#removePhoto').click(function () {
+            $("#file-1").val('');
+            $(".avatar").attr("src", 'View/ressources/avatar.svg');
+            $('#removePhoto').addClass('d-none');
+            $('.fileSpan').text('Choisis une photo');
+        })
 
         $scope.newUserAct = function(){
             if (verif()){

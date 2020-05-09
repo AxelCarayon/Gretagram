@@ -176,7 +176,9 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         serviceUserAjax.getUser({'id':idUser}).then(
             function (user){
                 $scope.nameConnected = user.prenom +' '+user.nom;
-                $scope.ppUser = user.pp;
+                if (!user.pp){
+                    $scope.ppUser = 'View/ressources/avatar.svg';
+                }else $scope.ppUser = user.pp;
             }
         )
 
@@ -410,7 +412,7 @@ function initMarker(pubs,map){
         let img = pubs[i].photo;
         let pp = pubs[i].pp;
         if (!pp){
-            pp = "View/ressources/profile.svg.png";
+            pp = "View/ressources/avatar.svg";
         }
         if (!message){
             message = '';

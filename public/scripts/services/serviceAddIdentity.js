@@ -48,7 +48,7 @@ function addNameinListOfObj (list , id, e){
 
 function addPPinListOfObj (list , id, e){
     if (e== null){
-        e = "View/ressources/profile.svg.png";
+        e = "View/ressources/avatar.svg";
     }
     for (var i = 0; i<list.length;i++){
         if (list[i].id == id || list[i].userID == id) {
