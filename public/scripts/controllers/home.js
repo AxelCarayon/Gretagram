@@ -317,8 +317,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                         }
                     }, 4000);
                 }
-                //$('#loaderH').removeClass('loaderH');
-
             }
         }
 

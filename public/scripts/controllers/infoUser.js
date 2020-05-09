@@ -10,6 +10,7 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
         serviceUserAjax.getUserPrivate(token).then(
             function (user) {
                 $scope.user = user.data;
+                $('#'+user.data.gender).selected = true;
                 verifMail();
             },function () {
                 createAlert('error','Erreur serveur:',"Rechargez la page s'il vous plait.")
