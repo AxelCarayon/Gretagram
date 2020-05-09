@@ -19,12 +19,32 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
 
         $('#mdp1,#mdp2').focusout((e) => {
             verifMdp();
-
         })
+
         $("#file-1").change(function() {
             changePP(this);
             $('#blah[ alt]').show();
+            $('#removePhoto').removeClass('d-none');
         });
+
+        if ($(".avatar").attr("src") !=='View/ressources/avatar.svg'){
+            $('#removePhoto').removeClass('d-none');
+        }else{
+            $('#removePhoto').addClass('d-none');
+        }
+
+        $('#removePhoto').click(function () {
+            if ($(".avatar").attr("src")=== $scope.user.pp){
+                $('#removePhoto').addClass('d-none');
+                $(".avatar").attr("src", 'View/ressources/avatar.svg');
+
+            }else{
+                $("#file-1").val('');
+                $(".avatar").attr("src", $scope.user.pp );
+                $('.fileSpan').text('Choisis une photo');
+            }
+        })
+
 
         $scope.modifier = () => {
             let inputs = $("input").serializeArray();
@@ -60,7 +80,12 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
             if ($('#genre').val() !== user.gender){etat = true;data.gender = $('#genre').val();}
 
             // Test photo
-           //if ($('#file-1')[0].files && $('#file-1')[0].files[0]){etat = true; data.pp = $('#file-1')[0].files[0];}
+           /*if ($('#file-1')[0].files && $('#file-1')[0].files[0] || $(".avatar").attr("src")=== 'View/ressources/avatar.svg'){
+               etat = true;
+               if ($(".avatar").attr("src")=== 'View/ressources/avatar.svg'){
+                   data.pp = null;
+               }else data.pp = $('#file-1')[0].files[0];
+           }*/
 
             console.log('data :',data, etat);
 
