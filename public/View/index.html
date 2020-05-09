@@ -150,10 +150,12 @@
                                 </div>
                             </div>
                         <div ng-show="statH" class="row justify-content-center">
-                            {{paysStatsH}}
-                            <div id="container" style="width: 75%;">
-                                <canvas id="canvas"></canvas>
-                            </div>
+<!--                            <div id="container" style="width: 75%;">-->
+<!--                                <canvas id="canvas"></canvas>-->
+<!--                            </div>-->
+                            <div id="loaderH" class="loaderH"></div>
+                            <div id="piechart" style="width: 900px; height: 500px;"></div>
+
                         </div>
                         <div class="col-12 publication clair" ng-controller="likeCommentCtrl"
                             ng-repeat="x in pubs | orderBy:'date':true">
@@ -337,8 +339,8 @@
     <script src="../scripts/services/serviceAddIdentity.js"></script>
     <script src="../scripts/services/serviceTheme.js"></script>
     <script src="../scripts/services/serviceLocation.js"></script>
-    <!-- Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <!-- Chart  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 
 </html>

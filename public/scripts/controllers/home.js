@@ -274,7 +274,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 $scope.carteH = false;
 
                 if ( !$scope.paysStatsH || $scope.paysStatsH.hashtag !==  $scope.nameH ){
-                    console.log($scope.pubs);
                     serviceLocation.getLoc($scope.pubs).then(
                         function (res){
                              $scope.paysStatsH = res;
@@ -285,26 +284,41 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     )
                     let dataForGraph =[];
                     setTimeout(function(){
-                        console.log('fin',$scope.paysStatsH);
+                        $('#loaderH').removeClass('loaderH');
                         $scope.paysStatsH.hashtag =  $scope.nameH; //Pour pas faire d'appel Ajax inutile
                         //Obj (pays,val)
                         let stat = $scope.paysStatsH[0];
                         //liste des noms de pays
                         let noms = $scope.paysStatsH[1];
                         //list des val
-                        let vals = [];
+                        let vals = [['Pays','nombre de fois']];
                         //Tableau de couleurs aléatoire
                         let colors = [];
-                        for (const i in noms){
-                            colors.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
-                            vals[i] = stat[noms[i]];
+                        for (let i = 0; i<noms.length;i++){
+                            if(noms[i]){
+                                colors.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+                                vals.push([noms[i],stat[noms[i]]]);
+                            }
                         }
-                        console.log(colors);
+                        console.log(vals);
 
-                        //TODO afficher graph
+                        google.charts.load('current', {'packages':['corechart']});
+                        google.charts.setOnLoadCallback(drawChart);
 
-                        }, 4000);
+                        function drawChart() {
+                            var data = google.visualization.arrayToDataTable(vals);
+                            var options = {
+                                title: 'Statistique sur '+$scope.nameH
+                            };
+
+                            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                            chart.draw(data, options);
+                        }
+                    }, 4000);
                 }
+                //$('#loaderH').removeClass('loaderH');
+
             }
         }
 
