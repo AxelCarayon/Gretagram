@@ -390,7 +390,6 @@ function initMarker(pubs,map){
 
     var markers = L.markerClusterGroup(); // Création du cluster group pour pouvoir afficher les markers meme si ils sont au meme enndroit
     for (const i in pubs){
-        console.log(pubs[i], pubs[i].pp, pubs[i].userName); //TODO pb dans les données
         let position = pubs[i].position;
         let message = pubs[i].message;
         let nom = pubs[i].userName
@@ -418,7 +417,7 @@ function initMarker(pubs,map){
                                     <a href="/profil?id=${userID}">${nom}</a> 
         </p>
         <p style='text-align:center;font-weight: 300'> ${message} </p>
-        <img style="width: 100%;height:100%" src="${img}">
+        <img style="width: 100%;height:100%;max-height: 110px;object-fit: cover;" src="${img}">
          `).openPopup();
 
         markers.addLayer(myMarker);
