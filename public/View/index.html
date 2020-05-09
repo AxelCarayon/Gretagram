@@ -143,11 +143,18 @@
                     <div class="col-12 col-12-sm container containerPublicationsProche">
                         <h1>Hashtags {{nameH}}</h1>
                         <a id="showCarte" ng-click="showCarte()">Afficher sur la carte </a>
+                        <a id="showStatH" ng-click="showStatH()">Afficher sur les statistiques </a>
                             <div ng-show="carteH" class="row justify-content-center">
                                 <div class="map-container" style="opacity: 1;">
                                     <div id="carteH"></div>
                                 </div>
                             </div>
+                        <div ng-show="statH" class="row justify-content-center">
+                            {{paysStatsH}}
+                            <div id="container" style="width: 75%;">
+                                <canvas id="canvas"></canvas>
+                            </div>
+                        </div>
                         <div class="col-12 publication clair" ng-controller="likeCommentCtrl"
                             ng-repeat="x in pubs | orderBy:'date':true">
                             <publication-template></publication-template>
@@ -329,6 +336,9 @@
     <script src="../scripts/services/serviceRechercheAjax.js"></script>
     <script src="../scripts/services/serviceAddIdentity.js"></script>
     <script src="../scripts/services/serviceTheme.js"></script>
+    <script src="../scripts/services/serviceLocation.js"></script>
+    <!-- Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 </body>
 
 </html>

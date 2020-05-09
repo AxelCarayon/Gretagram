@@ -156,33 +156,8 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                     datasetLike.unshift($scope.pubs[i].likes.length)
                     datasetComment.unshift($scope.pubs[i].commentaires.length)
                 }
-
-                $.ajax({
-                    method: "GET",
-                    data : {
-                        lat : $scope.pubs[i].position.lat,
-                        lng : $scope.pubs[i].position.long,
-                        username : 'gretagram'
-                    }
-                    ,
-                    url : "http://api.geonames.org/countryCodeJSON?",
-                    success : function (res) {
-                        if (res.countryName in $scope.paysStats) {
-                            $scope.paysStats[res.countryName] ++
-                        } else {
-                            $scope.paysStats[res.countryName] = 0
-                        }
-                        
-                    }, 
-                    error : function (err) {
-                        console.log(err);
-                        
-                    }
-                })
             }
 
-            console.log($scope.paysStats);
-            
             $scope.nbLike = likes;
             $scope.nbComment = commentaires;
             $scope.moyLikeParPub = Math.round(((likes / $scope.nbPublications) + Number.EPSILON) * 100) / 100 
@@ -199,7 +174,6 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
             var gradientFill2 = ctx.createLinearGradient(500, 0, 100, 0);
             gradientFill2.addColorStop(0, "rgba(255, 236, 210, 0.7)");
             gradientFill2.addColorStop(1, "rgba(252, 182, 159, 0.7)");
-
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {

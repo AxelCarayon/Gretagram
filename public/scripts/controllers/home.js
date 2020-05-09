@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax,serviceRechercheAjax,serviceAddIdentity,serviceTheme) {
+app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax,serviceSession,serviceUserAjax,serviceRechercheAjax,serviceAddIdentity,serviceTheme,serviceLocation) {
     $scope.loading = true;
     $scope.totalPubs = 5;
     $scope.btnLoadMore = "Charger plus..."
@@ -152,6 +152,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     $scope.pubs = pubs;
                     coeurRouge();
                     initMarker(pubs,mymap);
+                    setTimeout(function(){ initMarker(pubs,mymap); }, 1000);
 
                 },function (res) {
                     createAlert('ERROR','Problème chargement publications',res);
@@ -200,11 +201,12 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 $scope.recherche = true;
                 $('#icon-recherche').addClass("fa-times")
                 $('#icon-recherche').removeClass("fa-search")
+                $scope.statH = false;
+                $scope.carteH = false;
 
                 if (text[0] == '#'){
                     $scope.rechercheHashtag = true;
                     $scope.rechercheUser = false;
-                    $scope.carteH = false;
                     let recherche = text.split(' ')[0];
     
                     serviceRechercheAjax.getHPub({hashtag:recherche}).then(
@@ -242,6 +244,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
         }
 
+
         //Afficher carte dans recherche #
         $scope.showCarte = () => {
             if ($scope.carteH){
@@ -249,6 +252,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 $scope.carteH = false;
 
             }else{
+                $scope.statH = false;
                 $scope.carteH = true;
                 $(".map-container").animate({ // La map s'affiche
                     right: '0%'
@@ -258,6 +262,53 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 initMarker($scope.pubs,mapH);
             }
         }
+
+        //Afficher stat dans recherche #
+        $scope.showStatH = () => {
+            if ($scope.statH){
+                $('#showStatH').innerHTML = 'Masquer les statistiques.';
+                $scope.statH = false;
+
+            }else{
+                $scope.statH = true;
+                $scope.carteH = false;
+
+                if ( !$scope.paysStatsH || $scope.paysStatsH.hashtag !==  $scope.nameH ){
+                    console.log($scope.pubs);
+                    serviceLocation.getLoc($scope.pubs).then(
+                        function (res){
+                             $scope.paysStatsH = res;
+                        }, function (err) {
+                            console.log('front error :',err);
+                            createAlert('error','Erreur serveur:',"imposible d'afficher les statistiques.");
+                        }
+                    )
+                    let dataForGraph =[];
+                    setTimeout(function(){
+                        console.log('fin',$scope.paysStatsH);
+                        //Obj (pays,val)
+                        let stat = $scope.paysStatsH[0];
+                        //liste des noms de pays
+                        let noms = $scope.paysStatsH[1];
+                        //list des val
+                        let vals = [];
+                        //Tableau de couleurs aléatoire
+                        let colors = [];
+                        for (const i in noms){
+                            colors.push('#'+(Math.random()*0xFFFFFF<<0).toString(16));
+                            vals[i] = stat[noms[i]];
+                        }
+                        console.log(colors);
+
+                        //TODO afficher graph
+
+                        }, 4000);
+                }
+            }
+        }
+
+
+
 
         // Click sur TOP 10 #
         $scope.fillSearch = (hashtag) => {
