@@ -420,7 +420,7 @@ function initMarker(pubs,map){
                                     width: 50px;
                                     object-fit: cover;
                                     border-radius: 50%;">
-                                    <a href="/profil?id=${userID}">${nom}</a> 
+                                    <a style="margin-left:5px;" href="/profil?id=${userID}">${nom}</a> 
         </p>
         <p style='text-align:center;font-weight: 300'> ${message} </p>
         <img style="width: 100%;height:100%;max-height: 110px;object-fit: cover;" src="${img}">
