@@ -1065,4 +1065,14 @@ a.showHUI:hover {
   height: 400px;
 }
 
+.publicationContainer img:not([src]), .publicationContainer img[src=""], .publicationContainer a[href=undefined] {
+  display: none;
+}
+.publicationContainer .publicationTexte {
+  margin-bottom: 20px;
+}
+.publicationContainer .imagePublication {
+  margin-top: 20px;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -221,7 +221,7 @@
             <div class="row">
                 <div class="col-12 containerPublicationsProche">
                     <h2 style="text-align:center;margin-top: 50px;">Ta publication que les gens ont le plus commenté</h2>
-                    <div class="col-lg publication clair" ng-controller="likeCommentCtrl"
+                    <div class="col-lg publication publication-stat clair" ng-controller="likeCommentCtrl"
                         ng-repeat="x in laPlusComment">
                         <publication-template></publication-template>
                     </div>
@@ -231,7 +231,7 @@
 
 
     <div class="container">
-        <h2 style="margin-top: 50px;text-align: center;">Votre évolution sur les dernieres pulications</h2>
+        <h2 style="margin-top: 50px;text-align: center;">Ton évolution sur les dernieres pulications</h2>
         <div class="row justify-content-center">
 
             <div class=" col-12 col-md-6 container">
@@ -242,18 +242,7 @@
                     <canvas class="col-12" style="margin-top: 0;" id="myChart" width="400" height="400"></canvas>
                 </div>
             </div>
-            <div class=" col-12 col-md-6 container">
-                <div class="row card-graf justify-content-center">
-                    <div style="text-align: center;padding-left: 30px; padding-right: 30px ; padding-top:30px"
-                        class="card-stat-header">Evolution des commentaires et des likes sur les n dernières
-                        publications</div>
-                    
-                    <ul>
-                        <li ng-repeat="(pays,valeur) in paysStats">{{pays}} {{valeur}}</li>
-                    </ul>
 
-                </div>
-            </div>
         </div>
     </div>
     </div>

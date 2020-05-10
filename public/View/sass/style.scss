@@ -1211,3 +1211,19 @@ a.sombre, .container.sombre a {
       align-items: center;
       height: 400px;
   }
+
+.publicationContainer {
+    img:not([src]), img[src=""], a[href="undefined"]{
+        display: none;
+    }
+
+    .publicationTexte {
+        margin-bottom: 20px;
+    }
+
+    .imagePublication {
+        margin-top: 20px;
+    }
+}
+
+

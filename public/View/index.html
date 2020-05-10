@@ -296,7 +296,7 @@
 
                     <div class="col-12 publication clair" ng-controller="likeCommentCtrl"
                         ng-repeat="x in pubs | orderBy:'date':true | limitTo:totalPubs"
-                        ng-bind-html-unsafe="x.message">
+                        >
                         <publication-template></publication-template>
                     </div>
                 </div>
