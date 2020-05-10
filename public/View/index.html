@@ -191,8 +191,9 @@
                                             <img id="#blah" class="img-create-publication" src="" alt="">
 
                                         </div>
-                                        <div class="row justify-content-end">
-                                            <div class="content ">
+                                        <p ng-show="tr" ng-class="ng-hide" id="trendList animate-show-hide" class="ng-hide"><span><span ng-click="fillSearch(hashtag)" ng-repeat="hashtag in hashtags" style="margin:5px 10px;padding: 5px 10px; cursor:pointer; display: inline-block;" class="badge badge-success"> {{hashtag.name}} </span></p>
+                                        <div class="test">
+                                            <div class="content " >
                                                 <div class="box "
                                                     style="margin-right: -30px;height: 40px;min-width: 200px;">
                                                     <input type="file" name="file-1[]" id="file-1"
@@ -205,8 +206,8 @@
                                                         </svg> <span class="fileSpan">Choisis une photo</span></label>
                                                 </div>
                                             </div>
-                                            <button href="#" class=" btn btn-publication ">Tendances</button>
-                                            <button href="#" class=" btn btn-publier ">Publier</button>
+                                            <button href="#"  ng-click="tr = !tr" id="affichage-tendance" class=" btn btn-publication hidden-sm ">Tendances </span></button>
+                                            <button href="#"  class=" btn btn-publier ">Publier</button>
                                         </div>
                                     </div>
                                 </div>
@@ -339,6 +340,21 @@
     <script src="../scripts/services/serviceLocation.js"></script>
     <!-- Chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <script>
+        
+
+it('should check ngShow', function() {
+  var checkbox = element(by.model('checked'));
+  var checkElem = element(by.css('.check-element'));
+
+  expect(checkElem.isDisplayed()).toBe(false);
+  checkbox.click();
+  expect(checkElem.isDisplayed()).toBe(true);
+});
+
+
+    </script>
 </body>
 
 </html>

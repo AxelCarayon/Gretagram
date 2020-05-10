@@ -531,7 +531,7 @@ img[src=""] {
   width: 50%;
 }
 
-#macarte, #carteH {
+#macarte {
   height: 400px;
   border-radius: 20px;
 }
@@ -960,6 +960,57 @@ h2.sombre, .container.sombre h2 {
 #macarte, #carteH {
   height: 400px !important;
   border-radius: 20px !important;
+}
+
+.ng-hide:not(.ng-hide-animate) {
+  /* These are just alternative ways of hiding an element */
+  display: block !important;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+#trendList.ng-hide-add, #trendList.ng-hide-remove {
+  transition: all 0.5s linear;
+}
+
+.test {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 770px) {
+  .test {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .test button {
+    display: block;
+    flex: none;
+    max-width: 160px;
+  }
+
+  .avatar-create-publication {
+    max-height: 30px;
+    max-width: 30px;
+  }
+}
+.animate-show-hide.ng-hide {
+  opacity: 0;
+}
+
+.animate-show-hide.ng-hide-add,
+.animate-show-hide.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.check-element {
+  border: 1px solid black;
+  opacity: 1;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
