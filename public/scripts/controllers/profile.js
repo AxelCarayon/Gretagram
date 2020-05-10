@@ -271,9 +271,12 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
 
         $scope.showModal = ($event) => {
             let publication_id = $event.target.getAttribute("publication-id")
-            let pub = getPublicationWithId($scope,publication_id);
-            $scope.modal = pub.commentaires;
-            serviceAddIdentity.pubs($scope.modal);
+            servicePublicationAjax.getPub(publication_id).then(
+                function (pub) {
+                    $scope.modal = pub.commentaires;
+                    serviceAddIdentity.pubs($scope.modal);
+                }
+            )
         };
     }
     });
