@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html class="js" lang="fr" dir="ltr">
+
+<head>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Style Principal -->
+    <link rel="stylesheet" href="View/css/style.css">
+    <!-- Markers Cluster  -->
+    <link rel="stylesheet" href="View/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="View/dist/MarkerCluster.Default.css" />
+    <script src="View/dist/leaflet.markercluster-src.js"></script>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="View/ressources/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Demo for the tutorial: Styling and Customizing File Inputs the Smart Way" />
+    <meta name="keywords" content="cutom file input, styling, label, cross-browser, accessible, input type file" />
+    <meta name="author" content="Osvaldas Valutis for Codrops" />
+    <title>Gretagram</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <!-- Input File -->
+    <link rel="stylesheet" type="text/css" href="View/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="View/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="View/css/component.css" />
+</head>
+
+<body class="clair" ng-app="app" ng-controller="shareCtrl">
+
+    <div class="bloc-alert">
+        <h2 class="bloc-alert-title"></h2>
+        <p class="bloc-alert-para"></p>
+    </div>
+
+
+    <nav id="nav" class="clair mb-1 container navbar navbar-expand-lg navbar-dark default-color"
+        style="margin-bottom:40px ;">
+        <a class="clair navbar-brand">
+            <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30"
+                class="clair d-inline-block " alt=""> Gretagram</a>
+        <button class="clair navbar-toggler first-button" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <div class="clair animated-icon1"><span></span><span></span><span></span></div>
+        </button>
+        <div class="clair collapse navbar-collapse" id="navbarSupportedContent-333">
+            <ul class="clair navbar-nav ml-auto nav-flex-icons">
+                <li class="clair nav-item">
+                    <a id="moncompte" class="clair nav-link" userid="{{idUserConnect}}">{{nameConnected}}</a>
+                </li>
+                <li class="clair nav-item dropdown">
+                    <a style="cursor: pointer;" class="clair nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Parametres </a>
+                    <div class="clair dropdown-menu dropdown-menu-right dropdown-default"
+                        aria-labelledby="navbarDropdownMenuLink-333">
+                        <a href="/parametres" class="clair dropdown-item">Paramètres du compte</a>
+                        <a href="#" class="clair dropdown-item change-theme">Changement du
+                            thème</a>
+                        <a href="/login" class="clair dropdown-item">Déconnexion</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <!--/.Navbar -->
+
+    <div class="container containerPublications">
+        <div class="row publicationContainer">
+            <div class="col-12 publication">
+                <img id="{{x._id}}" ng-src="{{x.pp}}" class="photoProfil" alt="">
+                <!-- TODO x.nom undefind -->
+
+                <p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;"
+                    class="nomProfil clair">{{x.userName}}</p>
+
+                <a ng-show="{{'trashPub' + x.userID}}" style="cursor: pointer;" class="clair nav-link"
+                    id="btn-parametres-pub" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="points"></span>
+                    <span class="points"></span>
+                    <span class="points"></span>
+                </a>
+                <div class="clair dropdown-menu dropdown-menu-right dropdown-default"
+                    aria-labelledby="btn-parametres-pub">
+                    <a href="" publication-id="{{x._id}}" ng-click="trashPub($event)"
+                        class="clair dropdown-item">Supprimer la publication</a>
+
+                </div>
+
+                <p class="publicationDate">{{x.date | date : "dd-MM-yyyy hh:ss"}}</p>
+                <p class="publicationTexte clair">{{x.message}}</p>
+                <a href="{{x.photo}}"><img ng-src="{{x.photo}}" class="imagePublication" alt=""></a>
+                <div class="publication-body">
+                    <a publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+                        class="stat-publication" ng-click="like($event,$index)" href="">
+                        <div publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+                            ng-show="{{'liked'+x._id}}" class=" clair">{{x.likes.length}} <span
+                                publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+                                class="coeur"><svg publication-section="{{x}}" publication-id="{{x._id}}"
+                                    like-list="{{x.likes}}" aria-label="Je n’aime plus" class="_8-yf5 " fill="#ed4956"
+                                    height="24" viewBox="0 0 48 48" width="24">
+                                    <path publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+                                        clip-rule="evenodd"
+                                        d="M35.3 35.6c-9.2 8.2-9.8 8.9-11.3 8.9s-2.1-.7-11.3-8.9C6.5 30.1.5 25.6.5 17.8.5 9.9 6.4 3.5 13.7 3.5 20.8 3.5 24 8.8 24 8.8s3.2-5.3 10.3-5.3c7.3 0 13.2 6.4 13.2 14.3 0 7.8-6.1 12.3-12.2 17.8z"
+                                        fill-rule="evenodd"></path>
+                                </svg> </div>
+                        <div publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+                            ng-show="!{{'liked'+x._id}}" class=" clair">{{x.likes.length}} <span
+                                publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+                                class="coeur"><svg publication-section="{{x}}" publication-id="{{x._id}}"
+                                    like-list="{{x.likes}}" class="jaime" aria-label="J’aime" class="_8-yf5 "
+                                    fill="#ed4956" height="24" viewBox="0 0 48 48" width="24">
+                                    <path publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
+                                        clip-rule="evenodd"
+                                        d="M34.3 3.5C27.2 3.5 24 8.8 24 8.8s-3.2-5.3-10.3-5.3C6.4 3.5.5 9.9.5 17.8s6.1 12.4 12.2 17.8c9.2 8.2 9.8 8.9 11.3 8.9s2.1-.7 11.3-8.9c6.2-5.5 12.2-10 12.2-17.8 0-7.9-5.9-14.3-13.2-14.3zm-1 29.8c-5.4 4.8-8.3 7.5-9.3 8.1-1-.7-4.6-3.9-9.3-8.1-5.5-4.9-11.2-9-11.2-15.6 0-6.2 4.6-11.3 10.2-11.3 4.1 0 6.3 2 7.9 4.2 3.6 5.1 1.2 5.1 4.8 0 1.6-2.2 3.8-4.2 7.9-4.2 5.6 0 10.2 5.1 10.2 11.3 0 6.7-5.7 10.8-11.2 15.6z"
+                                        fill-rule="evenodd"></path>
+                                </svg> </div>
+
+                    </a>
+
+                    <a publication-id="{{x._id}}" ng-click="showModal($event,$index)" class="stat-publication" href="#"
+                        data-toggle="modal" data-target="#modal-comment">
+                        <div publication-id="{{x._id}}" class=" clair">{{x.commentaires.length}} <span
+                                publication-id="{{x._id}}" class="coeur"><svg publication-id="{{x._id}}"
+                                    aria-label="Commenter" class="_8-yf5 " fill="#ed4956" height="24"
+                                    viewBox="0 0 48 48" width="24">
+                                    <path publication-id="{{x._id}}" clip-rule="evenodd"
+                                        d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
+                                        fill-rule="evenodd"></path>
+                                </svg> </div>
+                    </a>
+                    <form class="add-comment">
+                        <input class="input-comment" ng-keydown="verifComment($event)" type="text"
+                            placeholder="Ajouter un commentaire...">
+                        <button disabled publication-id="{{x._id}}" type="submit" ng-click="sendComment($event,$index)"
+                            class="send-comment">Publier</button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../scripts/alert.js"></script>
+    <script src="Controller/js/js-beautify.js" charset="utf-8"></script>
+    <script src="View/plugin/custom-file-input.js"></script>
+    <script src="../scripts/controllers/home.js"></script>
+    <script src="../scripts/controllers/publicationForm.js"></script>
+    <script src="../scripts/services/servicePublicationAjax.js"></script>
+    <script src="../scripts/services/serviceSession.js"></script>
+    <script src="../scripts/services/serviceIsConnect.js"></script>
+    <script src="../scripts/services/serviceUserAjax.js"></script>
+    <script src="../scripts/controllers/likeComment.js"></script>
+    <script src="../scripts/directives/directives.js" charset="utf-8"></script>
+    <script src="Controller/js/publication.js" charset="utf-8"></script>
+    <script src="../scripts/services/serviceRechercheAjax.js"></script>
+    <script src="../scripts/services/serviceAddIdentity.js"></script>
+    <script src="../scripts/services/serviceTheme.js"></script>
+    <script src="../scripts/services/serviceLocation.js"></script>
+    <script>
+        function GetURLParameter(sParam) {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    return sParameterName[1];
+                }
+            }
+        }
+
+
+        angular
+            .module('app')
+            .filter('trustAsHtml', ['$sce', function ($sce) {
+
+                return function (text) {
+
+                    return $sce.trustAsHtml(text);
+
+                };
+
+            }])
+            .controller("shareCtrl", function ($location, $scope, servicePublicationAjax, serviceSession,
+                    serviceUserAjax) {
+                        console.log($scope);
+                        $.get("http://localhost:8080/api/publication?id=5eaeecb8bf26863214d12a5c")
+                        .then((data) => {
+                            $scope.x = data
+                            console.log(data);
+                            console.log($scope.x);
+                            
+                        
+
+                        }).fail((err) => {
+                            console.log(err);
+
+                        })
+
+                        
+                        
+
+                })
+            
+            
+                
+    </script>
+
+</body>
+
+</html>

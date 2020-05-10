@@ -282,4 +282,14 @@ footer p {
   padding: 0 15px !important;
 }
 
+.quote {
+  font-size: 15px;
+  display: block;
+  text-align: right;
+}
+.quote span {
+  color: #6a7858;
+  font-weight: 600;
+}
+
 /*# sourceMappingURL=login.css.map */

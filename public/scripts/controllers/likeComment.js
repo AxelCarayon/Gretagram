@@ -20,7 +20,19 @@ function getPublicationWithId ($scope,obj) {
     return pub
 }
 
-angular.module('app').controller("likeCommentCtrl", function ($location,$scope,servicePublicationAjax,serviceSession,serviceUserAjax) {
+
+angular
+.module('app')
+.filter('trustAsHtml',['$sce', function($sce) {
+
+    return function(text) {
+  
+      return $sce.trustAsHtml(text);
+  
+    };
+  
+  }])
+.controller("likeCommentCtrl", function ($location,$scope,servicePublicationAjax,serviceSession,serviceUserAjax) {
 
     var idUserCo = serviceSession.getValue('id');
     var token = serviceSession.getValue('token');
@@ -42,6 +54,25 @@ angular.module('app').controller("likeCommentCtrl", function ($location,$scope,s
         }
         servicePublicationAjax.setLike({'id':publication._id, 'token': token });
     };
+    
+
+    $scope.share = ($event) => {
+        const publicationString = $($event.target).attr("publication")
+        const publication = JSON.parse(publicationString);
+        console.log(publication);
+        console.log("http://localhost:8080/api/publication?id=${publication._id}");
+        
+
+        $('.text-create-publication').text(
+            `
+            - Allez voir cette <a href="http://localhost:8080/publication?id=${publication._id}"> publication </a> de <a userid="${publication.userID}" ng-controller="ctrl2" ng-click="redirectProfil($event)" style="cursor: pointer;" >${publication.userName}</a>
+            `
+        )
+
+        // createAlert('success',"YOUPI",'Votre publication a été partagée !');
+        $(".btn-publier").click();
+        
+    }
 
     $scope.verifComment = ($event) => {
 

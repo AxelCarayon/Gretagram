@@ -295,3 +295,13 @@ footer{
     
 }
 
+.quote {
+	font-size: 15px;
+	display: block;
+    text-align: right;
+    
+    span {
+        color: rgb(106, 120, 88);
+        font-weight: 600;
+    }
+}

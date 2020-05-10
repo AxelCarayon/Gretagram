@@ -23,9 +23,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let mapH = L.map('carteH');
 
 
-
-
-
         $scope.loadMorePubs = () =>{
             if ($scope.totalPubs >= sizeTrend - 5   ) {
                 $scope.btnLoadMore = "Pas de publications supplémentaires"
@@ -310,7 +307,8 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                         function drawChart() {
                             var data = google.visualization.arrayToDataTable(vals);
                             var options = {
-                                title: 'Statistique sur '+$scope.nameH
+                                title: 'Statistique sur '+$scope.nameH,
+                                backgroundColor: { fill:'transparent' }
                             };
 
                             var chart = new google.visualization.PieChart(document.getElementById('piechart'));

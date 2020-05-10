@@ -47,6 +47,10 @@ app.get('/parametres', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/View/modifyUser.html'));
 });
 
+app.get('/publication', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/View/publication.html'));
+});
+
 app.post('/connect', function(req, res) {
     var username = req.body.username; // Le nom d'utilisateur et le mot de passe sont récupérés ici
     var password = req.body.password; // Pour les tester ensuite

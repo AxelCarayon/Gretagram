@@ -14,7 +14,7 @@
 </div>
 
 <p class="publicationDate">{{x.date | date : "dd-MM-yyyy hh:ss"}}</p>
-<p class="publicationTexte clair">{{x.message}}</p>
+<p ng-bind-html="x.message|trustAsHtml" class="publicationTexte clair"></p>
 <a href="{{x.photo}}"><img ng-src="{{x.photo}}" class="imagePublication" alt=""></a>
 <div class="publication-body">
     <a publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}" class="stat-publication"
@@ -43,6 +43,7 @@
                 </svg> </div>
 
     </a>
+    
 
     <a publication-id="{{x._id}}" ng-click="showModal($event,$index)"  class="stat-publication" href="#" data-toggle="modal" data-target="#modal-comment">
         <div publication-id="{{x._id}}" class=" clair">{{x.commentaires.length}} <span publication-id="{{x._id}}" class="coeur"><svg publication-id="{{x._id}}" aria-label="Commenter" class="_8-yf5 "
@@ -52,6 +53,8 @@
                         fill-rule="evenodd"></path>
                 </svg> </div>
     </a>
+
+    <a href="" publication="{{x}}" ng-click="share($event)" class="stat-publication" href="#"><svg publication="{{x}}" aria-label="Partager la publication" class="_8-yf5 " fill="#ed4956" height="24" viewBox="0 0 48 48" width="24"><path publication="{{x}}" d="M46.5 3.5h-45C.6 3.5.2 4.6.8 5.2l16 15.8 5.5 22.8c.2.9 1.4 1 1.8.3L47.4 5c.4-.7-.1-1.5-.9-1.5zm-40.1 3h33.5L19.1 18c-.4.2-.9.1-1.2-.2L6.4 6.5zm17.7 31.8l-4-16.6c-.1-.4.1-.9.5-1.1L41.5 9 24.1 38.3z"></path><path d="M14.7 48.4l2.9-.7"></path></svg></a>
     <form class="add-comment">
         <input class="input-comment" ng-keydown="verifComment($event)" type="text"
             placeholder="Ajouter un commentaire...">
