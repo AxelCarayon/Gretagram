@@ -42,8 +42,13 @@ angular
         var t = 'liked' + publication_id;
         var publication = getPublicationWithId($scope,publication_id);
 
+        //Pour la page "publication"
+        if (!publication){
+            publication = $scope.x;
+        }
         var index = idInListOfObj(publication.likes,idUserCo);
 
+        console.log('index',index);
         if (index > -1) {
             publication.likes.splice(index, 1);
             $scope[t] = false
@@ -52,6 +57,8 @@ angular
             publication.likes.push({_id:idUserCo});
             $scope[t] = true
         }
+        console.log('liked ',$scope[t]);
+
         servicePublicationAjax.setLike({'id':publication._id, 'token': token });
     };
     
@@ -105,12 +112,16 @@ angular
 
         servicePublicationAjax.setComment({token:token,id:publication_id,message:comment}).then(
             function (rep) {
-                 for (const i in $scope.pubs) {
-                     if ($scope.pubs[i]._id == publication_id) {
-                         $scope.pubs[i] = rep.data;
-                         break;
-                     }
-                 }
+                if ($scope.x){
+                    $scope.x = rep.data;
+                }else{
+                    for (const i in $scope.pubs) {
+                        if ($scope.pubs[i]._id == publication_id) {
+                            $scope.pubs[i] = rep.data;
+                            break;
+                        }
+                    }
+                }
             },function (rep) {
                 createAlert('ERROR',rep,'Impossible de commenter la publication.');
             }

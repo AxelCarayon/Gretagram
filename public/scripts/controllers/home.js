@@ -6,10 +6,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
     $scope.btnLoadMore = "Charger plus..."
     serviceTheme.getTheme();
 
-    // TOP 10 #
-    serviceRechercheAjax.getTopH().then(function (data) {
-            $scope.hashtags = data;
-    });
+
 
 
     if (!serviceIsConnect) {
@@ -22,6 +19,10 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let mymap = L.map('macarte');
         let mapH = L.map('carteH');
 
+        // TOP 10 #
+        serviceRechercheAjax.getTopH().then(function (data) {
+            $scope.hashtags = data;
+        });
 
         $scope.loadMorePubs = () =>{
             if ($scope.totalPubs >= sizeTrend - 5   ) {
@@ -119,19 +120,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             })
         }
 
-        function identity (e){
-            let id = e.userID;
-            serviceUserAjax.getUser({id:id}).then(function (user) {
-                    e.userName = user.prenom +' '+user.nom;
-                    e.pp = user.pp;
-                },function (rep) {
-                    createAlert('ERROR','Problème récupération des données utilisateur',rep);
-                }
-            );
-
-            return e;
-        }
-
         function coeurRouge(){
             for (const index in ($scope.pubs)) {
                 var t ='liked' + $scope.pubs[index]._id  ;
@@ -160,7 +148,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             for(const i in list){
                 servicePublicationAjax.getPub(list[i]).then(
                     function (data) {
-                        scope.push(identity(data));
+                        scope.push(serviceAddIdentity.pub(data));
                     },function (data) {
                         createAlert('error','Erreur serveur : ', "Nous somme désolé la demande n'a pu aboutir.")
                     }
@@ -211,9 +199,7 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                     serviceRechercheAjax.getHPub({hashtag:recherche}).then(
                         function (data) {
                             if (data.status == 'hashtag inexistant'){
-                                // createAlert('error','hashtag inexistant','');
-                                // $scope.recherche = false;
-                                // getTrend();
+
                             }else{
                                 let listID = data.data.l_publications
                                 $scope.pubs = [];

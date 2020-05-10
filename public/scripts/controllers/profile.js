@@ -16,15 +16,6 @@ function idIsInListOfObj(list,e){
     }
     return false;
 }
-function getIdUrl (){
-    var param = window.location.search.slice(1,window.location.search.length);
-    var val = param.split('=');
-
-    if (val[0]=='id' && val[1]!='' && val[1]!='null' && !val[1].includes('&')){
-        return val[1]
-    }
-    return -1;
-}
 function listToObjList (list){
     for (var i = 0; list.length>i;i++){
         list[i]={id:list[i]};
@@ -32,7 +23,7 @@ function listToObjList (list){
     return list;
 }
 
-angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax,serviceAddIdentity,serviceTheme) {
+angular.module('app').controller("testCtrl", function ($location,$scope,serviceUserAjax,serviceSession,serviceIsConnect,servicePublicationAjax,serviceAddIdentity,serviceTheme,serviceGetIdUrl) {
     if (!serviceIsConnect){
         window.location.href = "/login";
     }else {
@@ -206,10 +197,11 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
                     responsive:true
                 }
             });
-        }
+        };
 
-        if (getIdUrl()!=-1){
-            idProfil = getIdUrl();
+        let idURL = serviceGetIdUrl.get( window.location.search.slice(1,window.location.search.length))
+        if (idURL!=-1){
+            idProfil = idURL;
         }else {
             idProfil = idUser;
         }
