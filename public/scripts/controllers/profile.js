@@ -143,7 +143,8 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
 
                 if (i < 50) {
                     date[i] = { "likes" : $scope.pubs[i].likes.length, "comments" : $scope.pubs[i].commentaires.length }
-                    labelsTab.unshift($scope.pubs[i].date)
+                    let test = new Date($scope.pubs[i].date)
+                    labelsTab.unshift(`${test.getDate()}/${test.getMonth()}/${test.getFullYear()}`)                    
                     datasetLike.unshift($scope.pubs[i].likes.length)
                     datasetComment.unshift($scope.pubs[i].commentaires.length)
                 }

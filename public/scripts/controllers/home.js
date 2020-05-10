@@ -55,8 +55,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
                 }
             )
 
-
-
         }
         let getTrend = function (){
             $scope.proche = false;
@@ -322,6 +320,14 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             $scope.pubs  =listToPubs(hashtag.l_publications,$scope.pubs);
             $scope.nameH = hashtag.name;
             $scope.confirmed =  hashtag.name;
+        }
+
+        $scope.addToPub = (hashtag) => {
+            if ($('.text-create-publication').text() == "Exprimez vous...") {
+                $('.text-create-publication').text(`${hashtag.name}`)
+            } else {
+                $('.text-create-publication').text(` ${$('.text-create-publication').text()} ${hashtag.name}`)    
+            }
         }
         $scope.deleteRecherche = () => {
             $scope.confirmed = ""

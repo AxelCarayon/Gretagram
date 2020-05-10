@@ -1075,4 +1075,8 @@ a.showHUI:hover {
   margin-top: 20px;
 }
 
+.navbar-brand {
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=style.css.map */
