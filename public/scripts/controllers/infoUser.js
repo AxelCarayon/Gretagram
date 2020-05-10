@@ -9,6 +9,9 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
 
         serviceUserAjax.getUserPrivate(token).then(
             function (user) {
+                if (!user.data.pp){
+                    user.data.pp = 'View/ressources/avatar.svg';
+                }
                 $scope.user = user.data;
                 $('#'+user.data.gender).selected = true;
                 verifMail();
@@ -16,6 +19,8 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
                 createAlert('error','Erreur serveur:',"Rechargez la page s'il vous plait.")
             }
         )
+        $("#file-1").val('');
+        $('.fileSpan').text('Choisis une photo');
 
         $('#mdp1,#mdp2').focusout((e) => {
             verifMdp();
@@ -39,37 +44,39 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
                 $(".avatar").attr("src", 'View/ressources/avatar.svg');
 
             }else{
-                $("#file-1").val('');
                 $(".avatar").attr("src", $scope.user.pp );
-                $('.fileSpan').text('Choisis une photo');
             }
+            $("#file-1").val('');
+            $('.fileSpan').text('Choisis une photo');
         })
 
 
         $scope.modifier = () => {
             let inputs = $("input").serializeArray();
-            let data = {token:token};
+            let data = new FormData();
             let user = $scope.user;
             let date = dateFormat(new Date($scope.user.age));
             let etat = false;
+
+            data.append('token',token);
 
             //Données form
             $(inputs).each((k, v) => {
                 if (user[v.name] != v.value && v.value!=''){
                     if (v.name === 'age' ){
                         if (v.value!==date){
-                            data.age = v.value;
+                            data.append('age',v.value);
                             etat = true;
                         }
                     }else{
                         if(v.name === 'mdp1' ){
                             if (verifMdp()){
-                                data.password = v.value;
+                                data.append('password',v.value);
                                 etat = true;
 
                             }
                         }else {
-                            data[v.name]=v.value;
+                            data.append(v.name,v.value);
                             etat = true;
                         }
                     }
@@ -77,22 +84,25 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
             });
 
             // Test du genre
-            if ($('#genre').val() !== user.gender){etat = true;data.gender = $('#genre').val();}
+            if ($('#genre').val() !== user.gender){etat = true;data.append('gender',$('#genre').val());}
 
             // Test photo
-           /*if ($('#file-1')[0].files && $('#file-1')[0].files[0] || $(".avatar").attr("src")=== 'View/ressources/avatar.svg'){
+           if ($('#file-1')[0].files && $('#file-1')[0].files[0] || $(".avatar").attr("src")=== 'View/ressources/avatar.svg'){
                etat = true;
-               if ($(".avatar").attr("src")=== 'View/ressources/avatar.svg'){
-                   data.pp = null;
-               }else data.pp = $('#file-1')[0].files[0];
-           }*/
+               if ($(".avatar").attr("src")=== 'View/ressources/avatar.svg' && user.pp !== 'View/ressources/avatar.svg'){
+                   data.append('deletePhoto',true);
+               }else {
+                   data.append('photo',$('#file-1')[0].files[0]);
+               }
+           }
 
-            console.log('data :',data, etat);
+            console.log('data :',data, etat, data.get('photo'),data.get('nom'));
 
             if (etat){
                 serviceUserAjax.setUser(data).then(
                     function (data) {
                         console.log(data);
+                        $scope.user = data.data;
                         createAlert('success', 'Information mise à jours.')
                     },function (data) {
                         console.log(data);

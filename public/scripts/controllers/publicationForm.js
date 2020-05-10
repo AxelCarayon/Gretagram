@@ -1,8 +1,7 @@
 function resetPub() {
     $(".text-create-publication").html("");
     $('.hashtest').empty()
-    console.log($('.fileSpan'));
-
+    $('#removePhoto').addClass('d-none');
     $('.fileSpan').text('Choisis une photo');
     $('.img-create-publication').attr('src', "").css("display", "none");
 }

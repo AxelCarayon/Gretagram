@@ -175,10 +175,13 @@ exports.update = function(req, res) {
                     if (key === "password") {
                         user.password = user.generateHash(value);
                     } else {
-                        if (key != "photo") {
+                        if (key != "photo" && key != 'deletePhoto') {
                             user[key] = value;
                         }
                     }
+                }
+                if (req.body.deletePhoto) {
+                    user.photo = null;
                 }
                 if (!req.files || Object.keys(req.files).length === 0) {
                     console.log("pas de photo");
@@ -192,6 +195,9 @@ exports.update = function(req, res) {
                             console.log(err);
                         }
                     });
+                }
+                if (req.body.deletePhoto) {
+                    user.pp = null;
                 }
                 user.save(function(err) {
                     if (err)

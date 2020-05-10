@@ -17,6 +17,11 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let mymap = L.map('macarte');
         let mapH = L.map('carteH');
 
+        //btn supprimer pub
+        let valTrash = 'trashPub'+idUser;
+        $scope[valTrash] = true;
+
+
         // TOP 10 #
         serviceRechercheAjax.getTopH().then(function (data) {
             $scope.hashtags = data;
@@ -366,9 +371,13 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
 
         $scope.showModal = ($event) => {
             let publication_id = $event.target.getAttribute("publication-id")
-            let pub = getPublicationWithId($scope,publication_id);
-            $scope.modal = pub.commentaires;
-            serviceAddIdentity.pubs($scope.modal);
+            servicePublicationAjax.getPub(publication_id).then(
+                function (pub) {
+                    $scope.modal = pub.commentaires;
+                    serviceAddIdentity.pubs($scope.modal);
+                }
+            )
+
         };
     }
 })
@@ -408,6 +417,8 @@ function initMarker(pubs,map){
         let userID = pubs[i].userID;
         let img = pubs[i].photo;
         let pp = pubs[i].pp;
+        let idpub = pubs[i]._id;
+
         if (!pp){
             pp = "View/ressources/avatar.svg";
         }
@@ -429,7 +440,8 @@ function initMarker(pubs,map){
                                     <a style="margin-left:5px;" href="/profil?id=${userID}">${nom}</a> 
         </p>
         <p style='text-align:center;font-weight: 300'> ${message} </p>
-        <img style="width: 100%;height:100%;max-height: 110px;object-fit: cover;" src="${img}">
+                <a href="/publication?id=${idpub}">
+        <img style="width: 100%;height:100%;max-height: 110px;object-fit: cover;" src="${img}"></a>
          `).openPopup();
 
         markers.addLayer(myMarker);

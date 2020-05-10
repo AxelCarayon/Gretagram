@@ -209,7 +209,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
 
         //Test si userprofil = user
         let valTrash = 'trashPub'+idProfil;
-        if (idProfil == idUser){
+        if (idProfil === idUser){
             $('.follow').addClass('d-none');
             $scope.statFunction = stat;
             $scope.pubFunction = feel;
@@ -272,9 +272,12 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
 
         $scope.showModal = ($event) => {
             let publication_id = $event.target.getAttribute("publication-id")
-            let pub = getPublicationWithId($scope,publication_id);
-            $scope.modal = pub.commentaires;
-            serviceAddIdentity.pubs($scope.modal);
+            servicePublicationAjax.getPub(publication_id).then(
+                function (pub) {
+                    $scope.modal = pub.commentaires;
+                    serviceAddIdentity.pubs($scope.modal);
+                }
+            )
         };
     }
     });

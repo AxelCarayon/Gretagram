@@ -21,7 +21,7 @@ app.controller("publicationSoloCtrl", function ($scope,serviceIsConnect,serviceG
             function (pub) {
                 $scope.x = serviceAddIdentity.pub(pub);
 
-                // coeur rouge
+                // TODO coeur rouge
                 let t ='liked' + idPub  ;
                 let likes = pub.likes;
                 if (_idIsInListOfObj(likes,idUser)){
@@ -36,11 +36,18 @@ app.controller("publicationSoloCtrl", function ($scope,serviceIsConnect,serviceG
         })
 
         $scope.showModal = () => {
-            console.log('cc',$scope.x.commentaires)
-            $scope.modal = $scope.x.commentaires;
-            serviceAddIdentity.pubs($scope.modal);
+            servicePublicationAjax.getPub($scope.x._id).then(
+                function (pub) {
+                    $scope.modal = pub.commentaires;
+                    serviceAddIdentity.pubs($scope.modal);
+                }
+            )
         };
-
+        $scope.redirectProfil = ($event) => {
+            var link = $event.target;
+            var id = link.getAttribute('userid');
+            window.location.href = "/profil?id="+id;
+        }
 
     }
 })
