@@ -1166,8 +1166,7 @@ a.sombre, .container.sombre a {
     width: 120px;
     height: 120px;
     animation: spin 2s linear infinite;
-  position: relative;
-  left: 44%;
+    margin: 150px 0;
   }
   
   @keyframes spin {
@@ -1205,3 +1204,10 @@ a.sombre, .container.sombre a {
 
   }
   
+
+  #loaderContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+  }

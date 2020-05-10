@@ -106,7 +106,7 @@
         <div class="row justify-content-center">
             <div class=" form-control searchbar col-6">
                 <input class="col-6" id="searchbar" ng-change="empty($event)" ng-model="confirmed" type="search"
-                    placeholder="Search" aria-label="Search"><button ng-click="deleteRecherche()" id="btn-recherche"><i
+                    placeholder="Rechercher" aria-label="Search"><button ng-click="deleteRecherche()" id="btn-recherche"><i
                         id="icon-recherche" class="fas fa-search"></i></button>
                 <div class="search-items" style="display: none;">
                     <h5 style="margin-top: 10px;">Top 10 des tendances</h5>
@@ -151,7 +151,7 @@
                                     <div id="carteH"></div>
                                 </div>
                             </div>
-                        <div ng-show="statH" class="row justify-content-center">
+                        <div id="loaderContainer" ng-show="statH" class="row justify-content-center">
 <!--                            <div id="container" style="width: 75%;">-->
 <!--                                <canvas id="canvas"></canvas>-->
 <!--                            </div>-->
@@ -196,6 +196,7 @@
 
                                         </div>
                                         <p ng-show="tr" ng-class="ng-hide" id="trendList animate-show-hide" class="ng-hide"><span><span ng-click="fillSearch(hashtag)" ng-repeat="hashtag in hashtags" style="margin:5px 10px;padding: 5px 10px; cursor:pointer; display: inline-block;" class="badge badge-success"> {{hashtag.name}} </span></p>
+                                        <button style="margin: 5px 0; border-radius: 10px;" href="#" id="removePhoto" class=" btn btn-danger d-none">Supprimer photo</button>
                                         <div class="test">
                                             <div class="content " >
                                                 <div class="box "
@@ -210,7 +211,7 @@
                                                         </svg> <span class="fileSpan">Choisis une photo</span></label>
                                                 </div>
                                             </div>
-                                            <button href="#" id="removePhoto" class=" btn btn-danger d-none">Supprimer photo</button>
+                                            
                                             <button href="#"  ng-click="tr = !tr" id="affichage-tendance" class=" btn btn-publication hidden-sm ">Tendances </span></button>
                                             <button href="#"  class=" btn btn-publier ">Publier</button>
                                         </div>
@@ -290,6 +291,9 @@
         <div class="container containerPublications">
             <div class="row publicationContainer">
                 <div class="col-12 col-12-sm container containerPublicationsProche">
+                    <h2 ng-show="trendQuote" style="margin-top:30px;text-align: center;">Les publications qui ont fait le plus de <span style="color: #467659;">bruits</span> </h2>
+                    <h2 ng-show="aboQuote" style="margin-top:30px;text-align: center;">Les <span style="color: #467659;">publications</span> des gens que vous suivez  </h2>
+
                     <div class="col-12 publication clair" ng-controller="likeCommentCtrl"
                         ng-repeat="x in pubs | orderBy:'date':true | limitTo:totalPubs"
                         ng-bind-html-unsafe="x.message">

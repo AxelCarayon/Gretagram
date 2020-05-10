@@ -22,6 +22,9 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let mymap = L.map('macarte');
         let mapH = L.map('carteH');
 
+        $scope.trendQuote = true
+        $scope.aboQuote = false
+
 
         $scope.loadMorePubs = () =>{
             if ($scope.totalPubs >= sizeTrend - 5   ) {
@@ -341,16 +344,22 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             $scope.empty()
         }
         $scope.aboFunction = function() {
+            $scope.trendQuote = false
+            $scope.aboQuote = true
             getAbo();
             serviceTheme.getTheme();
 
         }
         $scope.trendFunction =  function() {
+            $scope.trendQuote = true
+            $scope.aboQuote = false
             getTrend();
             serviceTheme.getTheme();
 
         }
         $scope.procheFunction =  function() {
+            $scope.trendQuote = false
+            $scope.aboQuote = false
             getProche();
             serviceTheme.getTheme();
         }
