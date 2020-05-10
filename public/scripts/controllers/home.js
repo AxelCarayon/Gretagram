@@ -411,6 +411,8 @@ function initMarker(pubs,map){
         let userID = pubs[i].userID;
         let img = pubs[i].photo;
         let pp = pubs[i].pp;
+        let idpub = pubs[i]._id;
+
         if (!pp){
             pp = "View/ressources/avatar.svg";
         }
@@ -432,7 +434,8 @@ function initMarker(pubs,map){
                                     <a style="margin-left:5px;" href="/profil?id=${userID}">${nom}</a> 
         </p>
         <p style='text-align:center;font-weight: 300'> ${message} </p>
-        <img style="width: 100%;height:100%;max-height: 110px;object-fit: cover;" src="${img}">
+                <a href="/publication?id=${idpub}">
+        <img style="width: 100%;height:100%;max-height: 110px;object-fit: cover;" src="${img}"></a>
          `).openPopup();
 
         markers.addLayer(myMarker);
