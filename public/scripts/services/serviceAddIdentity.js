@@ -19,7 +19,17 @@ angular.module('app')
                 }
                 return list;
             },
-
+            pub: function (pub) {
+                let id = pub.userID;
+                    serviceUserAjax.getUser({id:id}).then(function (user) {
+                            pub.userName = user.prenom +' '+user.nom;
+                            pub.pp = user.pp;
+                        },function (rep) {
+                            createAlert('ERROR',rep,"Impossible de récupérer les informations de l'utilisateur.");
+                        }
+                    );
+                return pub;
+            },
             abo : function (list) {
                 for (var i = 0; i<list.length;i++){
                     var id = list[i].id;

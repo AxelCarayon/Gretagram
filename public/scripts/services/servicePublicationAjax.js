@@ -161,6 +161,21 @@ app.service('servicePublicationAjax', function ($http,$q) {
                     deferred.resolve(res);
                 },
                 error : function(res,state,msg){
+                    deferred.reject(msg);
+                }
+            });
+            return deferred.promise;
+        },
+        getPhoto: function (string) {
+            var deferred = $q.defer();
+            $.ajax({
+                url: '/api/photo',
+                data: {photo:string},
+                type: 'GET',
+                success: function(res){
+                    deferred.resolve(res);
+                },
+                error : function(res,state,msg){
                     console.log('service rep :',res,msg);
                     deferred.reject(msg);
                 }

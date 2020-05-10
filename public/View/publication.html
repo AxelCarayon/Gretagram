@@ -57,7 +57,7 @@
     <link rel="stylesheet" type="text/css" href="View/css/component.css" />
 </head>
 
-<body class="clair" ng-app="app" ng-controller="shareCtrl">
+<body class="clair" ng-app="app" ng-controller="publicationSoloCtrl">
 
     <div class="bloc-alert">
         <h2 class="bloc-alert-title"></h2>
@@ -67,7 +67,7 @@
 
     <nav id="nav" class="clair mb-1 container navbar navbar-expand-lg navbar-dark default-color"
         style="margin-bottom:40px ;">
-        <a class="clair navbar-brand">
+        <a class="clair navbar-brand" href="/">
             <img style="margin-bottom: 5px;" src="View/ressources/leaf.png" width="30" height="30"
                 class="clair d-inline-block " alt=""> Gretagram</a>
         <button class="clair navbar-toggler first-button" type="button" data-toggle="collapse"
@@ -78,7 +78,7 @@
         <div class="clair collapse navbar-collapse" id="navbarSupportedContent-333">
             <ul class="clair navbar-nav ml-auto nav-flex-icons">
                 <li class="clair nav-item">
-                    <a id="moncompte" class="clair nav-link" userid="{{idUserConnect}}">{{nameConnected}}</a>
+                    <a id="moncompte" class="clair nav-link" href="/profil">{{nameConnected}}</a>
                 </li>
                 <li class="clair nav-item dropdown">
                     <a style="cursor: pointer;" class="clair nav-link dropdown-toggle" id="navbarDropdownMenuLink-333"
@@ -98,10 +98,9 @@
     <!--/.Navbar -->
 
     <div class="container containerPublications">
-        <div class="row publicationContainer">
+        <div class="row publicationContainer" ng-controller="likeCommentCtrl">
             <div class="col-12 publication">
                 <img id="{{x._id}}" ng-src="{{x.pp}}" class="photoProfil" alt="">
-                <!-- TODO x.nom undefind -->
 
                 <p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;"
                     class="nomProfil clair">{{x.userName}}</p>
@@ -135,7 +134,9 @@
                                         clip-rule="evenodd"
                                         d="M35.3 35.6c-9.2 8.2-9.8 8.9-11.3 8.9s-2.1-.7-11.3-8.9C6.5 30.1.5 25.6.5 17.8.5 9.9 6.4 3.5 13.7 3.5 20.8 3.5 24 8.8 24 8.8s3.2-5.3 10.3-5.3c7.3 0 13.2 6.4 13.2 14.3 0 7.8-6.1 12.3-12.2 17.8z"
                                         fill-rule="evenodd"></path>
-                                </svg> </div>
+                                </svg>
+                        </span>
+                        </div>
                         <div publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
                             ng-show="!{{'liked'+x._id}}" class=" clair">{{x.likes.length}} <span
                                 publication-section="{{x}}" publication-id="{{x._id}}" like-list="{{x.likes}}"
@@ -146,11 +147,11 @@
                                         clip-rule="evenodd"
                                         d="M34.3 3.5C27.2 3.5 24 8.8 24 8.8s-3.2-5.3-10.3-5.3C6.4 3.5.5 9.9.5 17.8s6.1 12.4 12.2 17.8c9.2 8.2 9.8 8.9 11.3 8.9s2.1-.7 11.3-8.9c6.2-5.5 12.2-10 12.2-17.8 0-7.9-5.9-14.3-13.2-14.3zm-1 29.8c-5.4 4.8-8.3 7.5-9.3 8.1-1-.7-4.6-3.9-9.3-8.1-5.5-4.9-11.2-9-11.2-15.6 0-6.2 4.6-11.3 10.2-11.3 4.1 0 6.3 2 7.9 4.2 3.6 5.1 1.2 5.1 4.8 0 1.6-2.2 3.8-4.2 7.9-4.2 5.6 0 10.2 5.1 10.2 11.3 0 6.7-5.7 10.8-11.2 15.6z"
                                         fill-rule="evenodd"></path>
-                                </svg> </div>
+                        </svg> </span></div>
 
                     </a>
 
-                    <a publication-id="{{x._id}}" ng-click="showModal($event,$index)" class="stat-publication" href="#"
+                    <a publication-id="{{x._id}}" ng-click="showModal()" class="stat-publication" href="#"
                         data-toggle="modal" data-target="#modal-comment">
                         <div publication-id="{{x._id}}" class=" clair">{{x.commentaires.length}} <span
                                 publication-id="{{x._id}}" class="coeur"><svg publication-id="{{x._id}}"
@@ -178,68 +179,16 @@
     <script src="../scripts/alert.js"></script>
     <script src="Controller/js/js-beautify.js" charset="utf-8"></script>
     <script src="View/plugin/custom-file-input.js"></script>
-    <script src="../scripts/controllers/home.js"></script>
-    <script src="../scripts/controllers/publicationForm.js"></script>
+    <script src="../scripts/controllers/publicationSolo.js"></script>
     <script src="../scripts/services/servicePublicationAjax.js"></script>
     <script src="../scripts/services/serviceSession.js"></script>
     <script src="../scripts/services/serviceIsConnect.js"></script>
     <script src="../scripts/services/serviceUserAjax.js"></script>
     <script src="../scripts/controllers/likeComment.js"></script>
     <script src="../scripts/directives/directives.js" charset="utf-8"></script>
-    <script src="Controller/js/publication.js" charset="utf-8"></script>
-    <script src="../scripts/services/serviceRechercheAjax.js"></script>
     <script src="../scripts/services/serviceAddIdentity.js"></script>
     <script src="../scripts/services/serviceTheme.js"></script>
-    <script src="../scripts/services/serviceLocation.js"></script>
-    <script>
-        function GetURLParameter(sParam) {
-            var sPageURL = window.location.search.substring(1);
-            var sURLVariables = sPageURL.split('&');
-            for (var i = 0; i < sURLVariables.length; i++) {
-                var sParameterName = sURLVariables[i].split('=');
-                if (sParameterName[0] == sParam) {
-                    return sParameterName[1];
-                }
-            }
-        }
-
-
-        angular
-            .module('app')
-            .filter('trustAsHtml', ['$sce', function ($sce) {
-
-                return function (text) {
-
-                    return $sce.trustAsHtml(text);
-
-                };
-
-            }])
-            .controller("shareCtrl", function ($location, $scope, servicePublicationAjax, serviceSession,
-                    serviceUserAjax) {
-                        console.log($scope);
-                        $.get("http://localhost:8080/api/publication?id=5eaeecb8bf26863214d12a5c")
-                        .then((data) => {
-                            $scope.x = data
-                            console.log(data);
-                            console.log($scope.x);
-                            
-                        
-
-                        }).fail((err) => {
-                            console.log(err);
-
-                        })
-
-                        
-                        
-
-                })
-            
-            
-                
-    </script>
-
+    <script src="../scripts/services/serviveGetIdUrl.js"></script>
 </body>
 
 </html>
