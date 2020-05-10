@@ -55,23 +55,39 @@ angular
         servicePublicationAjax.setLike({'id':publication._id, 'token': token });
     };
     
-
+    //Partager une publication
     $scope.share = ($event) => {
         const publicationString = $($event.target).attr("publication")
         const publication = JSON.parse(publicationString);
-        console.log(publication);
-        console.log("http://localhost:8080/api/publication?id=${publication._id}");
-        
 
-        $('.text-create-publication').text(
+        let message =
             `
-            - Allez voir cette <a href="http://localhost:8080/publication?id=${publication._id}"> publication </a> de <a userid="${publication.userID}" ng-controller="ctrl2" ng-click="redirectProfil($event)" style="cursor: pointer;" >${publication.userName}</a>
-            `
-        )
+            - Allez voir cette <a href="/publication?id=${publication._id}"> publication </a> de <a href="/profil?id=${publication.userID}" style="cursor: pointer;" >${publication.userName}</a>
+            `;
 
-        // createAlert('success',"YOUPI",'Votre publication a été partagée !');
-        $(".btn-publier").click();
-        
+        let data = new FormData(); //on crée un formData
+
+        data.append('token',token); //le token
+        data.append('message', message); //le message
+
+       /* if (publication.photo) {
+                    data.append('photoString', publication.photo);
+                    console.log('data apres photo ',data);
+                    sharePub(data);
+        }else sharePub(data);*/
+
+        sharePub(data);
+
+        function sharePub(data){
+            console.log('sharePub',data.photo)
+            servicePublicationAjax.newPub(data).then(
+                function() {
+                    createAlert('success',"YOUPI",'Votre publication a été partagée !');
+                },
+                function() {
+                    createAlert('error','Erreur :',"Partage indisponnible.");
+            });
+        }
     }
 
     $scope.verifComment = ($event) => {
