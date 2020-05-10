@@ -6,6 +6,7 @@ const http = require('http');
 const querystring = require('querystring');
 const uuidv4 = require("uuid/v4");
 const path = require('path');
+const fs = require("fs");
 
 
 //renvoie la liste de tous les # dans le texte donné
@@ -251,7 +252,7 @@ exports.new = function(req, res) {
             long: req.body.long
         };
 
-        if (!req.files || Object.keys(req.files).length === 0) {
+        if (!req.files || Object.keys(req.files).length === 0 || req.body.photoString != null) {
             console.log("pas de photo");
         } else {
             let photo = req.files.photo;
@@ -262,6 +263,14 @@ exports.new = function(req, res) {
                 }
             });
             publication.photo = id;
+        }
+
+        if (req.body.photoString) {
+            if (fs.existsSync('./photos/' + req.body.photoString)) {
+                publication.photo = req.body.photoString;
+            } else {
+                res.status(400).send("la photo n'existe pas");
+            }
         }
 
         User.findOne({ '_id': token._id }, function(err, user) {

@@ -1022,8 +1022,7 @@ h2.sombre, .container.sombre h2 {
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-  position: relative;
-  left: 44%;
+  margin: 150px 0;
 }
 
 @keyframes spin {
@@ -1057,6 +1056,13 @@ a.showHUI.sombre {
 }
 a.showHUI:hover {
   box-shadow: 7px 7px 17px #222b3200, -7px -7px 17px #323d4800 !important;
+}
+
+#loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
 }
 
 /*# sourceMappingURL=style.css.map */

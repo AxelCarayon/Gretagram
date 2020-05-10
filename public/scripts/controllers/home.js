@@ -7,8 +7,6 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
     serviceTheme.getTheme();
 
 
-
-
     if (!serviceIsConnect) {
         window.location.href = "/login";
 
@@ -23,6 +21,9 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         serviceRechercheAjax.getTopH().then(function (data) {
             $scope.hashtags = data;
         });
+        $scope.trendQuote = true
+        $scope.aboQuote = false
+
 
         $scope.loadMorePubs = () =>{
             if ($scope.totalPubs >= sizeTrend - 5   ) {
@@ -327,16 +328,22 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
             $scope.empty()
         }
         $scope.aboFunction = function() {
+            $scope.trendQuote = false
+            $scope.aboQuote = true
             getAbo();
             serviceTheme.getTheme();
 
         }
         $scope.trendFunction =  function() {
+            $scope.trendQuote = true
+            $scope.aboQuote = false
             getTrend();
             serviceTheme.getTheme();
 
         }
         $scope.procheFunction =  function() {
+            $scope.trendQuote = false
+            $scope.aboQuote = false
             getProche();
             serviceTheme.getTheme();
         }
