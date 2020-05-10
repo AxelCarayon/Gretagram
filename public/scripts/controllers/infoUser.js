@@ -9,6 +9,9 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
 
         serviceUserAjax.getUserPrivate(token).then(
             function (user) {
+                if (!user.data.pp){
+                    user.data.pp = 'View/ressources/avatar.svg';
+                }
                 $scope.user = user.data;
                 $('#'+user.data.gender).selected = true;
                 verifMail();
@@ -87,7 +90,7 @@ app.controller("infoUserCtrl", function ($scope,serviceIsConnect,serviceSession,
            if ($('#file-1')[0].files && $('#file-1')[0].files[0] || $(".avatar").attr("src")=== 'View/ressources/avatar.svg'){
                etat = true;
                if ($(".avatar").attr("src")=== 'View/ressources/avatar.svg' && user.pp !== 'View/ressources/avatar.svg'){
-                   //data.append('photo',null);
+                   data.append('deletePhoto',true);
                }else {
                    data.append('photo',$('#file-1')[0].files[0]);
                }

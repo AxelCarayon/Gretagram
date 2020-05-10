@@ -40,7 +40,11 @@ app.controller("publicationSoloCtrl", function ($scope,serviceIsConnect,serviceG
             $scope.modal = $scope.x.commentaires;
             serviceAddIdentity.pubs($scope.modal);
         };
-
+        $scope.redirectProfil = ($event) => {
+            var link = $event.target;
+            var id = link.getAttribute('userid');
+            window.location.href = "/profil?id="+id;
+        }
 
     }
 })
