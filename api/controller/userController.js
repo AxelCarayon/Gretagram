@@ -175,8 +175,23 @@ exports.update = function(req, res) {
                     if (key === "password") {
                         user.password = user.generateHash(value);
                     } else {
-                        user[key] = value;
+                        if (key != "photo") {
+                            user[key] = value;
+                        }
                     }
+                }
+                if (!req.files || Object.keys(req.files).length === 0) {
+                    console.log("pas de photo");
+                } else {
+                    let photo = req.files.photo;
+                    let id = uuidv4() + path.extname(photo.name);
+                    user.pp = id;
+                    user.photos.push(id);
+                    photo.mv('./photos/' + id, function(err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
                 }
                 user.save(function(err) {
                     if (err)

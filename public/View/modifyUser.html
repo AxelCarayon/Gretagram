@@ -116,9 +116,9 @@ and open the template in the editor.
                                     <div>
                                         <h5 id="genre-title">Genre</h5>
                                         <select name="gender" id="genre" class="form-control">
-                                            <option value="Femme">Femme</option>
-                                            <option value="Homme">Homme</option>
-                                            <option value="Autre">Autre</option>
+                                            <option id="Femme" value="Femme">Femme</option>
+                                            <option id="Homme" value="Homme">Homme</option>
+                                            <option id="Autre" value="Autre">Autre</option>
                                         </select>
                                     </div>
                                 </div>
@@ -164,6 +164,7 @@ and open the template in the editor.
 
                             </div>
                             <div class="row justify-content-end">
+                                <button href="#" id="removePhoto" class=" btn btn-danger d-none">Supprimer photo</button>
                                 <input type="button" class="btn" value="Modification du compte" ng-click="modifier()">
                             </div>
                         </div>

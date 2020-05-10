@@ -31,7 +31,15 @@ app.controller("publicationFormCtrl", function($q, $scope, serviceIsConnect, ser
     $("#file-1").change(function() {
         readURL(this);
         $('#blah[ alt]').show();
+        $('#removePhoto').removeClass('d-none');
     });
+
+    $('#removePhoto').click(function () {
+        $("#file-1").val('');
+        $('.img-create-publication').attr('src', "");
+        $('#removePhoto').addClass('d-none');
+        $('.fileSpan').text('Choisis une photo');
+    })
 
     //Ajout des hashtag dans la creation de publication
     var tab = [];

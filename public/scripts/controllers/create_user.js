@@ -42,6 +42,17 @@ angular.module('app',[])
             }
 
         })
+        $("#file-1").change(function() {
+            changePP(this);
+            $('#blah[ alt]').show();
+            $('#removePhoto').removeClass('d-none');
+        });
+        $('#removePhoto').click(function () {
+            $("#file-1").val('');
+            $(".avatar").attr("src", 'View/ressources/avatar.svg');
+            $('#removePhoto').addClass('d-none');
+            $('.fileSpan').text('Choisis une photo');
+        })
 
         $scope.newUserAct = function(){
             if (verif()){
@@ -200,5 +211,14 @@ function verif(){
     }
 
     return drap1 && drap2 && drap3 ;
+}
+function changePP(input) {
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            $(".avatar").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 

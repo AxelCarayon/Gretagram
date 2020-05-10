@@ -150,10 +150,12 @@
                                 </div>
                             </div>
                         <div ng-show="statH" class="row justify-content-center">
-                            {{paysStatsH}}
-                            <div id="container" style="width: 75%;">
-                                <canvas id="canvas"></canvas>
-                            </div>
+<!--                            <div id="container" style="width: 75%;">-->
+<!--                                <canvas id="canvas"></canvas>-->
+<!--                            </div>-->
+                            <div id="loaderH" class="loaderH"></div>
+                            <div id="piechart" style="width: 900px; height: 500px;"></div>
+
                         </div>
                         <div class="col-12 publication clair" ng-controller="likeCommentCtrl"
                             ng-repeat="x in pubs | orderBy:'date':true">
@@ -208,6 +210,9 @@
                                             </div>
                                             <button href="#"  ng-click="tr = !tr" id="affichage-tendance" class=" btn btn-publication hidden-sm ">Tendances </span></button>
                                             <button href="#"  class=" btn btn-publier ">Publier</button>
+                                            <button href="#" id="removePhoto" class=" btn btn-danger d-none">Supprimer photo</button>
+                                            <button href="#" class=" btn btn-publication ">Tendances</button>
+                                            <button href="#" class=" btn btn-publier ">Publier</button>
                                         </div>
                                     </div>
                                 </div>
@@ -355,6 +360,8 @@ it('should check ngShow', function() {
 
 
     </script>
+    <!-- Chart  -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 
 </html>
