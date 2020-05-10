@@ -62,6 +62,7 @@ angular.module('app',[])
                         if (data.message === 'New user created!'){
                             createAlert('success',data.message,"Ne perdez pas 1 minute connectez-vous !");
                             document.getElementById('formNewUser').reset();
+                            $(".avatar").attr("src",'View/ressources/avatar.svg');
 
                         }else{
                             console.log(data.message);
