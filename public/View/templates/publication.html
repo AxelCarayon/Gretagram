@@ -2,8 +2,7 @@
 <!-- TODO x.nom undefind -->
 
 <p userid="{{x.userID}}" ng-click="redirectProfil($event)" style="cursor: pointer;" class="nomProfil clair">{{x.userName}}</p>
-
-<a ng-show="{{'trashPub' + x.userID}}" style="cursor: pointer;" class="clair nav-link" id="btn-parametres-pub" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+<a  ng-class="{'d-none': !{{'trashPub' + x.userID}} }" style="cursor: pointer;" class="clair nav-link" id="btn-parametres-pub" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="points"></span>
     <span class="points"></span>
     <span class="points"></span>

@@ -62,11 +62,13 @@ app.factory('serviceUserAjax', function ($http,$q) {
                     url: '/api/user',
                     method: "PATCH",
                     data: data,
+                    processData: false,
+                    contentType: false,
                     success: function(res){
                         deferred.resolve(res);
-
                     },
                     error : function(res,state,msg){
+                        console.log(res);
                         deferred.reject(msg);
                     }
                 });

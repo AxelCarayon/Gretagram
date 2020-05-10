@@ -208,7 +208,7 @@ angular.module('app').controller("testCtrl", function ($location,$scope,serviceU
 
         //Test si userprofil = user
         let valTrash = 'trashPub'+idProfil;
-        if (idProfil == idUser){
+        if (idProfil === idUser){
             $('.follow').addClass('d-none');
             $scope.statFunction = stat;
             $scope.pubFunction = feel;

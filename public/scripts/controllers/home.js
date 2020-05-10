@@ -17,6 +17,11 @@ app.controller("ctrl2", function ($scope,serviceIsConnect,servicePublicationAjax
         let mymap = L.map('macarte');
         let mapH = L.map('carteH');
 
+        //btn supprimer pub
+        let valTrash = 'trashPub'+idUser;
+        $scope[valTrash] = true;
+
+
         // TOP 10 #
         serviceRechercheAjax.getTopH().then(function (data) {
             $scope.hashtags = data;
