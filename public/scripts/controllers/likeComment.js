@@ -77,16 +77,13 @@ angular
         data.append('token',token); //le token
         data.append('message', message); //le message
 
-       /* if (publication.photo) {
-                    data.append('photoString', publication.photo);
-                    console.log('data apres photo ',data);
-                    sharePub(data);
-        }else sharePub(data);*/
-
-        sharePub(data);
+        if (publication.photo !== 'undefined') {
+                data.append('photoString', publication.photo);
+                sharePub(data);
+        }else sharePub(data);
 
         function sharePub(data){
-            console.log('sharePub',data.photo)
+            console.log('sharePub',data.photoString)
             servicePublicationAjax.newPub(data).then(
                 function() {
                     createAlert('success',"YOUPI",'Votre publication a été partagée !');
