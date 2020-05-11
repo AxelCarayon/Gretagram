@@ -292,4 +292,25 @@ footer p {
   font-weight: 600;
 }
 
+#animatedPipe {
+  display: inline-block;
+  height: 12px;
+  width: 2px;
+  background: rgba(49, 49, 49, 0.844);
+  margin-left: 4px;
+  animation: cligno 1s infinite ease-in-out;
+}
+
+@keyframes cligno {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 /*# sourceMappingURL=login.css.map */
