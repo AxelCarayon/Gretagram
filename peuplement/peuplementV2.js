@@ -10,7 +10,7 @@ const request = require('request');
 const uuidv4 = require("uuid/v4");
 require('dotenv').config();
 
-const hashtags = ["#green", "#healthy", "#clean", "#proud", "#planet", "#ecologie", "#saveThePlanet", "#macronDemission"]
+const hashtags = ["#green", "#healthy", "#clean", "#proud", "#planet", "#ecologie", "#saveThePlanet", "#panzoliPresident"]
 
 //Fonctions auxiliaires=======================================================================
 function getRandomInt(max) {
